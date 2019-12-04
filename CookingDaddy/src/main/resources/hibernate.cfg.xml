@@ -4,9 +4,9 @@
 	<session-factory>
 		<!-- database connection -->
 		<property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
-		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
-		<property name="hibernate.connection.username"></property>
-		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.connection.url">revature-bootcamp.cll4hlpifqp4.us-east-2.rds.amazonaws.com</property>
+		<property name="hibernate.connection.username">cookdaddy</property>
+		<property name="hibernate.connection.password">p4ssw0rd</property>
 		
 		<!-- dialect, hibernate settings -->
 		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
