@@ -1,1 +1,15 @@
-<p>login works!</p>
+<ng-container *ngIf="!activePerson; else display">
+    <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                Username:
+                <input type="text" [(ngModel)]="username">
+            </li>
+            <li class="nav-item">
+                Password:
+                <input type="password" [(ngModel)]="password" (keydown.enter)="login()">
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-primary" (click)="login()">Login</button>
+            </li>
+    </ul>
+</ng-container>
