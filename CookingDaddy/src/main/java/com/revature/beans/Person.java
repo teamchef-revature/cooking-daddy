@@ -23,6 +23,8 @@ public class Person {
 	private String first;
 	@Column
 	private String last;
+	@Column(name="role_id")
+	private Integer roleId;
 	
 	public Integer getId() {
 		return id;
