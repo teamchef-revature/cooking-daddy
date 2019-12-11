@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 export class PersonService {
   private liURL = this.url.getUrl() + '/login';
   private loURL = this.url.getUrl() + '/logout';
+  private reURL = this.url.getUrl() + '/register';
   private headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
   private person: Person;
 
@@ -43,6 +44,7 @@ export class PersonService {
       );
     }
   }
+
   logout(): Observable<object> {
     const justabody = `Adios`;
     return this.http.post(this.loURL, justabody, {withCredentials: true}).pipe(
@@ -52,6 +54,14 @@ export class PersonService {
       })
     );
   }
+
+  public register(person: Person): Observable<object> {
+    const body = JSON.stringify(person);
+    return this.http.post(this.reURL, body, { headers: this.headers, withCredentials: true }).pipe(
+      map( resp => resp as Person )
+    );
+  }
+
   getPerson(): Person {
     return this.person;
   }
