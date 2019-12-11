@@ -15,12 +15,24 @@ export class LoginComponent implements OnInit {
   constructor(private personService: PersonService) { }
 
   ngOnInit() {
+    this.personService.login(null, null).subscribe(
+      resp => {
+        this.activePerson = resp;
+      });
   }
 
   login() {
+    this.personService.login(this.username, this.password).subscribe(
+      resp => {
+        this.activePerson = null;
+      });
   }
 
   logout() {
+    this.personService.logout().subscribe(
+      resp => {
+        this.activePerson = null;
+      });
   }
 
 }
