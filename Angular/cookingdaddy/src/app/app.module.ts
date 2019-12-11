@@ -10,7 +10,7 @@ import { NavBarComponent } from './core/nav-bar/nav-bar.component';
 import { FridgeComponent } from './fridge/fridge/fridge.component';
 import { HomeComponent } from './home/home.component';
 import { UrlService } from './shared/url.service';
-import { PersonService } from './shared/person.service';
+import { PersonService } from './shared/person/person.service';
 
 @NgModule({
   declarations: [
