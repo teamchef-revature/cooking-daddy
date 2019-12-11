@@ -11,7 +11,7 @@ import { FridgeComponent } from './fridge/fridge/fridge.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './core/register/register.component';
 import { UrlService } from './shared/url.service';
-import { PersonService } from './shared/person.service';
+import { PersonService } from './shared/person/person.service';
 
 @NgModule({
   declarations: [

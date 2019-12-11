@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Person } from 'src/app/shared/person';
-import { PersonService } from 'src/app/shared/person.service';
+import { Person } from '../../shared/person/person';
+import { PersonService } from '../../shared/person/person.service';
 
 @Component({
   selector: 'app-login',
