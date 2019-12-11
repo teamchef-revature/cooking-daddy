@@ -4,5 +4,5 @@ export class Person {
     password: string;
     firstname: string;
     lastname: string;
-    role: number;
+    roleId: number;
 }
