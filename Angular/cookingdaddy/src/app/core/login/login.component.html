@@ -16,7 +16,7 @@
 <ng-template #display>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <div *ngIf="loggedUser.employee; else admin">
+            <div *ngIf="activePerson.role === 1; else admin">
                 <span>Logged in as: {{activePerson.username}} <br>
                 Inworld Name: {{activePerson.first + " " + activePerson.employee.last}}</span>
             </div>
