@@ -8,11 +8,6 @@ import { IngredientControllerComponent } from './admin/ingredient-controller/ing
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home',
     component: HomeComponent
   },
   {
