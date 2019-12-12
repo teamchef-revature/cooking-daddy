@@ -1,1 +1,9 @@
-<p>Enter new Category Information</p>
+<div class="container">
+    <ul>
+        <li *ngFor="let c of categories">{{c.name}}</li>
+    </ul>
+    <ng-container>
+        <input type="text" [(ngModel)]="category.category" (keydown.enter)="submit()"/>
+        <button class="btn btn-primary" (click)="submit()">Submit</button>
+    </ng-container>
+</div>

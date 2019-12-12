@@ -1,1 +1,9 @@
-<p>Enter new Flavor Information</p>
+<div class="container">
+    <ul>
+        <li *ngFor="let f of flavors">{{f.name}}</li>
+    </ul>
+    <ng-container>
+        <input type="text" [(ngModel)]="flavor.flavor" (keydown.enter)="submit()"/>
+        <button class="btn btn-primary" (click)="submit()">Submit</button>
+    </ng-container>
+</div>
