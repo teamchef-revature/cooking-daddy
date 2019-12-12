@@ -1,10 +1,8 @@
 <div class="container">
-    <ng-container *ngIf="!person;else display">
-        <!-- <app-register></app-register> -->
-        <app-login></app-login>
-    </ng-container>
-    <ng-template #display>
-        <!-- big version of the nav -->
-        You're logged in!
-    </ng-template>
+    <table style="border:0px;margin:auto">
+        <tr>
+            <td><app-register></app-register></td>
+            <td style="vertical-align:top"><app-login></app-login></td>
+        </tr>
+    </table>
 </div>

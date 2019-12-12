@@ -9,7 +9,7 @@ import { LoginComponent } from './core/login/login.component';
 import { NavBarComponent } from './core/nav-bar/nav-bar.component';
 import { FridgeComponent } from './fridge/fridge/fridge.component';
 import { HomeComponent } from './home/home.component';
-// import { RegisterComponent } from './core/register/register.component';
+import { RegisterComponent } from './core/register/register.component';
 import { UrlService } from './shared/url.service';
 import { PersonService } from './shared/person/person.service';
 import { IngredientControllerComponent } from './admin/ingredient-controller/ingredient-controller.component';
@@ -18,11 +18,13 @@ import { FlavorControllerComponent } from './admin/flavor-controller/flavor-cont
 import { QualityControllerComponent } from './admin/quality-controller/quality-controller.component';
 import { EditIngredientControllerComponent } from './admin/edit-ingredient-controller/edit-ingredient-controller.component';
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
+import { IngredientPipe } from './ingredient.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     NavBarComponent,
     FridgeComponent,
     HomeComponent,
@@ -32,7 +34,8 @@ import { IngredientComponent } from './fridge/ingredient/ingredient.component';
     FlavorControllerComponent,
     QualityControllerComponent,
     EditIngredientControllerComponent,
-    IngredientComponent
+    IngredientComponent,
+    IngredientPipe
   ],
   imports: [
     BrowserModule,

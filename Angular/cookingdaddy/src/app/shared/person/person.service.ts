@@ -65,4 +65,8 @@ export class PersonService {
   getPerson(): Person {
     return this.person;
   }
+
+  isPerson(): boolean {
+    return (this.person !== undefined && this.person !== null);
+  }
 }
