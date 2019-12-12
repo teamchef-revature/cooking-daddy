@@ -37,6 +37,26 @@ insert into category (id, name, parent_id)
 insert into category (id, name, parent_id)
     values (10, 'Flour', 1);
 insert into category (id, name, parent_id)
-    values (11, 'Greens', 2);
+    values (11, 'Green', 2);
+insert into category (id, name, parent_id)
+    values (12, 'Root Vegetable', 2);
+insert into category (id, name, parent_id)
+    values (13, 'Citrus', 3);
+insert into category (id, name, parent_id)
+    values (14, 'Berry', 3);
+insert into category (id, name, parent_id)
+    values (15, 'Meat', 4);
+insert into category (id, name, parent_id)
+    values (16, 'Beans', 4);
+insert into category (id, name, parent_id)
+    values (17, 'Broth', 6);
+insert into category (id, name, parent_id)
+    values (18, 'Milk', 6);
+insert into category (id, name, parent_id)
+    values (19, 'Oil', 6);
+insert into category (id, name, parent_id)
+    values (20, 'Sugar', 7);
+insert into category (id, name, parent_id)
+    values (21, 'Herb', 7);
 -- insert into ingredient (id, category_id, quality_id, flavor_id
 commit;
