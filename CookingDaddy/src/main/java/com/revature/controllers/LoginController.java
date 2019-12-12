@@ -3,14 +3,17 @@ package com.revature.controllers;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Person;
 import com.revature.service.PersonService;
 
-@Controller
+@RestController
+@CrossOrigin(origins="http://localhost:4200")
 public class LoginController {
 	@Autowired
 	private PersonService pserv;
@@ -24,12 +27,12 @@ public class LoginController {
 	}
 	
 	@PostMapping(value="/login")
-	public String login(String user, String pass, HttpSession session) {
+	public ResponseEntity<Person> login(String user, String pass, HttpSession session) {
 		Person p = pserv.getPersonByUserPass(user, pass);
 		if(p == null)
-			return "redirect: login";
+			return ResponseEntity.notFound().build();
 		session.setAttribute("user", p);
-		return "redirect: home";
+		return ResponseEntity.ok(p);
 	}
 	
 	@PostMapping(value="/logout")
@@ -39,7 +42,7 @@ public class LoginController {
 	}
 	
 	@PostMapping(value="/register")
-	public String register(Person p, HttpSession session) {
+	public ResponseEntity<Person> register(Person p, HttpSession session) {
 		pserv.addPerson(p);
 		return login(p.getUsername(), p.getPassword(), session);
 	}

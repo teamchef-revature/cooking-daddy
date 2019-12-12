@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Person } from '../../shared/person/person';
+import { PersonService } from '../../shared/person/person.service';
 
 @Component({
   selector: 'app-register',
@@ -11,13 +14,14 @@ export class RegisterComponent implements OnInit {
   constructor(private personService: PersonService, private router: Router) { }
 
   ngOnInit() {
+    this.person = new Person();
   }
 
   submit(): void {
-    this.personService.registerPerson(this.person).subscribe(
+    this.personService.register(this.person).subscribe(
       person => {
         this.person = person;
-        //this.router.navigate(['/home']);
+        this.router.navigate(['/home']);
       }
     );
   }

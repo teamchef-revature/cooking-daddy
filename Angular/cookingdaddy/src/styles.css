@@ -1,0 +1,101 @@
+@import "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css";
+
+/* ***************************** TAGS ******************************** */
+
+body {
+    background-color: #df7722;
+    color: #552222;
+    text-align:center;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+div {
+    background-color: #ffdd99;
+    color: #663322;
+    text-align:left;
+}
+
+nav {
+    background-color: #ffdd99;
+    border-radius: 0px 0px 30px 30px;
+    padding:15px;
+    text-align:center;
+}
+
+a {
+    color: #774433;
+}
+
+a:hover {
+    color: #553311;
+    text-decoration: none;
+}
+
+button {
+    background-color: #ffbb77;
+    border-radius: 10px;
+    border: none;
+    color: #552222;
+    padding: 5px 10px;
+}
+
+button:hover {
+    background-color: #dd8855;
+    color:black;
+}
+
+form {
+    display: table;
+    margin: auto;
+}
+
+p {
+    display: table-row;
+}
+
+label {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+    padding: 10px;
+}
+
+input {
+    display: table-cell;
+    width: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+td {
+    padding: 25px;
+    margin: 0px 25px;
+    border: solid 1px;
+    border-color: #885544;
+    border-radius: 15px;
+}
+
+/* **************************** CLASSES ******************************* */
+
+.my-nav-pill {
+    padding:10px;
+}
+
+.my-nav-pill:hover {
+    background-color: #ffbb77;
+    border-radius: 15px;
+}
+
+.container {
+    padding: 20px;
+    border-radius: 15px;
+}
+
+/* ****************************** IDS ********************************* */
