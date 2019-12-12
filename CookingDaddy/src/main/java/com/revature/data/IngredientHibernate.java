@@ -10,7 +10,10 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.revature.beans.Category;
+import com.revature.beans.Flavor;
 import com.revature.beans.Ingredient;
+import com.revature.beans.Quality;
 import com.revature.utils.HibernateUtil;
 
 @Component
@@ -91,4 +94,55 @@ public class IngredientHibernate implements IngredientDAO{
 		}		
 	}
 
+	@Override
+	public Category getCategory(Integer id) {
+		Session session = hu.getSession();
+		Category category = session.get(Category.class, id);
+		session.close();
+		return category;
+	}
+
+	@Override
+	public Set<Category> getCategories() {
+		Session session = hu.getSession();
+		String q = "from Category";
+		Query<Category> query = session.createQuery(q, Category.class);
+		List<Category> categories = query.list();
+		session.close();
+		return new HashSet<Category>(categories);
+	}
+
+	@Override
+	public Flavor getFlavor(Integer id) {
+		Session session = hu.getSession();
+		Flavor flavor = session.get(Flavor.class, id);
+		session.close();
+		return flavor;
+	}
+
+	@Override
+	public Set<Flavor> getFlavors() {
+		Session session = hu.getSession();
+		String q = "from Flavor";
+		Query<Flavor> query = session.createQuery(q, Flavor.class);
+		List<Flavor> flavors = query.list();
+		return new HashSet<Flavor>(flavors);
+	}
+
+	@Override
+	public Quality getQuality(Integer id) {
+		Session session = hu.getSession();
+		Quality quality = session.get(Quality.class, id);
+		session.close();
+		return quality;
+	}
+
+	@Override
+	public Set<Quality> getQualities() {
+		Session session = hu.getSession();
+		String q = "from Quality";
+		Query<Quality> query = session.createQuery(q, Quality.class);
+		List<Quality> qualities = query.list();
+		return new HashSet<Quality>(qualities);
+	}
 }
