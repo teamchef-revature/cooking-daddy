@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     this.personService.register(this.person).subscribe(
       person => {
         this.person = person;
-        // this.router.navigate(['/home']);
+        this.router.navigate(['/home']);
       }
     );
   }
