@@ -4,9 +4,9 @@ import { Ingredient } from '../../shared/ingredient/ingredient';
 import { IngredientService } from '../../shared/ingredient/ingredient.service';
 
 @Component({
-  selector: 'app-ingredient-controler',
-  templateUrl: './ingredient-controler.component.html',
-  styleUrls: ['./ingredient-controler.component.css']
+  selector: 'app-ingredient-controller',
+  templateUrl: './ingredient-controller.component.html',
+  styleUrls: ['./ingredient-controller.component.css']
 })
 export class IngredientControllerComponent implements OnInit {
   @Input() ingredient: Ingredient;

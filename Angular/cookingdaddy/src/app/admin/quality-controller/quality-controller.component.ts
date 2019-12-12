@@ -3,9 +3,9 @@ import { Quality } from '../../shared/ingredient/quality';
 import { IngredientService } from '../../shared/ingredient/ingredient.service';
 
 @Component({
-  selector: 'app-quality-controler',
-  templateUrl: './quality-controler.component.html',
-  styleUrls: ['./quality-controler.component.css']
+  selector: 'app-quality-controller',
+  templateUrl: './quality-controller.component.html',
+  styleUrls: ['./quality-controller.component.css']
 })
 export class QualityControllerComponent implements OnInit {
   qualities: Quality[];

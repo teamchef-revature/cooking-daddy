@@ -45,7 +45,7 @@ export class PersonService {
     }
   }
 
-  logout(): Observable<object> {
+  logout(): Observable<Object> {
     const justabody = `Adios`;
     return this.http.post(this.loURL, justabody, {withCredentials: true}).pipe(
       map(success => {
@@ -55,7 +55,7 @@ export class PersonService {
     );
   }
 
-  public register(person: Person): Observable<object> {
+  public register(person: Person): Observable<Person> {
     const body = JSON.stringify(person);
     return this.http.post(this.reURL, body, { headers: this.headers, withCredentials: true }).pipe(
       map( resp => resp as Person )

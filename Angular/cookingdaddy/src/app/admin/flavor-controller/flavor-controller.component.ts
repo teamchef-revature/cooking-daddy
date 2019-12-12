@@ -3,7 +3,7 @@ import { Flavor } from '../../shared/ingredient/flavor';
 import { IngredientService } from '../../shared/ingredient/ingredient.service';
 
 @Component({
-  selector: 'app-flavor-controler',
+  selector: 'app-flavor-controller',
   templateUrl: './flavor-controller.component.html',
   styleUrls: ['./flavor-controller.component.css']
 })

@@ -3,7 +3,7 @@ import { Category } from '../../shared/ingredient/category';
 import { IngredientService } from '../../shared/ingredient/ingredient.service';
 
 @Component({
-  selector: 'app-category-controler',
+  selector: 'app-category-controller',
   templateUrl: './category-controller.component.html',
   styleUrls: ['./category-controller.component.css']
 })
