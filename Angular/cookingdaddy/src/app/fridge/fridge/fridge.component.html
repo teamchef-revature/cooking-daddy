@@ -1,1 +1,3 @@
-<p>fridge works!</p>
+Search: <input type="text" [(ngModel)]="searchText">
+
+<app-ingredient *ngFor="let i of ingredients | ingredient:searchText" [ingredient]="i"></app-ingredient>

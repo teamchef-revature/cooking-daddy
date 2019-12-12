@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { UrlService } from './shared/url.service';
 import { PersonService } from './shared/person/person.service';
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
+import { IngredientPipe } from './ingredient.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { IngredientComponent } from './fridge/ingredient/ingredient.component';
     NavBarComponent,
     FridgeComponent,
     HomeComponent,
-    IngredientComponent
+    IngredientComponent,
+    IngredientPipe
   ],
   imports: [
     BrowserModule,
