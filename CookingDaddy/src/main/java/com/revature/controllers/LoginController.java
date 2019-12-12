@@ -31,7 +31,7 @@ public class LoginController {
 		if(p == null)
 			return "redirect: login";
 		session.setAttribute("user", p);
-		return "redirect: home";
+		return "redirect: ";
 	}
 	
 	@PostMapping(value="/logout")
