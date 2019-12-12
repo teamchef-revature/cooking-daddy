@@ -2,10 +2,13 @@ package com.revature.service;
 
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import com.revature.beans.Ingredient;
 import com.revature.data.IngredientDAO;
 import com.revature.data.IngredientHibernate;
 
+@Service
 public class IngredientServiceHibernate implements IngredientService{
 	private IngredientDAO id = new IngredientHibernate();
 

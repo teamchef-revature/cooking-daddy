@@ -17,7 +17,7 @@ export class IngredientService {
   constructor( private urlService: UrlService, private http: HttpClient ) { }
 
   public getIngredients(): Observable<Ingredient[]> {
-    return this.http.get( this.appUrl + 'ingredients', { withCredentials: true }).pipe( map( resp => resp as Ingredient[] ));
+    return this.http.get( this.appUrl + '/ingredients', { withCredentials: true }).pipe( map( resp => resp as Ingredient[] ));
   }
   public getCategories(): Observable<Category[]> {
     return this.http.get( this.appUrl + 'categories', { withCredentials: true }).pipe( map( resp => resp as Category[] ));
@@ -29,7 +29,7 @@ export class IngredientService {
     return this.http.get( this.appUrl + 'flavors', { withCredentials: true }).pipe( map( resp => resp as Flavor[] ));
   }
   public getIngredient( id: number ) {
-    const url = this.appUrl + 'ingredients/' + id;
+    const url = this.appUrl + '/ingredients/' + id;
     return this.http.get( url, { withCredentials: true }).pipe( map( resp => resp as Ingredient ));
   }
   public getCategory( id: number ) {
