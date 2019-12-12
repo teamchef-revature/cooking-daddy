@@ -8,7 +8,7 @@ import { IngredientComponent } from './fridge/ingredient/ingredient.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {

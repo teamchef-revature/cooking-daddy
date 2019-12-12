@@ -1,34 +1,35 @@
 <ng-container *ngIf="!activePerson; else display">
-    <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                Username:
-                <input type="text" [(ngModel)]="username">
-            </li>
-            <li class="nav-item">
-                Password:
-                <input type="password" [(ngModel)]="password" (keydown.enter)="login()">
-            </li>
-            <li class="nav-item">
-                <button class="btn btn-primary" (click)="login()">Login</button>
-            </li>
-    </ul>
+    <h3>Log In</h3>
+    <form>
+        <p>
+            <label for="user">Username:</label>
+            <input type="text" name="user" [(ngModel)]="username" />
+        </p>
+        <p>
+            <label for="pass">Password:</label>
+            <input type="password" name="pass" [(ngModel)]="password" (keydown.enter)="login()" />
+        </p>
+        <p>
+            <button type="button" (click)="login()">Login</button>
+        </p>
+    </form>
 </ng-container>
 <ng-template #display>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
             <div *ngIf="activePerson.roleId === 1; else admin">
                 <span>Logged in as: {{activePerson.username}} <br>
-                Inworld Name: {{activePerson.first + " " + activePerson.last}}</span>
+                    Inworld Name: {{activePerson.first + " " + activePerson.last}}</span>
             </div>
         </li>
         <li class="nav-item">
-            <button class="btn btn-danger" (click)="logout()">Logout</button>
+            <button type="button" (click)="logout()">Logout</button>
         </li>
     </ul>
 </ng-template>
 <ng-template #admin>
     <div>
-            <span>Logged in as Admin: {{activePerson.username}} <br>
+        <span>Logged in as Admin: {{activePerson.username}} <br>
             Inworld Name: {{activePerson.first + " " + activePerson.last}}</span>
     </div>
 </ng-template>
