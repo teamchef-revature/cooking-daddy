@@ -26,6 +26,12 @@ public class Person {
 	@Column(name="role_id")
 	private Integer roleId;
 	
+	public Integer getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -105,7 +111,7 @@ public class Person {
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", first=" + first + ", last="
-				+ last + "]";
+		return "Person [id=" + id + ", username=" + username + ", password=" + password + ", first=" + first + ", last="
+				+ last + ", roleId=" + roleId + "]";
 	}
 }
