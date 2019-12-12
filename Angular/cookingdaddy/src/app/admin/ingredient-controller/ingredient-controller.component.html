@@ -1,0 +1,42 @@
+<div class="container border" *ngIf="ingredient">
+    <div class="row">
+        <div class="col-sm">
+            <h4 class="border border-dark mx-auto">{{ingredient.name}}</h4>
+        </div>
+        <div class="col-sm">
+            <div class="row">
+                <div class="col">
+                    <h5>Inventory</h5>
+                </div>
+                <div class="col">
+                    <p>{{ingredient.inventory}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h5>Category</h5>
+                </div>
+                <div class="col">
+                    <p>{{ingredient.category.name}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h5>Quality</h5>
+                </div>
+                <div class="col">
+                    <p>{{ingredient.quality.name}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h5>Flavor</h5>
+                </div>
+                <div class="col">
+                    <p>{{ingredient.flavor.name}}</p>
+                </div>
+            </div>
+            <button class="btn btn-caution" (click)="editIngredient()">Edit Ingredient</button>
+        </div>
+    </div>
+</div>

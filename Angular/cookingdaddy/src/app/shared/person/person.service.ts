@@ -45,7 +45,7 @@ export class PersonService {
     }
   }
 
-  logout(): Observable<object> {
+  logout(): Observable<Object> {
     const justabody = `Adios`;
     return this.http.post(this.loURL, justabody, {withCredentials: true}).pipe(
       map(success => {
