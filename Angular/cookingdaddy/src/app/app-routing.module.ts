@@ -11,7 +11,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'ingredients',
+    path: 'fridge',
     component: FridgeComponent
   },
   {
