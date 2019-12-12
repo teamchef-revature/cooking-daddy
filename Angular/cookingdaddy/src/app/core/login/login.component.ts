@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.personService.login(this.username, this.password).subscribe(
       resp => {
-        this.activePerson = null;
+        this.activePerson = resp;
       });
   }
 
