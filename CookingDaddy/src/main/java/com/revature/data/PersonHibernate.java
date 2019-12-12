@@ -1,18 +1,18 @@
 package com.revature.data;
 
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Person;
 import com.revature.utils.HibernateUtil;
-import com.revature.utils.LogUtil;
 
 @Component
 public class PersonHibernate implements PersonDAO {
+	@Autowired
 	private HibernateUtil hu = new HibernateUtil();
 	
 	@Override
@@ -25,8 +25,9 @@ public class PersonHibernate implements PersonDAO {
 			i = (Integer) s.save(p);
 			t.commit();
 		} catch(HibernateException e) {
-			t.rollback();
-			LogUtil.logException(e, PersonHibernate.class);
+			if(t != null)
+				t.rollback();
+			e.printStackTrace();
 		} finally {
 			s.close();
 		}
