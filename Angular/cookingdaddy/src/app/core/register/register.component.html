@@ -1,13 +1,26 @@
-<div class="container">
-    <form>
-        <label for="user">Username:</label>&nbsp;
-        <input type="text" [(ngModel)]="person.username" name="user" required><br>
-        <label for="pass">Password:</label>&nbsp;
-        <input type="text" [(ngModel)]="person.password" name="pass" required><br>
-        <label for="first">First Name:</label>&nbsp;
-        <input type="text" [(ngModel)]="person.first" name="first"><br>
-        <label for="last">Last Name:</label>&nbsp;
-        <input type="text" [(ngModel)]="person.last" name="last"><br>
-        <button type="button">Register</button>
-    </form>
-</div>
+<form>
+    <h3>Register an Account</h3>
+    <p>
+        <label for="user">Username:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" [(ngModel)]="person.username" name="user" required />
+    </p>
+    <br />
+    <p>
+        <label for="pass">Password:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" [(ngModel)]="person.password" name="pass" required />
+    </p>
+    <br />
+    <p>
+        <label for="first">First Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" [(ngModel)]="person.first" name="first" />
+    </p>
+    <br />
+    <p>
+        <label for="last">Last Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" [(ngModel)]="person.last" name="last" />
+    </p>
+    <br />
+    <p>
+        <button type="button" (click)="submit()">Register</button>
+    </p>
+</form>
