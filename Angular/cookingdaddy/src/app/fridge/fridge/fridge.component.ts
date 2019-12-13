@@ -18,9 +18,9 @@ export class FridgeComponent implements OnInit {
 
   ngOnInit() {
     this.searchText = '';
-    this.person = this.personService.getPerson();
-    this.personIngredients = this.person.ingredients;
-
+    console.log(this.personService.getPerson());
+    this.personIngredients = this.personService.getPerson().ingredients;
+    console.log(this.personIngredients);
   }
 
 }
