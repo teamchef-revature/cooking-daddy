@@ -66,20 +66,13 @@ public class Ingredient {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getInventory() {
-		return inventory;
-	}
-	public void setInventory(Integer inventory) {
-		this.inventory = inventory;
-	}
-	@Override
+@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((flavor == null) ? 0 : flavor.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((inventory == null) ? 0 : inventory.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((quality == null) ? 0 : quality.hashCode());
 		return result;
@@ -108,11 +101,6 @@ public class Ingredient {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (inventory == null) {
-			if (other.inventory != null)
-				return false;
-		} else if (!inventory.equals(other.inventory))
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -128,7 +116,11 @@ public class Ingredient {
 	@Override
 	public String toString() {
 		return "Ingredient [id=" + id + ", category=" + category + ", quality=" + quality + ", flavor=" + flavor
+<<<<<<< HEAD
 				+ ", name=" + name + ", inventory=" + inventory + "]";
+=======
+				+ ", name=" + name + "]";
+>>>>>>> 13d4ff91a83036748064fa1d75b98cd0c3157e9f
 	}
 	
 	

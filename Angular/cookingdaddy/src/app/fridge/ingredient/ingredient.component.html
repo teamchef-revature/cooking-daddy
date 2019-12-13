@@ -8,7 +8,7 @@
               <h5>Category:</h5>
             </div>
             <div class="col">
-              <p>{{ingredient.Category}}</p>
+              <p>{{ingredient.category.name}}</p>
             </div>
           </div>
           <div class="row">
@@ -16,24 +16,18 @@
               <h5>Quality:</h5>
             </div>
             <div class="col">
-              <p>{{ingredient.Quality}}</p>
+              <p>{{ingredient.quality.name}}</p>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <h5>Flavor:</h5>
             </div>
-            <div class="col">
-              <p>{{ingredient.Flavor}}</p>
-            </div>
+            <span class="col">
+              {{ingredient.flavor.name}}
+            </span>
           </div>
-          <div class="row">
-            <div class="col">
-              <h5>Inventory:</h5>
-            </div>
-            <div class="col">
-              <p>{{ingredient.Inventory}}</p>
-            </div>
+
           </div>
   
         </div>

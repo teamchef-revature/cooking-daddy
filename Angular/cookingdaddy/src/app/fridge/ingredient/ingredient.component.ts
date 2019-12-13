@@ -25,6 +25,7 @@ export class IngredientComponent implements OnInit {
       this.ingredientService.getIngredient(id).subscribe(
         ingredient => {
           this.ingredient = ingredient;
+          console.log('ingredient');
         }
       );
     }
