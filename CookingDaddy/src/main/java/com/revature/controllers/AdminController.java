@@ -5,9 +5,11 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +27,7 @@ public class AdminController {
 	@Autowired
 	private IngredientDAO ingredientDAO;
 	
+	// ** Ingredient **
 	@GetMapping(value="/ingredient")
 	public ResponseEntity<Set<Ingredient>> getIngredients() {
 		return ResponseEntity.ok(ingredientDAO.getIngredients());
@@ -38,7 +41,21 @@ public class AdminController {
 		ingredientDAO.addIngredient(ingredient);
 		return ResponseEntity.status(201).body(ingredient);
 	}
+	@PutMapping(value="/ingredient/{id}")
+	public ResponseEntity<Ingredient> updateIngredient(@PathVariable Integer id, @RequestBody Ingredient ingredient) {
+		if(ingredientDAO.getIngredient(id) == null)
+			return ResponseEntity.status(405).body(null);
+		return ResponseEntity.ok(ingredientDAO.updateIngredient(ingredient));
+	}
+	@DeleteMapping(value="/ingredient/{id}")
+	public ResponseEntity<Void> deleteIngredient(@PathVariable Integer id) {
+		if(ingredientDAO.getIngredient(id) == null)
+			return ResponseEntity.status(405).build();
+		ingredientDAO.deleteIngredient(ingredientDAO.getIngredient(id));
+		return ResponseEntity.noContent().build();
+	}
 	
+	// ** Category **
 	@GetMapping(value="/category")
 	public ResponseEntity<Set<Category>> getCategories() {
 		return ResponseEntity.ok(ingredientDAO.getCategories());
@@ -52,7 +69,15 @@ public class AdminController {
 		ingredientDAO.addCategory(category);
 		return ResponseEntity.status(201).body(category);
 	}
+	@DeleteMapping(value="/category/{id}")
+	public ResponseEntity<Void> deleteCategory(@PathVariable Integer id) {
+		if(ingredientDAO.getCategory(id) == null)
+			return ResponseEntity.status(405).build();
+		ingredientDAO.deleteCategory(ingredientDAO.getCategory(id));
+		return ResponseEntity.noContent().build();
+	}
 	
+	// ** Flavor **
 	@GetMapping(value="/flavor")
 	public ResponseEntity<Set<Flavor>> getFlavors() {
 		return ResponseEntity.ok(ingredientDAO.getFlavors());
@@ -66,7 +91,15 @@ public class AdminController {
 		ingredientDAO.addFlavor(flavor);
 		return ResponseEntity.status(201).body(flavor);
 	}
+	@DeleteMapping(value="/flavor/{id}")
+	public ResponseEntity<Flavor> deleteFlavor(@PathVariable Integer id) {
+		if(ingredientDAO.getFlavor(id) == null)
+			return ResponseEntity.status(405).build();
+		ingredientDAO.deleteCategory(ingredientDAO.getCategory(id));
+		return ResponseEntity.noContent().build();
+	}
 	
+	// ** Quality **
 	@GetMapping(value="/quality")
 	public ResponseEntity<Set<Quality>> getQualities() {
 		return ResponseEntity.ok(ingredientDAO.getQualities());
@@ -79,5 +112,12 @@ public class AdminController {
 	public ResponseEntity<Quality> addQuality(@RequestBody Quality quality) {
 		ingredientDAO.addQuality(quality);
 		return ResponseEntity.status(201).body(quality);
+	}
+	@GetMapping(value="/quality/{id}")
+	public ResponseEntity<Void> deleteQuality(@PathVariable Integer id) {
+		if(ingredientDAO.getQuality(id) == null)
+			return ResponseEntity.status(405).build();
+		ingredientDAO.deleteFlavor(ingredientDAO.getFlavor(id));
+		return ResponseEntity.noContent().build();
 	}
 }
