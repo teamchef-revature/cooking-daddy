@@ -20,13 +20,14 @@ export class IngredientService {
     return this.http.get( this.appUrl + '/ingredient', { withCredentials: true }).pipe( map( resp => resp as Ingredient[] ));
   }
   public getCategories(): Observable<Category[]> {
-    return this.http.get( this.appUrl + '/category', { withCredentials: true }).pipe( map( resp => resp as Category[] ));
+    console.log('does this execute');
+    return this.http.get( this.appUrl + '/admin/category', { withCredentials: true }).pipe( map( resp => resp as Category[] ));
   }
   public getQualities(): Observable<Quality[]> {
-    return this.http.get( this.appUrl + '/quality', { withCredentials: true }).pipe( map( resp => resp as Quality[] ));
+    return this.http.get( this.appUrl + '/admin/quality', { withCredentials: true }).pipe( map( resp => resp as Quality[] ));
   }
   public getFlavors(): Observable<Flavor[]> {
-    return this.http.get( this.appUrl + '/flavor', { withCredentials: true }).pipe( map( resp => resp as Flavor[] ));
+    return this.http.get( this.appUrl + '/admin/flavor', { withCredentials: true }).pipe( map( resp => resp as Flavor[] ));
   }
   public getIngredient( id: number ) {
     const url = this.appUrl + '/ingredient/' + id;
