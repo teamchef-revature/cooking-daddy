@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { UrlService } from '../url.service';
 import { Observable } from 'rxjs';
 import { Category } from '../ingredient/category';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class AdminService {
   private appUrl = this.urlService.getUrl() + '/admin';
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json'});
 
   constructor( private urlService: UrlService, private http: HttpClient ) { }
 
