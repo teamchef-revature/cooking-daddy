@@ -13,9 +13,11 @@ export class FridgeComponent implements OnInit {
   constructor(private ingredientService: IngredientService) { }
 
   ngOnInit() {
+    this.searchText = '';
     this.ingredientService.getIngredients().subscribe(
       resp => {
         this.ingredients = resp;
+
       });
   }
 

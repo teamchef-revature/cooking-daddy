@@ -30,7 +30,7 @@ public class Ingredient {
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
 	private String name;
-	private Integer inventory;
+//	private Integer inventory;
 	public Integer getId() {
 		return id;
 	}
@@ -61,19 +61,15 @@ public class Ingredient {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getInventory() {
-		return inventory;
-	}
-	public void setInventory(Integer inventory) {
-		this.inventory = inventory;
-	}
-	@Override
+@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
+		result = prime * result + ((flavor == null) ? 0 : flavor.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((inventory == null) ? 0 : inventory.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((quality == null) ? 0 : quality.hashCode());
 		return result;
 	}
 	@Override
@@ -85,26 +81,37 @@ public class Ingredient {
 		if (getClass() != obj.getClass())
 			return false;
 		Ingredient other = (Ingredient) obj;
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
+			return false;
+		if (flavor == null) {
+			if (other.flavor != null)
+				return false;
+		} else if (!flavor.equals(other.flavor))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (inventory == null) {
-			if (other.inventory != null)
-				return false;
-		} else if (!inventory.equals(other.inventory))
 			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (quality == null) {
+			if (other.quality != null)
+				return false;
+		} else if (!quality.equals(other.quality))
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Ingredient [id=" + id + ", name=" + name + ", inventory=" + inventory + "]";
+		return "Ingredient [id=" + id + ", category=" + category + ", quality=" + quality + ", flavor=" + flavor
+				+ ", name=" + name + "]";
 	}
 	
 
