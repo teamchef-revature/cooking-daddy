@@ -16,7 +16,19 @@ export class NavBarComponent implements OnInit {
     this.person = this.personService.getPerson();
   }
 
- isPerson(): boolean {
-  return this.personService.isPerson();
- }
+  isPerson(): boolean {
+    if (this.personService.isPerson()) {
+      this.person = this.personService.getPerson();
+      return true;
+    } else {
+      this.person = null;
+      return false;
+    }
+  }
+  logout() {
+    this.personService.logout().subscribe(
+      resp => {
+        this.person = null;
+      });
+  }
 }
