@@ -118,6 +118,4 @@ public class Ingredient {
 		return "Ingredient [id=" + id + ", category=" + category + ", quality=" + quality + ", flavor=" + flavor
 				+ ", name=" + name + ", inventory=" + inventory + "]";
 	}
-	
-	
 }

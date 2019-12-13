@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class HibernateUtil {
-	private static HibernateUtil hu;
+	//private static HibernateUtil hu;
 	private SessionFactory sf;
 	
 	public HibernateUtil() {
