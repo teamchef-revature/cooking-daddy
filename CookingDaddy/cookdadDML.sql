@@ -204,4 +204,8 @@ insert into ingredient (id, category_id, quality_id, flavor_id, name)
     values (66, 3, 5, 2, 'Pear');
 insert into ingredient (id, category_id, quality_id, flavor_id, name)
     values (67, 3, 6, 2, 'Persimmon');
+insert into equipment (id, quality_id, name, min_temp, max_temp, min_time, max_time)
+    values (1, 4, 'Oven', 300, 500, 5, 60);
+insert into equipment (id, quality_id, name, min_temp, max_temp, min_time, max_time)
+    values (2, 5, 'Stove', 100, 375, 1, 60);
 commit;

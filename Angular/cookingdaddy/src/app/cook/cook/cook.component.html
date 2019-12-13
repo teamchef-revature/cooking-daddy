@@ -1,3 +1,22 @@
 <div class="container">
-    
+    <div class="row">
+        <label for="ingredients">Ingredients: </label>
+        <select ngModel (ngModelChange)="addIngredient($event)" name="ingredients">
+            <option selected disabled>Choose ingredients</option>
+            <option *ngFor="let i of ingredients" [ngValue]="i">{{i.name}}</option>
+        </select>
+        <label for="Equipment">Equipment: </label>
+        <select name="equipment">
+            <option selected disabled>Choose equipment</option>
+        </select>
+    </div>
+    <div class="row">
+        Chosen Ingredients:
+        <ul *ngIf="chosenIngredients">
+            <li *ngFor="let i of chosenIngredients">
+                {{i.name}}
+                <button type="button" (click)="removeIngredient(i)">x</button>
+            </li>
+        </ul>
+    </div>
 </div>
