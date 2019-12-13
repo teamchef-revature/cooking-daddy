@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from 'src/app/shared/ingredient/ingredient';
 import { IngredientService } from 'src/app/shared/ingredient/ingredient.service';
+import { PersonIngredient } from 'src/app/shared/personIngredient/person-ingredient';
+import { PersonService } from 'src/app/shared/person/person.service';
+import { Person } from 'src/app/shared/person/person';
 
 @Component({
   selector: 'app-fridge',
@@ -8,17 +11,16 @@ import { IngredientService } from 'src/app/shared/ingredient/ingredient.service'
   styleUrls: ['./fridge.component.css']
 })
 export class FridgeComponent implements OnInit {
-  ingredients: Ingredient[];
+  personIngredients: PersonIngredient[];
   searchText: string;
-  constructor(private ingredientService: IngredientService) { }
+  person: Person;
+  constructor(private personService: PersonService) { }
 
   ngOnInit() {
     this.searchText = '';
-    this.ingredientService.getIngredients().subscribe(
-      resp => {
-        this.ingredients = resp;
+    this.person = this.personService.getPerson();
+    this.personIngredients = this.person.ingredients;
 
-      });
   }
 
 }
