@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient/ingredient';
 import { IngredientService } from '../../shared/ingredient/ingredient.service';
 import { PersonService } from '../../shared/person/person.service';
+import { Equipment } from '../../shared/equipment/equipment'
 
 @Component({
   selector: 'app-cook',
@@ -17,7 +18,7 @@ export class CookComponent implements OnInit {
   constructor(private ingredientService: IngredientService, private personService: PersonService) { }
 
   ngOnInit() {
-    // this.ingredients = 
+    //this.ingredients;
   }
 
 }
