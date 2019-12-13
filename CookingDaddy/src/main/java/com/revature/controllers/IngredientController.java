@@ -18,7 +18,7 @@ import com.revature.data.IngredientDAO;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
-@RequestMapping(value="/ingredients")
+@RequestMapping(value="/ingredient")
 public class IngredientController {
 	
 	@Autowired

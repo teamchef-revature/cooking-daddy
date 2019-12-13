@@ -21,5 +21,6 @@
 		<mapping class="com.revature.beans.Flavor"/>
 		<mapping class="com.revature.beans.Category"/>
 		<mapping class="com.revature.beans.Quality"/>
+		<mapping class="com.revature.beans.Role"/>
 	</session-factory>
 </hibernate-configuration>
