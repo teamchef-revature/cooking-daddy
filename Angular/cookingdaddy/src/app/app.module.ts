@@ -20,6 +20,7 @@ import { EditIngredientControllerComponent } from './admin/edit-ingredient-contr
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
 import { IngredientPipe } from './ingredient.pipe';
 import { CookComponent } from './cook/cook/cook.component';
+import { EquipmentPipe } from './equipment.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CookComponent } from './cook/cook/cook.component';
     EditIngredientControllerComponent,
     IngredientComponent,
     IngredientPipe,
-    CookComponent
+    CookComponent,
+    EquipmentPipe
   ],
   imports: [
     BrowserModule,
