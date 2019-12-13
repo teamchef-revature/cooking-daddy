@@ -17,7 +17,7 @@ export class CookComponent implements OnInit {
   constructor(private ingredientService: IngredientService, private personService: PersonService) { }
 
   ngOnInit() {
-    this.ingredients = 
+    //this.ingredients;
   }
 
 }

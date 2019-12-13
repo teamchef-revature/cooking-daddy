@@ -20,7 +20,7 @@ export class AdminService {
   }
   public addCategory( category: Category ) {
     const body = JSON.stringify( category );
-    return this.http.post( this.appUrl + '/category', body, { headers: this.headers, withCredentals: true}).pipe(
+    return this.http.post( this.appUrl + '/category', body, { headers: this.headers, withCredentials: true}).pipe(
       map( resp => resp as Category )
     );
   }
