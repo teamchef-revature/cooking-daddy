@@ -18,7 +18,7 @@ export class IngredientPipe implements PipeTransform {
     return ingredients.filter(ingredient => {
       const searchNumber: number = +searchText;
       const search = ingredient.ingredient.name.toLowerCase().includes(searchText)
-         || ingredient.ingredient.category.name.includes(searchText);
+         || ingredient.ingredient.category.name.toLowerCase().includes(searchText);
       //   || ingredient.quality.includes(searchText)
       //   || ingredient.flavor.includes(searchText)
       //   || ingredient.inventory === searchNumber
