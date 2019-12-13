@@ -15,8 +15,8 @@
     </form>
 </ng-container>
 <ng-template #display>
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+    <ul>
+        <li>
             <span>
                 <span [ngSwitch] = "activePerson.roleId">
                     <span *ngSwitchCase = "1">Player</span>
@@ -24,7 +24,7 @@
                 </span>: {{activePerson.username}}</span><br>
             <span>Inworld Name: {{activePerson.first + " " + activePerson.last}}</span>
         </li>
-        <li class="nav-item">
+        <li>
             <button type="button" (click)="logout()">Logout</button>
         </li>
     </ul>

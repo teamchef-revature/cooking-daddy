@@ -19,6 +19,7 @@ import { QualityControllerComponent } from './admin/quality-controller/quality-c
 import { EditIngredientControllerComponent } from './admin/edit-ingredient-controller/edit-ingredient-controller.component';
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
 import { IngredientPipe } from './ingredient.pipe';
+import { CookComponent } from './cook/cook/cook.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { IngredientPipe } from './ingredient.pipe';
     QualityControllerComponent,
     EditIngredientControllerComponent,
     IngredientComponent,
-    IngredientPipe
+    IngredientPipe,
+    CookComponent
   ],
   imports: [
     BrowserModule,
