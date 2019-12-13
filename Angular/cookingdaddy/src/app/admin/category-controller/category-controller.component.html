@@ -1,9 +1,19 @@
 <div class="container">
-    <ul>
-        <li *ngFor="let c of categories">{{c.name}}</li>
-    </ul>
+    <div class="container border" *ngFor="let c of categories">
+        <div class="row">
+            <div class="col-sm">
+                {{c.name}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm" *ngIf="c.parent">
+                parent {{c.parent.name}}
+            </div>
+        </div>
+    </div>
     <ng-container>
-        <input type="text" name="category" [(ngModel)]="category.name" (keydown.enter)="submit()"/>
+        <input type="text" name="category" [(ngModel)]="category.name" />
+        <input type="text" name="parent" [(ngModel)]="category.parent" />
         <button class="btn btn-primary" (click)="add()">Add</button>
         <button class="btn btn-warning" (click)="cancel()">Cancel</button>
     </ng-container>
