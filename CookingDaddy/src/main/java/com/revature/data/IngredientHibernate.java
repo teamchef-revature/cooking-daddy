@@ -131,12 +131,14 @@ public class IngredientHibernate implements IngredientDAO{
 
 	@Override
 	public Integer addCategory(Category category) {
+		System.out.println(category);
 		Integer response = null;
 		Session session = hu.getSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
 			response= (Integer) session.save(category);
+			System.out.println("response: " + response);
 			tx.commit();
 		} catch(Exception e) {
 			if(tx != null)

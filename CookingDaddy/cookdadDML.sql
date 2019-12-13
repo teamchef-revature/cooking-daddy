@@ -14,22 +14,34 @@ insert into quality (id, name)
     values (7, 'Delicious');
 insert into quality (id, name)
     values (8, 'Heavenly');
+
+insert into flavor (id, name)
+    values (1, 'Sour');
+insert into flavor (id, name)
+    values (2, 'Sweet');
+insert into flavor (id, name)
+    values (3, 'Spicy');
+insert into flavor (id, name)
+    values (4, 'Bitter');
+insert into flavor (id, name)
+    values (5, 'Savory');
+insert into flavor (id, name)
+    values (6, 'Neutral');
+
 insert into category (id, name, parent_id)
-    values (0, 'Any', 0);
+    values (1, 'Grain', null);
 insert into category (id, name, parent_id)
-    values (1, 'Grain', 0);
+    values (2, 'Vegetables', null);
 insert into category (id, name, parent_id)
-    values (2, 'Vegetables', 0);
+    values (3, 'Fruits', null);
 insert into category (id, name, parent_id)
-    values (3, 'Fruits', 0);
+    values (4, 'Proteins', null);
 insert into category (id, name, parent_id)
-    values (4, 'Proteins', 0);
+    values (5, 'Nuts', null);
 insert into category (id, name, parent_id)
-    values (5, 'Nuts', 0);
+    values (6, 'Liquids', null);
 insert into category (id, name, parent_id)
-    values (6, 'Liquids', 0);
-insert into category (id, name, parent_id)
-    values (7, 'Spices/Seasonings', 0);
+    values (7, 'Spices/Seasonings', null);
 insert into category (id, name, parent_id)
     values (8, 'Rice', 1);
 insert into category (id, name, parent_id)
@@ -58,18 +70,7 @@ insert into category (id, name, parent_id)
     values (20, 'Sugar', 7);
 insert into category (id, name, parent_id)
     values (21, 'Herb', 7);
-insert into flavor (id, name)
-    values (1, 'Sour');
-insert into flavor (id, name)
-    values (2, 'Sweet');
-insert into flavor (id, name)
-    values (3, 'Spicy');
-insert into flavor (id, name)
-    values (4, 'Bitter');
-insert into flavor (id, name)
-    values (5, 'Savory');
-insert into flavor (id, name)
-    values (6, 'Neutral');
+
 insert into ingredient (id, category_id, quality_id, flavor_id, name)
     values (1, 9, 4, 6, 'White Bread');
 insert into ingredient (id, category_id, quality_id, flavor_id, name)
@@ -204,6 +205,7 @@ insert into ingredient (id, category_id, quality_id, flavor_id, name)
     values (66, 3, 5, 2, 'Pear');
 insert into ingredient (id, category_id, quality_id, flavor_id, name)
     values (67, 3, 6, 2, 'Persimmon');
+
 insert into equipment (id, quality_id, name, min_temp, max_temp, min_time, max_time)
     values (1, 4, 'Oven', 300, 500, 5, 60);
 insert into equipment (id, quality_id, name, min_temp, max_temp, min_time, max_time)

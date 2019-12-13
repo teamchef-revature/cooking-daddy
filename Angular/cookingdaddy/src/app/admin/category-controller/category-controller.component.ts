@@ -24,7 +24,6 @@ export class CategoryControllerComponent implements OnInit {
 
   add(): void {
     this.adminService.addCategory( this.category ).subscribe( resp => {
-      this.category = new Category();
       this.categories.push( resp );
     });
   }
