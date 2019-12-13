@@ -15,14 +15,20 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.person = new Person();
+    this.person.roleId = 1; // player
   }
 
-  submit(): void {
+  submit() {
+    console.log(this.person);
     this.personService.register(this.person).subscribe(
       person => {
         this.person = person;
-        this.router.navigate(['/home']);
+        this.router.navigate(['']);
       }
     );
+  }
+
+  isPerson(): boolean {
+    return this.personService.isPerson();
   }
 }
