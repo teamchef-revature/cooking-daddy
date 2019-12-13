@@ -145,4 +145,111 @@ public class IngredientHibernate implements IngredientDAO{
 		List<Quality> qualities = query.list();
 		return new HashSet<Quality>(qualities);
 	}
+
+	@Override
+	public Integer addCategory(Category category) {
+		Integer response = null;
+		Session session = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			response= (Integer) session.save(category);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return response;
+	}
+
+	@Override
+	public void deleteCategory(Category category) {
+		Session session = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.delete(category);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+	}
+
+	@Override
+	public Integer addFlavor(Flavor flavor) {
+		Integer response = null;
+		Session session = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			response = (Integer) session.save(flavor);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+		} finally {
+			session.close();
+		}
+		return response;
+	}
+
+	@Override
+	public void deleteFlavor(Flavor flavor) {
+		Session session = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.delete(flavor);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public Integer addQuality(Quality quality) {
+		Integer response = null;
+		Session session = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			response = (Integer) session.save(quality);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+		} finally {
+			session.close();
+		}
+		return response;
+	}
+
+	@Override
+	public void deleteQuality(Quality quality) {
+		Session session = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.delete(quality);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
 }
