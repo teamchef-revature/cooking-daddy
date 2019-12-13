@@ -98,4 +98,20 @@ td {
     border-radius: 15px;
 }
 
+.fridge {
+    border: 0px;
+    padding: 10px;
+    text-align:center;
+}
+
+.fridgetable {
+    /*margin:auto;*/
+    width:33%;
+    float:left;
+}
+
+.fridgerow {
+    width: 100%;
+}
+
 /* ****************************** IDS ********************************* */
