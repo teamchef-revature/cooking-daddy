@@ -26,6 +26,9 @@ export class LoginComponent implements OnInit {
       resp => {
         this.activePerson = resp;
       });
+      if (this.activePerson == null) {
+        
+      }
   }
 
   logout() {
