@@ -18,9 +18,9 @@
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
             <span>
-                <span [ngSwitch] = "activePerson.roleId">
-                    <span *ngSwitchCase = "1">Player</span>
-                    <span *ngSwitchCase = "2">Admin</span>
+                <span [ngSwitch] = "activePerson.role.label">
+                    <span *ngSwitchCase = "Player">Player</span>
+                    <span *ngSwitchCase = "Admin">Admin</span>
                 </span>: {{activePerson.username}}</span><br>
             <span>Inworld Name: {{activePerson.first + " " + activePerson.last}}</span>
         </li>
