@@ -1,5 +1,7 @@
 <div class="container">
 Search: <input type="text" [(ngModel)]="searchText">
 
-<app-person-ingredient *ngFor="let i of ingredients | ingredient:searchText" [ingredient]="i"></app-person-ingredient>
+<div *ngFor="let i of ingredients | ingredient:searchText">
+    <app-ingredient [ingredient] = "i.ingredient"></app-ingredient>
+</div>
 </div>
