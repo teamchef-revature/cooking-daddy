@@ -72,7 +72,7 @@ public class AdminController {
 	public ResponseEntity<Flavor> getFlavor(@PathVariable Integer id) {
 		return ResponseEntity.ok(ingredientDAO.getFlavor(id));
 	}
-	@GetMapping(value="/flavor")
+	@PostMapping(value="/flavor")
 	public ResponseEntity<Flavor> addFlavor(@RequestBody Flavor flavor) {
 		ingredientDAO.addFlavor(flavor);
 		return ResponseEntity.status(201).body(flavor);
@@ -87,7 +87,7 @@ public class AdminController {
 	public ResponseEntity<Quality> getQuality(@PathVariable Integer id) {
 		return ResponseEntity.ok(ingredientDAO.getQuality(id));
 	}
-	@GetMapping(value="/quality")
+	@PostMapping(value="/quality")
 	public ResponseEntity<Quality> addQuality(@RequestBody Quality quality) {
 		ingredientDAO.addQuality(quality);
 		return ResponseEntity.status(201).body(quality);
