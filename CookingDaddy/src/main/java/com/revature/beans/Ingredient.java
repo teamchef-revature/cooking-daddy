@@ -31,17 +31,23 @@ public class Ingredient {
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
 	private String name;
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="person_ingredient", 
-		joinColumns=@JoinColumn(name="id"),
-		inverseJoinColumns=@JoinColumn(name="ingredient_id"))
-	private Integer inventory;
+//	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+//	@JoinTable(name="person_ingredient", 
+//		joinColumns=@JoinColumn(name="id"),
+//		inverseJoinColumns=@JoinColumn(name="ingredient_id"))
+//	private Integer inventory;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
+//	public Integer getInventory() {
+//		return inventory;
+//	}
+//	public void setInventory(Integer inventory) {
+//		this.inventory = inventory;
+//	}
 	public Category getCategory() {
 		return category;
 	}
@@ -67,16 +73,17 @@ public class Ingredient {
 		this.name = name;
 	}
 @Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((flavor == null) ? 0 : flavor.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((quality == null) ? 0 : quality.hashCode());
-		return result;
-	}
+public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((category == null) ? 0 : category.hashCode());
+	result = prime * result + ((flavor == null) ? 0 : flavor.hashCode());
+	result = prime * result + ((id == null) ? 0 : id.hashCode());
+//	result = prime * result + ((inventory == null) ? 0 : inventory.hashCode());
+	result = prime * result + ((name == null) ? 0 : name.hashCode());
+	result = prime * result + ((quality == null) ? 0 : quality.hashCode());
+	return result;
+}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -101,6 +108,11 @@ public class Ingredient {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+//		if (inventory == null) {
+//			if (other.inventory != null)
+//				return false;
+//		} else if (!inventory.equals(other.inventory))
+//			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -116,6 +128,6 @@ public class Ingredient {
 	@Override
 	public String toString() {
 		return "Ingredient [id=" + id + ", category=" + category + ", quality=" + quality + ", flavor=" + flavor
-				+ ", name=" + name + ", inventory=" + inventory + "]";
+				+ ", name=" + name + "]";
 	}
 }
