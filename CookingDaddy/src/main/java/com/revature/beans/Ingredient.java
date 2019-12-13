@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -30,7 +31,11 @@ public class Ingredient {
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
 	private String name;
-//	private Integer inventory;
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="person_ingredient", 
+		joinColumns=@JoinColumn(name="id"),
+		inverseJoinColumns=@JoinColumn(name="ingredient_id"))
+	private Integer inventory;
 	public Integer getId() {
 		return id;
 	}
@@ -111,10 +116,12 @@ public class Ingredient {
 	@Override
 	public String toString() {
 		return "Ingredient [id=" + id + ", category=" + category + ", quality=" + quality + ", flavor=" + flavor
+<<<<<<< HEAD
+				+ ", name=" + name + ", inventory=" + inventory + "]";
+=======
 				+ ", name=" + name + "]";
+>>>>>>> 13d4ff91a83036748064fa1d75b98cd0c3157e9f
 	}
 	
-
-
-
+	
 }

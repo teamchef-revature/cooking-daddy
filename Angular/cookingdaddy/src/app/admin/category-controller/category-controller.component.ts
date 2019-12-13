@@ -23,7 +23,7 @@ export class CategoryControllerComponent implements OnInit {
     );
   }
 
-  submit(): void {
+  add(): void {
     this.ingredientService.addCategory( this.category ).subscribe( resp => {
       this.category = new Category();
       this.categories.push( resp );
