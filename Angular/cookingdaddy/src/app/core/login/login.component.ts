@@ -35,4 +35,13 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  isPerson(): boolean {
+    if (this.personService.isPerson()) {
+      this.activePerson = this.personService.getPerson();
+      return true;
+    } else {
+      this.activePerson = null;
+      return false;
+    }
+  }
 }

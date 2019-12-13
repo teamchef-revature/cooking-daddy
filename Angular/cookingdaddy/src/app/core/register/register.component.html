@@ -1,26 +1,39 @@
-<form>
-    <h3>Register an Account</h3>
-    <p>
-        <label for="user">Username:</label>&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="text" [(ngModel)]="person.username" name="user" required />
-    </p>
-    <br />
-    <p>
-        <label for="pass">Password:</label>&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="password" [(ngModel)]="person.password" name="pass" required />
-    </p>
-    <br />
-    <p>
-        <label for="first">First Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="text" [(ngModel)]="person.first" name="first" />
-    </p>
-    <br />
-    <p>
-        <label for="last">Last Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="text" [(ngModel)]="person.last" name="last" />
-    </p>
-    <br />
-    <p>
-        <button type="button" (click)="submit()">Register</button>
-    </p>
-</form>
+<ng-container *ngIf="!isPerson();else display">
+    <form>
+        <h3>Register an Account</h3>
+        <p>
+            <label for="user">Username:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" [(ngModel)]="person.username" name="user" required />
+        </p>
+        <br />
+        <p>
+            <label for="pass">Password:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="password" [(ngModel)]="person.password" name="pass" required />
+        </p>
+        <br />
+        <p>
+            <label for="first">First Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" [(ngModel)]="person.first" name="first" />
+        </p>
+        <br />
+        <p>
+            <label for="last">Last Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" [(ngModel)]="person.last" name="last" />
+        </p>
+        <br />
+        <p>
+            <button type="button" (click)="submit()">Register</button>
+        </p>
+    </form>
+</ng-container>
+<ng-template #display>
+    <h3>Welcome!</h3><br />
+    <ul>
+        <li class="my-nav-pill">Cook </li>
+        <li class="my-nav-pill"><a routerLink="/fridge">Fridge </a></li>
+        <li class="my-nav-pill">Cookbook </li>
+        <li class="my-nav-pill">Marketplace </li>
+        <li class="my-nav-pill">Leaderboard </li>
+        <li class="my-nav-pill">Profile </li>
+    </ul>
+</ng-template>

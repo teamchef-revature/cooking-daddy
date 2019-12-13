@@ -8,11 +8,13 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.revature.beans.Ingredient;
 import com.revature.beans.PersonIngredient;
 import com.revature.utils.HibernateUtil;
 
+@Component
 public class PersonIngredientHibernate implements PersonIngredientDAO {
 	
 	@Autowired
