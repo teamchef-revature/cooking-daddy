@@ -10,6 +10,6 @@
             <li class="nav-item my-nav-pill">Profile </li>
         </ul>
         <span *ngIf="isPerson()">{{ player.username }}&nbsp;
-        <button type="button">Log Out</button></span>
+        <button type="button" (click)="logout()">Log Out</button></span>
     </div>
 </nav>
