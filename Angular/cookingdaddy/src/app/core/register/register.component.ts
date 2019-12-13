@@ -26,6 +26,12 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['']);
       }
     );
+    this.personService.login(this.person.username, this.person.password).subscribe(
+      person => {
+        this.person = person;
+      }
+    );
+    this.router.navigate(['']);
   }
 
   isPerson(): boolean {
