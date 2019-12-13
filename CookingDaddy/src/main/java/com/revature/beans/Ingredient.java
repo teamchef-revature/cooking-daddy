@@ -116,11 +116,7 @@ public class Ingredient {
 	@Override
 	public String toString() {
 		return "Ingredient [id=" + id + ", category=" + category + ", quality=" + quality + ", flavor=" + flavor
-<<<<<<< HEAD
 				+ ", name=" + name + ", inventory=" + inventory + "]";
-=======
-				+ ", name=" + name + "]";
->>>>>>> 13d4ff91a83036748064fa1d75b98cd0c3157e9f
 	}
 	
 	
