@@ -47,13 +47,6 @@ public class AdminController {
 			return ResponseEntity.status(405).body(null);
 		return ResponseEntity.ok(ingredientDAO.updateIngredient(ingredient));
 	}
-	@DeleteMapping(value="/ingredient/{id}")
-	public ResponseEntity<Void> deleteIngredient(@PathVariable Integer id) {
-		if(ingredientDAO.getIngredient(id) == null)
-			return ResponseEntity.status(405).build();
-		ingredientDAO.deleteIngredient(ingredientDAO.getIngredient(id));
-		return ResponseEntity.noContent().build();
-	}
 	
 	// ** Category **
 	@GetMapping(value="/category")
@@ -68,13 +61,6 @@ public class AdminController {
 	public ResponseEntity<Category> addCategory(@RequestBody Category category) {
 		ingredientDAO.addCategory(category);
 		return ResponseEntity.status(201).body(category);
-	}
-	@DeleteMapping(value="/category/{id}")
-	public ResponseEntity<Void> deleteCategory(@PathVariable Integer id) {
-		if(ingredientDAO.getCategory(id) == null)
-			return ResponseEntity.status(405).build();
-		ingredientDAO.deleteCategory(ingredientDAO.getCategory(id));
-		return ResponseEntity.noContent().build();
 	}
 	
 	// ** Flavor **
@@ -91,13 +77,6 @@ public class AdminController {
 		ingredientDAO.addFlavor(flavor);
 		return ResponseEntity.status(201).body(flavor);
 	}
-	@DeleteMapping(value="/flavor/{id}")
-	public ResponseEntity<Flavor> deleteFlavor(@PathVariable Integer id) {
-		if(ingredientDAO.getFlavor(id) == null)
-			return ResponseEntity.status(405).build();
-		ingredientDAO.deleteCategory(ingredientDAO.getCategory(id));
-		return ResponseEntity.noContent().build();
-	}
 	
 	// ** Quality **
 	@GetMapping(value="/quality")
@@ -112,12 +91,5 @@ public class AdminController {
 	public ResponseEntity<Quality> addQuality(@RequestBody Quality quality) {
 		ingredientDAO.addQuality(quality);
 		return ResponseEntity.status(201).body(quality);
-	}
-	@GetMapping(value="/quality/{id}")
-	public ResponseEntity<Void> deleteQuality(@PathVariable Integer id) {
-		if(ingredientDAO.getQuality(id) == null)
-			return ResponseEntity.status(405).build();
-		ingredientDAO.deleteFlavor(ingredientDAO.getFlavor(id));
-		return ResponseEntity.noContent().build();
 	}
 }

@@ -10,6 +10,5 @@ public interface IngredientService {
 	Set<Ingredient> getIngredients();
 	Ingredient getIngredient(Integer i);
 	Ingredient updateIngredient(Ingredient i);
-	public void deleteIngredient(Ingredient i);
 
 }

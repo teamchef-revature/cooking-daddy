@@ -78,23 +78,6 @@ public class IngredientHibernate implements IngredientDAO{
 	}
 
 	@Override
-	public void deleteIngredient(Ingredient i) {
-		Session s = hu.getSession();
-		Transaction tx = null;
-		try {
-			tx = s.beginTransaction();
-			s.delete(i);
-			tx.commit();
-		} catch(Exception e) {
-			if(tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			s.close();
-		}		
-	}
-
-	@Override
 	public Category getCategory(Integer id) {
 		Session session = hu.getSession();
 		Category category = session.get(Category.class, id);
@@ -166,24 +149,6 @@ public class IngredientHibernate implements IngredientDAO{
 	}
 
 	@Override
-	public void deleteCategory(Category category) {
-		Session session = hu.getSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.delete(category);
-			tx.commit();
-		} catch(Exception e) {
-			if(tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		
-	}
-
-	@Override
 	public Integer addFlavor(Flavor flavor) {
 		Integer response = null;
 		Session session = hu.getSession();
@@ -202,23 +167,6 @@ public class IngredientHibernate implements IngredientDAO{
 	}
 
 	@Override
-	public void deleteFlavor(Flavor flavor) {
-		Session session = hu.getSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.delete(flavor);
-			tx.commit();
-		} catch(Exception e) {
-			if(tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-	}
-
-	@Override
 	public Integer addQuality(Quality quality) {
 		Integer response = null;
 		Session session = hu.getSession();
@@ -234,22 +182,5 @@ public class IngredientHibernate implements IngredientDAO{
 			session.close();
 		}
 		return response;
-	}
-
-	@Override
-	public void deleteQuality(Quality quality) {
-		Session session = hu.getSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.delete(quality);
-			tx.commit();
-		} catch(Exception e) {
-			if(tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
 	}
 }

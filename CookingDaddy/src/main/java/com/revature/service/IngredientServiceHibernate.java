@@ -33,9 +33,4 @@ public class IngredientServiceHibernate implements IngredientService{
 		return id.updateIngredient(i);
 	}
 
-	@Override
-	public void deleteIngredient(Ingredient i) {
-		id.deleteIngredient(i);
-	}
-
 }

@@ -13,20 +13,16 @@ public interface IngredientDAO {
 	public Set<Ingredient> getIngredients();
 	public Ingredient getIngredient(Integer i);
 	public Ingredient updateIngredient(Ingredient i);
-	public void deleteIngredient(Ingredient i);
 	
 	public Category getCategory(Integer id);
 	public Set<Category> getCategories();
 	public Integer addCategory(Category category);
-	public void deleteCategory(Category category);
 	
 	public Flavor getFlavor(Integer id);
 	public Set<Flavor> getFlavors();
 	public Integer addFlavor(Flavor flavor);
-	public void deleteFlavor(Flavor flavor);
 	
 	public Quality getQuality(Integer id);
 	public Set<Quality> getQualities();
 	public Integer addQuality(Quality quality);
-	public void deleteQuality(Quality quality);
 }
