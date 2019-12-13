@@ -25,7 +25,7 @@ public class PersonIngredient {
 	private Integer inventory;
 	private Integer person_id;
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="ingredient_id", insertable=false, updatable=false)
+	@JoinColumn(name="ingredient_id")
 	private Ingredient ingredient;
 	
 	

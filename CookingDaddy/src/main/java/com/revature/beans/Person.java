@@ -1,5 +1,6 @@
 package com.revature.beans;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -28,7 +29,9 @@ public class Person {
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="role_id")
 	private Role role;
+
 	@OneToMany(fetch=FetchType.EAGER)
+
 	@JoinColumn(name="person_id")
 	private Set<PersonIngredient> ingredients;
 	
