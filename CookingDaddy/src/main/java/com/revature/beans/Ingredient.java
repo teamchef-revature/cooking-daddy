@@ -31,11 +31,10 @@ public class Ingredient {
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
 	private String name;
-//	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-//	@JoinTable(name="person_ingredient", 
-//		joinColumns=@JoinColumn(name="id"),
-//		inverseJoinColumns=@JoinColumn(name="ingredient_id"))
-//	private Integer inventory;
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="person_ingredient", 
+		joinColumns=@JoinColumn(name="id"),
+		inverseJoinColumns=@JoinColumn(name="ingredient_id"))
 	public Integer getId() {
 		return id;
 	}
