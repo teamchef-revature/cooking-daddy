@@ -18,13 +18,20 @@ export class NavBarComponent implements OnInit {
   }
 
   isPerson(): boolean {
-    return this.personService.isPerson();
+    if (this.personService.isPerson()) {
+      this.person = this.personService.getPerson();
+      return true;
+    } else {
+      this.person = null;
+      return false;
+    }
   }
 
   logout() {
     this.personService.logout().subscribe(
       resp => {
-        this.router.navigate(['/home']);
+        this.person = null;
+        this.router.navigate(['']);
       });
   }
 }

@@ -12,33 +12,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.beans.Ingredient;
-import com.revature.data.IngredientDAO;
-
+import com.revature.beans.PersonIngredient;
+import com.revature.data.PersonIngredientDAO;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
-@RequestMapping(value="/ingredients")
-public class IngredientController {
+@RequestMapping(value="/pingredients")
+public class PersonIngredientController {
 	
 	@Autowired
-	private IngredientDAO id;
+	private PersonIngredientDAO pid;
 	
 	@GetMapping
 	@ResponseBody
-	public Set<Ingredient> getAll(){
-		return id.getIngredients();
+	public Set<PersonIngredient> getAll(){
+		return pid.getPersonIngredients();
 	}
 	
 	@GetMapping("{steve}")
 	@ResponseBody
-	public Ingredient getIngredient(@PathVariable("steve") Integer bob) {
-		return id.getIngredient(bob);
+	public PersonIngredient getPersonIngredient(@PathVariable("steve") Integer bob) {
+		return pid.getPersonIngredient(bob);
 	}
 	
 	@PostMapping
-	public Ingredient addIngredient(@RequestBody Ingredient i) {
-		id.addIngredient(i);
+	public PersonIngredient addPersonIngredient(@RequestBody PersonIngredient i) {
+		pid.addPersonIngredient(i);
 		return i;
 	}
 

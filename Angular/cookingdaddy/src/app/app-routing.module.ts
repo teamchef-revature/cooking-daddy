@@ -22,10 +22,7 @@ const routes: Routes = [
     path: 'admin/ingredients',
     component: IngredientControllerComponent
   },
-  {
-    path: 'ingredients',
-    component: FridgeComponent
-  }
+
 ];
 
 @NgModule({

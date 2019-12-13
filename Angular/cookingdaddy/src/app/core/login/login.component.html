@@ -1,4 +1,4 @@
-<ng-container *ngIf="!activePerson; else display">
+<ng-container *ngIf="!isPerson(); else display">
     <h3>Log In</h3>
     <form>
         <p>
@@ -17,19 +17,15 @@
 <ng-template #display>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <div *ngIf="activePerson.roleId === 1; else admin">
-                <span>Logged in as: {{activePerson.username}} <br>
-                    Inworld Name: {{activePerson.first + " " + activePerson.last}}</span>
-            </div>
-        </li><br>
+            <span>
+                <span [ngSwitch] = "activePerson.roleId">
+                    <span *ngSwitchCase = "1">Player</span>
+                    <span *ngSwitchCase = "2">Admin</span>
+                </span>: {{activePerson.username}}</span><br>
+            <span>Inworld Name: {{activePerson.first + " " + activePerson.last}}</span>
+        </li>
         <li class="nav-item">
             <button type="button" (click)="logout()">Logout</button>
         </li>
     </ul>
-</ng-template>
-<ng-template #admin>
-    <div>
-        <span>Logged in as Admin: {{activePerson.username}} <br>
-            Inworld Name: {{activePerson.first + " " + activePerson.last}}</span>
-    </div>
 </ng-template>
