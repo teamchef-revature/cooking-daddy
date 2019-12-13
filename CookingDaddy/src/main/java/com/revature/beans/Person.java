@@ -9,9 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -29,11 +28,9 @@ public class Person {
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="role_id")
 	private Role role;
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="person_ingredent",
-		joinColumns=@JoinColumn(name="person_id"),
-		inverseJoinColumns=@JoinColumn(name="ingredient_id"))
-	private Set<Ingredient> ingredients;
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="person_id")
+	private Set<PersonIngredient> ingredients;
 	
 	public Integer getId() {
 		return id;
@@ -71,10 +68,10 @@ public class Person {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	public Set<Ingredient> getIngredients() {
+	public Set<PersonIngredient> getIngredients() {
 		return ingredients;
 	}
-	public void setIngredients(Set<Ingredient> ingredients) {
+	public void setIngredients(Set<PersonIngredient> ingredients) {
 		this.ingredients = ingredients;
 	}
 	@Override
