@@ -35,7 +35,6 @@ public class Ingredient {
 	@JoinTable(name="person_ingredient", 
 		joinColumns=@JoinColumn(name="id"),
 		inverseJoinColumns=@JoinColumn(name="ingredient_id"))
-	private Integer inventory;
 	public Integer getId() {
 		return id;
 	}
@@ -116,6 +115,6 @@ public class Ingredient {
 	@Override
 	public String toString() {
 		return "Ingredient [id=" + id + ", category=" + category + ", quality=" + quality + ", flavor=" + flavor
-				+ ", name=" + name + ", inventory=" + inventory + "]";
+				+ ", name=" + name + "]";
 	}
 }
