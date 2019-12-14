@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ingredient } from '../../shared/ingredient/ingredient';
-import { IngredientService } from '../../shared/ingredient/ingredient.service';
+import { AdminService } from '../../shared/person/admin.service';
 
 @Component({
   selector: 'app-ingredient-controller',
@@ -9,23 +9,17 @@ import { IngredientService } from '../../shared/ingredient/ingredient.service';
   styleUrls: ['./ingredient-controller.component.css']
 })
 export class IngredientControllerComponent implements OnInit {
-  @Input() ingredient: Ingredient;
-  constructor(
-    private ingredientService: IngredientService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) { }
+  ingredients: Ingredient[];
+  ingredient: Ingredient;
+
+  constructor( private adminService: AdminService ) { }
 
   ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    if ( id ) {
-      this.ingredientService.getIngredient(id).subscribe(
-        ingredient => {
-          this.ingredient = ingredient;
-        });
-    }
-  }
-  editIngredient() {
-    this.router.navigate(['/admin/ingredients/edit', this.ingredient.id]);
+    this.ingredient = new Ingredient();
+    this.adminService.getIngredients().subscribe(
+      (i) => {
+        this.ingredients = i;
+        this.ingredients.sort( (i1, i2) => i1.id - i2.id );
+      });
   }
 }

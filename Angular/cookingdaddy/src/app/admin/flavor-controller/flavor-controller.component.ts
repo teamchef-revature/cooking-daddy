@@ -18,7 +18,6 @@ export class FlavorControllerComponent implements OnInit {
       (f) => {
         this.flavors = f;
         this.flavors.sort( (f1, f2) => f1.id - f2.id );
-      }
-    );
+      });
   }
 }
