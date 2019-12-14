@@ -19,8 +19,8 @@
         <li>
             <span>
                 <span [ngSwitch] = "activePerson.role.label">
-                    <span *ngSwitchCase = "'Player'">Player</span>
-                    <span *ngSwitchCase = "'Admin'">Admin</span>
+                    <span *ngSwitchCase = "'player'">Player</span>
+                    <span *ngSwitchCase = "'admin'">Admin</span>
                 </span>: {{activePerson.username}}</span><br>
             <span>Inworld Name: {{activePerson.first + " " + activePerson.last}}</span>
         </li>

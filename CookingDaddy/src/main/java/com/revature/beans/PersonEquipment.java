@@ -23,7 +23,7 @@ public class PersonEquipment {
 	@Column(name = "person_Id")
 	private Integer personId;
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="ingredient_id")
+	@JoinColumn(name="equipment_id")
 	private Equipment equipment;
 	public PersonEquipment() {
 		
