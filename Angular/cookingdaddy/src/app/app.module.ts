@@ -27,6 +27,7 @@ import { CategoryEditControllerComponent } from './admin/category-edit-controlle
 import { AdminControllerComponent } from './admin/admin-controller/admin-controller.component';
 import { FlavorItemControllerComponent } from './admin/flavor-item-controller/flavor-item-controller.component';
 import { QualityItemControllerComponent } from './admin/quality-item-controller/quality-item-controller.component';
+import { MarketComponent } from './market/market.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { QualityItemControllerComponent } from './admin/quality-item-controller/
     CategoryEditControllerComponent,
     AdminControllerComponent,
     FlavorItemControllerComponent,
-    QualityItemControllerComponent
+    QualityItemControllerComponent,
+    MarketComponent
   ],
   imports: [
     BrowserModule,

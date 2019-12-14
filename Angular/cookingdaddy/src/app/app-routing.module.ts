@@ -8,11 +8,16 @@ import { CategoryControllerComponent } from './admin/category-controller/categor
 import { FlavorControllerComponent } from './admin/flavor-controller/flavor-controller.component';
 import { QualityControllerComponent } from './admin/quality-controller/quality-controller.component';
 import { EquipmentComponent } from './fridge/equipment/equipment.component';
+import { MarketComponent } from './market/market.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'market',
+    component: MarketComponent
   },
   {
     path: 'fridge',
