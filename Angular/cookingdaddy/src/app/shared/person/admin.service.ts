@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Flavor } from '../ingredient/flavor';
 import { Category } from '../ingredient/category';
+import { Quality } from '../ingredient/quality';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,9 @@ export class AdminService {
   }
   public getFlavors(): Observable<Flavor[]> {
     return this.http.get( this.appUrl + '/flavor', { withCredentials: true }).pipe( map( resp => resp as Flavor[]));
+  }
+  public getQualities(): Observable<Quality[]> {
+    return this.http.get( this.appUrl + '/quality', { withCredentials: true }).pipe( map( resp => resp as Quality[]));
   }
   public addCategory( category: Category ) {
     const body = JSON.stringify( category );

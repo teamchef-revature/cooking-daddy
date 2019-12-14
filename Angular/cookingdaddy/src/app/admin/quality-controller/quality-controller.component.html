@@ -1,9 +1,9 @@
 <div class="container">
-    <ul>
-        <li *ngFor="let q of qualities">{{q.name}}</li>
-    </ul>
-    <ng-container>
-        <input type="text" [(ngModel)]="quality.quality" (keydown.enter)="submit()"/>
-        <button class="btn btn-primary" (click)="submit()">Submit</button>
-    </ng-container>
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>Qualities</h4>
+        </div>
+        <div class="col-sm-8"></div>
+    </div>
+    <app-quality-item-controller *ngFor="let quality of qualities" [quality]="quality"></app-quality-item-controller>
 </div>

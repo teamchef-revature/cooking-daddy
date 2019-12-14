@@ -24,6 +24,7 @@ import { CategoryItemControllerComponent } from './admin/category-item-controlle
 import { CategoryEditControllerComponent } from './admin/category-edit-controller/category-edit-controller.component';
 import { AdminControllerComponent } from './admin/admin-controller/admin-controller.component';
 import { FlavorItemControllerComponent } from './admin/flavor-item-controller/flavor-item-controller.component';
+import { QualityItemControllerComponent } from './admin/quality-item-controller/quality-item-controller.component';
 //import { EquipmentPipe } from './equipment.pipe';
 
 @NgModule({
@@ -46,7 +47,8 @@ import { FlavorItemControllerComponent } from './admin/flavor-item-controller/fl
     CategoryItemControllerComponent,
     CategoryEditControllerComponent,
     AdminControllerComponent,
-    FlavorItemControllerComponent//,
+    FlavorItemControllerComponent,
+    QualityItemControllerComponent//,
     //EquipmentPipe
   ],
   imports: [
