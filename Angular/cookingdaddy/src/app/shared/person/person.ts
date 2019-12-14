@@ -1,5 +1,6 @@
 import { PersonIngredient } from '../personIngredient/person-ingredient';
 import { Role } from '../person/role';
+import { PersonEquipment } from '../equipment/person-equipment';
 
 export class Person {
     id: string;
@@ -9,4 +10,5 @@ export class Person {
     last: string;
     ingredients: PersonIngredient[];
     role: Role;
+    equipments: PersonEquipment[];
 }

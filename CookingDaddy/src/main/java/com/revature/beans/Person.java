@@ -28,11 +28,12 @@ public class Person {
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="role_id")
 	private Role role;
-
 	@OneToMany(fetch=FetchType.EAGER)
-
 	@JoinColumn(name="person_id")
 	private Set<PersonIngredient> ingredients;
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="person_id")
+	private Set<PersonEquipment> equipments;
 	
 	public Integer getId() {
 		return id;
@@ -76,10 +77,17 @@ public class Person {
 	public void setIngredients(Set<PersonIngredient> ingredients) {
 		this.ingredients = ingredients;
 	}
+	public Set<PersonEquipment> getEquipments() {
+		return equipments;
+	}
+	public void setEquipments(Set<PersonEquipment> equipments) {
+		this.equipments = equipments;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((equipments == null) ? 0 : equipments.hashCode());
 		result = prime * result + ((first == null) ? 0 : first.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((ingredients == null) ? 0 : ingredients.hashCode());
@@ -98,6 +106,11 @@ public class Person {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
+		if (equipments == null) {
+			if (other.equipments != null)
+				return false;
+		} else if (!equipments.equals(other.equipments))
+			return false;
 		if (first == null) {
 			if (other.first != null)
 				return false;
@@ -138,7 +151,7 @@ public class Person {
 	@Override
 	public String toString() {
 		return "Person [id=" + id + ", username=" + username + ", password=" + password + ", first=" + first + ", last="
-				+ last + ", role=" + role + ", ingredients=" + ingredients + "]";
+				+ last + ", role=" + role + ", ingredients=" + ingredients + ", equipments=" + equipments + "]";
 	}
 	
 }
