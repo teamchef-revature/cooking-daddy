@@ -20,7 +20,11 @@ import { EditIngredientControllerComponent } from './admin/edit-ingredient-contr
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
 import { IngredientPipe } from './ingredient.pipe';
 import { CookComponent } from './cook/cook/cook.component';
-import { EquipmentPipe } from './equipment.pipe';
+import { CategoryItemControllerComponent } from './admin/category-item-controller/category-item-controller.component';
+import { CategoryEditControllerComponent } from './admin/category-edit-controller/category-edit-controller.component';
+import { AdminControllerComponent } from './admin/admin-controller/admin-controller.component';
+import { FlavorItemControllerComponent } from './admin/flavor-item-controller/flavor-item-controller.component';
+//import { EquipmentPipe } from './equipment.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { EquipmentPipe } from './equipment.pipe';
     IngredientComponent,
     IngredientPipe,
     CookComponent,
-    EquipmentPipe
+    CategoryItemControllerComponent,
+    CategoryEditControllerComponent,
+    AdminControllerComponent,
+    FlavorItemControllerComponent//,
+    //EquipmentPipe
   ],
   imports: [
     BrowserModule,

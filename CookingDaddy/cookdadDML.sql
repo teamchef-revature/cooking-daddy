@@ -210,4 +210,7 @@ insert into equipment (id, quality_id, name, min_temp, max_temp, min_time, max_t
     values (1, 4, 'Oven', 300, 500, 5, 60);
 insert into equipment (id, quality_id, name, min_temp, max_temp, min_time, max_time)
     values (2, 5, 'Stove', 100, 375, 1, 60);
+    
+insert into role (id, label) values (1, 'player');
+insert into role (id, label) values (2, 'admin');
 commit;

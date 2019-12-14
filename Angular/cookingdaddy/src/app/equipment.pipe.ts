@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+/*import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'equipment'
@@ -19,5 +19,5 @@ export class EquipmentPipe implements PipeTransform {
       return search;
     });
   }
-
 }
+*/

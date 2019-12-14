@@ -1,0 +1,11 @@
+    <div *ngIf="category">
+        <div class="row">
+            <div class="col-sm-4">
+                {{category.name}}
+            </div>
+            <div class="col-sm-4" *ngIf="category.parent">
+                {{category.parent.name}}
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>

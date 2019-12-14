@@ -37,4 +37,10 @@ export class RegisterComponent implements OnInit {
   isPerson(): boolean {
     return this.personService.isPerson();
   }
+  isPlayer(): boolean {
+    return this.personService.isPlayer();
+  }
+  isAdmin(): boolean {
+    return this.personService.isAdmin();
+  }
 }
