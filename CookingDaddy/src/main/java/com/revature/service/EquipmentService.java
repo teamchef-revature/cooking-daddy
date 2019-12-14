@@ -1,12 +1,11 @@
-package com.revature.data;
+package com.revature.service;
 
 import java.util.Set;
 
 import com.revature.beans.Equipment;
 import com.revature.beans.PersonEquipment;
 
-public interface EquipmentDAO {
-	
+public interface EquipmentService {
 	public Integer addEquipment(Equipment e);
 	public Set<Equipment> getEquipments();
 	public Equipment getEquipment(Integer eid);
