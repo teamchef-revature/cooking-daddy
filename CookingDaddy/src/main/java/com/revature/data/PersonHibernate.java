@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Person;
+import com.revature.beans.Role;
 import com.revature.utils.HibernateUtil;
 
 @Component
@@ -71,4 +72,15 @@ public class PersonHibernate implements PersonDAO {
 
 	}
 
+	@Override
+	public Role getRoleById(Integer id) {
+		Role r = null;
+		Session s = hu.getSession();
+		String query = "from Role r where r.id=:id";
+		Query<Role> q = s.createQuery(query, Role.class);
+		q.setParameter("id", id);
+		r = q.uniqueResult();
+		s.close();
+		return r;
+	}
 }

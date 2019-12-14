@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Ingredient } from 'src/app/shared/ingredient/ingredient';
-import { IngredientService } from 'src/app/shared/ingredient/ingredient.service';
 import { PersonIngredient } from 'src/app/shared/personIngredient/person-ingredient';
 import { PersonService } from 'src/app/shared/person/person.service';
 import { Person } from 'src/app/shared/person/person';
@@ -27,10 +25,10 @@ export class FridgeComponent implements OnInit {
     console.log(this.personIngredients);
     this.personEquipments = this.personService.getPerson().equipments;
   }
-  chooseIng(){
+  chooseIng() {
     this.choice = 1;
   }
-  chooseEqu(){
+  chooseEqu() {
     this.choice = 2;
   }
 

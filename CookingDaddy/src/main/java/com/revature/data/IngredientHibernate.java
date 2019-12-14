@@ -92,6 +92,7 @@ public class IngredientHibernate implements IngredientDAO{
 		Query<Category> query = session.createQuery(q, Category.class);
 		List<Category> categories = query.list();
 		session.close();
+		System.out.println(categories);
 		return new HashSet<Category>(categories);
 	}
 

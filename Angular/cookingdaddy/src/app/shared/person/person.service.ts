@@ -71,4 +71,10 @@ export class PersonService {
   isPerson(): boolean {
     return (this.person !== undefined && this.person !== null);
   }
+  isPlayer(): boolean {
+    return (this.isPerson() && this.person.role.id === 1);
+  }
+  isAdmin(): boolean {
+    return (this.isPerson() && this.person.role.id === 2);
+  }
 }

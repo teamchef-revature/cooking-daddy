@@ -4,7 +4,9 @@ import { HomeComponent } from './home/home.component';
 import { FridgeComponent } from './fridge/fridge/fridge.component';
 import { CookComponent } from './cook/cook/cook.component';
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
-import { IngredientControllerComponent } from './admin/ingredient-controller/ingredient-controller.component';
+import { CategoryControllerComponent } from './admin/category-controller/category-controller.component';
+import { FlavorControllerComponent } from './admin/flavor-controller/flavor-controller.component';
+import { QualityControllerComponent } from './admin/quality-controller/quality-controller.component';
 import { EquipmentComponent } from './fridge/equipment/equipment.component';
 
 const routes: Routes = [
@@ -29,8 +31,16 @@ const routes: Routes = [
     component: EquipmentComponent
   },
   {
-    path: 'admin/ingredients',
-    component: IngredientControllerComponent
+    path: 'admin/category',
+    component: CategoryControllerComponent
+  },
+  {
+    path: 'admin/flavor',
+    component: FlavorControllerComponent
+  },
+  {
+    path: 'admin/quality',
+    component: QualityControllerComponent
   }
 ];
 
