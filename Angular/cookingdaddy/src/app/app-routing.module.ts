@@ -9,11 +9,16 @@ import { FridgeComponent } from './fridge/fridge/fridge.component';
 import { CookComponent } from './cook/cook/cook.component';
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
 import { EquipmentComponent } from './fridge/equipment/equipment.component';
+import { MarketComponent } from './market/market.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'market',
+    component: MarketComponent
   },
   {
     path: 'fridge',
