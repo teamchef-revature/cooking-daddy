@@ -1,4 +1,4 @@
-<span style="text-align:center;overflow:auto" *ngIf="ingredient">
+<span style="text-align:center;overflow:auto" *ngIf="equipment">
     <table class="fridge fridgetable">
       <tr class="fridge fridgerow">
         <td colspan="3" class="fridge">
@@ -10,10 +10,10 @@
           Quality: {{equipment.quality.name}}
         </td>
         <td class="fridge">
-          Temperature: {{equipment.minTemp}} - {{equipment.maxTemp}}
+          Temperature: {{equipment.minTemp}}°F - {{equipment.maxTemp}}°F
         </td>
         <td class="fridge">
-          Time: {{equipment.minTime}} - {{equipment.maxTime}}
+          Time: {{equipment.minTime}} min - {{equipment.maxTime}} min
         </td>
       </tr>
     </table>

@@ -30,8 +30,7 @@ public class EquipmentController {
 		return es.getEquipments();
 	}
 	
-	@GetMapping("{Sandshrew}")
-	@RequestMapping(value="/equipment")
+	@RequestMapping(value="/equipment/{Sandshrew}", method = RequestMethod.GET)
 	public ResponseEntity<Equipment> getEquipment(@PathVariable("Sandshrew") Integer diglett) {
 		Equipment eq = es.getEquipment(diglett);
 		if (eq==null) {
