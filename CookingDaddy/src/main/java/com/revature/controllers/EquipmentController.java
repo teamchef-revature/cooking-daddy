@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Equipment;
@@ -24,8 +25,7 @@ public class EquipmentController {
 	@Autowired
 	EquipmentService es;
 	
-	@GetMapping
-	@RequestMapping(value="/equipment")
+	@RequestMapping(value="/equipment", method = RequestMethod.GET)
 	public Set<Equipment> getAll(){
 		return es.getEquipments();
 	}
@@ -40,8 +40,7 @@ public class EquipmentController {
 		return ResponseEntity.ok(eq);
 	}
 	
-	@PostMapping
-	@RequestMapping(value="/equipment")
+	@RequestMapping(value="/equipment", method = RequestMethod.POST)
 	public ResponseEntity<Integer> addEquipment(@RequestBody Equipment e) {
 		Integer eid = es.addEquipment(e);
 		if (eid == null) {
@@ -60,11 +59,14 @@ public class EquipmentController {
 		return ResponseEntity.created(URI.create("/personEquipment/"+peid)).build();
 	}
 	
-	@PutMapping("{Hilda the Blender}")
-	@RequestMapping(value = "/personEquipment")
-	public ResponseEntity<PersonEquipment> updatePersonEquipment(@RequestBody PersonEquipment pe) {
-		PersonEquipment update= es.updatePersonEquipment(pe);
-		return ResponseEntity.ok(update);
+	@PutMapping
+	@RequestMapping(value = "/personEquipment/{id}")
+	public ResponseEntity<PersonEquipment> updatePersonEquipment(@PathVariable Integer id, @RequestBody PersonEquipment pe) {
+		if (pe.getId().equals(id)) {
+			PersonEquipment update= es.updatePersonEquipment(pe);
+			return ResponseEntity.ok(update);
+		} else {
+			return ResponseEntity.badRequest().build();
+		}
 	}
-
 }
