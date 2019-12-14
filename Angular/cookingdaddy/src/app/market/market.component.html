@@ -1,2 +1,5 @@
 <p>market works!</p>
-<app-fridge></app-fridge>
+<!-- <div class="container border">
+        <app-fridge *ngFor="let i of ingredients" [ingredient]="p"></app-fridge>
+      </div> -->
+<app-fridge [parentData] = "name"></app-fridge>
