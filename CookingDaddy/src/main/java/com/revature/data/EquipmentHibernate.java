@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Equipment;
-import com.revature.beans.Ingredient;
 import com.revature.beans.PersonEquipment;
 import com.revature.utils.HibernateUtil;
 

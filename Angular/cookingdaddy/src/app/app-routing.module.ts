@@ -5,6 +5,7 @@ import { FridgeComponent } from './fridge/fridge/fridge.component';
 import { CookComponent } from './cook/cook/cook.component';
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
 import { IngredientControllerComponent } from './admin/ingredient-controller/ingredient-controller.component';
+import { EquipmentComponent } from './fridge/equipment/equipment.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'ingredients/:bob',
     component: IngredientComponent
+  },
+  {
+    path: 'equipments/:ninja',
+    component: EquipmentComponent
   },
   {
     path: 'admin/ingredients',

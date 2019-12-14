@@ -21,6 +21,7 @@ import { IngredientComponent } from './fridge/ingredient/ingredient.component';
 import { IngredientPipe } from './ingredient.pipe';
 import { CookComponent } from './cook/cook/cook.component';
 import { EquipmentPipe } from './equipment.pipe';
+import { EquipmentComponent } from './fridge/equipment/equipment.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { EquipmentPipe } from './equipment.pipe';
     IngredientComponent,
     IngredientPipe,
     CookComponent,
-    EquipmentPipe
+    EquipmentPipe,
+    EquipmentComponent
   ],
   imports: [
     BrowserModule,
