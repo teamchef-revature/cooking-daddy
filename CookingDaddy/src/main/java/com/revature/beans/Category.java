@@ -23,7 +23,7 @@ public class Category {
 	@Column
 	private String name;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="parent_id")
 	private Category parent;
 

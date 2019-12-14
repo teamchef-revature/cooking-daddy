@@ -2,19 +2,19 @@ package com.revature.service;
 
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Ingredient;
 import com.revature.data.IngredientDAO;
-import com.revature.data.IngredientHibernate;
 
 @Service
 public class IngredientServiceHibernate implements IngredientService{
-	private IngredientDAO id = new IngredientHibernate();
+	@Autowired
+	private IngredientDAO id;
 
 	@Override
 	public Integer addIngredient(Ingredient i) {
-		
 		return id.addIngredient(i);
 	}
 
