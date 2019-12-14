@@ -45,6 +45,8 @@ public class LoginController {
 	@PostMapping(value="/register")
 	public ResponseEntity<Person> register(@RequestBody Person person) {
 		System.out.println(person);
+		person.setRole(pserv.getRoleById(1));
+		System.out.println(person);
 		pserv.addPerson(person);
 		return ResponseEntity.ok(person);
 	}

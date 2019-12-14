@@ -1,4 +1,5 @@
 import { PersonIngredient } from '../personIngredient/person-ingredient';
+import { Role } from '../person/role';
 import { PersonEquipment } from '../equipment/person-equipment';
 
 export class Person {
@@ -8,6 +9,6 @@ export class Person {
     first: string;
     last: string;
     ingredients: PersonIngredient[];
+    role: Role;
     equipments: PersonEquipment[];
-    roleId: number;
 }
