@@ -20,17 +20,13 @@ import { EditIngredientControllerComponent } from './admin/edit-ingredient-contr
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
 import { IngredientPipe } from './ingredient.pipe';
 import { CookComponent } from './cook/cook/cook.component';
-<<<<<<< HEAD
 import { EquipmentPipe } from './equipment.pipe';
 import { EquipmentComponent } from './fridge/equipment/equipment.component';
-=======
 import { CategoryItemControllerComponent } from './admin/category-item-controller/category-item-controller.component';
 import { CategoryEditControllerComponent } from './admin/category-edit-controller/category-edit-controller.component';
 import { AdminControllerComponent } from './admin/admin-controller/admin-controller.component';
 import { FlavorItemControllerComponent } from './admin/flavor-item-controller/flavor-item-controller.component';
 import { QualityItemControllerComponent } from './admin/quality-item-controller/quality-item-controller.component';
-//import { EquipmentPipe } from './equipment.pipe';
->>>>>>> 0cb9d51b694e830af92886c4a9f40d21e9fc7300
 
 @NgModule({
   declarations: [
@@ -49,17 +45,13 @@ import { QualityItemControllerComponent } from './admin/quality-item-controller/
     IngredientComponent,
     IngredientPipe,
     CookComponent,
-<<<<<<< HEAD
     EquipmentPipe,
-    EquipmentComponent
-=======
+    EquipmentComponent,
     CategoryItemControllerComponent,
     CategoryEditControllerComponent,
     AdminControllerComponent,
     FlavorItemControllerComponent,
-    QualityItemControllerComponent//,
-    //EquipmentPipe
->>>>>>> 0cb9d51b694e830af92886c4a9f40d21e9fc7300
+    QualityItemControllerComponent
   ],
   imports: [
     BrowserModule,
