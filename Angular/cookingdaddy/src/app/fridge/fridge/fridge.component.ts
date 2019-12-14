@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Ingredient } from 'src/app/shared/ingredient/ingredient';
-import { IngredientService } from 'src/app/shared/ingredient/ingredient.service';
 import { PersonIngredient } from 'src/app/shared/personIngredient/person-ingredient';
 import { PersonService } from 'src/app/shared/person/person.service';
 import { Person } from 'src/app/shared/person/person';
+import { PersonEquipment } from 'src/app/shared/equipment/person-equipment';
 
 @Component({
   selector: 'app-fridge',
@@ -12,15 +11,25 @@ import { Person } from 'src/app/shared/person/person';
 })
 export class FridgeComponent implements OnInit {
   personIngredients: PersonIngredient[];
+  personEquipments: PersonEquipment[];
+  choice: number;
   searchText: string;
   person: Person;
   constructor(private personService: PersonService) { }
 
   ngOnInit() {
     this.searchText = '';
+    this.choice = 1;
     console.log(this.personService.getPerson());
     this.personIngredients = this.personService.getPerson().ingredients;
     console.log(this.personIngredients);
+    this.personEquipments = this.personService.getPerson().equipments;
+  }
+  chooseIng() {
+    this.choice = 1;
+  }
+  chooseEqu() {
+    this.choice = 2;
   }
 
 }

@@ -1,0 +1,20 @@
+<span style="text-align:center;overflow:auto" *ngIf="ingredient">
+    <table class="fridge fridgetable">
+      <tr class="fridge fridgerow">
+        <td colspan="3" class="fridge">
+          <h3>{{equipment.name}}</h3>
+        </td>
+      </tr>
+      <tr class="fridge fridgerow">
+        <td class="fridge">
+          Quality: {{equipment.quality.name}}
+        </td>
+        <td class="fridge">
+          Temperature: {{equipment.minTemp}} - {{equipment.maxTemp}}
+        </td>
+        <td class="fridge">
+          Time: {{equipment.minTime}} - {{equipment.maxTime}}
+        </td>
+      </tr>
+    </table>
+  </span>

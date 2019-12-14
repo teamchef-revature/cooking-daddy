@@ -1,7 +1,24 @@
 <div class="container">
+<table>
+    <tr>
+        <td>
+            <button class="btn" (click)="chooseIng()">Ingredients</button>
+        </td>
+        <td>
+            <button class="btn" (click)="chooseEqu()">Equipment</button>
+        </td>
+    </tr>
+</table>
 Search: <input type="text" [(ngModel)]="searchText">
 
+<div *ngIf="choice === 1">
 <div *ngFor="let i of personIngredients | ingredient:searchText">
     <app-ingredient [ingredient] = "i.ingredient"></app-ingredient>
 </div>
+</div>
+<div *ngIf="choice === 2">
+    <div *ngFor="let e of personEquipments | equipment:searchText">
+        <app-equipment [equipment] = "e.equipment"></app-equipment>
+    </div>
+    </div>
 </div>

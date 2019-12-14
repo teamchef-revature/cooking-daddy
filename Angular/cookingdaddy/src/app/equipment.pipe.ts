@@ -1,11 +1,12 @@
-/*import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
+import { PersonEquipment } from './shared/equipment/person-equipment';
 
 @Pipe({
   name: 'equipment'
 })
 export class EquipmentPipe implements PipeTransform {
 
-  transform(ingredients: PersonEquipment[], searchText: string): PersonEquipment[] {
+  transform(equipments: PersonEquipment[], searchText: string): PersonEquipment[] {
     if (!equipments) {
       return [];
     }
@@ -19,5 +20,5 @@ export class EquipmentPipe implements PipeTransform {
       return search;
     });
   }
+
 }
-*/

@@ -20,12 +20,13 @@ import { EditIngredientControllerComponent } from './admin/edit-ingredient-contr
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
 import { IngredientPipe } from './ingredient.pipe';
 import { CookComponent } from './cook/cook/cook.component';
+import { EquipmentPipe } from './equipment.pipe';
+import { EquipmentComponent } from './fridge/equipment/equipment.component';
 import { CategoryItemControllerComponent } from './admin/category-item-controller/category-item-controller.component';
 import { CategoryEditControllerComponent } from './admin/category-edit-controller/category-edit-controller.component';
 import { AdminControllerComponent } from './admin/admin-controller/admin-controller.component';
 import { FlavorItemControllerComponent } from './admin/flavor-item-controller/flavor-item-controller.component';
 import { QualityItemControllerComponent } from './admin/quality-item-controller/quality-item-controller.component';
-//import { EquipmentPipe } from './equipment.pipe';
 
 @NgModule({
   declarations: [
@@ -44,12 +45,13 @@ import { QualityItemControllerComponent } from './admin/quality-item-controller/
     IngredientComponent,
     IngredientPipe,
     CookComponent,
+    EquipmentPipe,
+    EquipmentComponent,
     CategoryItemControllerComponent,
     CategoryEditControllerComponent,
     AdminControllerComponent,
     FlavorItemControllerComponent,
-    QualityItemControllerComponent//,
-    //EquipmentPipe
+    QualityItemControllerComponent
   ],
   imports: [
     BrowserModule,
