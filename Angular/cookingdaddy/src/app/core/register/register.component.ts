@@ -15,7 +15,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.person = new Person();
-    //this.person.roleId = 1; // player
   }
 
   submit() {
