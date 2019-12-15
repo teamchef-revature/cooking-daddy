@@ -42,8 +42,6 @@ export class CategoryEditControllerComponent implements OnInit {
     } else {
       this.category.parent = null;
     }
-    console.log(parent);
-    console.log(this.category);
   }
 
   submit(): void {

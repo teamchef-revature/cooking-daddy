@@ -20,4 +20,9 @@ export class FlavorControllerComponent implements OnInit {
         this.flavors.sort( (f1, f2) => f1.id - f2.id );
       });
   }
+
+  submitted() {
+    this.flavors.push(this.flavor);
+    this.flavor = new Flavor();
+  }
 }

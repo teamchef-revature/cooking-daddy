@@ -35,7 +35,6 @@ export class CategoryAddControllerComponent implements OnInit {
   addCategory() {
     this.adminService.addCategory(this.category).subscribe(
       category => {
-        console.log(category);
         this.category = category;
         this.created.emit(true);
       });

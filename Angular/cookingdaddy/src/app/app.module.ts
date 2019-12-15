@@ -30,6 +30,8 @@ import { MarketComponent } from './marketplace/market/market.component';
 import { BasketComponent } from './marketplace/basket/basket.component';
 import { MinifridgeComponent } from './marketplace/miniFridge/minifridgecomponent';
 import { CategoryAddControllerComponent } from './admin/category-add-controller/category-add-controller.component';
+import { FlavorEditControllerComponent } from './admin/flavor-edit-controller/flavor-edit-controller.component';
+import { FlavorAddControllerComponent } from './admin/flavor-add-controller/flavor-add-controller.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { CategoryAddControllerComponent } from './admin/category-add-controller/
     MarketComponent,
     BasketComponent,
     MinifridgeComponent,
-    CategoryAddControllerComponent
+    CategoryAddControllerComponent,
+    FlavorEditControllerComponent,
+    FlavorAddControllerComponent
   ],
   imports: [
     BrowserModule,

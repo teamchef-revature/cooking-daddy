@@ -28,20 +28,43 @@ export class AdminService {
   public updateCategory(category: Category) {
     const body = JSON.stringify(category);
     if (category.id) {
-      return this.http.put(this.appUrl + '/category/' + category.id, body, { headers: this.headers, withCredentials: true }).pipe(
-        map(resp => resp as Category));
+      return this.http.put(this.appUrl + '/category/' + category.id, body, {
+        headers: this.headers, withCredentials: true
+      }).pipe(map(resp => resp as Category));
     }
   }
   public addCategory(category: Category) {
     const body = JSON.stringify(category);
-    return this.http.post(this.appUrl + '/category', body, { headers: this.headers, withCredentials: true }).pipe(
-      map(resp => resp as Category)
-    );
+    return this.http.post(this.appUrl + '/category', body, {
+      headers: this.headers, withCredentials: true
+    }).pipe(map(resp => resp as Category));
   }
 
   public getFlavors(): Observable<Flavor[]> {
-    return this.http.get(this.appUrl + '/flavor', { withCredentials: true }).pipe(map(resp => resp as Flavor[]));
+    return this.http.get(this.appUrl + '/flavor', {
+      withCredentials: true
+    }).pipe(map(resp => resp as Flavor[]));
   }
+  public getFlavor(id: number): Observable<Flavor> {
+    const url: string = this.appUrl + '/flavor/' + id;
+    return this.http.get(url, { withCredentials: true }).pipe(
+      map( resp => resp as Flavor));
+  }
+  public updateFlavor(flavor: Flavor) {
+    const body = JSON.stringify(flavor);
+    if (flavor.id) {
+      return this.http.put(this.appUrl + '/flavor/' + flavor.id, body, {
+        headers: this.headers, withCredentials: true
+      }).pipe(map (resp => resp as Flavor));
+    }
+  }
+  public addFlavor(flavor: Flavor) {
+    const body = JSON.stringify(flavor);
+    return this.http.post(this.appUrl + '/flavor', body, {
+      headers: this.headers, withCredentials: true
+    }).pipe(map(resp => resp as Flavor));
+  }
+
   public getQualities(): Observable<Quality[]> {
     return this.http.get(this.appUrl + '/quality', { withCredentials: true }).pipe(map(resp => resp as Quality[]));
   }
