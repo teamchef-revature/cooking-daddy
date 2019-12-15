@@ -80,7 +80,7 @@ export class AdminService {
     if (quality.id) {
       return this.http.put(this.appUrl + '/quality/' + quality.id, body, {
         headers: this.headers, withCredentials: true
-      }).pipe(map (resp => resp as Flavor));
+      }).pipe(map (resp => resp as Quality));
     }
   }
   public addQuality(quality: Quality) {

@@ -17,7 +17,6 @@ import com.revature.beans.Category;
 import com.revature.beans.Flavor;
 import com.revature.beans.Ingredient;
 import com.revature.beans.Quality;
-import com.revature.data.IngredientDAO;
 import com.revature.service.IngredientService;
 
 @RestController
@@ -103,5 +102,11 @@ public class AdminController {
 	public ResponseEntity<Quality> addQuality(@RequestBody Quality quality) {
 		ingredientService.addQuality(quality);
 		return ResponseEntity.status(201).body(quality);
+	}
+	@PutMapping(value="/quality/{id}")
+	public ResponseEntity<Quality> updateQuality(@PathVariable Integer id, @RequestBody Quality quality) {
+		if(ingredientService.getQuality(id) == null)
+			return ResponseEntity.status(405).body(null);
+		return ResponseEntity.ok(ingredientService.updateQuality(quality));
 	}
 }
