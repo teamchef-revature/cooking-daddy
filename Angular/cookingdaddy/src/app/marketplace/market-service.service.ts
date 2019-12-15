@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Person } from '../shared/person/person';
 import { PersonIngredient } from '../shared/personIngredient/person-ingredient';
-import { Ingredient } from '../shared/ingredient/ingredient';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MarketServiceService {
   basketHolder: Person;
+  public bkhsub: BehaviorSubject<Person> = new BehaviorSubject<Person>(this.basketHolder);
   constructor() {
     this.basketHolder = new Person();
+    this.basketHolder.ingredients = [];
+    this.basketHolder.equipments = [];
   }
   getBasket(): Person {
     return this.basketHolder;

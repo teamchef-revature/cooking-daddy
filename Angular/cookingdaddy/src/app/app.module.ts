@@ -29,6 +29,7 @@ import { IngredientItemControllerComponent } from './admin/ingredient-item-contr
 import { MarketComponent } from './marketplace/market/market.component';
 import { BasketComponent } from './marketplace/basket/basket.component';
 import { MinifridgeComponent } from './marketplace/miniFridge/minifridgecomponent';
+import { MarketServiceService } from './marketplace/market-service.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { MinifridgeComponent } from './marketplace/miniFridge/minifridgecomponen
   ],
   providers: [
     UrlService,
-    PersonService
+    PersonService,
+    MarketServiceService
   ],
   bootstrap: [AppComponent]
 })
