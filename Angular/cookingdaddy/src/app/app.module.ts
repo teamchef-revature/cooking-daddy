@@ -26,7 +26,9 @@ import { CategoryEditControllerComponent } from './admin/category-edit-controlle
 import { FlavorItemControllerComponent } from './admin/flavor-item-controller/flavor-item-controller.component';
 import { QualityItemControllerComponent } from './admin/quality-item-controller/quality-item-controller.component';
 import { IngredientItemControllerComponent } from './admin/ingredient-item-controller/ingredient-item-controller.component';
-import { MarketComponent } from './market/market.component';
+import { MarketComponent } from './marketplace/market/market.component';
+import { BasketComponent } from './marketplace/basket/basket.component';
+import { MinifridgeComponent } from './marketplace/miniFridge/minifridgecomponent';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { MarketComponent } from './market/market.component';
     FlavorItemControllerComponent,
     QualityItemControllerComponent,
     IngredientItemControllerComponent,
-    MarketComponent
+    MarketComponent,
+    BasketComponent,
+    MinifridgeComponent
   ],
   imports: [
     BrowserModule,
