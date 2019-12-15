@@ -29,6 +29,7 @@ import { IngredientItemControllerComponent } from './admin/ingredient-item-contr
 import { MarketComponent } from './marketplace/market/market.component';
 import { BasketComponent } from './marketplace/basket/basket.component';
 import { MinifridgeComponent } from './marketplace/miniFridge/minifridgecomponent';
+import { CategoryAddControllerComponent } from './admin/category-add-controller/category-add-controller.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { MinifridgeComponent } from './marketplace/miniFridge/minifridgecomponen
     IngredientItemControllerComponent,
     MarketComponent,
     BasketComponent,
-    MinifridgeComponent
+    MinifridgeComponent,
+    CategoryAddControllerComponent
   ],
   imports: [
     BrowserModule,

@@ -8,4 +8,8 @@
         </div>
     </div>
     <app-category-item-controller *ngFor="let category of categories" [category]="category"></app-category-item-controller>
+    <div class="row">
+        <div class="col-sm-12"><br /></div>
+    </div>
+    <app-category-add-controller [category]="category" (created)="submitted()"></app-category-add-controller>
 </div>

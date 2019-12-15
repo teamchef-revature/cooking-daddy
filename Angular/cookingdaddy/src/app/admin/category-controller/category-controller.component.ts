@@ -15,10 +15,17 @@ export class CategoryControllerComponent implements OnInit {
 
   ngOnInit() {
     this.category = new Category();
+    this.category.parent = new Category();
     this.adminService.getCategories().subscribe(
       (c) => {
         this.categories = c;
         this.categories.sort ( (c1, c2) => c1.id - c2.id );
       });
+  }
+
+  submitted() {
+    this.categories.push(this.category);
+    this.category = new Category();
+    this.category.parent = new Category();
   }
 }

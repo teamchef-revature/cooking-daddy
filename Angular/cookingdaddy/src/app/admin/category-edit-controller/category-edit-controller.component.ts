@@ -19,9 +19,11 @@ export class CategoryEditControllerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get( 'id' );
+    this.category = new Category();
+    this.category.parent = new Category();
+    const id = +this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.adminService.getCategory( id ).subscribe(
+      this.adminService.getCategory(id).subscribe(
         category => {
           this.category = category;
         });
@@ -35,11 +37,17 @@ export class CategoryEditControllerComponent implements OnInit {
   }
 
   addParent(parent: Category): void {
-    this.category.parent = parent;
+    if ( parent.name ) {
+      this.category.parent = parent;
+    } else {
+      this.category.parent = null;
+    }
+    console.log(parent);
+    console.log(this.category);
   }
 
   submit(): void {
-    this.adminService.updateCategory( this.category ).subscribe(
+    this.adminService.updateCategory(this.category).subscribe(
       category => {
         this.category = category;
         this.router.navigate(['/admin/category']);
