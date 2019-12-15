@@ -15,7 +15,6 @@ export class FridgeComponent implements OnInit {
   choice: number;
   searchText: string;
   person: Person;
-  @Input() public parentData;
   constructor(private personService: PersonService) { }
 
   ngOnInit() {
