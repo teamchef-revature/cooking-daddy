@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Person } from '../../shared/person/person';
 import { PersonService } from '../../shared/person/person.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   public username: string;
   public password: string;
 
-  constructor(private personService: PersonService) { }
+  constructor(private personService: PersonService, private router: Router) { }
 
   ngOnInit() {
     this.personService.login(null, null).subscribe(
@@ -25,7 +26,20 @@ export class LoginComponent implements OnInit {
     this.personService.login(this.username, this.password).subscribe(
       resp => {
         this.activePerson = resp;
-      });
+      },
+      error => {
+        this.checkLogin();
+        this.router.navigate(['']);
+      }
+      );
+  }
+
+  checkLogin() {
+    if(!this.activePerson) {
+      window.alert('Login failed. Please try again.');
+      this.username = '';
+      this.password = '';
+    }
   }
 
   logout() {
