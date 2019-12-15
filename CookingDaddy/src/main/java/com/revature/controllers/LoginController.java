@@ -21,10 +21,14 @@ public class LoginController {
 	
 	@GetMapping(value="/login")
 	public ResponseEntity<Person> goLogin(HttpSession session) {
-		if(session.getAttribute("person") == null)
+		Person active = (Person) session.getAttribute("person");
+		if(active == null)
 			return ResponseEntity.notFound().build();
-		else
-			return ResponseEntity.ok((Person) session.getAttribute("person"));
+		else {
+			Person pPrime = pserv.getPersonById(active.getId());
+			session.setAttribute("person", pPrime);
+			return ResponseEntity.ok(pPrime);
+		}
 	}
 	
 	@PostMapping(value="/login")
