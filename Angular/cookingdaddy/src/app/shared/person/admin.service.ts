@@ -66,9 +66,52 @@ export class AdminService {
   }
 
   public getQualities(): Observable<Quality[]> {
-    return this.http.get(this.appUrl + '/quality', { withCredentials: true }).pipe(map(resp => resp as Quality[]));
+    return this.http.get(this.appUrl + '/quality', {
+      withCredentials: true
+    }).pipe(map(resp => resp as Quality[]));
   }
+  public getQuality(id: number): Observable<Quality> {
+    const url: string = this.appUrl + '/quality/' + id;
+    return this.http.get(url, { withCredentials: true }).pipe(
+      map(resp => resp as Quality));
+  }
+  public updateQuality(quality: Quality) {
+    const body = JSON.stringify(quality);
+    if (quality.id) {
+      return this.http.put(this.appUrl + '/quality/' + quality.id, body, {
+        headers: this.headers, withCredentials: true
+      }).pipe(map (resp => resp as Flavor));
+    }
+  }
+  public addQuality(quality: Quality) {
+    const body = JSON.stringify(quality);
+    return this.http.post(this.appUrl + '/quality', body, {
+      headers: this.headers, withCredentials: true
+    }).pipe( map( resp => resp as Quality ));
+  }
+
   public getIngredients(): Observable<Ingredient[]> {
-    return this.http.get(this.appUrl + '/ingredient', { withCredentials: true }).pipe(map(resp => resp as Ingredient[]));
+    return this.http.get(this.appUrl + '/ingredient', {
+      withCredentials: true
+    }).pipe(map(resp => resp as Ingredient[]));
+  }
+  public getIngredient(id: number): Observable<Ingredient> {
+    const url: string = this.appUrl + '/ingredient/' + id;
+    return this.http.get(url, { withCredentials: true }).pipe(
+      map( resp => resp as Ingredient));
+  }
+  public updateIngredient(ingredient: Ingredient) {
+    const body = JSON.stringify(ingredient);
+    if (ingredient.id) {
+      return this.http.put( this.appUrl + '/ingredient/' + ingredient.id, body, {
+        headers: this.headers, withCredentials: true
+      }).pipe(map (resp => resp as Ingredient));
+    }
+  }
+  public addIngredient(ingredient: Ingredient) {
+    const body = JSON.stringify(ingredient);
+    return this.http.post(this.appUrl + '/ingredient', body, {
+      headers: this.headers, withCredentials: true
+    }).pipe( map( resp => resp as Ingredient ));
   }
 }

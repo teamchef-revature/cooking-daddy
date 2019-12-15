@@ -17,13 +17,15 @@ public interface IngredientDAO {
 	public Category getCategory(Integer id);
 	public Set<Category> getCategories();
 	public Integer addCategory(Category category);
+	public Category updateCategory(Category category);
 	
 	public Flavor getFlavor(Integer id);
 	public Set<Flavor> getFlavors();
 	public Integer addFlavor(Flavor flavor);
+	public Flavor updateFlavor(Flavor flavor);
 	
 	public Quality getQuality(Integer id);
 	public Set<Quality> getQualities();
 	public Integer addQuality(Quality quality);
-	public Category updateCAtegory(Category category);
+	public Quality updateQuality(Quality quality);
 }

@@ -33,6 +33,8 @@ import { CategoryAddControllerComponent } from './admin/category-add-controller/
 import { FlavorEditControllerComponent } from './admin/flavor-edit-controller/flavor-edit-controller.component';
 import { FlavorAddControllerComponent } from './admin/flavor-add-controller/flavor-add-controller.component';
 import { MarketServiceService } from './marketplace/market-service.service';
+import { QualityAddControllerComponent } from './admin/quality-add-controller/quality-add-controller.component';
+import { QualityEditControllerComponent } from './admin/quality-edit-controller/quality-edit-controller.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { MarketServiceService } from './marketplace/market-service.service';
     MinifridgeComponent,
     CategoryAddControllerComponent,
     FlavorEditControllerComponent,
-    FlavorAddControllerComponent
+    FlavorAddControllerComponent,
+    QualityAddControllerComponent,
+    QualityEditControllerComponent
   ],
   imports: [
     BrowserModule,

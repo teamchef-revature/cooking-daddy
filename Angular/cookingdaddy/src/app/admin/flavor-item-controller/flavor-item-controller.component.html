@@ -1,8 +1,11 @@
 <div *ngIf="flavor">
     <div class="row">
+        <div class="col-sm-1">
+            <button class="btn btn-caution" (click)="editFlavor()">Edit</button>
+        </div>
         <div class="col-sm-4">
             {{flavor.name}}
         </div>
-        <div class="col-sm-8"></div>
+        <div class="col-sm-7"></div>
     </div>
 </div>

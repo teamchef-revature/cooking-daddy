@@ -23,6 +23,24 @@ public class IngredientHibernate implements IngredientDAO{
 	private HibernateUtil hu;
 
 	@Override
+	public Set<Ingredient> getIngredients() {
+		Session s = hu.getSession();
+		String query = "from Ingredient";
+		Query<Ingredient> q = s.createQuery(query, Ingredient.class);
+		List<Ingredient> ingredients = q.list();
+		s.close();
+		return new HashSet<Ingredient>(ingredients);
+	}
+
+	@Override
+	public Ingredient getIngredient(Integer i) {
+		Session s = hu.getSession();
+		Ingredient ing = s.get(Ingredient.class, i);
+		s.close();
+		return ing;
+	}
+	
+	@Override
 	public Integer addIngredient(Ingredient i) {
 		Integer r = null;
 		Session s = hu.getSession();
@@ -39,24 +57,6 @@ public class IngredientHibernate implements IngredientDAO{
 			s.close();
 		}
 		return r;
-	}
-
-	@Override
-	public Set<Ingredient> getIngredients() {
-		Session s = hu.getSession();
-		String query = "from Ingredient";
-		Query<Ingredient> q = s.createQuery(query, Ingredient.class);
-		List<Ingredient> ingredients = q.list();
-		s.close();
-		return new HashSet<Ingredient>(ingredients);
-	}
-
-	@Override
-	public Ingredient getIngredient(Integer i) {
-		Session s = hu.getSession();
-		Ingredient ing = s.get(Ingredient.class, i);
-		s.close();
-		return ing;
 	}
 
 	@Override
@@ -97,7 +97,26 @@ public class IngredientHibernate implements IngredientDAO{
 	}
 
 	@Override
-	public Category updateCAtegory(Category category) {
+	public Integer addCategory(Category category) {
+		Integer response = null;
+		Session session = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			response= (Integer) session.save(category);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return response;
+	}
+	
+	@Override
+	public Category updateCategory(Category category) {
 		Session s = hu.getSession();
 		Transaction tx = null;
 		try {
@@ -132,6 +151,43 @@ public class IngredientHibernate implements IngredientDAO{
 	}
 
 	@Override
+	public Integer addFlavor(Flavor flavor) {
+		Integer response = null;
+		Session session = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			response = (Integer) session.save(flavor);
+			System.out.println(response);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+		} finally {
+			session.close();
+		}
+		return response;
+	}
+	
+	@Override
+	public Flavor updateFlavor(Flavor flavor) {
+		Session s = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = s.beginTransaction();
+			s.update(flavor);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			s.close();
+		}
+		return flavor;
+	}
+
+	@Override
 	public Quality getQuality(Integer id) {
 		Session session = hu.getSession();
 		Quality quality = session.get(Quality.class, id);
@@ -146,43 +202,6 @@ public class IngredientHibernate implements IngredientDAO{
 		Query<Quality> query = session.createQuery(q, Quality.class);
 		List<Quality> qualities = query.list();
 		return new HashSet<Quality>(qualities);
-	}
-
-	@Override
-	public Integer addCategory(Category category) {
-		Integer response = null;
-		Session session = hu.getSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			response= (Integer) session.save(category);
-			tx.commit();
-		} catch(Exception e) {
-			if(tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return response;
-	}
-
-	@Override
-	public Integer addFlavor(Flavor flavor) {
-		Integer response = null;
-		Session session = hu.getSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			response = (Integer) session.save(flavor);
-			tx.commit();
-		} catch(Exception e) {
-			if(tx != null)
-				tx.rollback();
-		} finally {
-			session.close();
-		}
-		return response;
 	}
 
 	@Override
@@ -203,4 +222,21 @@ public class IngredientHibernate implements IngredientDAO{
 		return response;
 	}
 
+	@Override
+	public Quality updateQuality(Quality quality) {
+		Session s = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = s.beginTransaction();
+			s.saveOrUpdate(quality);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			s.close();
+		}
+		return quality;
+	}
 }

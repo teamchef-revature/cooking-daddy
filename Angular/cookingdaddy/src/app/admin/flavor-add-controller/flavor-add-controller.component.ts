@@ -22,7 +22,6 @@ export class FlavorAddControllerComponent implements OnInit {
       flavor => {
         this.flavor = flavor;
         this.created.emit(true);
-      }
-    )
+      });
   }
 }

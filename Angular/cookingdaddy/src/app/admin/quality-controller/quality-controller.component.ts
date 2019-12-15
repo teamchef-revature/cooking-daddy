@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Quality } from '../../shared/ingredient/quality';
 import { AdminService } from '../../shared/person/admin.service';
 
@@ -18,7 +18,11 @@ export class QualityControllerComponent implements OnInit {
       (q) => {
         this.qualities = q;
         this.qualities.sort( (q1, q2) => q1.id - q2.id );
-      }
-    );
+      });
+  }
+
+  submitted() {
+    this.qualities.push(this.quality);
+    this.quality = new Quality();
   }
 }
