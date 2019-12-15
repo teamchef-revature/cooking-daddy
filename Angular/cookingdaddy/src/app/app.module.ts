@@ -32,6 +32,7 @@ import { MinifridgeComponent } from './marketplace/miniFridge/minifridgecomponen
 import { CategoryAddControllerComponent } from './admin/category-add-controller/category-add-controller.component';
 import { FlavorEditControllerComponent } from './admin/flavor-edit-controller/flavor-edit-controller.component';
 import { FlavorAddControllerComponent } from './admin/flavor-add-controller/flavor-add-controller.component';
+import { MarketServiceService } from './marketplace/market-service.service';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { FlavorAddControllerComponent } from './admin/flavor-add-controller/flav
   ],
   providers: [
     UrlService,
-    PersonService
+    PersonService,
+    MarketServiceService
   ],
   bootstrap: [AppComponent]
 })
