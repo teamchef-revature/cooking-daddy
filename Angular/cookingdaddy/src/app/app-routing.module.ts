@@ -9,7 +9,7 @@ import { FridgeComponent } from './fridge/fridge/fridge.component';
 import { CookComponent } from './cook/cook/cook.component';
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
 import { EquipmentComponent } from './fridge/equipment/equipment.component';
-import { MarketComponent } from './market/market.component';
+import { MarketComponent } from './marketplace/market/market.component';
 
 const routes: Routes = [
   {
