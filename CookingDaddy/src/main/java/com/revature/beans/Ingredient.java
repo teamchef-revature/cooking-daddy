@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+// import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -31,10 +31,15 @@ public class Ingredient {
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
 	private String name;
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	// commented this out because i'm not sure why it's here,
+	// left it in case we do need it again. looks like it was probably
+	// leftover from when we included inventory in the ingredient bean.
+	// (before separating personingredient to its own bean)
+	/*@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="person_ingredient", 
 		joinColumns=@JoinColumn(name="id"),
 		inverseJoinColumns=@JoinColumn(name="ingredient_id"))
+	*/
 	public Integer getId() {
 		return id;
 	}
