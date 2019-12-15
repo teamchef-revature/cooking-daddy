@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Quality } from '../../shared/ingredient/quality';
-import { IngredientService } from '../../shared/ingredient/ingredient.service';
+import { AdminService } from '../../shared/person/admin.service';
 
 @Component({
   selector: 'app-quality-controller',
@@ -10,22 +10,15 @@ import { IngredientService } from '../../shared/ingredient/ingredient.service';
 export class QualityControllerComponent implements OnInit {
   qualities: Quality[];
   quality: Quality;
-  constructor( private ingredientService: IngredientService ) { }
+  constructor( private adminService: AdminService ) { }
 
   ngOnInit() {
     this.quality = new Quality();
-    this.ingredientService.getQualities().subscribe(
+    this.adminService.getQualities().subscribe(
       (q) => {
         this.qualities = q;
         this.qualities.sort( (q1, q2) => q1.id - q2.id );
       }
     );
-  }
-
-  submit(): void {
-    this.ingredientService.addQuality( this.quality ).subscribe( resp => {
-      this.quality = new Quality();
-      this.qualities.push( resp) ;
-    });
   }
 }

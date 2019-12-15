@@ -15,7 +15,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.person = new Person();
-    this.person.roleId = 1; // player
   }
 
   submit() {
@@ -36,5 +35,11 @@ export class RegisterComponent implements OnInit {
 
   isPerson(): boolean {
     return this.personService.isPerson();
+  }
+  isPlayer(): boolean {
+    return this.personService.isPlayer();
+  }
+  isAdmin(): boolean {
+    return this.personService.isAdmin();
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Flavor } from '../../shared/ingredient/flavor';
-import { IngredientService } from '../../shared/ingredient/ingredient.service';
-
+import { AdminService } from '../../shared/person/admin.service';
 @Component({
   selector: 'app-flavor-controller',
   templateUrl: './flavor-controller.component.html',
@@ -11,22 +10,14 @@ export class FlavorControllerComponent implements OnInit {
   flavors: Flavor[];
   flavor: Flavor;
 
-  constructor( private ingredientService: IngredientService ) { }
+  constructor( private adminService: AdminService ) { }
 
   ngOnInit() {
     this.flavor = new Flavor();
-    this.ingredientService.getFlavors().subscribe(
+    this.adminService.getFlavors().subscribe(
       (f) => {
         this.flavors = f;
         this.flavors.sort( (f1, f2) => f1.id - f2.id );
-      }
-    );
-  }
-
-  submit(): void {
-    this.ingredientService.addFlavor( this.flavor ).subscribe( resp => {
-      this.flavor = new Flavor();
-      this.flavors.push( resp );
-    });
+      });
   }
 }

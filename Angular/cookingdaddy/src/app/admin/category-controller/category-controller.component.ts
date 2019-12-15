@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../shared/ingredient/category';
-import { AdminService } from 'src/app/shared/person/admin.service';
+import { AdminService } from '../../shared/person/admin.service';
 
 @Component({
   selector: 'app-category-controller',
@@ -24,7 +24,6 @@ export class CategoryControllerComponent implements OnInit {
 
   add(): void {
     this.adminService.addCategory( this.category ).subscribe( resp => {
-      this.category = new Category();
       this.categories.push( resp );
     });
   }

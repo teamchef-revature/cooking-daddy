@@ -16,10 +16,19 @@ import { IngredientControllerComponent } from './admin/ingredient-controller/ing
 import { CategoryControllerComponent } from './admin/category-controller/category-controller.component';
 import { FlavorControllerComponent } from './admin/flavor-controller/flavor-controller.component';
 import { QualityControllerComponent } from './admin/quality-controller/quality-controller.component';
-import { EditIngredientControllerComponent } from './admin/edit-ingredient-controller/edit-ingredient-controller.component';
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
 import { IngredientPipe } from './ingredient.pipe';
 import { CookComponent } from './cook/cook/cook.component';
+import { EquipmentPipe } from './equipment.pipe';
+import { EquipmentComponent } from './fridge/equipment/equipment.component';
+import { CategoryItemControllerComponent } from './admin/category-item-controller/category-item-controller.component';
+import { CategoryEditControllerComponent } from './admin/category-edit-controller/category-edit-controller.component';
+import { FlavorItemControllerComponent } from './admin/flavor-item-controller/flavor-item-controller.component';
+import { QualityItemControllerComponent } from './admin/quality-item-controller/quality-item-controller.component';
+import { IngredientItemControllerComponent } from './admin/ingredient-item-controller/ingredient-item-controller.component';
+import { MarketComponent } from './marketplace/market/market.component';
+import { BasketComponent } from './marketplace/basket/basket.component';
+import { MinifridgeComponent } from './marketplace/miniFridge/minifridgecomponent';
 
 @NgModule({
   declarations: [
@@ -29,15 +38,23 @@ import { CookComponent } from './cook/cook/cook.component';
     NavBarComponent,
     FridgeComponent,
     HomeComponent,
-    //RegisterComponent,
     IngredientControllerComponent,
     CategoryControllerComponent,
     FlavorControllerComponent,
     QualityControllerComponent,
-    EditIngredientControllerComponent,
     IngredientComponent,
     IngredientPipe,
-    CookComponent
+    CookComponent,
+    EquipmentPipe,
+    EquipmentComponent,
+    CategoryItemControllerComponent,
+    CategoryEditControllerComponent,
+    FlavorItemControllerComponent,
+    QualityItemControllerComponent,
+    IngredientItemControllerComponent,
+    MarketComponent,
+    BasketComponent,
+    MinifridgeComponent
   ],
   imports: [
     BrowserModule,

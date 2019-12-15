@@ -24,6 +24,6 @@
 		<mapping class="com.revature.beans.Role"/>
 		<mapping class="com.revature.beans.PersonIngredient"/>
 		<mapping class="com.revature.beans.Equipment"/>
-		<mapping class="com.revature.beans.PersonIngredient"/>
+		<mapping class="com.revature.beans.PersonEquipment"/>
 	</session-factory>
 </hibernate-configuration>

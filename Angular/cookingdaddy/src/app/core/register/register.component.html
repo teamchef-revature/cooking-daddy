@@ -28,12 +28,19 @@
 </ng-container>
 <ng-template #display>
     <h3>Welcome!</h3><br />
-    <ul>
+    <ul *ngIf="isPlayer()">
         <li class="my-nav-pill"><a routerLink="/cook">Cook </a></li>
         <li class="my-nav-pill"><a routerLink="/fridge">Fridge </a></li>
         <li class="my-nav-pill">Cookbook </li>
         <li class="my-nav-pill">Marketplace </li>
         <li class="my-nav-pill">Leaderboard </li>
         <li class="my-nav-pill">Profile </li>
+    </ul>
+    <ul *ngIf="isAdmin()">
+        <li>Edit or Display Menu</li>
+        <li class="my-nav-pill"><a routerLink="/admin/category">Categories </a></li>
+        <li class="my-nav-pill"><a routerLink="/admin/flavor">Flavors </a></li>
+        <li class="my-nav-pill"><a routerLink="/admin/quality">Qualities </a></li>
+        <li class="my-nav-pill"><a routerLink="/admin/ingredient">Ingredients </a></li>
     </ul>
 </ng-template>

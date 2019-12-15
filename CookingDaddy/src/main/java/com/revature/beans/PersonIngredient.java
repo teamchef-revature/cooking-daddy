@@ -15,7 +15,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="person_ingredient")
-//@JsonIgnoreProperties(value= {"id", "person_id"})
 public class PersonIngredient {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="person_ingredient")
