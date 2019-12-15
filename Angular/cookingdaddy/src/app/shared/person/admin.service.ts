@@ -20,6 +20,19 @@ export class AdminService {
   public getCategories(): Observable<Category[]> {
     return this.http.get( this.appUrl + '/category', { withCredentials: true }).pipe( map( resp => resp as Category[] ));
   }
+  public getCategory(id: number): Observable<Category> {
+    const url: string = this.appUrl + '/category/' + id;
+    return this.http.get(url, {withCredentials: true}).pipe(
+      map( resp => resp as Category));
+  }
+  public updateCategory( category: Category ) {
+    const body = JSON.stringify( category );
+    if ( category.id ) {
+    return this.http.put( this.appUrl + '/category/' + category.id, body, { headers: this.headers, withCredentials: true }).pipe(
+      map( resp => resp as Category ));
+    }
+
+  }
   public getFlavors(): Observable<Flavor[]> {
     return this.http.get( this.appUrl + '/flavor', { withCredentials: true }).pipe( map( resp => resp as Flavor[]));
   }

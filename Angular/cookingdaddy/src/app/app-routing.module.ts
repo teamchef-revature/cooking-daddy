@@ -10,6 +10,7 @@ import { CookComponent } from './cook/cook/cook.component';
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
 import { EquipmentComponent } from './fridge/equipment/equipment.component';
 import { MarketComponent } from './market/market.component';
+import { CategoryEditControllerComponent } from './admin/category-edit-controller/category-edit-controller.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: 'admin/category',
     component: CategoryControllerComponent
+  },
+  {
+    path: 'admin/category/:id',
+    component: CategoryEditControllerComponent
   },
   {
     path: 'admin/flavor',

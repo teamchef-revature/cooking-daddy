@@ -21,10 +21,4 @@ export class CategoryControllerComponent implements OnInit {
         this.categories.sort ( (c1, c2) => c1.id - c2.id );
       });
   }
-
-  add(): void {
-    this.adminService.addCategory( this.category ).subscribe( resp => {
-      this.categories.push( resp );
-    });
-  }
 }

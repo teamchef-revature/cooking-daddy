@@ -25,4 +25,5 @@ public interface IngredientDAO {
 	public Quality getQuality(Integer id);
 	public Set<Quality> getQualities();
 	public Integer addQuality(Quality quality);
+	public Category updateCAtegory(Category category);
 }

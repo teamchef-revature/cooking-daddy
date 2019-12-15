@@ -97,6 +97,24 @@ public class IngredientHibernate implements IngredientDAO{
 	}
 
 	@Override
+	public Category updateCAtegory(Category category) {
+		Session s = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = s.beginTransaction();
+			s.update(category);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			s.close();
+		}
+		return category;
+	}
+	
+	@Override
 	public Flavor getFlavor(Integer id) {
 		Session session = hu.getSession();
 		Flavor flavor = session.get(Flavor.class, id);
@@ -184,4 +202,5 @@ public class IngredientHibernate implements IngredientDAO{
 		}
 		return response;
 	}
+
 }

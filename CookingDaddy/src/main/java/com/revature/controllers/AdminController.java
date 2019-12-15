@@ -61,6 +61,12 @@ public class AdminController {
 		ingredientDAO.addCategory(category);
 		return ResponseEntity.status(201).body(category);
 	}
+	@PutMapping(value="/category/{id}")
+	public ResponseEntity<Category> updateCategory(@PathVariable Integer id, @RequestBody Category category) {
+		if(ingredientDAO.getCategory(id) == null)
+			return ResponseEntity.status(405).body(null);
+		return ResponseEntity.ok(ingredientDAO.updateCAtegory(category));
+	}
 	
 	// ** Flavor **
 	@GetMapping(value="/flavor")
