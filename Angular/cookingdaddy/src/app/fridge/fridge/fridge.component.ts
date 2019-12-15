@@ -3,6 +3,7 @@ import { PersonIngredient } from 'src/app/shared/personIngredient/person-ingredi
 import { PersonService } from 'src/app/shared/person/person.service';
 import { Person } from 'src/app/shared/person/person';
 import { PersonEquipment } from 'src/app/shared/equipment/person-equipment';
+import { RandomitemService } from 'src/app/shared/randomitem.service';
 
 @Component({
   selector: 'app-fridge',
@@ -15,14 +16,12 @@ export class FridgeComponent implements OnInit {
   choice: number;
   searchText: string;
   person: Person;
-  constructor(private personService: PersonService) { }
+  constructor(private personService: PersonService, private randSer: RandomitemService) { }
 
   ngOnInit() {
     this.searchText = '';
     this.choice = 1;
-    console.log(this.personService.getPerson());
     this.personIngredients = this.personService.getPerson().ingredients;
-    console.log(this.personIngredients);
     this.personEquipments = this.personService.getPerson().equipments;
   }
   chooseIng() {
@@ -30,6 +29,9 @@ export class FridgeComponent implements OnInit {
   }
   chooseEqu() {
     this.choice = 2;
+  }
+  randIng() {
+    return this.randSer.getRandIng();
   }
 
 }
