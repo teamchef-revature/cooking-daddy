@@ -27,6 +27,10 @@ export class NavBarComponent implements OnInit {
     }
   }
 
+  isPlayer(): boolean {
+    return this.personService.isPlayer();
+  }
+
   logout() {
     this.personService.logout().subscribe(
       resp => {

@@ -22,15 +22,40 @@ export class RegisterComponent implements OnInit {
     this.personService.register(this.person).subscribe(
       person => {
         this.person = person;
+        this.loginPerson();
+        this.router.navigate(['']);
+      },
+      error => {
+        this.checkRegister();
         this.router.navigate(['']);
       }
     );
+    /*this.personService.login(this.person.username, this.person.password).subscribe(
+      person => {
+        this.person = person;
+      },
+      error => {
+        this.router.navigate(['']);
+      }
+    );*/
+    this.router.navigate(['']);
+  }
+
+  loginPerson() {
     this.personService.login(this.person.username, this.person.password).subscribe(
       person => {
         this.person = person;
+      },
+      error => {
+        this.router.navigate(['']);
       }
     );
-    this.router.navigate(['']);
+  }
+
+  checkRegister() {
+    window.alert('Sorry, a user already exists with that username. Try again.');
+    this.person.username = '';
+    this.person.password = '';
   }
 
   isPerson(): boolean {
