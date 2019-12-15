@@ -7,6 +7,9 @@
         <td>
             <button class="btn" (click)="chooseEqu()">Equipment</button>
         </td>
+        <td>
+            <app-ingredient [ingredient] = "randIng()"></app-ingredient>
+        </td>
     </tr>
 </table>
 Search: <input type="text" [(ngModel)]="searchText">

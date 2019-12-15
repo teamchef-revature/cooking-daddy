@@ -19,7 +19,6 @@ export class MinifridgeComponent implements OnInit {
     if (!this.holder) {
       this.holder = active.getPerson();
       this.choice = 1;
-
     }
   }
   ngOnInit() {
@@ -46,7 +45,7 @@ export class MinifridgeComponent implements OnInit {
       const bping = new PersonIngredient();
       bping.ingredient = ping.ingredient;
       bping.inventory = 1;
-      this.basketHolder.addItem(ping);
+      this.basketHolder.addItem(bping);
     }
     this.refresh();
 
