@@ -1,0 +1,12 @@
+<div *ngIf="flavor">
+    <div class="row">
+        <div class="col-sm-1">
+            <button class="btn btn-warning" (click)="addFlavor()">Add</button>
+        </div>
+        <div class="col-sm-4">
+            <label for="category">Category</label>
+            <input type="text" name="category" [(ngModel)]="flavor.name" />
+        </div>
+        <div class="col-sm-7"></div>
+    </div>
+</div>

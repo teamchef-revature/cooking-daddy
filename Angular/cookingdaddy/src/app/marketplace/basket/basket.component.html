@@ -1,0 +1,30 @@
+<div class="container">
+        <table>
+            <tr>
+                <td>
+                    <button class="btn" (click)="chooseIng()">Ingredients</button>
+                </td>
+                <td>
+                    <button class="btn" (click)="chooseEqu()">Equipment</button>
+                </td>
+            </tr>
+        </table>
+        {{holder.ingredients.length}}
+        Search: <input type="text" [(ngModel)]="searchText">
+        
+        <div *ngIf="choice === 1">
+        <table class ="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of holder.ingredients | ingredient:searchText">
+            <tr class= "fridge"><td>
+            <app-ingredient [ingredient] = "i.ingredient" (click) = "onIngClick(i)"></app-ingredient>
+            </td></tr>
+            <tr class = "fridge"><td>
+            <div class="fridge">Available Inventory: {{i.inventory}}</div>
+            </td></tr>
+        </table>
+        </div>
+        <div *ngIf="choice === 2">
+            <div *ngFor="let e of holder.equipments | equipment:searchText">
+                <app-equipment [equipment] = "e.equipment"></app-equipment>
+            </div>
+            </div>
+        </div>

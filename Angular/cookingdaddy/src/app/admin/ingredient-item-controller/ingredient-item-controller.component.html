@@ -1,0 +1,19 @@
+<div *ngIf="ingredient">
+    <div class="row">
+        <div class="col-sm-1">
+            <button class="btn btn-caution" (click)="editIngredient()">Edit</button>
+        </div>
+        <div class="col-sm-3">
+            {{ingredient.name}}
+        </div>
+        <div class="col-sm-3">
+            {{ingredient.category.name}}
+        </div>
+        <div class="col-sm-2">
+            {{ingredient.quality.name}}
+        </div>
+        <div class="col-sm-3">
+            {{ingredient.flavor.name}}
+        </div>
+    </div>
+</div>

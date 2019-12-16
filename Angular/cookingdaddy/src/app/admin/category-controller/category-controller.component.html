@@ -1,9 +1,15 @@
 <div class="container">
-    <ul>
-        <li *ngFor="let c of categories">{{c.name}}</li>
-    </ul>
-    <ng-container>
-        <input type="text" [(ngModel)]="category.category" (keydown.enter)="submit()"/>
-        <button class="btn btn-primary" (click)="submit()">Submit</button>
-    </ng-container>
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>Category</h4>
+        </div>
+        <div class="col-sm-8">
+            <h4>Parent Category</h4>
+        </div>
+    </div>
+    <app-category-item-controller *ngFor="let category of categories" [category]="category"></app-category-item-controller>
+    <div class="row">
+        <div class="col-sm-12"><br /></div>
+    </div>
+    <app-category-add-controller [category]="category" (created)="submitted()"></app-category-add-controller>
 </div>

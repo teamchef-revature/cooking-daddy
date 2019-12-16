@@ -1,0 +1,41 @@
+<div class="container">
+    <div style="margin:auto; width:75%">
+        <div class="cookpage">
+            <label for="ingredients">Ingredients: </label>
+            <select ngModel (ngModelChange)="addIngredient($event)" name="ingredients" id="ingredientChoice">
+                <option selected disabled>Choose ingredients</option>
+                <option *ngFor="let i of ingredients" [ngValue]="i">{{i.ingredient.name}}</option>
+            </select>
+        </div>
+        <div class="cookpage">
+            <label for="equipment">Equipment: </label>
+            <select ngModel (ngModelChange)="chooseEquipment($event)" name="equipment" id="equipmentChoice">
+                <option selected disabled>Choose equipment</option>
+                <option *ngFor="let e of equipment" [ngValue]="e">{{e.equipment.name}}</option>
+            </select>
+        </div>
+        <br>
+        <div class="cookpage">
+            <br>
+            Chosen Ingredients:
+            <ul *ngIf="chosenIngredients">
+                <li *ngFor="let i of chosenIngredients">
+                    {{i.ingredient.name}}
+                    <button type="button" (click)="removeIngredient(i)">x</button>
+                </li>
+            </ul>
+        </div>
+        <div class="cookpage" *ngIf="chosenEquipment">
+            <label for="temperature">Temperature: </label>
+            <input type="number" min="{{chosenEquipment.equipment.minTemp}}"
+                max="{{chosenEquipment.equipment.maxTemp}}" />
+            <br>
+            <label for="time">Time (in minutes): </label>
+            <input type="number" min="{{chosenEquipment.equipment.minTime}}"
+                max="{{chosenEquipment.equipment.maxTime}}" />
+        </div>
+    </div>
+    <div style="text-align:center">
+        <button style="margin:auto" type="button" (click)="cookMeal()">Cook</button>
+    </div>
+</div>

@@ -1,10 +1,16 @@
 package com.revature.beans;
 
-import javax.persistence.Column;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -15,16 +21,19 @@ public class Person {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="person")
 	@SequenceGenerator(name="person", sequenceName="person_seq", allocationSize=1)
 	private Integer id;
-	@Column
 	private String username;
-	@Column
 	private String password;
-	@Column
 	private String first;
-	@Column
 	private String last;
-	@Column(name="role_id")
-	private Integer roleId;
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="role_id")
+	private Role role;
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="person_id")
+	private Set<PersonIngredient> ingredients;
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="person_id")
+	private Set<PersonEquipment> equipments;
 	
 	public Integer getId() {
 		return id;
@@ -56,14 +65,35 @@ public class Person {
 	public void setLast(String last) {
 		this.last = last;
 	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	public Set<PersonIngredient> getIngredients() {
+		return ingredients;
+	}
+	public void setIngredients(Set<PersonIngredient> ingredients) {
+		this.ingredients = ingredients;
+	}
+	public Set<PersonEquipment> getEquipments() {
+		return equipments;
+	}
+	public void setEquipments(Set<PersonEquipment> equipments) {
+		this.equipments = equipments;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((equipments == null) ? 0 : equipments.hashCode());
 		result = prime * result + ((first == null) ? 0 : first.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((ingredients == null) ? 0 : ingredients.hashCode());
 		result = prime * result + ((last == null) ? 0 : last.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -76,6 +106,11 @@ public class Person {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
+		if (equipments == null) {
+			if (other.equipments != null)
+				return false;
+		} else if (!equipments.equals(other.equipments))
+			return false;
 		if (first == null) {
 			if (other.first != null)
 				return false;
@@ -85,6 +120,11 @@ public class Person {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (ingredients == null) {
+			if (other.ingredients != null)
+				return false;
+		} else if (!ingredients.equals(other.ingredients))
 			return false;
 		if (last == null) {
 			if (other.last != null)
@@ -96,6 +136,11 @@ public class Person {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
+			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
@@ -105,7 +150,8 @@ public class Person {
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", first=" + first + ", last="
-				+ last + "]";
+		return "Person [id=" + id + ", username=" + username + ", password=" + password + ", first=" + first + ", last="
+				+ last + ", role=" + role + ", ingredients=" + ingredients + ", equipments=" + equipments + "]";
 	}
+	
 }

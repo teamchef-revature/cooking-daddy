@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Ingredient } from 'src/app/shared/ingredient/ingredient';
-import { IngredientService } from 'src/app/shared/ingredient/ingredient.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { PersonIngredient } from 'src/app/shared/personIngredient/person-ingredient';
+import { PersonService } from 'src/app/shared/person/person.service';
+import { Person } from 'src/app/shared/person/person';
+import { PersonEquipment } from 'src/app/shared/equipment/person-equipment';
+import { RandomitemService } from 'src/app/shared/randomitem.service';
 
 @Component({
   selector: 'app-fridge',
@@ -8,15 +11,27 @@ import { IngredientService } from 'src/app/shared/ingredient/ingredient.service'
   styleUrls: ['./fridge.component.css']
 })
 export class FridgeComponent implements OnInit {
-  ingredients: Ingredient[];
+  personIngredients: PersonIngredient[];
+  personEquipments: PersonEquipment[];
+  choice: number;
   searchText: string;
-  constructor(private ingredientService: IngredientService) { }
+  person: Person;
+  constructor(private personService: PersonService, private randSer: RandomitemService) { }
 
   ngOnInit() {
-    this.ingredientService.getIngredients().subscribe(
-      resp => {
-        this.ingredients = resp;
-      });
+    this.searchText = '';
+    this.choice = 1;
+    this.personIngredients = this.personService.getPerson().ingredients;
+    this.personEquipments = this.personService.getPerson().equipments;
+  }
+  chooseIng() {
+    this.choice = 1;
+  }
+  chooseEqu() {
+    this.choice = 2;
+  }
+  randIng() {
+    return this.randSer.getRandIng();
   }
 
 }

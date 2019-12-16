@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-sm-4">
+        <label for="category">Category</label>
+        <input type="text" name="category" [(ngModel)]="category.name" />
+    </div>
+    <div class="col-sm-4">
+        <label for="parent">Parent of Category</label>
+        <select ngModel (ngModelChange)="addParent($event)" name="parent">
+            <option *ngIf="!category.parent" selected>None</option>
+            <option *ngIf="category.parent" value=null>None</option>
+            <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
+        </select>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+<div class="row">
+    <div class="col-sm-12"><br /></div>
+</div>
+<div class="row">
+    <div class="col-sm-2">
+        <button class="btn btn-primary" (click)="submit()">Submit</button>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-warning" (click)="cancel()">Cancel</button>
+    </div>
+    <div class="col-sm-8"></div>
+</div>

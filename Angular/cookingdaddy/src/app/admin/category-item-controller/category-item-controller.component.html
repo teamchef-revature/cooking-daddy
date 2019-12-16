@@ -1,0 +1,14 @@
+    <div *ngIf="category">
+        <div class="row">
+            <div class="col-sm-1">
+                <button class="btn btn-caution" (click)="editCategory()">Edit</button>
+            </div>
+            <div class="col-sm-4">
+                {{category.name}}
+            </div>
+            <div class="col-sm-4">
+                <p *ngIf="category.parent">{{category.parent.name}}</p>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>

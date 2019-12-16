@@ -1,12 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Ingredient } from './shared/ingredient/ingredient';
+import { PersonIngredient } from './shared/personIngredient/person-ingredient';
 
 @Pipe({
   name: 'ingredient'
 })
 export class IngredientPipe implements PipeTransform {
 
-  transform(ingredients: Ingredient[], searchText: string): Ingredient[] {
+  transform(ingredients: PersonIngredient[], searchText: string): PersonIngredient[] {
     if (!ingredients) {
       return [];
     }
@@ -16,8 +17,8 @@ export class IngredientPipe implements PipeTransform {
     searchText = searchText.toLowerCase();
     return ingredients.filter(ingredient => {
       const searchNumber: number = +searchText;
-      let search = ingredient.name.toLowerCase().includes(searchText);
-      //   || ingredient.category.includes(searchText)
+      const search = ingredient.ingredient.name.toLowerCase().includes(searchText)
+         || ingredient.ingredient.category.name.toLowerCase().includes(searchText);
       //   || ingredient.quality.includes(searchText)
       //   || ingredient.flavor.includes(searchText)
       //   || ingredient.inventory === searchNumber

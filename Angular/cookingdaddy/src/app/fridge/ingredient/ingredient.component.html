@@ -1,41 +1,20 @@
-<div class="container border" *ngIf="ingredient">
-    <div class="row">
-        <div class="col-sm border card">
-          <h4 class="border border-dark mx-auto">{{ingredient.name}}</h4>
-        <div class="col-sm">
-          <div class="row">
-            <div class="col">
-              <h5>Category:</h5>
-            </div>
-            <div class="col">
-              <p>{{ingredient.Category}}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <h5>Quality:</h5>
-            </div>
-            <div class="col">
-              <p>{{ingredient.Quality}}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <h5>Flavor:</h5>
-            </div>
-            <div class="col">
-              <p>{{ingredient.Flavor}}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <h5>Inventory:</h5>
-            </div>
-            <div class="col">
-              <p>{{ingredient.Inventory}}</p>
-            </div>
-          </div>
-  
-        </div>
-      </div>
-  </div>
+<span style="text-align:center;overflow:auto" *ngIf="ingredient">
+  <table class="fridge fridgetable">
+    <tr class="fridge fridgerow">
+      <td colspan="3" class="fridge">
+        <h3>{{ingredient.name}}</h3>
+      </td>
+    </tr>
+    <tr class="fridge fridgerow">
+      <td class="fridge">
+        Category: {{ingredient.category.name}}
+      </td>
+      <td class="fridge">
+        Quality: {{ingredient.quality.name}}
+      </td>
+      <td class="fridge">
+        Flavor: {{ingredient.flavor.name}}
+      </td>
+    </tr>
+  </table>
+</span>

@@ -55,9 +55,11 @@ export class PersonService {
     );
   }
 
-  public register(person: Person): Observable<Person> {
-    const body = JSON.stringify(person);
-    return this.http.post(this.reURL, body, { headers: this.headers, withCredentials: true }).pipe(
+  public register(newbie: Person): Observable<Person> {
+    const regHeaders = new HttpHeaders( { 'Content-Type': 'application/json' });
+    const body = JSON.stringify(newbie); // `person=${newbie}`;
+    console.log(body);
+    return this.http.post(this.reURL, body, { headers: regHeaders, withCredentials: true }).pipe(
       map( resp => resp as Person )
     );
   }
@@ -68,5 +70,11 @@ export class PersonService {
 
   isPerson(): boolean {
     return (this.person !== undefined && this.person !== null);
+  }
+  isPlayer(): boolean {
+    return (this.isPerson() && this.person.role.id === 1);
+  }
+  isAdmin(): boolean {
+    return (this.isPerson() && this.person.role.id === 2);
   }
 }

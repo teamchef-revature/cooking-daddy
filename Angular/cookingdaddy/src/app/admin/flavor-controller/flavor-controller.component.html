@@ -1,9 +1,13 @@
 <div class="container">
-    <ul>
-        <li *ngFor="let f of flavors">{{f.name}}</li>
-    </ul>
-    <ng-container>
-        <input type="text" [(ngModel)]="flavor.flavor" (keydown.enter)="submit()"/>
-        <button class="btn btn-primary" (click)="submit()">Submit</button>
-    </ng-container>
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>Flavor</h4>
+        </div>
+        <div class="col-sm-8"></div>
+    </div>
+    <app-flavor-item-controller *ngFor="let flavor of flavors" [flavor]="flavor"></app-flavor-item-controller>
+    <div class="row">
+        <div class="col-sm-12"><br /></div>
+    </div>
+    <app-flavor-add-controller [flavor]="flavor" (created)="submitted()"></app-flavor-add-controller>
 </div>
