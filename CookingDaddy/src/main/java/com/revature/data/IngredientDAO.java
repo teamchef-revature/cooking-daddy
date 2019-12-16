@@ -5,6 +5,7 @@ import java.util.Set;
 import com.revature.beans.Category;
 import com.revature.beans.Flavor;
 import com.revature.beans.Ingredient;
+import com.revature.beans.PersonIngredient;
 import com.revature.beans.Quality;
 
 public interface IngredientDAO {
@@ -28,4 +29,7 @@ public interface IngredientDAO {
 	public Set<Quality> getQualities();
 	public Integer addQuality(Quality quality);
 	public Quality updateQuality(Quality quality);
+	
+	public Integer addPersonIngredient(PersonIngredient pi);
+	public PersonIngredient updatePersonIngredient(PersonIngredient pi);
 }

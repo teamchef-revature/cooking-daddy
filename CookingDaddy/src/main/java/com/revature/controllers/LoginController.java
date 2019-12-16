@@ -6,11 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Person;
+import com.revature.beans.PersonEquipment;
+import com.revature.beans.PersonIngredient;
 import com.revature.service.PersonService;
 
 @RestController
@@ -44,6 +48,23 @@ public class LoginController {
 	public ResponseEntity<Person> logout(HttpSession session) {
 		session.invalidate();
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PutMapping(value="/person/{id}")
+	public ResponseEntity<Person> updatePerson(@RequestBody Person person, @PathVariable("id") Integer id) {
+		if (person.getId() != id) {
+			return ResponseEntity.notFound().build();
+		}
+		System.out.println(person.toString());
+		for (PersonIngredient pi: person.getIngredients()) {
+			pi.setPerson_id(id);
+		}
+		for (PersonEquipment pe: person.getEquipments()) {
+			pe.setPersonId(id);
+		}
+		System.out.println();
+		pserv.updatePerson(person);
+		return ResponseEntity.ok(pserv.getPersonById(id));
 	}
 	
 	@PostMapping(value="/register")
