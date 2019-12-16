@@ -13,7 +13,7 @@ export class CookService {
 
   constructor(private personService: PersonService, private url: UrlService, private http: HttpClient) {}
 
-  cookMeal(ingredients: Ingredient[]) {
+  public cookMeal(ingredients: Ingredient[]) {
     console.log('Cooking!!!!!!');
     /*const body = JSON.stringify(ingredients); // `person=${newbie}`;
     console.log(body);
