@@ -29,7 +29,14 @@ import { IngredientItemControllerComponent } from './admin/ingredient-item-contr
 import { MarketComponent } from './marketplace/market/market.component';
 import { BasketComponent } from './marketplace/basket/basket.component';
 import { MinifridgeComponent } from './marketplace/miniFridge/minifridgecomponent';
+import { CategoryAddControllerComponent } from './admin/category-add-controller/category-add-controller.component';
+import { FlavorEditControllerComponent } from './admin/flavor-edit-controller/flavor-edit-controller.component';
+import { FlavorAddControllerComponent } from './admin/flavor-add-controller/flavor-add-controller.component';
 import { MarketServiceService } from './marketplace/market-service.service';
+import { QualityAddControllerComponent } from './admin/quality-add-controller/quality-add-controller.component';
+import { QualityEditControllerComponent } from './admin/quality-edit-controller/quality-edit-controller.component';
+import { IngredientEditControllerComponent } from './admin/ingredient-edit-controller/ingredient-edit-controller.component';
+import { IngredientAddControllerComponent } from './admin/ingredient-add-controller/ingredient-add-controller.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +62,14 @@ import { MarketServiceService } from './marketplace/market-service.service';
     IngredientItemControllerComponent,
     MarketComponent,
     BasketComponent,
-    MinifridgeComponent
+    MinifridgeComponent,
+    CategoryAddControllerComponent,
+    FlavorEditControllerComponent,
+    FlavorAddControllerComponent,
+    QualityAddControllerComponent,
+    QualityEditControllerComponent,
+    IngredientEditControllerComponent,
+    IngredientAddControllerComponent
   ],
   imports: [
     BrowserModule,

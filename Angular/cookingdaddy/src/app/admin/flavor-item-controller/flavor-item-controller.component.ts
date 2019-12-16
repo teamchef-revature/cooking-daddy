@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Flavor } from 'src/app/shared/ingredient/flavor';
+import { Flavor } from '../../shared/ingredient/flavor';
+import { AdminService } from '../../shared/person/admin.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-flavor-item-controller',
@@ -8,9 +10,23 @@ import { Flavor } from 'src/app/shared/ingredient/flavor';
 })
 export class FlavorItemControllerComponent implements OnInit {
   @Input() flavor: Flavor;
-  constructor() { }
+  constructor(
+    private adminService: AdminService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    if ( id ) {
+      this.adminService.getFlavor(id).subscribe(
+        flavor => {
+          this.flavor = flavor;
+        });
+    }
   }
 
+  editFlavor() {
+    this.router.navigate(['/admin/flavor', this.flavor.id]);
+  }
 }
