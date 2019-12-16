@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
+import { PersonService } from '../shared/person/person.service';
+import { Ingredient } from '../shared/ingredient/ingredient';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CookService {
 
-  constructor() { }
+  constructor(private personService: PersonService) {}
+
+  cookMeal(ingredients: Ingredient[]) {
+    console.log('Cooking!!!!!!');
+  }
 }

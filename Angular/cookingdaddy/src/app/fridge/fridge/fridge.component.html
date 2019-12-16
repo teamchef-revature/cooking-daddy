@@ -1,4 +1,5 @@
 <div class="container">
+<<<<<<< HEAD
 <table>
     <tr>
         <td>
@@ -28,6 +29,41 @@ Search: <input type="text" [(ngModel)]="searchText">
 <div *ngIf="choice === 2">
     <div *ngFor="let e of personEquipments | equipment:searchText">
         <app-equipment [equipment] = "e.equipment"></app-equipment>
+=======
+    <button class="btn mybtn" (click)="chooseIng()">Ingredients</button>
+    <button class="btn mybtn" (click)="chooseEqu()">Equipment</button>
+    <div>
+        <app-ingredient [ingredient]="randIng()"></app-ingredient>
+>>>>>>> 785cb608f6b4dcda7b96804e22fd84d85d293b53
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    Search: <input type="text" [(ngModel)]="searchText">
+    <div *ngIf="choice === 1">
+        <table class="fridgetable" style="text-align:center;overflow:auto"
+            *ngFor="let i of personIngredients | ingredient:searchText">
+            <tr class="fridge">
+                <td>
+                    <app-ingredient [ingredient]="i.ingredient"></app-ingredient>
+                </td>
+            </tr>
+            <tr class="fridge">
+                <td>
+                    <div class="fridge">Available Inventory: {{i.inventory}}</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div *ngIf="choice === 2">
+        <div *ngFor="let e of personEquipments | equipment:searchText">
+            <app-equipment [equipment]="e.equipment"></app-equipment>
+        </div>
     </div>
 </div>
