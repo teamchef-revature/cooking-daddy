@@ -5,4 +5,5 @@ export class PersonIngredient {
     id: number;
     ingredient: Ingredient;
     inventory: number;
+    person_id: string;
 }

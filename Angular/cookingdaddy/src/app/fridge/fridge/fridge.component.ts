@@ -23,8 +23,8 @@ export class FridgeComponent implements OnInit {
   ngOnInit() {
     this.searchText = '';
     this.choice = 1;
-    this.personIngredients = this.personService.getPerson().ingredients;
-    this.personEquipments = this.personService.getPerson().equipments;
+    this.personIngredients = this.personService.getPerson().ingredients.filter(el => el.inventory > 0);
+    this.personEquipments = this.personService.getPerson().equipments.filter(el => el.inventory > 0);
     this.person = this.personService.getPerson();
   }
   chooseIng() {
@@ -38,7 +38,7 @@ export class FridgeComponent implements OnInit {
     return this.randIngred;
   }
   takeRandIng() {
-    this.randSer.addIngToPer(this.randIngred, this.person, true);
+    this.randSer.addIngToPer(this.randIngred, this.person, 1, true);
   }
 
 }
