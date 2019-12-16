@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Recipe;
-import com.revature.beans.PersonMeal;
+import com.revature.beans.Meal;
 import com.revature.utils.HibernateUtil;
 
 @Component
@@ -80,7 +80,7 @@ public class MealHibernate implements MealDAO {
 	}
 
 	@Override
-	public Integer addPersonMeal(PersonMeal personMeal) {
+	public Integer addPersonMeal(Meal personMeal) {
 		Integer index = null;
 		Session session = hibernateUtil.getSession();
 		Transaction transaction = null;
@@ -99,7 +99,7 @@ public class MealHibernate implements MealDAO {
 	}
 
 	@Override
-	public PersonMeal updatePersonMeal(PersonMeal personMeal) {
+	public Meal updatePersonMeal(Meal personMeal) {
 		Session session = hibernateUtil.getSession();
 		Transaction transaction = null;
 		try {

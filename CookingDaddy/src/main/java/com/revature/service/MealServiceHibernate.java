@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Recipe;
-import com.revature.beans.PersonMeal;
+import com.revature.beans.Meal;
 import com.revature.data.MealDAO;
 
 @Service
@@ -35,12 +35,12 @@ public class MealServiceHibernate implements MealService {
 	}
 
 	@Override
-	public Integer addPersonMeal(PersonMeal personMeal) {
+	public Integer addPersonMeal(Meal personMeal) {
 		return mealDAO.addPersonMeal(personMeal);
 	}
 
 	@Override
-	public PersonMeal updatePersonMeal(PersonMeal personMeal) {
+	public Meal updatePersonMeal(Meal personMeal) {
 		return mealDAO.updatePersonMeal(personMeal);
 	}
 }
