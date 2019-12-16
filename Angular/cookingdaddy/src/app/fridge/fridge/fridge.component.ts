@@ -4,6 +4,7 @@ import { PersonService } from 'src/app/shared/person/person.service';
 import { Person } from 'src/app/shared/person/person';
 import { PersonEquipment } from 'src/app/shared/equipment/person-equipment';
 import { RandomitemService } from 'src/app/shared/randomitem.service';
+import { Ingredient } from 'src/app/shared/ingredient/ingredient';
 
 @Component({
   selector: 'app-fridge',
@@ -11,11 +12,12 @@ import { RandomitemService } from 'src/app/shared/randomitem.service';
   styleUrls: ['./fridge.component.css']
 })
 export class FridgeComponent implements OnInit {
-  personIngredients: PersonIngredient[];
-  personEquipments: PersonEquipment[];
-  choice: number;
-  searchText: string;
-  person: Person;
+  private personIngredients: PersonIngredient[];
+  private personEquipments: PersonEquipment[];
+  private choice: number;
+  private searchText: string;
+  private person: Person;
+  private randIngred: Ingredient;
   constructor(private personService: PersonService, private randSer: RandomitemService) { }
 
   ngOnInit() {
@@ -23,6 +25,7 @@ export class FridgeComponent implements OnInit {
     this.choice = 1;
     this.personIngredients = this.personService.getPerson().ingredients;
     this.personEquipments = this.personService.getPerson().equipments;
+    this.person = this.personService.getPerson();
   }
   chooseIng() {
     this.choice = 1;
@@ -31,7 +34,11 @@ export class FridgeComponent implements OnInit {
     this.choice = 2;
   }
   randIng() {
-    return this.randSer.getRandIng();
+    this.randIngred = this.randSer.getRandIng();
+    return this.randIngred;
+  }
+  takeRandIng() {
+    this.randSer.addIngToPer(this.randIngred, this.person, true);
   }
 
 }
