@@ -14,4 +14,8 @@
         </div>
     </div>
     <app-ingredient-item-controller *ngFor="let ingredient of ingredients" [ingredient]="ingredient"></app-ingredient-item-controller>
+    <div class="row">
+        <div class="col-sm-12"><br /></div>
+    </div>
+    <app-ingredient-add-controller [ingredient]="ingredient" (created)="submitted()"></app-ingredient-add-controller>
 </div>

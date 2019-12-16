@@ -13,6 +13,8 @@ import { CategoryEditControllerComponent } from './admin/category-edit-controlle
 import { MarketComponent } from './marketplace/market/market.component';
 import { FlavorEditControllerComponent } from './admin/flavor-edit-controller/flavor-edit-controller.component';
 import { QualityEditControllerComponent } from './admin/quality-edit-controller/quality-edit-controller.component';
+import { IngredientEditControllerComponent } from './admin/ingredient-edit-controller/ingredient-edit-controller.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -65,6 +67,10 @@ const routes: Routes = [
   {
     path: 'admin/ingredient',
     component: IngredientControllerComponent
+  },
+  {
+    path: 'admin/ingredient/:id',
+    component: IngredientEditControllerComponent
   }
 ];
 

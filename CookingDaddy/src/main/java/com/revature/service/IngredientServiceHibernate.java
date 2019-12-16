@@ -17,8 +17,8 @@ public class IngredientServiceHibernate implements IngredientService{
 	private IngredientDAO idao;
 
 	@Override
-	public Integer addIngredient(Ingredient id) {
-		return idao.addIngredient(id);
+	public Integer addIngredient(Ingredient ingredient) {
+		return idao.addIngredient(ingredient);
 	}
 
 	@Override
@@ -32,8 +32,8 @@ public class IngredientServiceHibernate implements IngredientService{
 	}
 
 	@Override
-	public Ingredient updateIngredient(Ingredient id) {
-		return idao.updateIngredient(id);
+	public Ingredient updateIngredient(Ingredient ingredient) {
+		return idao.updateIngredient(ingredient);
 	}
 
 	@Override

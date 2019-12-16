@@ -33,21 +33,22 @@ public class IngredientHibernate implements IngredientDAO{
 	}
 
 	@Override
-	public Ingredient getIngredient(Integer i) {
+	public Ingredient getIngredient(Integer id) {
 		Session s = hu.getSession();
-		Ingredient ing = s.get(Ingredient.class, i);
+		Ingredient ing = s.get(Ingredient.class, id);
 		s.close();
 		return ing;
 	}
 	
 	@Override
-	public Integer addIngredient(Ingredient i) {
+	public Integer addIngredient(Ingredient ingredient) {
 		Integer r = null;
 		Session s = hu.getSession();
 		Transaction tx = null;
 		try {
 			tx = s.beginTransaction();
-			r = (Integer) s.save(i);
+			r = (Integer) s.save(ingredient);
+			System.out.println(r);
 			tx.commit();
 		} catch(Exception e) {
 			if(tx != null)
@@ -60,12 +61,12 @@ public class IngredientHibernate implements IngredientDAO{
 	}
 
 	@Override
-	public Ingredient updateIngredient(Ingredient i) {
+	public Ingredient updateIngredient(Ingredient ingredient) {
 		Session s = hu.getSession();
 		Transaction tx = null;
 		try {
 			tx = s.beginTransaction();
-			s.update(i);
+			s.update(ingredient);
 			tx.commit();
 		} catch(Exception e) {
 			if(tx != null)
@@ -74,7 +75,7 @@ public class IngredientHibernate implements IngredientDAO{
 		} finally {
 			s.close();
 		}
-		return i;		
+		return ingredient;		
 	}
 
 	@Override

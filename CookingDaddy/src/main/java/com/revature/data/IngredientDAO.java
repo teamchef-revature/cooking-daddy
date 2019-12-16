@@ -9,10 +9,10 @@ import com.revature.beans.Quality;
 
 public interface IngredientDAO {
 	
-	public Integer addIngredient(Ingredient i);
+	public Integer addIngredient(Ingredient ingredient);
 	public Set<Ingredient> getIngredients();
-	public Ingredient getIngredient(Integer i);
-	public Ingredient updateIngredient(Ingredient i);
+	public Ingredient getIngredient(Integer id);
+	public Ingredient updateIngredient(Ingredient ingredient);
 	
 	public Category getCategory(Integer id);
 	public Set<Category> getCategories();

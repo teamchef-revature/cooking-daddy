@@ -15,7 +15,7 @@ export class CategoryControllerComponent implements OnInit {
 
   ngOnInit() {
     this.category = new Category();
-    this.category.parent = new Category();
+    this.category.parent = null;
     this.adminService.getCategories().subscribe(
       (c) => {
         this.categories = c;
@@ -26,6 +26,6 @@ export class CategoryControllerComponent implements OnInit {
   submitted() {
     this.categories.push(this.category);
     this.category = new Category();
-    this.category.parent = new Category();
+    this.category.parent = null;
   }
 }

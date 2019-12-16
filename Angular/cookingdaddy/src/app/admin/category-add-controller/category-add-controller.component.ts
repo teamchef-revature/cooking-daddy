@@ -28,13 +28,13 @@ export class CategoryAddControllerComponent implements OnInit {
     } else {
       this.category.parent = null;
     }
-    console.log(parent);
-    console.log(this.category);
   }
 
   addCategory() {
     this.adminService.addCategory(this.category).subscribe(
       category => {
+        console.log(category);
+        console.log(this.category);
         this.category = category;
         this.created.emit(true);
       });

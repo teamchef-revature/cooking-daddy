@@ -35,6 +35,8 @@ import { FlavorAddControllerComponent } from './admin/flavor-add-controller/flav
 import { MarketServiceService } from './marketplace/market-service.service';
 import { QualityAddControllerComponent } from './admin/quality-add-controller/quality-add-controller.component';
 import { QualityEditControllerComponent } from './admin/quality-edit-controller/quality-edit-controller.component';
+import { IngredientEditControllerComponent } from './admin/ingredient-edit-controller/ingredient-edit-controller.component';
+import { IngredientAddControllerComponent } from './admin/ingredient-add-controller/ingredient-add-controller.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { QualityEditControllerComponent } from './admin/quality-edit-controller/
     FlavorEditControllerComponent,
     FlavorAddControllerComponent,
     QualityAddControllerComponent,
-    QualityEditControllerComponent
+    QualityEditControllerComponent,
+    IngredientEditControllerComponent,
+    IngredientAddControllerComponent
   ],
   imports: [
     BrowserModule,
