@@ -2,5 +2,21 @@
 <!-- <div class="container border">
         <app-fridge *ngFor="let i of ingredients" [ingredient]="p"></app-fridge>
       </div> -->
-<app-minifridge></app-minifridge>
-<app-basket></app-basket>
+<table>
+  <tr>
+    <td>
+      NPC store to do
+    </td>
+    <td>
+        <app-minifridge (add)="updateBasket()"></app-minifridge>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      NPC basket to do
+    </td>
+    <td>
+        
+    </td>
+  </tr>
+</table>

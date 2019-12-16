@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarketComponent implements OnInit {
   public name = 'trade';
+  hack = 'none';
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  updateBasket() {
+    this.hack = 'none' === this.hack ? 'yes' : 'none';
+  }
 }
