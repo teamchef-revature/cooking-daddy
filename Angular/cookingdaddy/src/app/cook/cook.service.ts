@@ -9,7 +9,7 @@ export class CookService {
 
   constructor(private personService: PersonService) {}
 
-  cookMeal(ingredients: Ingredient[]) {
+  public cookMeal(ingredients: Ingredient[]) {
     console.log('Cooking!!!!!!');
   }
 }

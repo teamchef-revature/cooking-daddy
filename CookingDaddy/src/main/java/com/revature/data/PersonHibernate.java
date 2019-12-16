@@ -62,8 +62,19 @@ public class PersonHibernate implements PersonDAO {
 
 	@Override
 	public void updatePerson(Person p) {
-		// TODO Auto-generated method stub
-
+		Session s = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = s.beginTransaction();
+			s.update(p);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			s.close();
+		};		
 	}
 
 	@Override
