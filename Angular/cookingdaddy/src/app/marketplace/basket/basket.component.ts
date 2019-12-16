@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, DoCheck } from '@angular/core';
+import { Component, OnInit, Input, DoCheck, OnChanges } from '@angular/core';
 import { MarketServiceService } from '../market-service.service';
 import { Person } from 'src/app/shared/person/person';
 import { PersonIngredient } from 'src/app/shared/personIngredient/person-ingredient';
@@ -10,19 +10,26 @@ import { PersonService } from 'src/app/shared/person/person.service';
   templateUrl: './basket.component.html',
   styleUrls: ['./basket.component.css']
 })
-export class BasketComponent implements OnInit {
+export class BasketComponent implements OnInit, OnChanges {
   @Input() holder: Person;
+  @Input() hack: string;
   choice: number;
   activePerson: Person;
-  constructor(private basketHolder: MarketServiceService, active: PersonService) {
+  blankPerson: Person;
+  constructor(private basketHolder: MarketServiceService, private active: PersonService) {
     if (!this.holder) {
-      this.holder = basketHolder.getBasket();
       this.choice = 1;
-      this.activePerson = active.getPerson();
     }
   }
   ngOnInit() {
     this.choice = 1;
+    this.holder = this.basketHolder.getBasket();
+    this.activePerson = this.active.getPerson();
+    this.blankPerson = new Person();
+
+  }
+  ngOnChanges() {
+    this.ngOnInit();
   }
   chooseIng() {
     this.choice = 1;

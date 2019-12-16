@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MarketServiceService } from '../market-service.service';
 import { Person } from 'src/app/shared/person/person';
 import { PersonIngredient } from 'src/app/shared/personIngredient/person-ingredient';
@@ -15,7 +15,8 @@ export class MinifridgeComponent implements OnInit {
   choice: number;
   personIngredients: PersonIngredient[];
   personEquipments: PersonEquipment[];
-  constructor(private basketHolder: MarketServiceService, private active: PersonService) {
+  @Output() add = new EventEmitter<boolean>();
+  constructor(private basketHolder: MarketServiceService, private  active: PersonService) {
     if (!this.holder) {
       this.holder = active.getPerson();
       this.choice = 1;
@@ -32,11 +33,11 @@ export class MinifridgeComponent implements OnInit {
   chooseEqu() {
     this.choice = 2;
   }
-  refresh() {
-    this.holder = this.active.getPerson();
-    this.personIngredients = this.holder.ingredients;
-    this.personEquipments = this.holder.equipments;
-  }
+  // refresh() {
+  //   this.holder = this.active.getPerson();
+  //   this.personIngredients = this.holder.ingredients;
+  //   this.personEquipments = this.holder.equipments;
+  // }
   onClick(ping: PersonIngredient) {
     if (ping.inventory === 0) {
     } else {
@@ -46,8 +47,9 @@ export class MinifridgeComponent implements OnInit {
       bping.ingredient = ping.ingredient;
       bping.inventory = 1;
       this.basketHolder.addItem(bping);
+      this.add.emit(true);
     }
-    this.refresh();
+    // this.refresh();
 
   }
 }
