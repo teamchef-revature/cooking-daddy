@@ -6,4 +6,8 @@
         <div class="col-sm-8"></div>
     </div>
     <app-quality-item-controller *ngFor="let quality of qualities" [quality]="quality"></app-quality-item-controller>
+    <div class="row">
+        <div class="col-sm-12"><br /></div>
+    </div>
+    <app-quality-add-controller [quality]="quality" (created)="submitted()"></app-quality-add-controller>
 </div>

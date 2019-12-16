@@ -9,7 +9,11 @@ import { FridgeComponent } from './fridge/fridge/fridge.component';
 import { CookComponent } from './cook/cook/cook.component';
 import { IngredientComponent } from './fridge/ingredient/ingredient.component';
 import { EquipmentComponent } from './fridge/equipment/equipment.component';
+import { CategoryEditControllerComponent } from './admin/category-edit-controller/category-edit-controller.component';
 import { MarketComponent } from './marketplace/market/market.component';
+import { FlavorEditControllerComponent } from './admin/flavor-edit-controller/flavor-edit-controller.component';
+import { QualityEditControllerComponent } from './admin/quality-edit-controller/quality-edit-controller.component';
+import { IngredientEditControllerComponent } from './admin/ingredient-edit-controller/ingredient-edit-controller.component';
 
 const routes: Routes = [
   {
@@ -41,16 +45,32 @@ const routes: Routes = [
     component: CategoryControllerComponent
   },
   {
+    path: 'admin/category/:id',
+    component: CategoryEditControllerComponent
+  },
+  {
     path: 'admin/flavor',
     component: FlavorControllerComponent
+  },
+  {
+    path: 'admin/flavor/:id',
+    component: FlavorEditControllerComponent
   },
   {
     path: 'admin/quality',
     component: QualityControllerComponent
   },
   {
+    path: 'admin/quality/:id',
+    component: QualityEditControllerComponent
+  },
+  {
     path: 'admin/ingredient',
     component: IngredientControllerComponent
+  },
+  {
+    path: 'admin/ingredient/:id',
+    component: IngredientEditControllerComponent
   }
 ];
 
