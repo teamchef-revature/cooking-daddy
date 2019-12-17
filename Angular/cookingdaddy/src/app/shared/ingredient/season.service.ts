@@ -50,6 +50,9 @@ export class SeasonService {
   }
 
   public anyInSeason(ss: Season[]): boolean {
+    if (!ss){
+      return true;
+    }
     ss.forEach(el => {
       if (this.inSeason(el)) {
         return true;
