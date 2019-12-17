@@ -117,21 +117,21 @@ public class AdminController {
 	// ** Meal **
 	@GetMapping(value="/meal")
 	public ResponseEntity<Set<Recipe>> getMeals() {
-		return ResponseEntity.ok(mealService.getMeals());
+		return ResponseEntity.ok(mealService.getRecipes());
 	}
 	@GetMapping(value="/meal/{id}")
 	public ResponseEntity<Recipe> getMeal(@PathVariable Integer id) {
-		return ResponseEntity.ok(mealService.getMeal(id));
+		return ResponseEntity.ok(mealService.getRecipe(id));
 	}
 	@PostMapping(value="/meal")
 	public ResponseEntity<Recipe> addMeal(@RequestBody Recipe meal) {
-		mealService.addMeal(meal);
+		mealService.addRecipe(meal);
 		return ResponseEntity.status(201).body(meal);
 	}
 	@PutMapping(value="/meal/{id}")
 	public ResponseEntity<Recipe> updateMeal(@PathVariable Integer id, @RequestBody Recipe meal) {
-		if(mealService.getMeal(id) == null)
+		if(mealService.getRecipe(id) == null)
 			return ResponseEntity.status(405).body(null);
-		return ResponseEntity.ok(mealService.updateMeal(meal));
+		return ResponseEntity.ok(mealService.updateRecipe(meal));
 	}
 }
