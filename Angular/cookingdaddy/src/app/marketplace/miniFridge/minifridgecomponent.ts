@@ -15,7 +15,7 @@ export class MinifridgeComponent implements OnInit {
   choice: number;
   personIngredients: PersonIngredient[];
   personEquipments: PersonEquipment[];
-  @Output() add = new EventEmitter<boolean>();
+  @Output() add = new EventEmitter();
   constructor(private basketHolder: MarketServiceService, private  active: PersonService) {
     if (!this.holder) {
       this.holder = active.getPerson();
@@ -33,11 +33,6 @@ export class MinifridgeComponent implements OnInit {
   chooseEqu() {
     this.choice = 2;
   }
-  // refresh() {
-  //   this.holder = this.active.getPerson();
-  //   this.personIngredients = this.holder.ingredients;
-  //   this.personEquipments = this.holder.equipments;
-  // }
   onClick(ping: PersonIngredient) {
     if (ping.inventory === 0) {
     } else {
@@ -47,10 +42,8 @@ export class MinifridgeComponent implements OnInit {
       bping.ingredient = ping.ingredient;
       bping.inventory = 1;
       this.basketHolder.addItem(bping);
-      this.add.emit(true);
+      this.add.emit();
     }
-    // this.refresh();
-
   }
 }
 
