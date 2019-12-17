@@ -21,5 +21,5 @@ public interface MealService {
 	
 	//public Integer addMeal(Meal personMeal);
 	//public Meal updateMeal(Meal personMeal);
-	public Meal cookMeal(Ingredient[] ingredients);
+	public Meal cookMeal(ArrayList<Ingredient> ingredients);
 }
