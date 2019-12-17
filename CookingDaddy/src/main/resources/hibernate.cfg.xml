@@ -29,5 +29,6 @@
 		<mapping class="com.revature.beans.Recipe"/>
 		<mapping class="com.revature.beans.Role"/>
 		<mapping class="com.revature.beans.Season"/>
+		<mapping class="com.revature.beans.Cookbook"/>
 	</session-factory>
 </hibernate-configuration>
