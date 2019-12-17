@@ -37,6 +37,7 @@ import { QualityAddControllerComponent } from './admin/quality-add-controller/qu
 import { QualityEditControllerComponent } from './admin/quality-edit-controller/quality-edit-controller.component';
 import { IngredientEditControllerComponent } from './admin/ingredient-edit-controller/ingredient-edit-controller.component';
 import { IngredientAddControllerComponent } from './admin/ingredient-add-controller/ingredient-add-controller.component';
+import { CookbookComponent } from './cook/cookbook/cookbook/cookbook.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { IngredientAddControllerComponent } from './admin/ingredient-add-control
     QualityAddControllerComponent,
     QualityEditControllerComponent,
     IngredientEditControllerComponent,
-    IngredientAddControllerComponent
+    IngredientAddControllerComponent,
+    CookbookComponent
   ],
   imports: [
     BrowserModule,

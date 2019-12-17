@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.revature.beans.Category;
 import com.revature.beans.Flavor;
 import com.revature.beans.Ingredient;
+import com.revature.beans.PersonIngredient;
 import com.revature.beans.Quality;
 import com.revature.utils.HibernateUtil;
 
@@ -239,5 +240,42 @@ public class IngredientHibernate implements IngredientDAO{
 			s.close();
 		}
 		return quality;
+	}
+
+	@Override
+	public Integer addPersonIngredient(PersonIngredient pi) {
+		Integer r = null;
+		Session s = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = s.beginTransaction();
+			r = (Integer) s.save(pi);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			s.close();
+		}
+		return r;
+	}
+
+	@Override
+	public PersonIngredient updatePersonIngredient(PersonIngredient pi) {
+		Session s = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = s.beginTransaction();
+			s.update(pi);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			s.close();
+		}
+		return pi;		
 	}
 }

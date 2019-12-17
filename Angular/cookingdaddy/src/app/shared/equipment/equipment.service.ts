@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { Equipment } from './equipment';
 import { map } from 'rxjs/operators';
 import { Quality } from '../ingredient/quality';
-import { stringify } from 'querystring';
 import { PersonEquipment } from './person-equipment';
 
 @Injectable({
@@ -32,21 +31,21 @@ export class EquipmentService {
   }
   // code to test in future for making equipment/PersonEquipment, should give URI of created objects
   public addEquipment(eq: Equipment): Observable<string> {
-    const body = stringify(eq);
+    const body = JSON.stringify(eq);
     return this.http.post(this.appUrl + '/equipment', body, { withCredentials: true }).pipe(
       map(resp => resp as string)
     );
   }
   public addPersonEquipment(peq: PersonEquipment): Observable<string> {
-    const body = stringify(peq);
-    return this.http.post(this.appUrl + '/personEquipment', body, { withCredentials: true }).pipe(
+    const body = JSON.stringify(peq);
+    return this.http.post(this.appUrl + '/personEquipment', body, {headers: this.headers, withCredentials: true }).pipe(
       map(resp => resp as string)
     );
   }
   public updatePersonEquipment(peq: PersonEquipment): Observable<PersonEquipment> {
     if (peq.id) {
-      const body = stringify(peq);
-      return this.http.put(this.appUrl + '/personEquipment/' + peq.id, body, { withCredentials: true }).pipe(
+      const body = JSON.stringify(peq);
+      return this.http.put(this.appUrl + '/personEquipment/' + peq.id, body, {headers: this.headers, withCredentials: true }).pipe(
         map(resp => resp as PersonEquipment)
       );
     } else {

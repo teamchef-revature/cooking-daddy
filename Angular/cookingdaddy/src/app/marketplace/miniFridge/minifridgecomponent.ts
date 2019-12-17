@@ -23,8 +23,8 @@ export class MinifridgeComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.personIngredients = this.holder.ingredients;
-    this.personEquipments = this.holder.equipments;
+    this.personIngredients = this.holder.ingredients.filter(el => el.inventory > 0);
+    this.personEquipments = this.holder.equipments.filter(el => el.inventory > 0);
 
   }
   chooseIng() {

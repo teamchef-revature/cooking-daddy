@@ -7,14 +7,16 @@
                     <li class="nav-item my-nav-pill"><a routerLink="/cook">Cook </a></li>
                     <li class="nav-item my-nav-pill"><a routerLink="/fridge">Fridge </a></li>
                     <li class="nav-item my-nav-pill">Cookbook </li>
-                    <li class="nav-item my-nav-pill"><a routerLink="/market">Marketplace</a></li>
+                    <li class="nav-item my-nav-pill"><a routerLink="/market">Marketplace </a></li>
                     <li class="nav-item my-nav-pill">Leaderboard </li>
                     <li class="nav-item my-nav-pill">Profile </li>
                 </ng-container>
                 <ng-template #admin>
-                    <li class="nav-item my-nav-pill">Admin1</li>
-                    <li class="nav-item my-nav-pill">Admin2</li>
-                    <li class="nav-item my-nav-pill">Admin3</li>
+                    <li class="nav-item my-nav-pill"><a routerLink="/admin/category">Categories </a></li>
+                    <li class="nav-item my-nav-pill"><a routerLink="/admin/flavor">Flavors </a></li>
+                    <li class="nav-item my-nav-pill"><a routerLink="/admin/quality">Qualities </a></li>
+                    <li class="nav-item my-nav-pill"><a routerLink="/admin/ingredient">Ingredients </a></li>
+                    <li class="nav-item my-nav-pill"><a routerLink="/admin/recipe">Recipes </a></li>
                 </ng-template>
             </ul>
             <span *ngIf="isPerson()">{{ person.username }}&nbsp;
