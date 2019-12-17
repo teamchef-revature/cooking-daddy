@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import com.revature.beans.Recipe;
@@ -14,5 +15,5 @@ public interface MealService {
 	
 	public Integer addMeal(Meal personMeal);
 	public Meal updateMeal(Meal personMeal);
-	public Meal cookMeal(Ingredient[] ingredients);
+	public Meal cookMeal(ArrayList<Ingredient> ingredients);
 }
