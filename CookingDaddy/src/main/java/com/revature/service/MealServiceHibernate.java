@@ -1,11 +1,14 @@
 package com.revature.service;
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Recipe;
+import com.revature.beans.Component;
 import com.revature.beans.Ingredient;
 import com.revature.beans.Meal;
 import com.revature.data.MealDAO;
@@ -46,14 +49,31 @@ public class MealServiceHibernate implements MealService {
 	}
 	*/
 	@Override
-	public Meal cookMeal(Ingredient[] ingredients) {
+	public Meal cookMeal(ArrayList<Ingredient> ingredients) {
 		Meal cookedMeal = null;
+		//keeps track of ingredients used in the meal
+		ArrayList<Ingredient> checkedIngredients = new ArrayList<>();
+		//keeps track of how many ingredients were used
+		int counter = 0;
 		
 		Set<Recipe> recipes = this.getRecipes();
-		for(Recipe r : recipes) {
-			//TODO: Empty code here
+		rec: for(Recipe r : recipes) {
+			counter = 0;
+			checkedIngredients.clear();
+			comp: for(Component c : r.getComponents()) {
+				ing: for(Ingredient i : ingredients) {
+					if (c.getIngredient() != null && c.getIngredient().equals(i)) {
+						// if the component has a specific ingredient,
+						// and that ingredient is equal to the current
+						// ingredient from the list, then we add it to
+						// the used ingredients for the final meal
+						// and increment the ingredients used counter
+						counter++;
+						checkedIngredients.add(i);
+					}
+				}
+			}
 		}
-		
 		return cookedMeal;
 	}
 /*
