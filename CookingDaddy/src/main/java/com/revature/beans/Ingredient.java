@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 // import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -31,6 +34,11 @@ public class Ingredient {
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
 	private String name;
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="ingredient_season", 
+		joinColumns=@JoinColumn(name="ingredient_id"),
+		inverseJoinColumns=@JoinColumn(name="season_id"))
+	private Set<Season> seasons;
 	// commented this out because i'm not sure why it's here,
 	// left it in case we do need it again. looks like it was probably
 	// leftover from when we included inventory in the ingredient bean.

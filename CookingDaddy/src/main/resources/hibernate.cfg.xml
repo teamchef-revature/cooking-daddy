@@ -27,5 +27,6 @@
 		<mapping class="com.revature.beans.PersonEquipment"/>
 		<mapping class="com.revature.beans.Meal"/>
 		<mapping class="com.revature.beans.PersonMeal"/>
+		<mapping class="com.revature.beans.Season"/>
 	</session-factory>
 </hibernate-configuration>

@@ -12,6 +12,7 @@ import { UrlService } from './url.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { PersonEquipment } from './equipment/person-equipment';
+import { SeasonService } from './ingredient/season.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +26,14 @@ export class RandomitemService {
   private urlstart: string = this.url.getUrl() + '/person/';
   private urlpi: string = this.url.getUrl() + '/personIngredient';
   private urlpe: string = this.url.getUrl() + '/personEquipment';
+  private today: Date = new Date();
 
   constructor(
     private ingser: IngredientService,
     private equser: EquipmentService,
     private admser: AdminService,
     private activeser: PersonService,
+    private seaser: SeasonService,
     private http: HttpClient,
     private url: UrlService) {
     ingser.getIngredients().subscribe(resp => this.alling = resp);
@@ -40,7 +43,8 @@ export class RandomitemService {
   }
   getRandIng(): Ingredient {
     const randLevel: number = 3 + ((this.maxQual - 2) * Math.random());
-    const randIngChoice: Ingredient[] = this.alling.filter(element => element.quality.id <= randLevel);
+    const randIngChoice: Ingredient[] = this.alling.filter(element =>
+      (element.quality.id <= randLevel) && (this.seaser.anyInSeason(element.seasons)));
     const randID: number = Math.floor(randIngChoice.length * Math.random());
     return randIngChoice[randID];
   }
