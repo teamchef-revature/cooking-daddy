@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -18,13 +18,13 @@ public class Component {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="component")
 	@SequenceGenerator(name="component", sequenceName="component_seq", allocationSize=1)
 	private Integer id;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="ingredient_id")
 	private Ingredient ingredient;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="category_id")
 	private Category category;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
 	
