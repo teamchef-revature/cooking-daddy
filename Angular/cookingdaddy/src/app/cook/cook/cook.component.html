@@ -3,14 +3,14 @@
         <div class="cookpage">
             <label for="ingredients">Ingredients: </label>
             <select ngModel (ngModelChange)="addIngredient($event)" name="ingredients" id="ingredientChoice">
-                <option selected disabled>Choose ingredients</option>
+                <option value="default" selected disabled>Choose ingredients</option>
                 <option *ngFor="let i of ingredients" [ngValue]="i">{{i.ingredient.name}}</option>
             </select>
         </div>
         <div class="cookpage">
             <label for="equipment">Equipment: </label>
             <select ngModel (ngModelChange)="chooseEquipment($event)" name="equipment" id="equipmentChoice">
-                <option selected disabled>Choose equipment</option>
+                <option value="default" selected disabled>Choose equipment</option>
                 <option *ngFor="let e of equipment" [ngValue]="e">{{e.equipment.name}}</option>
             </select>
         </div>

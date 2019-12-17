@@ -3,6 +3,7 @@ import { PersonIngredient } from '../../shared/personIngredient/person-ingredien
 import { IngredientService } from '../../shared/ingredient/ingredient.service';
 import { PersonService } from '../../shared/person/person.service';
 import { PersonEquipment } from '../../shared/equipment/person-equipment';
+import { CookService } from '../cook.service';
 
 @Component({
   selector: 'app-cook',
@@ -15,7 +16,7 @@ export class CookComponent implements OnInit {
   private equipment: PersonEquipment[];
   private chosenEquipment: PersonEquipment;
 
-  constructor(private ingredientService: IngredientService, private personService: PersonService) { }
+  constructor(private ingredientService: IngredientService, private personService: PersonService, private cookService: CookService) { }
 
   ngOnInit() {
     // get the current user's ingredients and equipment to populate the dropdowns
@@ -60,4 +61,20 @@ export class CookComponent implements OnInit {
     this.chosenEquipment = eq;
   }
 
+  cookMeal() {
+    const ingToCook = new Array();
+    for (const i of this.ingredients) {
+      ingToCook.push(i.ingredient);
+    }
+    this.cookService.cookMeal(ingToCook);
+    // reset form
+    this.ingredients = this.personService.getPerson().ingredients;
+    this.equipment = this.personService.getPerson().equipments;
+    this.chosenIngredients = new Array();
+    this.chosenEquipment = null;
+    const ingSelect = document.getElementById('ingredientChoice') as HTMLSelectElement;
+    const eqSelect = document.getElementById('equipmentChoice') as HTMLSelectElement;
+    ingSelect.value = 'default';
+    eqSelect.value = 'default';
+  }
 }

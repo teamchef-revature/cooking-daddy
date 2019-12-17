@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.beans.Category;
 import com.revature.beans.Flavor;
 import com.revature.beans.Ingredient;
+import com.revature.beans.Recipe;
 import com.revature.beans.Quality;
 import com.revature.service.IngredientService;
+import com.revature.service.MealService;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
@@ -25,6 +27,8 @@ import com.revature.service.IngredientService;
 public class AdminController {
 	@Autowired
 	private IngredientService ingredientService;
+	@Autowired
+	private MealService mealService;
 	
 	// ** Ingredient **
 	@GetMapping(value="/ingredient")
@@ -108,5 +112,26 @@ public class AdminController {
 		if(ingredientService.getQuality(id) == null)
 			return ResponseEntity.status(405).body(null);
 		return ResponseEntity.ok(ingredientService.updateQuality(quality));
+	}
+	
+	// ** Meal **
+	@GetMapping(value="/meal")
+	public ResponseEntity<Set<Recipe>> getMeals() {
+		return ResponseEntity.ok(mealService.getRecipes());
+	}
+	@GetMapping(value="/meal/{id}")
+	public ResponseEntity<Recipe> getMeal(@PathVariable Integer id) {
+		return ResponseEntity.ok(mealService.getRecipe(id));
+	}
+	@PostMapping(value="/meal")
+	public ResponseEntity<Recipe> addMeal(@RequestBody Recipe meal) {
+		mealService.addRecipe(meal);
+		return ResponseEntity.status(201).body(meal);
+	}
+	@PutMapping(value="/meal/{id}")
+	public ResponseEntity<Recipe> updateMeal(@PathVariable Integer id, @RequestBody Recipe meal) {
+		if(mealService.getRecipe(id) == null)
+			return ResponseEntity.status(405).body(null);
+		return ResponseEntity.ok(mealService.updateRecipe(meal));
 	}
 }

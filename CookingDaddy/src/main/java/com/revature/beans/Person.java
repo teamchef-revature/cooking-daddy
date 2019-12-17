@@ -29,10 +29,10 @@ public class Person {
 	@JoinColumn(name="role_id")
 	private Role role;
 	@OneToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="person_id")
+	@JoinColumn(name="person_id", insertable = false, updatable = false)
 	private Set<PersonIngredient> ingredients;
 	@OneToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="person_id")
+	@JoinColumn(name="person_id", insertable = false, updatable = false)
 	private Set<PersonEquipment> equipments;
 	
 	public Integer getId() {
