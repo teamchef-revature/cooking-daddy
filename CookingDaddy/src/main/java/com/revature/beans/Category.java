@@ -20,7 +20,6 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="category")
 	@SequenceGenerator(name="category", sequenceName="category_seq", allocationSize=1)
 	private Integer id;
-	@Column
 	private String name;
 	
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)

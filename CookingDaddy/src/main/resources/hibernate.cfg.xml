@@ -16,17 +16,19 @@
 		<property name="use_sql_comments">true</property>
 		
 		<!--  mapping to beans -->
-		<mapping class="com.revature.beans.Person"/>
-		<mapping class="com.revature.beans.Ingredient"/>
-		<mapping class="com.revature.beans.Flavor"/>
 		<mapping class="com.revature.beans.Category"/>
-		<mapping class="com.revature.beans.Quality"/>
-		<mapping class="com.revature.beans.Role"/>
-		<mapping class="com.revature.beans.PersonIngredient"/>
+		<mapping class="com.revature.beans.Component"/>
 		<mapping class="com.revature.beans.Equipment"/>
-		<mapping class="com.revature.beans.PersonEquipment"/>
+		<mapping class="com.revature.beans.Flavor"/>
+		<mapping class="com.revature.beans.Ingredient"/>
 		<mapping class="com.revature.beans.Meal"/>
-		<mapping class="com.revature.beans.PersonMeal"/>
+		<mapping class="com.revature.beans.Person"/>
+		<mapping class="com.revature.beans.PersonEquipment"/>
+		<mapping class="com.revature.beans.PersonIngredient"/>
+		<mapping class="com.revature.beans.Quality"/>
+		<mapping class="com.revature.beans.Recipe"/>
+		<mapping class="com.revature.beans.Role"/>
 		<mapping class="com.revature.beans.Season"/>
+		<mapping class="com.revature.beans.Cookbook"/>
 	</session-factory>
 </hibernate-configuration>
