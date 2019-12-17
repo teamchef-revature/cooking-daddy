@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.beans.Component;
 import com.revature.beans.Recipe;
 import com.revature.data.RecipeDAO;
 
@@ -30,6 +31,11 @@ public class RecipeServiceHibernate implements RecipeService {
 	@Override
 	public Recipe updateRecipe(Recipe recipe) {
 		return recipeDAO.updateRecipe(recipe);
+	}
+
+	@Override
+	public Set<Component> getComponents(Recipe recipe) {
+		return recipeDAO.getComponents(recipe);
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import com.revature.beans.Recipe;
+import com.revature.beans.Component;
 import com.revature.beans.Ingredient;
 import com.revature.beans.Meal;
 

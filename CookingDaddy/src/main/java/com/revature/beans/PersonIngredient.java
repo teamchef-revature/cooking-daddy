@@ -20,9 +20,9 @@ public class PersonIngredient {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="person_ingredient")
 	@SequenceGenerator(name="person_ingredient", sequenceName="person_ingredient_seq", allocationSize=1)
 	private Integer id;
+	private Integer person_id;
 	@Column
 	private Integer inventory;
-	private Integer person_id;
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="ingredient_id")
 	private Ingredient ingredient;

@@ -17,6 +17,9 @@ import com.revature.data.MealDAO;
 public class MealServiceHibernate implements MealService {
 	@Autowired
 	private MealDAO mealDAO;
+	
+	@Autowired
+	private RecipeService recipeService;
 
 	@Override
 	public Set<Recipe> getRecipes() {
@@ -60,7 +63,7 @@ public class MealServiceHibernate implements MealService {
 		rec: for(Recipe r : recipes) {
 			counter = 0;
 			checkedIngredients.clear();
-			comp: for(Component c : r.getComponents()) {
+			comp: for(Component c : recipeService.getComponents(r)) {
 				ing: for(Ingredient i : ingredients) {
 					if (c.getIngredient() != null && c.getIngredient().equals(i)) {
 						// if the component has a specific ingredient,
@@ -76,28 +79,4 @@ public class MealServiceHibernate implements MealService {
 		}
 		return cookedMeal;
 	}
-/*
-	@Override
-	public Set<Recipe> getMeals() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Recipe getMeal(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Recipe updateMeal(Recipe meal) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Integer addMeal(Recipe meal) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 }

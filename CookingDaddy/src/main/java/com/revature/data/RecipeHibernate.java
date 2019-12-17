@@ -73,4 +73,13 @@ public class RecipeHibernate implements RecipeDAO {
 		return recipe;
 	}
 
+	@Override
+	public Set<com.revature.beans.Component> getComponents(Recipe recipe) {
+		Session session = hu.getSession();
+		String queryHQL = "from Recipe as recipe join fetch recipe.components";
+		Query<com.revature.beans.Component> query = session.createQuery(queryHQL, com.revature.beans.Component.class);
+		List<com.revature.beans.Component> components = query.list();
+		return new HashSet<com.revature.beans.Component>(components);
+	}
+
 }

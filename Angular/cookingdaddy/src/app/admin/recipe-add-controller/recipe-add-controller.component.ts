@@ -23,7 +23,6 @@ export class RecipeAddControllerComponent implements OnInit {
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
-    this.recipeComp = null;
     this.adminService.getFlavors().subscribe(
       (f) => {
         this.flavors = f;
@@ -66,6 +65,7 @@ export class RecipeAddControllerComponent implements OnInit {
   }
 
   addFlavor(flavor: Flavor): void {
+    console.log('Add Flavor: ' + flavor.name);
     this.recipeComp.flavor = flavor;
     this.recipe.recipeComps.push(this.recipeComp);
     this.flavors.splice(this.flavors.indexOf(flavor, 1));
