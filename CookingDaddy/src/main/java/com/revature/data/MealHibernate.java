@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Recipe;
-import com.revature.beans.PersonMeal;
+import com.revature.beans.Meal;
 import com.revature.utils.HibernateUtil;
 
 @Component
@@ -21,7 +21,7 @@ public class MealHibernate implements MealDAO {
 	private HibernateUtil hibernateUtil = new HibernateUtil();
 
 	@Override
-	public Integer addMeal(Recipe meal) {
+	public Integer addRecipe(Recipe meal) {
 		Session session = hibernateUtil.getSession();
 		Transaction transaction = null;
 		Integer index = 0;
@@ -40,7 +40,7 @@ public class MealHibernate implements MealDAO {
 	}
 
 	@Override
-	public Set<Recipe> getMeals() {
+	public Set<Recipe> getRecipes() {
 		Session session = hibernateUtil.getSession();
 		String queryHQL = "from Meal";
 		Query<Recipe> query = session.createQuery(queryHQL, Recipe.class);
@@ -50,7 +50,7 @@ public class MealHibernate implements MealDAO {
 	}
 
 	@Override
-	public Recipe getMeal(Integer id) {
+	public Recipe getRecipe(Integer id) {
 		Recipe meal = null;
 		Session session = hibernateUtil.getSession();
 		String queryHQL = "from Meal where meal.id=:id";
@@ -62,7 +62,7 @@ public class MealHibernate implements MealDAO {
 	}
 
 	@Override
-	public Recipe updateMeal(Recipe meal) {
+	public Recipe updateRecipe(Recipe meal) {
 		Session session = hibernateUtil.getSession();
 		Transaction transaction = null;
 		try {
@@ -80,7 +80,7 @@ public class MealHibernate implements MealDAO {
 	}
 
 	@Override
-	public Integer addPersonMeal(PersonMeal personMeal) {
+	public Integer addMeal(Meal personMeal) {
 		Integer index = null;
 		Session session = hibernateUtil.getSession();
 		Transaction transaction = null;
@@ -99,7 +99,7 @@ public class MealHibernate implements MealDAO {
 	}
 
 	@Override
-	public PersonMeal updatePersonMeal(PersonMeal personMeal) {
+	public Meal updateMeal(Meal personMeal) {
 		Session session = hibernateUtil.getSession();
 		Transaction transaction = null;
 		try {

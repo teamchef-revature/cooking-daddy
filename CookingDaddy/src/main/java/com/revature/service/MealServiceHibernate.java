@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Recipe;
-import com.revature.beans.PersonMeal;
+import com.revature.beans.Ingredient;
+import com.revature.beans.Meal;
 import com.revature.data.MealDAO;
 
 @Service
@@ -15,32 +16,44 @@ public class MealServiceHibernate implements MealService {
 	private MealDAO mealDAO;
 
 	@Override
-	public Set<Recipe> getMeals() {
-		return mealDAO.getMeals();
+	public Set<Recipe> getRecipes() {
+		return mealDAO.getRecipes();
 	}
 
 	@Override
-	public Recipe getMeal(Integer id) {
-		return mealDAO.getMeal(id);
+	public Recipe getRecipe(Integer id) {
+		return mealDAO.getRecipe(id);
 	}
 
 	@Override
-	public Recipe updateMeal(Recipe meal) {
-		return mealDAO.updateMeal(meal);
+	public Recipe updateRecipe(Recipe meal) {
+		return mealDAO.updateRecipe(meal);
 	}
 
 	@Override
-	public Integer addMeal(Recipe meal) {
-		return mealDAO.addMeal(meal);
+	public Integer addRecipe(Recipe meal) {
+		return mealDAO.addRecipe(meal);
 	}
 
 	@Override
-	public Integer addPersonMeal(PersonMeal personMeal) {
-		return mealDAO.addPersonMeal(personMeal);
+	public Integer addMeal(Meal personMeal) {
+		return mealDAO.addMeal(personMeal);
 	}
 
 	@Override
-	public PersonMeal updatePersonMeal(PersonMeal personMeal) {
-		return mealDAO.updatePersonMeal(personMeal);
+	public Meal updateMeal(Meal personMeal) {
+		return mealDAO.updateMeal(personMeal);
+	}
+	
+	@Override
+	public Meal cookMeal(Ingredient[] ingredients) {
+		Meal cookedMeal = null;
+		
+		Set<Recipe> recipes = this.getRecipes();
+		for(Recipe r : recipes) {
+			
+		}
+		
+		return cookedMeal;
 	}
 }
