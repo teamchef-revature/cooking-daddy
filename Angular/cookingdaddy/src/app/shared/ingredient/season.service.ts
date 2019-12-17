@@ -7,6 +7,7 @@ import { Season } from './season';
 export class SeasonService {
   private startTime: Date;
   private endTime: Date;
+  private recbool: boolean;
   private today: Date = new Date();
   constructor() { }
 
@@ -27,28 +28,33 @@ export class SeasonService {
     } else {
       this.endTime = null;
     }
-    return {start: this.startTime, end: this.endTime};
+    this.recbool = (s.recurring) ? true : false;
+    return { start: this.startTime, end: this.endTime, recur: this.recbool};
   }
 
   public inSeason(s: Season): boolean {
     this.convertedToDates(s);
-    if (!this.startTime || this.today >= this.startTime ) {
-      if (!this.endTime || this.today <= this.endTime) {
+    if (!this.startTime || this.today >= this.startTime) {
+      if (!this.endTime || this.today <= this.endTime || this.endTime < this.startTime) {
         return true;
       }
     } else {
       // only occurs if season is recurring and it jumps over new year
-      if (this.today <= this.endTime) {
-        return true;
+      if (this.endTime < this.startTime) {
+        if (this.today <= this.endTime) {
+          return true;
+        }
       }
     }
     return false;
   }
 
   public anyInSeason(ss: Season[]): boolean {
-    ss.forEach(el => {if (this.inSeason(el)) {
-      return true;
-    }});
+    ss.forEach(el => {
+      if (this.inSeason(el)) {
+        return true;
+      }
+    });
     return false;
   }
 
