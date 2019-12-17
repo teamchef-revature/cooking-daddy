@@ -79,6 +79,8 @@ public class MealHibernate implements MealDAO {
 		return meal;
 	}
 
+	/*@Override
+	public Integer addPersonMeal(PersonMeal personMeal) {
 	@Override
 	public Integer addMeal(Meal personMeal) {
 		Integer index = null;
@@ -96,8 +98,10 @@ public class MealHibernate implements MealDAO {
 			session.close();
 		}
 		return index;
-	}
+	}*/
 
+	/*@Override
+	public PersonMeal updatePersonMeal(PersonMeal personMeal) {
 	@Override
 	public Meal updateMeal(Meal personMeal) {
 		Session session = hibernateUtil.getSession();
@@ -114,5 +118,5 @@ public class MealHibernate implements MealDAO {
 			session.close();
 		}
 		return personMeal;
-	}
+	}*/
 }
