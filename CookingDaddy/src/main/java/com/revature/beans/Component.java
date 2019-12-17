@@ -27,6 +27,7 @@ public class Component {
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
+
 	public Integer getId() {
 		return id;
 	}
@@ -97,5 +98,5 @@ public class Component {
 		return "Component [id=" + id + ", ingredient=" + ingredient + ", category=" + category + ", flavor=" + flavor
 				+ "]";
 	}
-	
+
 }

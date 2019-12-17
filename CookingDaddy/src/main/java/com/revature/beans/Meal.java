@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -25,6 +29,11 @@ public class Meal {
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="quality_id")
 	private Quality quality;
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="meal_ingredient",
+			joinColumns=@JoinColumn(name="meal_id"),
+			inverseJoinColumns=@JoinColumn(name="ingredient_id"))
+	private Set<Ingredient> ingredients;
 	@Column
 	private Integer inventory;
 	public Integer getId() {
@@ -45,6 +54,12 @@ public class Meal {
 	public void setQuality(Quality quality) {
 		this.quality = quality;
 	}
+	public Set<Ingredient> getIngredients() {
+		return ingredients;
+	}
+	public void setIngredients(Set<Ingredient> ingredients) {
+		this.ingredients = ingredients;
+	}
 	public Integer getInventory() {
 		return inventory;
 	}
@@ -56,6 +71,7 @@ public class Meal {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((ingredients == null) ? 0 : ingredients.hashCode());
 		result = prime * result + ((inventory == null) ? 0 : inventory.hashCode());
 		result = prime * result + ((quality == null) ? 0 : quality.hashCode());
 		result = prime * result + ((recipe == null) ? 0 : recipe.hashCode());
@@ -74,6 +90,11 @@ public class Meal {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (ingredients == null) {
+			if (other.ingredients != null)
+				return false;
+		} else if (!ingredients.equals(other.ingredients))
 			return false;
 		if (inventory == null) {
 			if (other.inventory != null)
@@ -94,7 +115,7 @@ public class Meal {
 	}
 	@Override
 	public String toString() {
-		return "Meal [id=" + id + ", recipe=" + recipe + ", quality=" + quality + ", inventory=" + inventory + "]";
+		return "Meal [id=" + id + ", recipe=" + recipe + ", quality=" + quality + ", ingredients=" + ingredients
+				+ ", inventory=" + inventory + "]";
 	}
-	
 }

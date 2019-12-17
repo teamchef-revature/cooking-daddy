@@ -37,7 +37,7 @@ public class MealServiceHibernate implements MealService {
 	public Integer addRecipe(Recipe meal) {
 		return mealDAO.addRecipe(meal);
 	}
-
+	/*
 	@Override
 	public Integer addMeal(Meal personMeal) {
 		return mealDAO.addMeal(personMeal);
@@ -47,7 +47,7 @@ public class MealServiceHibernate implements MealService {
 	public Meal updateMeal(Meal personMeal) {
 		return mealDAO.updateMeal(personMeal);
 	}
-	
+	*/
 	@Override
 	public Meal cookMeal(ArrayList<Ingredient> ingredients) {
 		Meal cookedMeal = null;
@@ -76,4 +76,28 @@ public class MealServiceHibernate implements MealService {
 		}
 		return cookedMeal;
 	}
+/*
+	@Override
+	public Set<Recipe> getMeals() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Recipe getMeal(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Recipe updateMeal(Recipe meal) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer addMeal(Recipe meal) {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
 }
