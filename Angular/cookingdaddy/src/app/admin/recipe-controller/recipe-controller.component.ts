@@ -15,7 +15,7 @@ export class RecipeControllerComponent implements OnInit {
 
   ngOnInit() {
     this.recipe = new Recipe();
-    this.recipe.components = null;
+    this.recipe.recipeComps = null;
     this.recipe.flavor = null;
     this.adminService.getRecipes().subscribe(
       (r) => {
@@ -27,7 +27,7 @@ export class RecipeControllerComponent implements OnInit {
   submitted() {
     this.recipes.push(this.recipe);
     this.recipe = new Recipe();
-    this.recipe.components = null;
+    this.recipe.recipeComps = null;
     this.recipe.flavor = null;
   }
 }

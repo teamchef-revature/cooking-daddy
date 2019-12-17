@@ -10,47 +10,47 @@
     </div>
     <div class="row">
         <div class="col-sm-1"></div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <label for="flavor">Flavor</label>
             <select ngModel (ngModelChange)="addFlavor($event)" name="flavor">
                 <option *ngFor="let flavor of flavors" [ngValue]="flavor">{{flavor.name}}</option>
             </select>
         </div>
-        <div class="col-sm-4">
-            <label for="components">Components</label>
-            <ul *ngIf="recipe.components">
-                <div *ngFor="let component of recipe.components">
-                    <li *ngIf="component.ingredient">
-                        <button class="btn btn-sm btn-danger" (click)="removeIngredient(component.ingredient)">x</button>
-                        <em>Ingredient:</em> {{recipe.component.ingredient.name}}
+        <div class="col-sm-2">
+            <label>Components</label>
+            <ul *ngIf="recipe.recipeComps">
+                <div *ngFor="let recipeComp of recipe.recipeComps">
+                    <li *ngIf="recipeComp.ingredient">
+                        <button class="btn btn-sm btn-danger" (click)="removeIngredient(recipeComp.ingredient)">x</button>
+                        <em>Ingredient:</em> {{recipe.recipeComp.ingredient.name}}
                     </li>
-                    <li *ngIf="component.category">
-                        <button class="btn btn-sm btn-danger" (click)="removeCategory(component.category)">x</button>
-                        <em>Category:</em> {{recipe.component.category.name}}
+                    <li *ngIf="recipeComp.category">
+                        <button class="btn btn-sm btn-danger" (click)="removeCategory(recipeComp.category)">x</button>
+                        <em>Category:</em> {{recipe.recipeComp.category.name}}
                     </li>
-                    <li *ngIf="component.flavor">
-                        <button class="btn btn-sm btn-danger" (click)="removeFlavor(component.flavor)">x</button>
-                        <em>Flavor:</em> {{recipe.component.flavor.name}}
+                    <li *ngIf="recipeComp.flavor">
+                        <button class="btn btn-sm btn-danger" (click)="removeFlavor(recipeComp.flavor)">x</button>
+                        <em>Flavor:</em> {{recipe.recipeComp.flavor.name}}
                     </li>
                 </div>
             </ul>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-7">
             <div class="row">
-                <div class="col-xs-3">
-                    <label for="add-ingredient">Add Ingredient</label>
+                <div class="col-xs-5">
+                    <label for="add-ingredient">Ingredient</label>
                     <select ngModel (ngModelChange)="addIngredient($event)" name="add-ingredient">
                         <option *ngFor="let ingredient of ingredients" [ngValue]="ingredient">{{ingredient.name}}</option>
                     </select>
                 </div>
-                <div class="col-xs-3">
-                    <label for="add-category">Add Category</label>
+                <div class="col-xs-4">
+                    <label for="add-category">Category</label>
                     <select ngModel (ngModelChange)="addCategory($event)" name="add-category">
                         <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
                     </select>
                 </div>
                 <div class="col-xs-3">
-                    <label for="add-flavor">Add Flavor</label>
+                    <label for="add-flavor">Flavor</label>
                     <select ngModel (ngModelChange)="addFlavor($event)" name="add-flavor">
                         <option *ngFor="let flavor of flavors" [ngValue]="flavor">{{flavor.name}}</option>
                     </select>

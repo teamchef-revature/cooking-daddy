@@ -17,7 +17,7 @@ export class RecipeItemControllerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const id = +this.route.snapshot.parmMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('id');
     if (id) {
       this.adminService.getRecipe(id).subscribe(
         recipe => {
