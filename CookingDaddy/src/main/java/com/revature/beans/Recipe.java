@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table
@@ -22,16 +23,15 @@ public class Recipe {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="spicyLiquid")
 	@SequenceGenerator(name="spicyLiquid", sequenceName="recipe_seq", allocationSize=1)
 	private Integer id;
-	private String name;
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="recipe_component",
-			joinColumns=@JoinColumn(name="recipe_id"),
-			inverseJoinColumns=@JoinColumn(name="component_id"))
+		joinColumns=@JoinColumn(name="recipe_id"),
+		inverseJoinColumns=@JoinColumn(name="component_id"))
 	private Set<Component> components;
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
-	
+	private String name;
 	public Integer getId() {
 		return id;
 	}
@@ -101,6 +101,4 @@ public class Recipe {
 	public String toString() {
 		return "Recipe [id=" + id + ", name=" + name + ", components=" + components + ", flavor=" + flavor + "]";
 	}
-	
-	
 }

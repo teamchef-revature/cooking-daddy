@@ -15,8 +15,8 @@ import javax.persistence.Table;
 @Table
 public class Component {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="component")
-	@SequenceGenerator(name="component", sequenceName="component_seq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="prometheus")
+	@SequenceGenerator(name="prometheus", sequenceName="meal_seq", allocationSize=1)
 	private Integer id;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="ingredient_id")
@@ -27,7 +27,7 @@ public class Component {
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -98,6 +98,5 @@ public class Component {
 		return "Component [id=" + id + ", ingredient=" + ingredient + ", category=" + category + ", flavor=" + flavor
 				+ "]";
 	}
-	
-	
+
 }
