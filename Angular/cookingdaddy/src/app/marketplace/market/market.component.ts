@@ -13,8 +13,4 @@ export class MarketComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  updateBasket() {
-    this.hack = 'none' === this.hack ? 'yes' : 'none';
-  }
 }

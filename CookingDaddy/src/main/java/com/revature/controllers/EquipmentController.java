@@ -47,8 +47,7 @@ public class EquipmentController {
 		return ResponseEntity.created(URI.create("/equipment/"+eid)).build();
 	}
 	
-	@PostMapping
-	@RequestMapping(value="/personEquipment")
+	@RequestMapping(value="/personEquipment", method = RequestMethod.POST)
 	public ResponseEntity<Integer> addPersonEquipment(@RequestBody PersonEquipment pe) {
 		Integer peid = es.addPersonEquipment(pe);
 		if (peid == null) {
@@ -57,10 +56,9 @@ public class EquipmentController {
 		return ResponseEntity.created(URI.create("/personEquipment/"+peid)).build();
 	}
 	
-	@PutMapping
-	@RequestMapping(value = "/personEquipment/{id}")
-	public ResponseEntity<PersonEquipment> updatePersonEquipment(@PathVariable Integer id, @RequestBody PersonEquipment pe) {
-		if (pe.getId().equals(id)) {
+	@RequestMapping(value = "/personEquipment/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<PersonEquipment> updatePersonEquipment(@PathVariable("id") Integer peid, @RequestBody PersonEquipment pe) {
+		if (pe.getId().equals(peid)) {
 			PersonEquipment update= es.updatePersonEquipment(pe);
 			return ResponseEntity.ok(update);
 		} else {

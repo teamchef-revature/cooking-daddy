@@ -10,26 +10,21 @@ import { PersonService } from 'src/app/shared/person/person.service';
   templateUrl: './basket.component.html',
   styleUrls: ['./basket.component.css']
 })
-export class BasketComponent implements OnInit, OnChanges {
+export class BasketComponent implements OnInit {
   @Input() holder: Person;
-  @Input() hack: string;
   choice: number;
+  clicked: number;
   activePerson: Person;
-  blankPerson: Person;
   constructor(private basketHolder: MarketServiceService, private active: PersonService) {
     if (!this.holder) {
       this.choice = 1;
+      this.clicked = 1;
     }
   }
   ngOnInit() {
     this.choice = 1;
     this.holder = this.basketHolder.getBasket();
     this.activePerson = this.active.getPerson();
-    this.blankPerson = new Person();
-
-  }
-  ngOnChanges() {
-    this.ngOnInit();
   }
   chooseIng() {
     this.choice = 1;
@@ -49,6 +44,10 @@ export class BasketComponent implements OnInit, OnChanges {
       this.basketHolder.restoreItem(ping, this.activePerson);
     }
   }
+  updateBasket() {
+    this.choice = (this.choice === 1) ? 2 : 1;
+    setTimeout(() => {
+      this.choice = (this.choice === 1) ? 2 : 1;
+    }, 100);
+  }
 }
-
-

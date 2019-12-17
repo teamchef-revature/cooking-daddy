@@ -9,8 +9,9 @@ import { AdminService } from './person/admin.service';
 import { PersonIngredient } from './personIngredient/person-ingredient';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UrlService } from './url.service';
-import { map, retry } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { PersonEquipment } from './equipment/person-equipment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class RandomitemService {
   private headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   private urlstart: string = this.url.getUrl() + '/person/';
   private urlpi: string = this.url.getUrl() + '/personIngredient';
+  private urlpe: string = this.url.getUrl() + '/personEquipment';
 
   constructor(
     private ingser: IngredientService,
@@ -37,7 +39,7 @@ export class RandomitemService {
     this.user = activeser.getPerson();
   }
   getRandIng(): Ingredient {
-    const randLevel: number = 1 + (this.maxQual * Math.random());
+    const randLevel: number = 3 + ((this.maxQual - 2) * Math.random());
     const randIngChoice: Ingredient[] = this.alling.filter(element => element.quality.id <= randLevel);
     const randID: number = Math.floor(randIngChoice.length * Math.random());
     return randIngChoice[randID];
@@ -56,7 +58,6 @@ export class RandomitemService {
       if (aftertot >= 0) {
         pering.inventory += num;
         if (toDB) {
-          console.log(pering);
           this.updatePersonIngredient(pering).subscribe(resp => console.log(resp));
         }
       } else {
@@ -72,12 +73,35 @@ export class RandomitemService {
       pering.person_id = per.id;
       per.ingredients.push(pering);
       if (toDB) {
-        console.log(pering);
         this.addPersonIngredient(pering).subscribe(resp => console.log(resp));
       }
     }
-    if (toDB) {
-      //this.updatePerson(per);
+  }
+  addEquToPer(equ: Equipment, per: Person, num: number, toDB: boolean) {
+    const prev: number = per.equipments.findIndex(pereq => pereq.equipment.id === equ.id);
+    if (prev + 1) {
+      const perequ = per.equipments[prev];
+      const aftertot = perequ.inventory + num;
+      if (aftertot >= 0) {
+        perequ.inventory += num;
+        if (toDB) {
+          this.updatePersonEquipment(perequ).subscribe(resp => console.log(resp));
+        }
+      } else {
+        return null;
+      }
+    } else {
+      if (num < 0) {
+        return null;
+      }
+      const perequ = new PersonEquipment();
+      perequ.equipment = equ;
+      perequ.inventory = num;
+      perequ.personId = per.id;
+      per.equipments.push(perequ);
+      if (toDB) {
+        this.addPersonEquipment(perequ).subscribe(resp => console.log(resp));
+      }
     }
   }
   updatePerson(per: Person) {
@@ -111,6 +135,22 @@ export class RandomitemService {
       const body = JSON.stringify(pin);
       return this.http.put(this.urlpi + '/' + pin.id, body, { headers: this.headers, withCredentials: true }).pipe(
         map(resp => resp as PersonIngredient)
+      );
+    } else {
+      return null;
+    }
+  }
+  public addPersonEquipment(pe: PersonEquipment): Observable<string> {
+    const body = JSON.stringify(pe);
+    return this.http.post(this.urlpe, body, { headers: this.headers, withCredentials: true }).pipe(
+      map(resp => resp as string)
+    );
+  }
+  public updatePersonEquipment(peq: PersonEquipment): Observable<PersonEquipment> {
+    if (peq.id) {
+      const body = JSON.stringify(peq);
+      return this.http.put(this.urlpe + '/' + peq.id, body, { headers: this.headers, withCredentials: true }).pipe(
+        map(resp => resp as PersonEquipment)
       );
     } else {
       return null;
