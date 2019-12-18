@@ -61,16 +61,17 @@ public class MealServiceHibernate implements MealService {
 			counter = 0;
 			checkedIngredients.clear();
 			comp: for(Component c : r.getComponents()) {
-				ing: for(Ingredient i : ingredients) {
-					if (c.getIngredient() != null && c.getIngredient().equals(i)) {
-						// if the component has a specific ingredient,
-						// and that ingredient is equal to the current
-						// ingredient from the list, then we add it to
-						// the used ingredients for the final meal
-						// and increment the ingredients used counter
-						counter++;
+				if(c.getIngredient() != null) {
+					ing: for(Ingredient i : ingredients) {
 						checkedIngredients.add(i);
+						counter++;
 					}
+				}
+				else if (c.getCategory() != null) {
+					
+				}
+				else if (c.getFlavor() != null) {
+					
 				}
 			}
 		}
