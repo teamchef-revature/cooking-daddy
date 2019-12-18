@@ -34,9 +34,18 @@ public class Person {
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="person_id", insertable = false, updatable = false)
 	private Set<PersonEquipment> equipments;
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="person_id")
+	private Set<Meal> meals;
 	
 	public Integer getId() {
 		return id;
+	}
+	public Set<Meal> getMeals() {
+		return meals;
+	}
+	public void setMeals(Set<Meal> meals) {
+		this.meals = meals;
 	}
 	public void setId(Integer id) {
 		this.id = id;
@@ -92,6 +101,7 @@ public class Person {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((ingredients == null) ? 0 : ingredients.hashCode());
 		result = prime * result + ((last == null) ? 0 : last.hashCode());
+		result = prime * result + ((meals == null) ? 0 : meals.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -131,6 +141,11 @@ public class Person {
 				return false;
 		} else if (!last.equals(other.last))
 			return false;
+		if (meals == null) {
+			if (other.meals != null)
+				return false;
+		} else if (!meals.equals(other.meals))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
@@ -151,7 +166,8 @@ public class Person {
 	@Override
 	public String toString() {
 		return "Person [id=" + id + ", username=" + username + ", password=" + password + ", first=" + first + ", last="
-				+ last + ", role=" + role + ", ingredients=" + ingredients + ", equipments=" + equipments + "]";
+				+ last + ", role=" + role + ", ingredients=" + ingredients + ", equipments=" + equipments + ", meals="
+				+ meals + "]";
 	}
 	
 }
