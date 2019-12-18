@@ -20,6 +20,7 @@ import com.revature.beans.Recipe;
 import com.revature.beans.Quality;
 import com.revature.service.IngredientService;
 import com.revature.service.MealService;
+import com.revature.service.RecipeService;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
@@ -28,7 +29,7 @@ public class AdminController {
 	@Autowired
 	private IngredientService ingredientService;
 	@Autowired
-	private MealService mealService;
+	private RecipeService recipeService;
 	
 	// ** Ingredient **
 	@GetMapping(value="/ingredient")
@@ -114,24 +115,24 @@ public class AdminController {
 		return ResponseEntity.ok(ingredientService.updateQuality(quality));
 	}
 	
-	// ** Meal **
-	@GetMapping(value="/meal")
-	public ResponseEntity<Set<Recipe>> getMeals() {
-		return ResponseEntity.ok(mealService.getRecipes());
+	// ** Recipe **
+	@GetMapping(value="/recipe")
+	public ResponseEntity<Set<Recipe>> getRecipe() {
+		return ResponseEntity.ok(recipeService.getRecipes());
 	}
-	@GetMapping(value="/meal/{id}")
-	public ResponseEntity<Recipe> getMeal(@PathVariable Integer id) {
-		return ResponseEntity.ok(mealService.getRecipe(id));
+	@GetMapping(value="/recipe/{id}")
+	public ResponseEntity<Recipe> getRecipe(@PathVariable Integer id) {
+		return ResponseEntity.ok(recipeService.getRecipe(id));
 	}
-	@PostMapping(value="/meal")
-	public ResponseEntity<Recipe> addMeal(@RequestBody Recipe meal) {
-		mealService.addRecipe(meal);
-		return ResponseEntity.status(201).body(meal);
+	@PostMapping(value="/recipe")
+	public ResponseEntity<Recipe> addMeal(@RequestBody Recipe recipe) {
+		recipeService.addRecipe(recipe);
+		return ResponseEntity.status(201).body(recipe);
 	}
-	@PutMapping(value="/meal/{id}")
-	public ResponseEntity<Recipe> updateMeal(@PathVariable Integer id, @RequestBody Recipe meal) {
-		if(mealService.getRecipe(id) == null)
+	@PutMapping(value="/recipe/{id}")
+	public ResponseEntity<Recipe> updateRecipe(@PathVariable Integer id, @RequestBody Recipe recipe) {
+		if(recipeService.getRecipe(id) == null)
 			return ResponseEntity.status(405).body(null);
-		return ResponseEntity.ok(mealService.updateRecipe(meal));
+		return ResponseEntity.ok(recipeService.updateRecipe(recipe));
 	}
 }

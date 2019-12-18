@@ -230,7 +230,7 @@ public class IngredientHibernate implements IngredientDAO{
 		Transaction tx = null;
 		try {
 			tx = s.beginTransaction();
-			s.saveOrUpdate(quality);
+			s.update(quality);
 			tx.commit();
 		} catch(Exception e) {
 			if(tx != null)

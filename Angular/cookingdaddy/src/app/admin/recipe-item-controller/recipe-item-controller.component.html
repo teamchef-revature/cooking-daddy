@@ -1,0 +1,28 @@
+<div *ngIf="recipe">
+    <div class="row">
+        <div class="col-sm-1">
+            <button class="btn btn-caution" (click)="editRecipe()">Edit</button>
+        </div>
+        <div class="col-sm-6">
+            <h3>{{recipe.name}}</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-3">
+            <h4>Flavor</h4>
+            <p>{{recipe.flavor.name}}</p>
+        </div>
+        <div class="col-sm-4">
+            <h4>Components</h4>
+            <ul *ngIf="recipe.components">
+                <div *ngFor="let recipeComp of recipe.components">
+                    <li *ngIf="recipeComp.component.ingredient"><em>Ingredient:</em> {{recipeComp.component.ingredient.name}} x{{recipeComp.quantity}}</li>
+                    <li *ngIf="recipeComp.component.category"><em>Category:</em> {{recipeComp.component.category.name}} x{{recipeComp.quantity}}</li>
+                    <li *ngIf="recipeComp.component.flavor"><em>Flavor:</em> {{recipeComp.component.flavor.name}} x{{recipeComp.quantity}}</li>
+                    <li *ngIf="recipeComp.component.any"><em>Any Item</em> x{{recipeComp.quantity}}</li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>

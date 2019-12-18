@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
@@ -23,11 +24,9 @@ public class Recipe {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="spicyLiquid")
 	@SequenceGenerator(name="spicyLiquid", sequenceName="recipe_seq", allocationSize=1)
 	private Integer id;
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="recipe_component",
-		joinColumns=@JoinColumn(name="recipe_id"),
-		inverseJoinColumns=@JoinColumn(name="component_id"))
-	private Set<Component> components;
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="recipe_id", insertable=false, updatable=false)
+	private Set<RecipeComponent> components;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
@@ -44,10 +43,10 @@ public class Recipe {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Set<Component> getComponents() {
+	public Set<RecipeComponent> getComponents() {
 		return components;
 	}
-	public void setComponents(Set<Component> components) {
+	public void setComponents(Set<RecipeComponent> components) {
 		this.components = components;
 	}
 	public Flavor getFlavor() {
