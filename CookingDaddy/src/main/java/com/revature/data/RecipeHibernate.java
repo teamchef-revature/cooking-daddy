@@ -1,5 +1,6 @@
 package com.revature.data;
 
+import java.lang.reflect.Array;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.revature.beans.Recipe;
+import com.revature.beans.RecipeComponent;
 import com.revature.utils.HibernateUtil;
 
 @Component
@@ -25,7 +27,13 @@ public class RecipeHibernate implements RecipeDAO {
 		String queryHQL = "from Recipe";
 		Query<Recipe> query = session.createQuery(queryHQL, Recipe.class);
 		List<Recipe> recipes = query.list();
-		return new HashSet<Recipe>(recipes);
+		Set<Recipe> adjustedRecipes = new HashSet<Recipe>();
+		
+		for (int iter = 0; iter < recipes.size(); iter++) {
+			Recipe recipe = (Recipe) Array.get(recipes.toArray(), iter);
+			adjustedRecipes.add(SetIfAny(recipe));
+		}
+		return adjustedRecipes;
 	}
 
 	@Override
@@ -33,6 +41,26 @@ public class RecipeHibernate implements RecipeDAO {
 		Session session = hu.getSession();
 		Recipe recipe = session.get(Recipe.class, id);
 		session.close();
+		recipe = SetIfAny(recipe);
+		return recipe;
+	}
+	
+	private Recipe SetIfAny(Recipe recipe) {
+		// pull the RecipeComponents from the recipe and make an adjusted set
+		Set<RecipeComponent> components = new HashSet<RecipeComponent>(recipe.getComponents());
+		Set<RecipeComponent> adjustedSet = new HashSet<RecipeComponent>();
+
+		// get each component from components
+		for (int iter = 0; iter < components.size(); iter++) {
+			RecipeComponent recipeComponent = (RecipeComponent) Array.get(components.toArray(), iter);
+			// set any to the results of checking if category, flavor, and ingredient is null
+			recipeComponent.getComponent().isAny(
+					recipeComponent.getComponent().getCategory() == null &&
+					recipeComponent.getComponent().getFlavor() == null &&
+					recipeComponent.getComponent().getIngredient() == null);
+			adjustedSet.add(recipeComponent);
+		}
+		recipe.setComponents(adjustedSet);
 		return recipe;
 	}
 
@@ -72,14 +100,4 @@ public class RecipeHibernate implements RecipeDAO {
 		}
 		return recipe;
 	}
-
-	@Override
-	public Set<com.revature.beans.Component> getComponents(Recipe recipe) {
-		Session session = hu.getSession();
-		String queryHQL = "from Recipe as recipe join fetch recipe.components";
-		Query<com.revature.beans.Component> query = session.createQuery(queryHQL, com.revature.beans.Component.class);
-		List<com.revature.beans.Component> components = query.list();
-		return new HashSet<com.revature.beans.Component>(components);
-	}
-
 }

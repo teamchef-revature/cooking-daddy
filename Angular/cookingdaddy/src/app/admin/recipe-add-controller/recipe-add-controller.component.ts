@@ -5,6 +5,7 @@ import { Ingredient } from '../../shared/ingredient/ingredient';
 import { Category } from '../../shared/ingredient/category';
 import { AdminService } from '../../shared/person/admin.service';
 import { RecipeComp } from '../../cook/recipecomp';
+import { Thecomp } from 'src/app/cook/thecomp';
 
 @Component({
   selector: 'app-recipe-add-controller',
@@ -18,7 +19,7 @@ export class RecipeAddControllerComponent implements OnInit {
   flavors: Flavor[];
   ingredients: Ingredient[];
   categories: Category[];
-  recipeComp: RecipeComp;
+  recipeComp: Thecomp;
 
   constructor(private adminService: AdminService) { }
 
@@ -26,11 +27,11 @@ export class RecipeAddControllerComponent implements OnInit {
     this.adminService.getFlavors().subscribe(
       (f) => {
         this.flavors = f;
-        if (this.recipe.recipeComps) {
-          this.recipe.recipeComps.forEach(
+        if (this.recipe.components) {
+          this.recipe.components.forEach(
             rc => {
-              if (rc.flavor) {
-                this.flavors.splice(this.flavors.indexOf(rc.flavor, 1));
+              if (rc.component.flavor) {
+                this.flavors.splice(this.flavors.indexOf(rc.component.flavor, 1));
               }
             });
         }
@@ -39,11 +40,11 @@ export class RecipeAddControllerComponent implements OnInit {
     this.adminService.getIngredients().subscribe(
       (i) => {
         this.ingredients = i;
-        if (this.recipe.recipeComps) {
-          this.recipe.recipeComps.forEach(
+        if (this.recipe.components) {
+          this.recipe.components.forEach(
             rc => {
-              if (rc.ingredient) {
-                this.ingredients.splice(this.ingredients.indexOf(rc.ingredient, 1));
+              if (rc.component.ingredient) {
+                this.ingredients.splice(this.ingredients.indexOf(rc.component.ingredient, 1));
               }
             });
         }
@@ -52,11 +53,11 @@ export class RecipeAddControllerComponent implements OnInit {
     this.adminService.getCategories().subscribe(
       (c) => {
         this.categories = c;
-        if (this.recipe.recipeComps) {
-          this.recipe.recipeComps.forEach(
+        if (this.recipe.components) {
+          this.recipe.components.forEach(
             rc => {
-              if (rc.category) {
-                this.categories.splice(this.categories.indexOf(rc.category, 1));
+              if (rc.component.category) {
+                this.categories.splice(this.categories.indexOf(rc.component.category, 1));
               }
             });
         }
@@ -66,38 +67,38 @@ export class RecipeAddControllerComponent implements OnInit {
 
   addFlavor(flavor: Flavor): void {
     console.log('Add Flavor: ' + flavor.name);
-    this.recipeComp.flavor = flavor;
-    this.recipe.recipeComps.push(this.recipeComp);
+    this.recipeComp.component.flavor = flavor;
+    this.recipe.components.push(this.recipeComp);
     this.flavors.splice(this.flavors.indexOf(flavor, 1));
   }
 
   addIngredient(ingredient: Ingredient): void {
-    this.recipeComp.ingredient = ingredient;
-    this.recipe.recipeComps.push(this.recipeComp);
+    this.recipeComp.component.ingredient = ingredient;
+    this.recipe.components.push(this.recipeComp);
     this.ingredients.splice(this.ingredients.indexOf(ingredient, 1));
   }
 
   addCategory(category: Category): void {
-    this.recipeComp.category = category;
-    this.recipe.recipeComps.push(this.recipeComp);
+    this.recipeComp.component.category = category;
+    this.recipe.components.push(this.recipeComp);
     this.categories.splice(this.categories.indexOf(category, 1));
   }
 
   removeFlavor(flavor: Flavor): void {
-    this.recipeComp.flavor = flavor;
-    this.recipe.recipeComps.splice(this.recipe.recipeComps.indexOf(this.recipeComp, 1));
+    this.recipeComp.component.flavor = flavor;
+    this.recipe.components.splice(this.recipe.components.indexOf(this.recipeComp, 1));
     this.flavors.push(flavor);
   }
 
   removeIngredient(ingredient: Ingredient): void {
-    this.recipeComp.ingredient = ingredient;
-    this.recipe.recipeComps.splice(this.recipe.recipeComps.indexOf(this.recipeComp, 1));
+    this.recipeComp.component.ingredient = ingredient;
+    this.recipe.components.splice(this.recipe.components.indexOf(this.recipeComp, 1));
     this.ingredients.push(ingredient);
   }
 
   removeCategory(category: Category): void {
-    this.recipeComp.category = category;
-    this.recipe.recipeComps.splice(this.recipe.recipeComps.indexOf(this.recipeComp, 1));
+    this.recipeComp.component.category = category;
+    this.recipe.components.splice(this.recipe.components.indexOf(this.recipeComp, 1));
     this.categories.push(category);
   }
 

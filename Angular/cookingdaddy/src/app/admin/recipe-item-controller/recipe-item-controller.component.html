@@ -15,11 +15,12 @@
         </div>
         <div class="col-sm-4">
             <h4>Components</h4>
-            <ul *ngIf="recipe.recipeComps">
-                <div *ngFor="let recipeComp of recipe.recipeComps">
-                    <li *ngIf="recipe.recipeComps.ingredient"><em>Ingredient:</em> {{recipe.recipeComps.ingredient.name}}</li>
-                    <li *ngIf="recipe.recipeComps.category"><em>Category:</em> {{recipe.recipeComps.category.name}}</li>
-                    <li *ngIf="recipe.recipeComps.flavor"><em>Flavor:</em> {{recipe.recipeComps.flavor.name}}</li>
+            <ul *ngIf="recipe.components">
+                <div *ngFor="let recipeComp of recipe.components">
+                    <li *ngIf="recipeComp.component.ingredient"><em>Ingredient:</em> {{recipeComp.component.ingredient.name}} x{{recipeComp.quantity}}</li>
+                    <li *ngIf="recipeComp.component.category"><em>Category:</em> {{recipeComp.component.category.name}} x{{recipeComp.quantity}}</li>
+                    <li *ngIf="recipeComp.component.flavor"><em>Flavor:</em> {{recipeComp.component.flavor.name}} x{{recipeComp.quantity}}</li>
+                    <li *ngIf="recipeComp.component.any"><em>Any Item</em> x{{recipeComp.quantity}}</li>
                 </div>
             </ul>
         </div>

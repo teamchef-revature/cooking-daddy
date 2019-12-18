@@ -11,6 +11,5 @@ public interface RecipeDAO {
 	public Recipe getRecipe(Integer id);
 	public Integer addRecipe(Recipe recipe);
 	public Recipe updateRecipe(Recipe recipe);
-	public Set<Component> getComponents(Recipe recipe);
 
 }
