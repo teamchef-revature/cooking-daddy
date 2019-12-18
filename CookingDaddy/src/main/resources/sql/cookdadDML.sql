@@ -58,5 +58,17 @@ insert into category (id, name, parent_id)
     values (20, 'Sugar', 7);
 insert into category (id, name, parent_id)
     values (21, 'Herb', 7);
--- insert into ingredient (id, category_id, quality_id, flavor_id
+insert into recipe (id, flavor_id, name)
+    values (1, 6, 'Baked Potato');
+insert into recipe (id, flavor_id, name)
+    values (2, 5, 'Casserole');
+insert into component (id) values (1);
+insert into component (id, category_id) values (2, 12);
+insert into component (id, category_id) values (3, 2);
+insert into recipe_component (id, recipe_id, component_id, quantity)
+    values (1, 2, 1, 2);
+insert into recipe_component (id, recipe_id, component_id, quantity)
+    values (2, 1, 2, 1);
+insert into recipe_component (id, recipe_id, component_id, quantity)
+    values (3, 2, 3, 1);
 commit;
