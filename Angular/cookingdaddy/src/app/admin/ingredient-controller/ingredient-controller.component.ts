@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient/ingredient';
 import { AdminService } from '../../shared/person/admin.service';
-import { Category } from '../../shared/ingredient/category';
-import { Flavor } from '../../shared/ingredient/flavor';
-import { Quality } from '../../shared/ingredient/quality';
 
 @Component({
   selector: 'app-ingredient-controller',

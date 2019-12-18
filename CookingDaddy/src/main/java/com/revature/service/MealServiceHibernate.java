@@ -17,6 +17,9 @@ import com.revature.data.MealDAO;
 public class MealServiceHibernate implements MealService {
 	@Autowired
 	private MealDAO mealDAO;
+	
+	@Autowired
+	private RecipeService recipeService;
 
 	@Override
 	public Set<Recipe> getRecipes() {
@@ -77,28 +80,4 @@ public class MealServiceHibernate implements MealService {
 		}
 		return cookedMeal;
 	}
-/*
-	@Override
-	public Set<Recipe> getMeals() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Recipe getMeal(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Recipe updateMeal(Recipe meal) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Integer addMeal(Recipe meal) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 }

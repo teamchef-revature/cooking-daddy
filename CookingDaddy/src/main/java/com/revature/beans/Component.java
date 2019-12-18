@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table
@@ -27,12 +28,20 @@ public class Component {
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
+	@Transient
+	private Boolean any;
 
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public Boolean isAny() {
+		return any;
+	}
+	public void isAny(Boolean isAny) {
+		this.any = isAny;
 	}
 	public Ingredient getIngredient() {
 		return ingredient;
@@ -56,6 +65,7 @@ public class Component {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((any == null) ? 0 : any.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((flavor == null) ? 0 : flavor.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -71,6 +81,11 @@ public class Component {
 		if (getClass() != obj.getClass())
 			return false;
 		Component other = (Component) obj;
+		if (any == null) {
+			if (other.any != null)
+				return false;
+		} else if (!any.equals(other.any))
+			return false;
 		if (category == null) {
 			if (other.category != null)
 				return false;
@@ -96,7 +111,7 @@ public class Component {
 	@Override
 	public String toString() {
 		return "Component [id=" + id + ", ingredient=" + ingredient + ", category=" + category + ", flavor=" + flavor
-				+ "]";
+				+ ", any=" + any + "]";
 	}
-
+	
 }

@@ -7,6 +7,7 @@ import { Flavor } from '../ingredient/flavor';
 import { Category } from '../ingredient/category';
 import { Quality } from '../ingredient/quality';
 import { Ingredient } from '../ingredient/ingredient';
+import { Recipe } from '../../cook/recipe';
 
 @Injectable({
   providedIn: 'root'
@@ -113,5 +114,30 @@ export class AdminService {
     return this.http.post(this.appUrl + '/ingredient', body, {
       headers: this.headers, withCredentials: true
     }).pipe( map( resp => resp as Ingredient ));
+  }
+
+  public getRecipes(): Observable<Recipe[]> {
+    return this.http.get(this.appUrl + '/recipe', {
+      withCredentials: true
+    }).pipe(map(resp => resp as Recipe[]));
+  }
+  public getRecipe(id: number): Observable<Recipe> {
+    const url: string = this.appUrl + '/recipe/' + id;
+    return this.http.get(url, { withCredentials: true }).pipe(
+      map(resp => resp as Recipe));
+  }
+  public updateRecipe(recipe: Recipe) {
+    const body = JSON.stringify(recipe);
+    if (recipe.id) {
+      return this.http.put(this.appUrl + '/recipe/' + recipe.id, body, {
+        headers: this.headers, withCredentials: true
+      }).pipe(map(resp => resp as Recipe));
+    }
+  }
+  public addRecipe(recipe: Recipe) {
+    const body = JSON.stringify(recipe);
+    return this.http.post(this.appUrl + '/recipe', body, {
+      headers: this.headers, withCredentials: true
+    }).pipe(map(resp => resp as Recipe));
   }
 }
