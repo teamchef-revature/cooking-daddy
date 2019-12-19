@@ -278,4 +278,21 @@ public class IngredientHibernate implements IngredientDAO{
 		}
 		return pi;		
 	}
+
+	@Override
+	public void deletePersonIngredient(PersonIngredient pi) {
+		Session s = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = s.beginTransaction();
+			s.delete(pi);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			s.close();
+		}
+	}
 }
