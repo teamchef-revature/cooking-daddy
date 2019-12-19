@@ -40,6 +40,9 @@ public class Ingredient {
 		joinColumns=@JoinColumn(name="id"),
 		inverseJoinColumns=@JoinColumn(name="ingredient_id"))
 	*/
+	public Ingredient() {
+		
+	}
 	public Integer getId() {
 		return id;
 	}
