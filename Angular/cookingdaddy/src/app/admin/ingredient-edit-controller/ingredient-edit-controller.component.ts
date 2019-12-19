@@ -5,6 +5,8 @@ import { Quality } from '../../shared/ingredient/quality';
 import { Flavor } from '../../shared/ingredient/flavor';
 import { AdminService } from '../../shared/person/admin.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Season } from 'src/app/shared/ingredient/season';
+import { SeasonService } from 'src/app/shared/ingredient/season.service';
 
 @Component({
   selector: 'app-ingredient-edit-controller',
@@ -16,9 +18,11 @@ export class IngredientEditControllerComponent implements OnInit {
   public categories: Category[];
   public qualities: Quality[];
   public flavors: Flavor[];
+  public allseasons: Season[];
 
   constructor(
     private adminService: AdminService,
+    private seasonService: SeasonService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -49,6 +53,18 @@ export class IngredientEditControllerComponent implements OnInit {
       flavors => {
         this.flavors = flavors;
       });
+    this.seasonService.getSeasons().subscribe(
+      s => {
+        this.allseasons = this.seasonService.getDSeasons(s);
+        if (this.ingredient.seasons) {
+          this.ingredient.seasons.forEach(
+            el => this.allseasons.splice(this.allseasons.indexOf(el), 1)
+          );
+        } else {
+          this.ingredient.seasons = [];
+        }
+      }
+    );
   }
 
   addCategory(category: Category): void {
@@ -67,6 +83,20 @@ export class IngredientEditControllerComponent implements OnInit {
     if (flavor.name) {
       this.ingredient.flavor = flavor;
     }
+  }
+
+  addSeason(s: Season) {
+    // @ts-ignore
+    if (s === 'nil') {
+      return;
+    }
+    this.ingredient.seasons.push(s);
+    this.allseasons.splice(this.allseasons.indexOf(s), 1);
+  }
+
+  removeSeason(s: Season) {
+    this.allseasons.push(s);
+    this.ingredient.seasons.splice(this.allseasons.indexOf(s), 1);
   }
 
   submit(): void {
