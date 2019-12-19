@@ -66,7 +66,8 @@ public class PersonHibernate implements PersonDAO {
 		Transaction tx = null;
 		try {
 			tx = s.beginTransaction();
-			s.update(p);
+			s.merge(p);
+			// s.update(p);
 			tx.commit();
 		} catch(Exception e) {
 			if(tx != null)

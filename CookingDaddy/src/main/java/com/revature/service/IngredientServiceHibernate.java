@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.revature.beans.Category;
 import com.revature.beans.Flavor;
 import com.revature.beans.Ingredient;
+import com.revature.beans.PersonIngredient;
 import com.revature.beans.Quality;
 import com.revature.data.IngredientDAO;
 
@@ -94,6 +95,16 @@ public class IngredientServiceHibernate implements IngredientService{
 	@Override
 	public Quality updateQuality(Quality quality) {
 		return idao.updateQuality(quality);
+	}
+
+	@Override
+	public PersonIngredient updatePersonIngredient(PersonIngredient ping) {
+		return idao.updatePersonIngredient(ping);
+	}
+
+	@Override
+	public void deletePersonIngredient(PersonIngredient ping) {
+		idao.deletePersonIngredient(ping);
 	}
 
 }
