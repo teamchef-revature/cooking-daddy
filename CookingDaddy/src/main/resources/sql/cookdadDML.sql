@@ -62,6 +62,8 @@ insert into recipe (id, flavor_id, name)
     values (1, 6, 'Baked Potato');
 insert into recipe (id, flavor_id, name)
     values (2, 5, 'Casserole');
+insert into recipe (id, flavor_id, name)
+    values (3, 6, 'Mush');
 insert into component (id) values (1);
 insert into component (id, category_id) values (2, 12);
 insert into component (id, category_id) values (3, 2);

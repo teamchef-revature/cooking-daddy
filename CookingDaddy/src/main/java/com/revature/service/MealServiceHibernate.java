@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Recipe;
-import com.revature.beans.Component;
+import com.revature.beans.RecipeComponent;
 import com.revature.beans.Ingredient;
 import com.revature.beans.Meal;
 import com.revature.data.MealDAO;
@@ -63,7 +63,7 @@ public class MealServiceHibernate implements MealService {
 		rec: for(Recipe r : recipes) {
 			counter = 0;
 			checkedIngredients.clear();
-			comp: for(Component c : recipeService.getComponents(r)) {
+			comp: for(RecipeComponent c : recipeService.getComponents(r)) {
 				ing: for(Ingredient i : ingredients) {
 					if (c.getIngredient() != null && c.getIngredient().equals(i)) {
 						// if the component has a specific ingredient,

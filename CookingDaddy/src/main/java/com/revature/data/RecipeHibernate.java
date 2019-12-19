@@ -1,6 +1,7 @@
 package com.revature.data;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -46,21 +47,16 @@ public class RecipeHibernate implements RecipeDAO {
 	}
 	
 	private Recipe SetIfAny(Recipe recipe) {
-		// pull the RecipeComponents from the recipe and make an adjusted set
-		Set<RecipeComponent> components = new HashSet<RecipeComponent>(recipe.getComponents());
-		Set<RecipeComponent> adjustedSet = new HashSet<RecipeComponent>();
-
-		// get each component from components
-		for (int iter = 0; iter < components.size(); iter++) {
-			RecipeComponent recipeComponent = (RecipeComponent) Array.get(components.toArray(), iter);
-			// set any to the results of checking if category, flavor, and ingredient is null
-			recipeComponent.getComponent().isAny(
-					recipeComponent.getComponent().getCategory() == null &&
-					recipeComponent.getComponent().getFlavor() == null &&
-					recipeComponent.getComponent().getIngredient() == null);
-			adjustedSet.add(recipeComponent);
+		RecipeComponent[] recipeComponent = new RecipeComponent[recipe.getComponent().size()];
+		recipeComponent = recipe.getComponent().toArray(recipeComponent);
+		
+		for (int iter = 0; iter < recipe.getComponent().size(); iter++) {
+			recipeComponent[iter].isAny(
+					recipeComponent[iter].getCategory() == null &&
+					recipeComponent[iter].getFlavor() == null &&
+					recipeComponent[iter].getIngredient() == null);
 		}
-		recipe.setComponents(adjustedSet);
+		recipe.setComponent(new HashSet<>(Arrays.asList(recipeComponent)));
 		return recipe;
 	}
 
