@@ -5,6 +5,7 @@ import java.util.Set;
 import com.revature.beans.Category;
 import com.revature.beans.Flavor;
 import com.revature.beans.Ingredient;
+import com.revature.beans.PersonIngredient;
 import com.revature.beans.Quality;
 import com.revature.beans.Season;
 
@@ -34,4 +35,7 @@ public interface IngredientService {
 	public Set<Season> getSeasons();
 	public Integer addSeason(Season season);
 	public Season updateSeason(Season season);
+
+	public PersonIngredient updatePersonIngredient(PersonIngredient ping);
+	public void deletePersonIngredient(PersonIngredient ping);
 }

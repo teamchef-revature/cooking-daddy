@@ -66,7 +66,18 @@ export class CookComponent implements OnInit {
     for (const i of this.ingredients) {
       ingToCook.push(i.ingredient);
     }
-    this.cookService.cookMeal(ingToCook);
+    let cookedMeal;
+    this.cookService.cookMeal(ingToCook, this.chosenEquipment.equipment).subscribe(
+      resp => {
+        cookedMeal = resp;
+        window.alert('You cooked ' + cookedMeal.recipe.name + '!');
+      },
+      error => {
+        cookedMeal = null;
+        window.alert('Oh no! The kitchen is on fire! Everything went wrong!');
+      }
+    );
+    console.log(cookedMeal);
     // reset form
     this.ingredients = this.personService.getPerson().ingredients;
     this.equipment = this.personService.getPerson().equipments;

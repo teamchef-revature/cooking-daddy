@@ -9,45 +9,37 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 
 @Entity
 @Table
 public class Recipe {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="spicyLiquid")
-	@SequenceGenerator(name="spicyLiquid", sequenceName="recipe_seq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="recipe")
+	@SequenceGenerator(name="recipe", sequenceName="recipe_seq")
 	private Integer id;
-	@OneToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="recipe_id", insertable=false, updatable=false)
-	private Set<RecipeComponent> components;
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="recipe_id")
+	private Set<RecipeComponent> component;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
 	private String name;
+	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public Set<RecipeComponent> getComponent() {
+		return component;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Set<RecipeComponent> getComponents() {
-		return components;
-	}
-	public void setComponents(Set<RecipeComponent> components) {
-		this.components = components;
+	public void setComponent(Set<RecipeComponent> component) {
+		this.component = component;
 	}
 	public Flavor getFlavor() {
 		return flavor;
@@ -55,11 +47,17 @@ public class Recipe {
 	public void setFlavor(Flavor flavor) {
 		this.flavor = flavor;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((components == null) ? 0 : components.hashCode());
+		result = prime * result + ((component == null) ? 0 : component.hashCode());
 		result = prime * result + ((flavor == null) ? 0 : flavor.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -74,10 +72,10 @@ public class Recipe {
 		if (getClass() != obj.getClass())
 			return false;
 		Recipe other = (Recipe) obj;
-		if (components == null) {
-			if (other.components != null)
+		if (component == null) {
+			if (other.component != null)
 				return false;
-		} else if (!components.equals(other.components))
+		} else if (!component.equals(other.component))
 			return false;
 		if (flavor == null) {
 			if (other.flavor != null)
@@ -98,6 +96,6 @@ public class Recipe {
 	}
 	@Override
 	public String toString() {
-		return "Recipe [id=" + id + ", name=" + name + ", components=" + components + ", flavor=" + flavor + "]";
+		return "Recipe [id=" + id + ", component=" + component + ", flavor=" + flavor + ", name=" + name + "]";
 	}
 }
