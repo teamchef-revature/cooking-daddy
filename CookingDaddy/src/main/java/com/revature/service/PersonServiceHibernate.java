@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.revature.beans.Person;
 import com.revature.beans.Role;
 import com.revature.data.PersonDAO;
-import com.revature.data.PersonHibernate;
 
 @Service
 public class PersonServiceHibernate implements PersonService {
