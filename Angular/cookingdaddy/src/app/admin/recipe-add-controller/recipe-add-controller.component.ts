@@ -5,7 +5,6 @@ import { Ingredient } from '../../shared/ingredient/ingredient';
 import { Category } from '../../shared/ingredient/category';
 import { AdminService } from '../../shared/person/admin.service';
 import { RecipeComp } from '../../cook/recipecomp';
-import { Thecomp } from 'src/app/cook/thecomp';
 
 @Component({
   selector: 'app-recipe-add-controller',
@@ -21,15 +20,14 @@ export class RecipeAddControllerComponent implements OnInit {
   ingredientList: Ingredient[];
   categorieList: Category[];
 
-  addedComponentList: Thecomp[];
-  addedComponent: Thecomp;
+  addedComponentList: RecipeComp[];
+  addedComponent: RecipeComp;
 
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
     this.addedComponentList = new Array();
-    this.addedComponent = new Thecomp();
-    this.addedComponent.component = new RecipeComp();
+    this.addedComponent = new RecipeComp();
 
     this.adminService.getFlavors().subscribe(
       (f) => {
@@ -37,10 +35,6 @@ export class RecipeAddControllerComponent implements OnInit {
         if (this.recipe.components) {
           this.recipe.components.forEach(
             rc => {
-              if (rc.component.flavor) {
-                this.recipeFlavorList.splice(this.recipeFlavorList.indexOf(rc.component.flavor, 1));
-                this.flavorList.splice(this.flavorList.indexOf(rc.component.flavor, 1));
-              }
             });
         }
         this.flavorList = this.abcSort(this.flavorList);
@@ -52,8 +46,8 @@ export class RecipeAddControllerComponent implements OnInit {
         if (this.recipe.components) {
           this.recipe.components.forEach(
             rc => {
-              if (rc.component.ingredient) {
-                this.ingredientList.splice(this.ingredientList.indexOf(rc.component.ingredient, 1));
+              if (rc.ingredient) {
+                this.ingredientList.splice(this.ingredientList.indexOf(rc.ingredient, 1));
               }
             });
         }
@@ -65,8 +59,8 @@ export class RecipeAddControllerComponent implements OnInit {
         if (this.recipe.components) {
           this.recipe.components.forEach(
             rc => {
-              if (rc.component.category) {
-                this.categorieList.splice(this.categorieList.indexOf(rc.component.category, 1));
+              if (rc.category) {
+                this.categorieList.splice(this.categorieList.indexOf(rc.category, 1));
               }
             });
         }
@@ -94,12 +88,11 @@ export class RecipeAddControllerComponent implements OnInit {
 
   addFlavor(flavor: Flavor): void {
     if (flavor) {
-      if(this.addedComponent.component.flavor === flavor) {
+      if(this.addedComponent.flavor === flavor) {
         this.addedComponent.quantity++;
       }
-      this.addedComponent.component.flavor = flavor;
+      this.addedComponent.flavor = flavor;
       this.recipe.components.push(this.addedComponent);
-      this.recipeComp.component.flavor = flavor;
     } else {
       flavor = new Flavor();
     }
@@ -107,7 +100,6 @@ export class RecipeAddControllerComponent implements OnInit {
 
   addIngredient(ingredient: Ingredient): void {
     if (ingredient) {
-      this.recipeComp.component.ingredient = ingredient;
     } else {
       ingredient = new Ingredient();
     }
@@ -115,7 +107,6 @@ export class RecipeAddControllerComponent implements OnInit {
 
   addCategory(category: Category): void {
     if (category) {
-      this.recipeComp.component.category = category;
     } else {
       category = new Category();
     }
@@ -123,8 +114,6 @@ export class RecipeAddControllerComponent implements OnInit {
 
   removeFlavor(flavor: Flavor): void {
     if (flavor) {
-      this.recipeComp.component.flavor = flavor;
-      this.recipe.components.splice(this.recipe.components.indexOf(this.recipeComp, 1));
       this.flavorList.push(flavor);
     } else {
       flavor = new Flavor();
@@ -133,9 +122,6 @@ export class RecipeAddControllerComponent implements OnInit {
 
   removeIngredient(ingredient: Ingredient): void {
     if (ingredient) {
-      this.recipeComp.component.ingredient = ingredient;
-      this.recipe.components.splice(this.recipe.components.indexOf(this.recipeComp, 1));
-      this.ingredients.push(ingredient);
     } else {
       ingredient = new Ingredient();
     }
@@ -143,9 +129,6 @@ export class RecipeAddControllerComponent implements OnInit {
 
   removeCategory(category: Category): void {
     if (category) {
-      this.recipeComp.component.category = category;
-      this.recipe.components.splice(this.recipe.components.indexOf(this.recipeComp, 1));
-      this.categories.push(category);
     } else {
       category = new Category();
     }

@@ -15,7 +15,6 @@ export class RecipeControllerComponent implements OnInit {
 
   ngOnInit() {
     this.recipe = new Recipe();
-    this.recipe.any = null;
     this.recipe.components = new Array();
     this.recipe.flavor = null;
     this.recipe.name = null;
