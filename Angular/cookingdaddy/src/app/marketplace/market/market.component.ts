@@ -29,5 +29,7 @@ export class MarketComponent implements OnInit {
       // tslint:disable-next-line: max-line-length
       this.randItemService.addIngToPer(this.marketService.storeBasketHolder.ingredients[i].ingredient, this.marketService.storePerson, 1, false);
     }
+    this.marketService.storeBasketHolder.ingredients = [];
+    this.marketService.basketHolder.ingredients = [];
   }
 }
