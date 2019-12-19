@@ -1,0 +1,7 @@
+<div class="container">
+    <app-recipe-item-controller *ngFor="let recipe of recipes" [recipe]="recipe"></app-recipe-item-controller>
+    <div class="row">
+        <div class="col-sm-12"><br /></div>
+    </div>
+    <app-recipe-add-controller [recipe]="recipe" (created)="submitted()"></app-recipe-add-controller>
+</div>

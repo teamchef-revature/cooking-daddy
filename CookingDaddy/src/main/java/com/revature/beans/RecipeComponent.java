@@ -12,39 +12,29 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table
-public class Component {
+@Table(name="newcomponent")
+public class RecipeComponent {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="prometheus")
-	@SequenceGenerator(name="prometheus", sequenceName="meal_seq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="recipecomponent")
+	@SequenceGenerator(name="recipecomponent", sequenceName="new_component_seq", allocationSize=1)
 	private Integer id;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="ingredient_id")
-	private Ingredient ingredient;
+	@JoinColumn(name="flavor_id")
+	private Flavor flavor;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="category_id")
 	private Category category;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="flavor_id")
-	private Flavor flavor;
-
+	@JoinColumn(name="ingredient_id")
+	private Ingredient ingredient;
+	private Boolean any;
+	private Integer quantity;
+	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	public Ingredient getIngredient() {
-		return ingredient;
-	}
-	public void setIngredient(Ingredient ingredient) {
-		this.ingredient = ingredient;
-	}
-	public Category getCategory() {
-		return category;
-	}
-	public void setCategory(Category category) {
-		this.category = category;
 	}
 	public Flavor getFlavor() {
 		return flavor;
@@ -52,14 +42,40 @@ public class Component {
 	public void setFlavor(Flavor flavor) {
 		this.flavor = flavor;
 	}
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	public Ingredient getIngredient() {
+		return ingredient;
+	}
+	public void setIngredient(Ingredient ingredient) {
+		this.ingredient = ingredient;
+	}
+	public Boolean isAny() {
+		return any;
+	}
+	public void isAny(Boolean any) {
+		this.any = any;
+	}
+	public Integer getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((any == null) ? 0 : any.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((flavor == null) ? 0 : flavor.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((ingredient == null) ? 0 : ingredient.hashCode());
+		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		return result;
 	}
 	@Override
@@ -70,7 +86,12 @@ public class Component {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Component other = (Component) obj;
+		RecipeComponent other = (RecipeComponent) obj;
+		if (any == null) {
+			if (other.any != null)
+				return false;
+		} else if (!any.equals(other.any))
+			return false;
 		if (category == null) {
 			if (other.category != null)
 				return false;
@@ -91,12 +112,16 @@ public class Component {
 				return false;
 		} else if (!ingredient.equals(other.ingredient))
 			return false;
+		if (quantity == null) {
+			if (other.quantity != null)
+				return false;
+		} else if (!quantity.equals(other.quantity))
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Component [id=" + id + ", ingredient=" + ingredient + ", category=" + category + ", flavor=" + flavor
-				+ "]";
+		return "RecipeComponent [id=" + id + ", flavor=" + flavor + ", category=" + category + ", ingredient="
+				+ ingredient + ", any=" + any + ", quantity=" + quantity + "]";
 	}
-
 }

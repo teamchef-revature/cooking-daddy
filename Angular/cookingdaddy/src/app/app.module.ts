@@ -40,6 +40,16 @@ import { IngredientAddControllerComponent } from './admin/ingredient-add-control
 import { CookbookComponent } from './cook/cookbook/cookbook/cookbook.component';
 import { StorefridgeComponent } from './marketplace/storefridge/storefridge.component';
 import { StorebasketComponent } from './marketplace/storebasket/storebasket.component';
+import { SeasonControllerComponent } from './admin/season-controller/season-controller.component';
+import { SeasonEditControllerComponent } from './admin/season-edit-controller/season-edit-controller.component';
+import { SeasonAddControllerComponent } from './admin/season-add-controller/season-add-controller.component';
+import { SeasonItemControllerComponent } from './admin/season-item-controller/season-item-controller.component';
+import { DatePipe } from '@angular/common';
+import { RecipeControllerComponent } from './admin/recipe-controller/recipe-controller.component';
+import { RecipeAddControllerComponent } from './admin/recipe-add-controller/recipe-add-controller.component';
+import { RecipeEditControllerComponent } from './admin/recipe-edit-controller/recipe-edit-controller.component';
+import { RecipeItemControllerComponent } from './admin/recipe-item-controller/recipe-item-controller.component';
+import { RecipeComponentAddedListControllerComponent } from './admin/recipe-component-added-list-controller/recipe-component-added-list-controller.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +85,16 @@ import { StorebasketComponent } from './marketplace/storebasket/storebasket.comp
     IngredientAddControllerComponent,
     CookbookComponent,
     StorefridgeComponent,
-    StorebasketComponent
+    StorebasketComponent,
+    SeasonControllerComponent,
+    SeasonEditControllerComponent,
+    SeasonAddControllerComponent,
+    SeasonItemControllerComponent,
+    RecipeControllerComponent,
+    RecipeAddControllerComponent,
+    RecipeEditControllerComponent,
+    RecipeItemControllerComponent,
+    RecipeComponentAddedListControllerComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +105,8 @@ import { StorebasketComponent } from './marketplace/storebasket/storebasket.comp
   providers: [
     UrlService,
     PersonService,
-    MarketServiceService
+    MarketServiceService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

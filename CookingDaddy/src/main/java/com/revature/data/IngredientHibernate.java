@@ -15,6 +15,7 @@ import com.revature.beans.Flavor;
 import com.revature.beans.Ingredient;
 import com.revature.beans.PersonIngredient;
 import com.revature.beans.Quality;
+import com.revature.beans.Season;
 import com.revature.utils.HibernateUtil;
 
 @Component
@@ -230,7 +231,7 @@ public class IngredientHibernate implements IngredientDAO{
 		Transaction tx = null;
 		try {
 			tx = s.beginTransaction();
-			s.saveOrUpdate(quality);
+			s.update(quality);
 			tx.commit();
 		} catch(Exception e) {
 			if(tx != null)
@@ -277,5 +278,74 @@ public class IngredientHibernate implements IngredientDAO{
 			s.close();
 		}
 		return pi;		
+	}
+
+	@Override
+	public Season getSeason(Integer id) {
+		Session session = hu.getSession();
+		Season season = session.get(Season.class, id);
+		session.close();
+		return season;
+	}
+
+	@Override
+	public Set<Season> getSeasons() {
+		Session session = hu.getSession();
+		String q = "from Season";
+		Query<Season> query = session.createQuery(q, Season.class);
+		List<Season> seasons = query.list();
+		return new HashSet<Season>(seasons);
+	}
+
+	@Override
+	public Integer addSeason(Season season) {
+		Integer response = null;
+		Session session = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			response = (Integer) session.save(season);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+		} finally {
+			session.close();
+		}
+		return response;
+	}
+
+	@Override
+	public Season updateSeason(Season season) {
+    Session s = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = s.beginTransaction();
+			s.saveOrUpdate(season);
+      tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			s.close();
+		}
+    return season;
+  }
+
+	public void deletePersonIngredient(PersonIngredient pi) {
+		Session s = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = s.beginTransaction();
+			s.delete(pi);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			s.close();
+    }
 	}
 }

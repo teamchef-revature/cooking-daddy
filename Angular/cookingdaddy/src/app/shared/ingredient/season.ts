@@ -1,5 +1,5 @@
 export class Season {
-    id: string;
+    id: number;
     name: string;
     timeStart: number;
     timeEnd: number;

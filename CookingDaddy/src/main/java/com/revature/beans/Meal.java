@@ -36,6 +36,15 @@ public class Meal {
 	private Set<Ingredient> ingredients;
 	@Column
 	private Integer inventory;
+	@Column(name="person_id")
+	private Integer personId;
+	
+	public Integer getPersonId() {
+		return personId;
+	}
+	public void setPersonId(Integer personId) {
+		this.personId = personId;
+	}
 	public Integer getId() {
 		return id;
 	}
