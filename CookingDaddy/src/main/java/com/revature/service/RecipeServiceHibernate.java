@@ -1,12 +1,10 @@
 package com.revature.service;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.beans.Component;
 import com.revature.beans.Recipe;
 import com.revature.beans.RecipeComponent;
 import com.revature.data.RecipeDAO;
@@ -36,13 +34,8 @@ public class RecipeServiceHibernate implements RecipeService {
 	}
 
 	@Override
-	public Set<Component> getComponents(Recipe recipe) {
-		Set<RecipeComponent> recipeComponents = recipe.getComponents();
-		Set<Component> components = new HashSet<Component>();
-		for(RecipeComponent recipeComponent : recipeComponents) {
-			components.add(recipeComponent.getComponent());
-		}
-		return components;
+	public Set<RecipeComponent> getComponents(Recipe recipe) {
+		return recipe.getComponent();
 	}
 
 }

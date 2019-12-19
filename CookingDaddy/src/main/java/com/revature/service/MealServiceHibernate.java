@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.revature.beans.Recipe;
 import com.revature.beans.RecipeComponent;
-import com.revature.beans.Component;
 import com.revature.beans.Equipment;
 import com.revature.beans.Ingredient;
 import com.revature.beans.Meal;
@@ -80,10 +79,10 @@ public class MealServiceHibernate implements MealService {
 		
 		Set<Recipe> recipes = this.getRecipes();
 		rec: for(Recipe r : recipes) {
-			List<Component> sortedComponents = sortComponents(r.getComponents());
+			List<RecipeComponent> sortedComponents = sortComponents(r.getComponent());
 			System.out.println("Sorted components for recipe " + r.getName() + ": " 
 			+ sortedComponents);
-			for(Component c : sortedComponents) {
+			for(RecipeComponent c : sortedComponents) {
 				ing: for(Ingredient i : ingredients ) {
 					// if the current component of the recipe is a specific ingredient
 					if(c.getIngredient() != null) {
@@ -235,25 +234,25 @@ public class MealServiceHibernate implements MealService {
 		return cookedMeal;
 	}
 	
-	private List<Component> sortComponents (Set<RecipeComponent> rcs) {
-		List<Component> sortedComponents = new ArrayList<Component>();
+	private List<RecipeComponent> sortComponents (Set<RecipeComponent> rcs) {
+		List<RecipeComponent> sortedComponents = new ArrayList<RecipeComponent>();
 		
 		for(RecipeComponent rc : rcs) {
 			if(sortedComponents.isEmpty()) {
-				sortedComponents.add(rc.getComponent());
+				sortedComponents.add(rc);
 			}
 			else {
 				// if the component has a specific ingredient
-				if(rc.getComponent().getIngredient() != null) {
+				if(rc.getIngredient() != null) {
 					// add that to the front of the list always
-					sortedComponents.add(0, rc.getComponent());
+					sortedComponents.add(0, rc);
 				} // if the component has a flavor and category
-				else if(rc.getComponent().getFlavor() != null &&
-						rc.getComponent().getCategory() != null) {
+				else if(rc.getFlavor() != null &&
+						rc.getCategory() != null) {
 					// add that after ingredients
 					int index = 0;
 					int startLength = sortedComponents.size();
-					sortcomp: for(Component sc : sortedComponents) {
+					sortcomp: for(RecipeComponent sc : sortedComponents) {
 						// if the current sorted component has an ingredient
 						if (sc.getIngredient() != null) {
 							// we move to the next index
@@ -261,7 +260,7 @@ public class MealServiceHibernate implements MealService {
 						} // if the current sc does not have an ingredient
 						else {
 							// we insert it at the current index and break
-							sortedComponents.add(index, rc.getComponent());
+							sortedComponents.add(index, rc);
 							break sortcomp;
 						}
 					}
@@ -271,15 +270,15 @@ public class MealServiceHibernate implements MealService {
 					// sorted components are still the same size, we did
 					// not add it yet, so we now do
 					if (sortedComponents.size() == startLength) {
-						sortedComponents.add(rc.getComponent());
+						sortedComponents.add(rc);
 					}
 				} // if it has only a flavor or only a category
-				else if(rc.getComponent().getFlavor() != null || 
-						rc.getComponent().getCategory() != null){
+				else if(rc.getFlavor() != null || 
+						rc.getCategory() != null){
 					// add that after flavor + category
 					int index = 0;
 					int startLength = sortedComponents.size();
-					sortcomp: for(Component sc : sortedComponents) {
+					sortcomp: for(RecipeComponent sc : sortedComponents) {
 						// if the current sorted component has ingredient OR 
 						// has both flavor + category
 						if (sc.getIngredient() != null ||
@@ -289,19 +288,19 @@ public class MealServiceHibernate implements MealService {
 						} // if the current sc does not have one of the above
 						else {
 							// we insert it at the current index and break
-							sortedComponents.add(index, rc.getComponent());
+							sortedComponents.add(index, rc);
 							break sortcomp;
 						}
 					}
 					// if we didn't add anything yet, we have to add
 					// our new component still
 					if (sortedComponents.size() == startLength) {
-						sortedComponents.add(rc.getComponent());
+						sortedComponents.add(rc);
 					}
 				} // if the component is any
 				else {
 					// literally just add to the end
-					sortedComponents.add(rc.getComponent());
+					sortedComponents.add(rc);
 				}
 			}
 		}

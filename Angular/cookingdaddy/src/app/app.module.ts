@@ -42,6 +42,7 @@ import { RecipeControllerComponent } from './admin/recipe-controller/recipe-cont
 import { RecipeAddControllerComponent } from './admin/recipe-add-controller/recipe-add-controller.component';
 import { RecipeEditControllerComponent } from './admin/recipe-edit-controller/recipe-edit-controller.component';
 import { RecipeItemControllerComponent } from './admin/recipe-item-controller/recipe-item-controller.component';
+import { RecipeComponentAddedListControllerComponent } from './admin/recipe-component-added-list-controller/recipe-component-added-list-controller.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { RecipeItemControllerComponent } from './admin/recipe-item-controller/re
     RecipeControllerComponent,
     RecipeAddControllerComponent,
     RecipeEditControllerComponent,
-    RecipeItemControllerComponent
+    RecipeItemControllerComponent,
+    RecipeComponentAddedListControllerComponent
   ],
   imports: [
     BrowserModule,
