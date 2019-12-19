@@ -50,4 +50,7 @@ export class BasketComponent implements OnInit {
       this.choice = (this.choice === 1) ? 2 : 1;
     }, 100);
   }
+  submit() {
+// implement submit to add a post to the database
+}
 }
