@@ -20,8 +20,6 @@ import com.revature.beans.Quality;
 import com.revature.data.MealDAO;
 import com.revature.data.QualityDAO;
 
-import javassist.bytecode.Descriptor.Iterator;
-
 @Service
 public class MealServiceHibernate implements MealService {
 	@Autowired

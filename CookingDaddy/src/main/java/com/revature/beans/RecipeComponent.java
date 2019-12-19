@@ -10,9 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name="newcomponent")
+@Table(name="new_component")
 public class RecipeComponent {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="recipecomponent")
@@ -27,8 +28,9 @@ public class RecipeComponent {
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="ingredient_id")
 	private Ingredient ingredient;
-	private Boolean any;
 	private Integer quantity;
+	@Transient
+	private Boolean any;
 	
 	public Integer getId() {
 		return id;

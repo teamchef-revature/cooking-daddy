@@ -98,4 +98,5 @@ public class Recipe {
 	public String toString() {
 		return "Recipe [id=" + id + ", component=" + component + ", flavor=" + flavor + ", name=" + name + "]";
 	}
+	
 }

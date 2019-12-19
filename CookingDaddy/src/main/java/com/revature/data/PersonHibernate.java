@@ -14,7 +14,7 @@ import com.revature.utils.HibernateUtil;
 @Component
 public class PersonHibernate implements PersonDAO {
 	@Autowired
-	private HibernateUtil hu = new HibernateUtil();
+	private HibernateUtil hu;
 	
 	@Override
 	public Integer addPerson(Person p) {
