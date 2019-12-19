@@ -38,6 +38,11 @@ import { QualityEditControllerComponent } from './admin/quality-edit-controller/
 import { IngredientEditControllerComponent } from './admin/ingredient-edit-controller/ingredient-edit-controller.component';
 import { IngredientAddControllerComponent } from './admin/ingredient-add-controller/ingredient-add-controller.component';
 import { CookbookComponent } from './cook/cookbook/cookbook/cookbook.component';
+import { SeasonControllerComponent } from './admin/season-controller/season-controller.component';
+import { SeasonEditControllerComponent } from './admin/season-edit-controller/season-edit-controller.component';
+import { SeasonAddControllerComponent } from './admin/season-add-controller/season-add-controller.component';
+import { SeasonItemControllerComponent } from './admin/season-item-controller/season-item-controller.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -71,7 +76,11 @@ import { CookbookComponent } from './cook/cookbook/cookbook/cookbook.component';
     QualityEditControllerComponent,
     IngredientEditControllerComponent,
     IngredientAddControllerComponent,
-    CookbookComponent
+    CookbookComponent,
+    SeasonControllerComponent,
+    SeasonEditControllerComponent,
+    SeasonAddControllerComponent,
+    SeasonItemControllerComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +91,8 @@ import { CookbookComponent } from './cook/cookbook/cookbook/cookbook.component';
   providers: [
     UrlService,
     PersonService,
-    MarketServiceService
+    MarketServiceService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

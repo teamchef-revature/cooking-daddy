@@ -341,6 +341,7 @@ CREATE TABLE SEASON (
     ID NUMBER(20) PRIMARY KEY,
     NAME VARCHAR2(256) NOT NULL
 );
+alter table season add (start_time number, end_time number, recurring number);
 CREATE SEQUENCE SEASON_SEQ;
 
 /*
