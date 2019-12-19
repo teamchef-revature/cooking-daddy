@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.revature.beans.Recipe;
 import com.revature.beans.Meal;
+import com.revature.beans.Person;
 import com.revature.utils.HibernateUtil;
 
 @Component
@@ -77,6 +78,11 @@ public class MealHibernate implements MealDAO {
 			session.close();
 		}
 		return meal;
+	}
+
+	@Override
+	public Set<Meal> getMealsByPerson(Person p) {
+		return p.getMeals();
 	}
 
 	/*@Override

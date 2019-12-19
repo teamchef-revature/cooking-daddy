@@ -16,6 +16,8 @@ import { QualityEditControllerComponent } from './admin/quality-edit-controller/
 import { IngredientEditControllerComponent } from './admin/ingredient-edit-controller/ingredient-edit-controller.component';
 import { SeasonControllerComponent } from './admin/season-controller/season-controller.component';
 import { SeasonEditControllerComponent } from './admin/season-edit-controller/season-edit-controller.component';
+import { RecipeControllerComponent } from './admin/recipe-controller/recipe-controller.component';
+import { RecipeEditControllerComponent } from './admin/recipe-edit-controller/recipe-edit-controller.component';
 
 const routes: Routes = [
   {
@@ -81,6 +83,14 @@ const routes: Routes = [
   {
     path: 'admin/season/:id',
     component: SeasonEditControllerComponent
+  },
+  {
+    path: 'admin/recipe',
+    component: RecipeControllerComponent
+  },
+  {
+    path: 'admin/recipe/:id',
+    component: RecipeEditControllerComponent
   }
 ];
 

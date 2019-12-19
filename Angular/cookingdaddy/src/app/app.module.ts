@@ -43,6 +43,10 @@ import { SeasonEditControllerComponent } from './admin/season-edit-controller/se
 import { SeasonAddControllerComponent } from './admin/season-add-controller/season-add-controller.component';
 import { SeasonItemControllerComponent } from './admin/season-item-controller/season-item-controller.component';
 import { DatePipe } from '@angular/common';
+import { RecipeControllerComponent } from './admin/recipe-controller/recipe-controller.component';
+import { RecipeAddControllerComponent } from './admin/recipe-add-controller/recipe-add-controller.component';
+import { RecipeEditControllerComponent } from './admin/recipe-edit-controller/recipe-edit-controller.component';
+import { RecipeItemControllerComponent } from './admin/recipe-item-controller/recipe-item-controller.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +84,11 @@ import { DatePipe } from '@angular/common';
     SeasonControllerComponent,
     SeasonEditControllerComponent,
     SeasonAddControllerComponent,
-    SeasonItemControllerComponent
+    SeasonItemControllerComponent,
+    RecipeControllerComponent,
+    RecipeAddControllerComponent,
+    RecipeEditControllerComponent,
+    RecipeItemControllerComponent
   ],
   imports: [
     BrowserModule,
