@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Person;
@@ -9,7 +10,8 @@ import com.revature.data.PersonHibernate;
 
 @Service
 public class PersonServiceHibernate implements PersonService {
-	private PersonDAO pdao = new PersonHibernate();
+	@Autowired
+	private PersonDAO pdao;
 	
 	@Override
 	public Integer addPerson(Person p) {

@@ -17,7 +17,6 @@
 		
 		<!--  mapping to beans -->
 		<mapping class="com.revature.beans.Category"/>
-		<mapping class="com.revature.beans.Component"/>
 		<mapping class="com.revature.beans.Equipment"/>
 		<mapping class="com.revature.beans.Flavor"/>
 		<mapping class="com.revature.beans.Ingredient"/>
