@@ -1,10 +1,9 @@
 import { Flavor } from '../shared/ingredient/flavor';
-import { Thecomp } from './thecomp';
+import { RecipeComp } from './recipecomp';
 
 export class Recipe {
     id: number;
     name: string;
-    components: Thecomp[];
+    components: RecipeComp[];
     flavor: Flavor;
-    any: boolean;
 }

@@ -23,6 +23,22 @@
     </div>
     <div class="col-sm-1"></div>
 </div>
+<div class="row" *ngIf="allseasons">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-4">
+        <label for="seasons">Seasons</label>
+        <select ngModel (ngModelChange)="addSeason($event)" name="seasons" id="SeasonChoice">
+            <option value="default" selected value="nil">Choose Seasons</option>
+            <option *ngFor="let s of allseasons" [ngValue]="s">{{s.name}}</option>
+        </select>
+    </div>
+    <div class="col-sm-7">
+        <li *ngFor="let s of ingredient.seasons">
+            {{s.name}}
+            <button type="button" (click)="removeSeason(s)">x</button>
+        </li>
+    </div>
+</div>
 <div class="row">
     <div class="col-sm-12"><br /></div>
 </div>

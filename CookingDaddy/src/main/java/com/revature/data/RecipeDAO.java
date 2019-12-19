@@ -2,7 +2,6 @@ package com.revature.data;
 
 import java.util.Set;
 
-import com.revature.beans.Component;
 import com.revature.beans.Recipe;
 
 public interface RecipeDAO {

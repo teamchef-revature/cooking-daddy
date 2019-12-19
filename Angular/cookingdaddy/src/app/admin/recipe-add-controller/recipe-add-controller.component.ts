@@ -5,7 +5,6 @@ import { Ingredient } from '../../shared/ingredient/ingredient';
 import { Category } from '../../shared/ingredient/category';
 import { AdminService } from '../../shared/person/admin.service';
 import { RecipeComp } from '../../cook/recipecomp';
-import { Thecomp } from 'src/app/cook/thecomp';
 
 @Component({
   selector: 'app-recipe-add-controller',
@@ -16,90 +15,123 @@ export class RecipeAddControllerComponent implements OnInit {
   // tslint:disable-next-line: ban-types
   @Output() created = new EventEmitter<Boolean>();
   @Input() recipe: Recipe;
-  flavors: Flavor[];
-  ingredients: Ingredient[];
-  categories: Category[];
-  recipeComp: Thecomp;
+  recipeFlavorList: Flavor[];
+  flavorList: Flavor[];
+  ingredientList: Ingredient[];
+  categorieList: Category[];
+
+  addedComponentList: RecipeComp[];
+  addedComponent: RecipeComp;
 
   constructor(private adminService: AdminService) { }
 
   ngOnInit() {
+    this.addedComponentList = new Array();
+    this.addedComponent = new RecipeComp();
+
     this.adminService.getFlavors().subscribe(
       (f) => {
-        this.flavors = f;
+        this.flavorList = f;
         if (this.recipe.components) {
           this.recipe.components.forEach(
             rc => {
-              if (rc.component.flavor) {
-                this.flavors.splice(this.flavors.indexOf(rc.component.flavor, 1));
-              }
             });
         }
-        this.flavors.sort((f1, f2) => f1.id - f2.id);
+        this.flavorList = this.abcSort(this.flavorList);
+        this.recipeFlavorList = this.abcSort(this.recipeFlavorList);
       });
     this.adminService.getIngredients().subscribe(
       (i) => {
-        this.ingredients = i;
+        this.ingredientList = i;
         if (this.recipe.components) {
           this.recipe.components.forEach(
             rc => {
-              if (rc.component.ingredient) {
-                this.ingredients.splice(this.ingredients.indexOf(rc.component.ingredient, 1));
+              if (rc.ingredient) {
+                this.ingredientList.splice(this.ingredientList.indexOf(rc.ingredient, 1));
               }
             });
         }
-        this.ingredients.sort((i1, i2) => i1.id - i2.id);
+        this.ingredientList = this.abcSort(this.ingredientList);
       });
     this.adminService.getCategories().subscribe(
       (c) => {
-        this.categories = c;
+        this.categorieList = c;
         if (this.recipe.components) {
           this.recipe.components.forEach(
             rc => {
-              if (rc.component.category) {
-                this.categories.splice(this.categories.indexOf(rc.component.category, 1));
+              if (rc.category) {
+                this.categorieList.splice(this.categorieList.indexOf(rc.category, 1));
               }
             });
         }
-        this.categories.sort((c1, c2) => c1.id - c2.id);
+        this.categorieList = this.abcSort(this.categorieList);
       });
   }
 
+  abcSort(anything: any[]): any[] {
+    return anything.sort((a1, a2) => {
+      if (a1.name < a2.name) {
+        return -1;
+      }
+      if (a1.name > a2.name) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  addRecipeFlavor(flavor: Flavor): void {
+    if (flavor) {
+      this.recipe.flavor = flavor;
+    }
+  }
+
   addFlavor(flavor: Flavor): void {
-    console.log('Add Flavor: ' + flavor.name);
-    this.recipeComp.component.flavor = flavor;
-    this.recipe.components.push(this.recipeComp);
-    this.flavors.splice(this.flavors.indexOf(flavor, 1));
+    if (flavor) {
+      if(this.addedComponent.flavor === flavor) {
+        this.addedComponent.quantity++;
+      }
+      this.addedComponent.flavor = flavor;
+      this.recipe.components.push(this.addedComponent);
+    } else {
+      flavor = new Flavor();
+    }
   }
 
   addIngredient(ingredient: Ingredient): void {
-    this.recipeComp.component.ingredient = ingredient;
-    this.recipe.components.push(this.recipeComp);
-    this.ingredients.splice(this.ingredients.indexOf(ingredient, 1));
+    if (ingredient) {
+    } else {
+      ingredient = new Ingredient();
+    }
   }
 
   addCategory(category: Category): void {
-    this.recipeComp.component.category = category;
-    this.recipe.components.push(this.recipeComp);
-    this.categories.splice(this.categories.indexOf(category, 1));
+    if (category) {
+    } else {
+      category = new Category();
+    }
   }
 
   removeFlavor(flavor: Flavor): void {
-    this.recipeComp.component.flavor = flavor;
-    this.recipe.components.splice(this.recipe.components.indexOf(this.recipeComp, 1));
-    this.flavors.push(flavor);
+    if (flavor) {
+      this.flavorList.push(flavor);
+    } else {
+      flavor = new Flavor();
+    }
   }
 
   removeIngredient(ingredient: Ingredient): void {
-    this.recipeComp.component.ingredient = ingredient;
-    this.recipe.components.splice(this.recipe.components.indexOf(this.recipeComp, 1));
-    this.ingredients.push(ingredient);
+    if (ingredient) {
+    } else {
+      ingredient = new Ingredient();
+    }
   }
 
   removeCategory(category: Category): void {
-    this.recipeComp.component.category = category;
-    this.recipe.components.splice(this.recipe.components.indexOf(this.recipeComp, 1));
-    this.categories.push(category);
+    if (category) {
+    } else {
+      category = new Category();
+    }
   }
 
   addRecipe() {

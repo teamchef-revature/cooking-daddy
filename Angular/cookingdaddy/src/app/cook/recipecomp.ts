@@ -7,5 +7,6 @@ export class RecipeComp {
     ingredient: Ingredient;
     category: Category;
     flavor: Flavor;
+    quantity: number;
     any: boolean;
 }

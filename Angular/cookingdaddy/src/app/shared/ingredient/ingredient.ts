@@ -1,6 +1,7 @@
 import { Category } from './category';
 import { Quality } from './quality';
 import { Flavor } from './flavor';
+import { Season } from './season';
 
 export class Ingredient {
     id: number;
@@ -9,4 +10,5 @@ export class Ingredient {
     category: Category;
     quality: Quality;
     flavor: Flavor;
+    seasons: Season[];
 }
