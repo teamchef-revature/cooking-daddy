@@ -180,6 +180,7 @@ public class MealServiceHibernate implements MealService {
 						iserv.updatePersonIngredient(ping);
 					}
 					if(ping.getInventory() <= 0) {
+						// if ingredients have inventory of zero, remove from DB
 						iserv.deletePersonIngredient(ping);
 					}
 				}
