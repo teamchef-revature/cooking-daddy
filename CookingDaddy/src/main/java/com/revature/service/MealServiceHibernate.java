@@ -20,8 +20,6 @@ import com.revature.beans.Quality;
 import com.revature.data.MealDAO;
 import com.revature.data.QualityDAO;
 
-import javassist.bytecode.Descriptor.Iterator;
-
 @Service
 public class MealServiceHibernate implements MealService {
 	@Autowired
@@ -179,6 +177,7 @@ public class MealServiceHibernate implements MealService {
 						iserv.updatePersonIngredient(ping);
 					}
 					if(ping.getInventory() <= 0) {
+						// if ingredients have inventory of zero, remove from DB
 						iserv.deletePersonIngredient(ping);
 					}
 				}
