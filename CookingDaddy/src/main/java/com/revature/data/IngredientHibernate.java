@@ -317,12 +317,12 @@ public class IngredientHibernate implements IngredientDAO{
 
 	@Override
 	public Season updateSeason(Season season) {
-		Session s = hu.getSession();
+    Session s = hu.getSession();
 		Transaction tx = null;
 		try {
 			tx = s.beginTransaction();
 			s.saveOrUpdate(season);
-			tx.commit();
+      tx.commit();
 		} catch(Exception e) {
 			if(tx != null)
 				tx.rollback();
@@ -330,6 +330,22 @@ public class IngredientHibernate implements IngredientDAO{
 		} finally {
 			s.close();
 		}
-		return season;
+    return season;
+  }
+
+	public void deletePersonIngredient(PersonIngredient pi) {
+		Session s = hu.getSession();
+		Transaction tx = null;
+		try {
+			tx = s.beginTransaction();
+			s.delete(pi);
+			tx.commit();
+		} catch(Exception e) {
+			if(tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			s.close();
+    }
 	}
 }

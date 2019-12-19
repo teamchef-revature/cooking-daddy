@@ -38,4 +38,5 @@ public interface IngredientDAO {
 	
 	public Integer addPersonIngredient(PersonIngredient pi);
 	public PersonIngredient updatePersonIngredient(PersonIngredient pi);
+	public void deletePersonIngredient(PersonIngredient pi);
 }
