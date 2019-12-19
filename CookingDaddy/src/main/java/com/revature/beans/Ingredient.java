@@ -34,8 +34,8 @@ public class Ingredient {
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
 	private String name;
-	@ManyToMany(fetch=FetchType.EAGER, cascade= {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name="ingredient_season", 
+	@ManyToMany(fetch=FetchType.EAGER, cascade= CascadeType.ALL)
+	@JoinTable(name="Ingredient_Season", 
 		joinColumns=@JoinColumn(name="ingredient_id"),
 		inverseJoinColumns=@JoinColumn(name="season_id"))
 	private Set<Season> seasons;
@@ -74,6 +74,12 @@ public class Ingredient {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Set<Season> getSeasons() {
+		return seasons;
+	}
+	public void setSeasons(Set<Season> seasons) {
+		this.seasons = seasons;
 	}
 	@Override
 	public int hashCode() {

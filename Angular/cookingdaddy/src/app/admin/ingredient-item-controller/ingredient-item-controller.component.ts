@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient/ingredient';
 import { AdminService } from '../../shared/person/admin.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SeasonService } from 'src/app/shared/ingredient/season.service';
 
 @Component({
   selector: 'app-ingredient-item-controller',
@@ -12,6 +13,7 @@ export class IngredientItemControllerComponent implements OnInit {
   @Input() ingredient: Ingredient;
   constructor(
     private adminService: AdminService,
+    private seasonService: SeasonService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -24,6 +26,10 @@ export class IngredientItemControllerComponent implements OnInit {
           this.ingredient = ingredient;
         });
     }
+  }
+
+  checkAvailable(ing: Ingredient) {
+    return this.seasonService.anyInSeason(ing.seasons);
   }
 
   editIngredient() {

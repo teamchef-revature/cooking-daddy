@@ -4,7 +4,7 @@
             <button class="btn btn-caution" (click)="editIngredient()">Edit</button>
         </div>
         <div class="col-sm-3">
-            {{ingredient.name}}
+            {{ingredient.name}} <span *ngIf="checkAvailable(ingredient)" style="color:darkblue;">IN SEASON</span>
         </div>
         <div class="col-sm-3">
             {{ingredient.category.name}}
