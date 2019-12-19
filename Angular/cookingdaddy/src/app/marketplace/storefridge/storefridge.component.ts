@@ -41,7 +41,7 @@ export class StorefridgeComponent implements OnInit {
       const bping = new PersonIngredient();
       bping.ingredient = ping.ingredient;
       bping.inventory = 1;
-      this.storeBasketHolder.addItem(bping);
+      this.storeBasketHolder.addStoreItem(bping);
       this.add.emit();
     }
   }

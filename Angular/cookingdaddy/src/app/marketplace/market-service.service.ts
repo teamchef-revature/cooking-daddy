@@ -46,11 +46,21 @@ export class MarketServiceService {
       this.basketHolder.ingredients.push(pi);
     }
   }
+  addStoreItem(pi: PersonIngredient) {
+    const prev: number = this.storeBasketHolder.ingredients.findIndex(perig => perig.ingredient === pi.ingredient);
+    if (prev + 1) {
+      this.storeBasketHolder.ingredients[prev].inventory++;
+    } else {
+      this.storeBasketHolder.ingredients.push(pi);
+    }
+  }
   restoreItem(pi: PersonIngredient, activePerson: Person) {
     console.log(activePerson);
     const prev: number = activePerson.ingredients.findIndex(perig => perig.ingredient === pi.ingredient);
     activePerson.ingredients[prev].inventory++;
   }
+
+  
 
   public addPost(post: Post) {
     const body = JSON.stringify(post);
