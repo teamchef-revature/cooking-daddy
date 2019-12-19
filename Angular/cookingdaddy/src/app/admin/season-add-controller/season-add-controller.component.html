@@ -1,0 +1,25 @@
+<div *ngIf="season">
+    <div class="row">
+        <div class="col-sm-1">
+            <button class="btn btn-warning" (click)="addSeason()">Add</button>
+        </div>
+        <div class="col-sm-3">
+            <label for="season">Season</label>
+            <input type="text" name="season" [(ngModel)]="name" />
+        </div>
+        <div class="col-sm-3">
+            <label for="start">Start Time</label>
+            <input type="date" name="season" [(ngModel)]="startD" />
+        </div>
+        <div class="col-sm-3">
+            <label for="end">End Time</label>
+            <input type="date" name="season" [(ngModel)]="endD" />
+        </div>
+        <div class="col-sm-1">
+            <label for="flavor">Recurring</label>
+            <input type="checkbox" [(ngModel)]="recur" />
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div></div>
+</div>

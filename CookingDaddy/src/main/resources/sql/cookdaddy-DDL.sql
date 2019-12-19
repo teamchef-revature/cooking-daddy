@@ -347,6 +347,7 @@ CREATE TABLE SEASON (
     END_TIME NUMBER,
     RECURRING NUMBER
 );
+alter table season add (start_time number, end_time number, recurring number);
 CREATE SEQUENCE SEASON_SEQ;
 
 /*

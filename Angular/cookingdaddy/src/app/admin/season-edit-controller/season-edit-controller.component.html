@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-sm-3">
+        <label for="season">Season</label>
+        <input type="text" name="season" [(ngModel)]="season.name" />
+    </div>
+    <div class="col-sm-3">
+        <label for="start">Start Time</label>
+        <input type="date" name="start" [(ngModel)]="startD" />
+    </div>
+    <div class="col-sm-3">
+        <label for="end">End Time</label>
+        <input type="date" name="end" [(ngModel)]="endD" />
+    </div>
+    <div class="col-sm-1">
+        <label for="recur">Recurring</label>
+        <input type="checkbox" name="recur" [(ngModel)]="recur" />
+    </div>
+    <div class="col-sm-1"></div>
+</div>
+<div class="row">
+    <div class="col-sm-12"><br /></div>
+</div>
+<div class="row">
+    <div class="col-sm-2">
+        <button class="btn btn-primary" (click)="submit()">Submit</button>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-warning" (click)="cancel()">Cancel</button>
+    </div>
+    <div class="col-sm-8"></div>
+</div>

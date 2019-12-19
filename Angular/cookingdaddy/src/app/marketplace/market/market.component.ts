@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MarketComponent implements OnInit {
   public name = 'trade';
+  hack = 'none';
+
   constructor() { }
 
   ngOnInit() {
   }
-
 }

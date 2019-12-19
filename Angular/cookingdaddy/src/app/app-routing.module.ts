@@ -14,6 +14,8 @@ import { MarketComponent } from './marketplace/market/market.component';
 import { FlavorEditControllerComponent } from './admin/flavor-edit-controller/flavor-edit-controller.component';
 import { QualityEditControllerComponent } from './admin/quality-edit-controller/quality-edit-controller.component';
 import { IngredientEditControllerComponent } from './admin/ingredient-edit-controller/ingredient-edit-controller.component';
+import { SeasonControllerComponent } from './admin/season-controller/season-controller.component';
+import { SeasonEditControllerComponent } from './admin/season-edit-controller/season-edit-controller.component';
 import { RecipeControllerComponent } from './admin/recipe-controller/recipe-controller.component';
 import { RecipeEditControllerComponent } from './admin/recipe-edit-controller/recipe-edit-controller.component';
 
@@ -73,6 +75,14 @@ const routes: Routes = [
   {
     path: 'admin/ingredient/:id',
     component: IngredientEditControllerComponent
+  },
+  {
+    path: 'admin/season',
+    component: SeasonControllerComponent
+  },
+  {
+    path: 'admin/season/:id',
+    component: SeasonEditControllerComponent
   },
   {
     path: 'admin/recipe',

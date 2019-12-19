@@ -10,6 +10,7 @@ import com.revature.beans.Flavor;
 import com.revature.beans.Ingredient;
 import com.revature.beans.PersonIngredient;
 import com.revature.beans.Quality;
+import com.revature.beans.Season;
 import com.revature.data.IngredientDAO;
 
 @Service
@@ -98,6 +99,26 @@ public class IngredientServiceHibernate implements IngredientService{
 	}
 
 	@Override
+	public Season getSeason(Integer id) {
+		return idao.getSeason(id);
+	}
+
+	@Override
+	public Set<Season> getSeasons() {
+		return idao.getSeasons();
+	}
+
+	@Override
+	public Integer addSeason(Season season) {
+		return idao.addSeason(season);
+	}
+
+	@Override
+	public Season updateSeason(Season season) {
+		return idao.updateSeason(season);
+  }
+    
+  @Override
 	public PersonIngredient updatePersonIngredient(PersonIngredient ping) {
 		return idao.updatePersonIngredient(ping);
 	}
