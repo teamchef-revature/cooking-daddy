@@ -154,27 +154,6 @@ public class AdminController {
 		return ResponseEntity.ok(ingredientService.updateSeason(season));
 	}
 
-	// ** Meal **
-	@GetMapping(value = "/meal")
-	public ResponseEntity<Set<Recipe>> getMeals() {
-		return ResponseEntity.ok(mealService.getRecipes());
-	}
-
-	@GetMapping(value = "/meal/{id}")
-	public ResponseEntity<Recipe> getMeal(@PathVariable Integer id) {
-		return ResponseEntity.ok(mealService.getRecipe(id));
-	}
-
-	@PostMapping(value = "/meal")
-	public ResponseEntity<Recipe> addMeal(@RequestBody Recipe meal) {
-		mealService.addRecipe(meal);
-		return ResponseEntity.status(201).body(meal);
-	}
-
-	@PutMapping(value = "/meal/{id}")
-	public ResponseEntity<Recipe> updateMeal(@PathVariable Integer id, @RequestBody Recipe meal) {
-		if (mealService.getRecipe(id) == null)
-	
 	// ** Recipe **
 	@GetMapping(value="/recipe")
 	public ResponseEntity<Set<Recipe>> getRecipe() {
