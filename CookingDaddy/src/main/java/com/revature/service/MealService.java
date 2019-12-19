@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import com.revature.beans.Recipe;
+import com.revature.beans.Equipment;
 import com.revature.beans.Ingredient;
 import com.revature.beans.Meal;
+import com.revature.beans.Person;
 
 public interface MealService {
 	/*
@@ -21,5 +23,5 @@ public interface MealService {
 	
 	//public Integer addMeal(Meal personMeal);
 	//public Meal updateMeal(Meal personMeal);
-	public Meal cookMeal(ArrayList<Ingredient> ingredients);
+	public Meal cookMeal(ArrayList<Ingredient> ingredients, Equipment equipment, Person p);
 }
