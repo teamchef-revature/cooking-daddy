@@ -5,6 +5,7 @@ import { PersonService } from '../../shared/person/person.service';
 import { PersonEquipment } from '../../shared/equipment/person-equipment';
 import { CookService } from '../cook.service';
 import { Meal } from '../meal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cook',
@@ -17,7 +18,8 @@ export class CookComponent implements OnInit {
   private equipment: PersonEquipment[];
   private chosenEquipment: PersonEquipment;
 
-  constructor(private ingredientService: IngredientService, private personService: PersonService, private cookService: CookService) { }
+  constructor(private ingredientService: IngredientService, private personService: PersonService,
+              private cookService: CookService, private router: Router) { }
 
   ngOnInit() {
     // get the current user's ingredients and equipment to populate the dropdowns
@@ -64,7 +66,7 @@ export class CookComponent implements OnInit {
 
   cookMeal() {
     const ingToCook = new Array();
-    for (const i of this.ingredients) {
+    for (const i of this.chosenIngredients) {
       ingToCook.push(i.ingredient);
     }
     let cookedMeal;
@@ -72,6 +74,7 @@ export class CookComponent implements OnInit {
       resp => {
         cookedMeal = resp;
         window.alert('You cooked ' + cookedMeal.recipe.name + '!');
+        this.router.navigate(['/restaurant']);
       },
       error => {
         cookedMeal = null;

@@ -18,6 +18,7 @@ import { SeasonControllerComponent } from './admin/season-controller/season-cont
 import { SeasonEditControllerComponent } from './admin/season-edit-controller/season-edit-controller.component';
 import { RecipeControllerComponent } from './admin/recipe-controller/recipe-controller.component';
 import { RecipeEditControllerComponent } from './admin/recipe-edit-controller/recipe-edit-controller.component';
+import { RestaurantComponent } from './cook/restaurant/restaurant.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'cook',
     component: CookComponent
+  },
+  {
+    path: 'restaurant',
+    component: RestaurantComponent
   },
   {
     path: 'ingredients/:bob',

@@ -4,6 +4,6 @@ import { RecipeComp } from './recipecomp';
 export class Recipe {
     id: number;
     name: string;
-    components: RecipeComp[];
+    component: RecipeComp[];
     flavor: Flavor;
 }
