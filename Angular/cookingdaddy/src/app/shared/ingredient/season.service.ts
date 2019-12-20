@@ -64,11 +64,12 @@ export class SeasonService {
     if (!ss || ss.length === 0) {
       return true;
     }
-    ss.forEach(el => {
-      if (this.inSeason(el)) {
+    let i: number;
+    for (i = 0; i < ss.length; i++)  {
+      if (this.inSeason(ss[i])) {
         return true;
       }
-    });
+    }
     return false;
   }
 
