@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Person } from '../../shared/person/person';
 import { PersonService } from '../../shared/person/person.service';
 import { Router } from '@angular/router';
+import { MarketServiceService } from 'src/app/marketplace/market-service.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   public username: string;
   public password: string;
 
-  constructor(private personService: PersonService, private router: Router) { }
+  constructor(private personService: PersonService, private router: Router, private marketService: MarketServiceService) { }
 
   ngOnInit() {
     this.username = '';
