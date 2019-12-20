@@ -3,6 +3,7 @@ package com.revature.beans;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -37,7 +38,23 @@ public class Person {
 	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="person_id")
 	private Set<Meal> meals;
+	@Column(name="chef_rating")
+	private Integer chefRating;
+	@Column(name="meals_served")
+	private Integer mealsServed;
 	
+	public Integer getMealsServed() {
+		return mealsServed;
+	}
+	public void setMealsServed(Integer mealsServed) {
+		this.mealsServed = mealsServed;
+	}
+	public Integer getChefRating() {
+		return chefRating;
+	}
+	public void setChefRating(Integer chefRating) {
+		this.chefRating = chefRating;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -96,12 +113,14 @@ public class Person {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((chefRating == null) ? 0 : chefRating.hashCode());
 		result = prime * result + ((equipments == null) ? 0 : equipments.hashCode());
 		result = prime * result + ((first == null) ? 0 : first.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((ingredients == null) ? 0 : ingredients.hashCode());
 		result = prime * result + ((last == null) ? 0 : last.hashCode());
 		result = prime * result + ((meals == null) ? 0 : meals.hashCode());
+		result = prime * result + ((mealsServed == null) ? 0 : mealsServed.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -116,6 +135,11 @@ public class Person {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
+		if (chefRating == null) {
+			if (other.chefRating != null)
+				return false;
+		} else if (!chefRating.equals(other.chefRating))
+			return false;
 		if (equipments == null) {
 			if (other.equipments != null)
 				return false;
@@ -146,6 +170,11 @@ public class Person {
 				return false;
 		} else if (!meals.equals(other.meals))
 			return false;
+		if (mealsServed == null) {
+			if (other.mealsServed != null)
+				return false;
+		} else if (!mealsServed.equals(other.mealsServed))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
@@ -167,7 +196,7 @@ public class Person {
 	public String toString() {
 		return "Person [id=" + id + ", username=" + username + ", password=" + password + ", first=" + first + ", last="
 				+ last + ", role=" + role + ", ingredients=" + ingredients + ", equipments=" + equipments + ", meals="
-				+ meals + "]";
+				+ meals + ", chefRating=" + chefRating + ", mealsServed=" + mealsServed + "]";
 	}
 	
 }

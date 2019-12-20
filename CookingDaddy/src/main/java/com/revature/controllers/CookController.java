@@ -45,4 +45,13 @@ public class CookController {
 		Meal cookedMeal = mserv.cookMeal(ingsList, eqserv.getEquipment(equipID), pserv.getPersonById(personID));
 		return ResponseEntity.ok(cookedMeal);
 	}
+	
+	@PutMapping(value="/serve/{personID}")
+	public ResponseEntity<Integer> serveMeal(@RequestBody Meal meal, @PathVariable("personID") Integer personID) {
+		Integer score = 0;
+		
+		score = mserv.serveMeal(meal, pserv.getPersonById(personID));
+		
+		return ResponseEntity.ok(score);
+	}
 }
