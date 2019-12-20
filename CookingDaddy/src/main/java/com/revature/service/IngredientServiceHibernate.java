@@ -1,5 +1,7 @@
 package com.revature.service;
 
+import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,6 +128,51 @@ public class IngredientServiceHibernate implements IngredientService{
 	@Override
 	public void deletePersonIngredient(PersonIngredient ping) {
 		idao.deletePersonIngredient(ping);
+	}
+
+	@Override
+	public Set<PersonIngredient> getStarterIngredients(Integer personID) {
+		Set<PersonIngredient> starts = new HashSet<PersonIngredient>();
+				
+		// default 5 ingredients, 4 set and 2 random
+		PersonIngredient minRice = new PersonIngredient();
+		minRice.setIngredient(getIngredient(3));
+		minRice.setInventory(3);
+		minRice.setPerson_id(personID);
+		PersonIngredient lettuce = new PersonIngredient();
+		lettuce.setIngredient(getIngredient(7));
+		lettuce.setInventory(3);
+		lettuce.setPerson_id(personID);
+		PersonIngredient bBeans = new PersonIngredient();
+		bBeans.setIngredient(getIngredient(14));
+		bBeans.setInventory(3);
+		bBeans.setPerson_id(personID);
+		PersonIngredient potato = new PersonIngredient();
+		potato.setIngredient(getIngredient(16));
+		potato.setInventory(3);
+		potato.setPerson_id(personID);
+		PersonIngredient randomIng = new PersonIngredient();
+		Random rdm = new Random();
+		randomIng.setIngredient(getIngredient(rdm.nextInt(67)+1));
+		randomIng.setInventory(1);
+		randomIng.setPerson_id(personID);
+		
+		starts.add(minRice);
+		starts.add(lettuce);
+		starts.add(bBeans);
+		starts.add(potato);
+		starts.add(randomIng);
+		
+		for(PersonIngredient pi : starts) {
+			pi.setId(addPersonIngredient(pi));
+		}
+				
+		return starts;
+	}
+
+	@Override
+	public Integer addPersonIngredient(PersonIngredient ping) {
+		return idao.addPersonIngredient(ping);
 	}
 
 }

@@ -1,4 +1,4 @@
-<app-minifridge (add)="updateBasket()"></app-minifridge>
+<app-minifridge (add)="updateBasket()" [refresh]="refresh" [personIngredients]="pi" *ngIf="refresh.on"></app-minifridge>
 <div class="container">
         <table>
             <tr>

@@ -3,6 +3,7 @@ import { PersonIngredient } from 'src/app/shared/personIngredient/person-ingredi
 import { MarketServiceService } from '../market-service.service';
 import { PersonService } from 'src/app/shared/person/person.service';
 import { Person } from 'src/app/shared/person/person';
+import { RandomitemService } from 'src/app/shared/randomitem.service';
 
 @Component({
   selector: 'app-storefridge',
@@ -15,15 +16,22 @@ export class StorefridgeComponent implements OnInit {
   choice: number;
   holder: Person;
 
-  constructor(private storeBasketHolder: MarketServiceService, private storePerson: MarketServiceService) {
+  // tslint:disable-next-line: max-line-length
+  constructor(private storeBasketHolder: MarketServiceService, private storePerson: MarketServiceService, private randItemService: RandomitemService) {
     // if (!this.storePerson) {
     //   this.storePerson = this.storePerson.getStorePerson();
-      this.choice = 1;
+    // randItemService.getRandIng();
+    this.choice = 1;
   }
 
   ngOnInit() {
+    
+    this.storePerson.setNpcIngredients();
+
     this.holder = this.storePerson.getStorePerson();
+
     this.personIngredients = this.holder.ingredients.filter(el => el.inventory > 0);
+
 
   }
 
@@ -45,5 +53,6 @@ export class StorefridgeComponent implements OnInit {
       this.add.emit();
     }
   }
+
 
 }

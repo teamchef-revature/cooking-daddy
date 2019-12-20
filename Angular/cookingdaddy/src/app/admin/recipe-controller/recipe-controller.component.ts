@@ -17,7 +17,11 @@ export class RecipeControllerComponent implements OnInit {
   ngOnInit() {
     this.recipe = new Recipe();
     this.recipe.component = new Array();
+<<<<<<< HEAD
     this.recipe.flavor = new Flavor();
+=======
+    this.recipe.flavor = null;
+>>>>>>> c99a001048a25c76ff525de8e80c912954382cec
     this.recipe.name = null;
     this.recipe.id = null;
 

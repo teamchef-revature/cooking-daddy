@@ -21,7 +21,6 @@ import com.revature.beans.Recipe;
 import com.revature.beans.Season;
 import com.revature.beans.Quality;
 import com.revature.service.IngredientService;
-import com.revature.service.MealService;
 import com.revature.service.RecipeService;
 
 @RestController

@@ -94,11 +94,21 @@ public class MealServiceHibernate implements MealService {
 						}
 					} // if the current component has flavor + category
 					else if (c.getFlavor() != null && c.getCategory() != null) {
+						// if exact category match
 						if(c.getFlavor().equals(i.getFlavor()) && 
 								c.getCategory().equals(i.getCategory()) ) { 
 							ingredientBowl.add(i);
 							ingredients.remove(i);
 							break ing;
+						} // if the ingredient has a parent category
+						else if(i.getCategory().getParent() != null) {
+							// if parent category match
+							if(c.getCategory().equals(i.getCategory().getParent()) &&
+									c.getFlavor().equals(i.getFlavor())) {
+								ingredientBowl.add(i);
+								ingredients.remove(i);
+								break ing;
+							}
 						}
 					} // if the current component just has flavor
 					else if (c.getFlavor() != null) {
@@ -109,10 +119,19 @@ public class MealServiceHibernate implements MealService {
 						}
 					} // if the current component just has category
 					else if (c.getCategory() != null) {
+						// if exact category match
 						if(c.getCategory().equals(i.getCategory())) {
 							ingredientBowl.add(i);
 							ingredients.remove(i);
 							break ing;
+						} // if the ingredient has a parent category
+						else if(i.getCategory().getParent() != null) {
+							// if parent category match
+							if(c.getCategory().equals(i.getCategory().getParent())) {
+								ingredientBowl.add(i);
+								ingredients.remove(i);
+								break ing;
+							}
 						}
 					} // if the current component is ANY
 					else {
@@ -322,5 +341,71 @@ public class MealServiceHibernate implements MealService {
 			qualityId = 4;
 		}
 		return qd.getQualityById(qualityId);
+	}
+
+	@Override
+	public Integer serveMeal(Meal m, Person p) {
+		Integer score = 0;
+		
+		Integer mealQuality = m.getQuality().getId();
+		
+		Random rand = new Random();
+		int npc = rand.nextInt(5);
+		switch(npc) {
+		case 0: // "DOG"
+			score = mealQuality + rand.nextInt(5);
+			break;
+		case 1: // "GRANDMA"
+			if(rand.nextInt(2) == 0)
+				score = mealQuality + rand.nextInt(4);
+			else
+				score = mealQuality - rand.nextInt(2);
+			break;
+		case 2: // "ADULT"
+			if(rand.nextInt(2) == 0)
+				score = mealQuality + rand.nextInt(3);
+			else
+				score = mealQuality - rand.nextInt(3);
+			break;
+		case 3: // "CHILD"
+			if(rand.nextInt(2) == 0)
+				score = mealQuality + rand.nextInt(2);
+			else
+				score = mealQuality - rand.nextInt(4);
+			break;
+		case 4: // "GORDON RAMSAY"
+			score = mealQuality - rand.nextInt(5);
+			break;
+		}
+		
+		p = pserv.getPersonById(p.getId());
+		// increment meals served
+		if(p.getMealsServed() != null) {
+			p.setMealsServed(p.getMealsServed() + 1);
+		}
+		else {
+			p.setMealsServed(1);
+		}
+					
+		// if they haven't gotten a chef rating yet
+		if(p.getChefRating() == null || p.getChefRating() == 0) {
+			// they just get a score based on current meal
+			p.setChefRating(score);
+		} // if they already have a score
+		else {
+			// their score is averaged with their current rating
+			p.setChefRating((score + p.getChefRating()) / 2);
+		}
+		
+		// decrement meal inventory
+		m.setInventory(m.getInventory() - 1);
+		
+		m.setRecipe(mealDAO.getRecipe(m.getRecipe().getId()));
+		
+		mealDAO.updateMeal(m);
+		
+		pserv.updatePerson(p);
+		
+		return score;
 	}
 }

@@ -13,9 +13,10 @@ import { PersonService } from 'src/app/shared/person/person.service';
 export class MinifridgeComponent implements OnInit {
   @Input() holder: Person;
   choice: number;
-  personIngredients: PersonIngredient[];
+  @Input() personIngredients: PersonIngredient[];
   personEquipments: PersonEquipment[];
   @Output() add = new EventEmitter();
+  @Input() refresh: {on: number};
   constructor(private basketHolder: MarketServiceService, private  active: PersonService) {
     if (!this.holder) {
       this.holder = active.getPerson();
@@ -23,9 +24,7 @@ export class MinifridgeComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.personIngredients = this.holder.ingredients.filter(el => el.inventory > 0);
     this.personEquipments = this.holder.equipments.filter(el => el.inventory > 0);
-
   }
   chooseIng() {
     this.choice = 1;
