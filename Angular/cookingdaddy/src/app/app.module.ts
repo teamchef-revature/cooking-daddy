@@ -52,6 +52,8 @@ import { RecipeItemControllerComponent } from './admin/recipe-item-controller/re
 import { RecipeComponentAddedListControllerComponent } from './admin/recipe-component-added-list-controller/recipe-component-added-list-controller.component';
 import { ShowcaseComponent } from './marketplace/showcase/showcase/showcase.component';
 import { ClassifiedsComponent } from './marketplace/showcase/classifieds/classifieds.component';
+import { RestaurantComponent } from './cook/restaurant/restaurant.component';
+import { MealComponent } from './fridge/meal/meal.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +100,9 @@ import { ClassifiedsComponent } from './marketplace/showcase/classifieds/classif
     RecipeItemControllerComponent,
     RecipeComponentAddedListControllerComponent,
     ShowcaseComponent,
-    ClassifiedsComponent
+    ClassifiedsComponent,
+    RestaurantComponent,
+    MealComponent
   ],
   imports: [
     BrowserModule,

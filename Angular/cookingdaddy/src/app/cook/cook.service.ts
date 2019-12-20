@@ -25,4 +25,13 @@ export class CookService {
       map( resp => resp as Meal )
     );
   }
+
+  public serveMeal(meal: Meal) {
+    const person = this.personService.getPerson();
+    const body = JSON.stringify(meal);
+    const myUrl = this.cookURL + '/' + person.id;
+    return this.http.put(myUrl, body, { headers: this.headers, withCredentials: true }).pipe(
+      map( resp => resp as number )
+    );
+  }
 }

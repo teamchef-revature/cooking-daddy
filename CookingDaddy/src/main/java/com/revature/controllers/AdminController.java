@@ -20,7 +20,6 @@ import com.revature.beans.Recipe;
 import com.revature.beans.Season;
 import com.revature.beans.Quality;
 import com.revature.service.IngredientService;
-import com.revature.service.MealService;
 import com.revature.service.RecipeService;
 
 @RestController
@@ -29,8 +28,6 @@ import com.revature.service.RecipeService;
 public class AdminController {
 	@Autowired
 	private IngredientService ingredientService;
-	@Autowired
-	private MealService mealService;
 	@Autowired
 	private RecipeService recipeService;
 	
