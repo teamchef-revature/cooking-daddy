@@ -323,4 +323,63 @@ public class MealServiceHibernate implements MealService {
 		}
 		return qd.getQualityById(qualityId);
 	}
+
+	@Override
+	public Integer serveMeal(Meal m, Person p) {
+		Integer score = 0;
+		
+		Integer mealQuality = m.getQuality().getId();
+		
+		Random rand = new Random();
+		int npc = rand.nextInt(5);
+		switch(npc) {
+		case 0: // "DOG"
+			score = mealQuality + rand.nextInt(5);
+			break;
+		case 1: // "GRANDMA"
+			if(rand.nextInt(2) == 0)
+				score = mealQuality + rand.nextInt(4);
+			else
+				score = mealQuality - rand.nextInt(2);
+			break;
+		case 2: // "ADULT"
+			if(rand.nextInt(2) == 0)
+				score = mealQuality + rand.nextInt(3);
+			else
+				score = mealQuality - rand.nextInt(3);
+			break;
+		case 3: // "CHILD"
+			if(rand.nextInt(2) == 0)
+				score = mealQuality + rand.nextInt(2);
+			else
+				score = mealQuality - rand.nextInt(4);
+			break;
+		case 4: // "GORDON RAMSAY"
+			score = mealQuality - rand.nextInt(5);
+			break;
+		}
+		
+		p = pserv.getPersonById(p.getId());
+		// increment meals served
+		p.setMealsServed(p.getMealsServed() + 1);
+					
+		// if they haven't gotten a chef rating yet
+		if(p.getChefRating() == null || p.getChefRating() == 0) {
+			// they just get a score based on current meal
+			p.setChefRating(score);
+		} // if they already have a score
+		else {
+			// their score is averaged with their current rating
+			p.setChefRating((score + p.getChefRating()) / p.getMealsServed());
+		}
+		
+		// decrement meal inventory
+		m.setInventory(m.getInventory() - 1);
+		
+		mealDAO.updateMeal(m);
+		
+		pserv.updatePerson(p);
+		
+		return score;
+	}
 }

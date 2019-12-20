@@ -4,6 +4,7 @@ import { IngredientService } from '../../shared/ingredient/ingredient.service';
 import { PersonService } from '../../shared/person/person.service';
 import { PersonEquipment } from '../../shared/equipment/person-equipment';
 import { CookService } from '../cook.service';
+import { Meal } from '../meal';
 
 @Component({
   selector: 'app-cook',
@@ -77,7 +78,6 @@ export class CookComponent implements OnInit {
         window.alert('Oh no! The kitchen is on fire! Everything went wrong!');
       }
     );
-    console.log(cookedMeal);
     // reset form
     this.ingredients = this.personService.getPerson().ingredients;
     this.equipment = this.personService.getPerson().equipments;
