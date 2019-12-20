@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './core/register/register.component';
 import { UrlService } from './shared/url.service';
 import { PersonService } from './shared/person/person.service';
+import { AdminService } from './shared/person/admin.service';
 import { IngredientControllerComponent } from './admin/ingredient-controller/ingredient-controller.component';
 import { CategoryControllerComponent } from './admin/category-controller/category-controller.component';
 import { FlavorControllerComponent } from './admin/flavor-controller/flavor-controller.component';
@@ -103,6 +104,7 @@ import { RecipeItemControllerComponent } from './admin/recipe-item-controller/re
   providers: [
     UrlService,
     PersonService,
+    AdminService,
     MarketServiceService,
     DatePipe
   ],

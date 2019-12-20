@@ -22,6 +22,7 @@ export class RecipeItemControllerComponent implements OnInit {
       this.adminService.getRecipe(id).subscribe(
         recipe => {
           this.recipe = recipe;
+          console.log(recipe);
         });
     }
   }
