@@ -62,7 +62,6 @@ export class RecipeAddControllerComponent implements OnInit {
   }
 
   addCategory(category: Category) {
-    console.log(category.name);
     this.category = category;
     this.flavor = null;
     this.ingredient = null;
@@ -79,10 +78,13 @@ export class RecipeAddControllerComponent implements OnInit {
   }
 
   addRecipe() {
-    this.adminService.addRecipe(this.recipe);
-    this.created.emit(true);
+    this.adminService.addRecipe(this.recipe).subscribe(
+      recipe => {
+        this.recipe = recipe;
+        this.created.emit(true);
+      });
     this.recipe = new Recipe();
-    this.recipe.components = new Array();
+    this.recipe.component = new Array();
     this.recipe.flavor = new Flavor();
     this.addedComponentList = new Array();
   }
@@ -94,22 +96,16 @@ export class RecipeAddControllerComponent implements OnInit {
   addComponent() {
     if (this.category) {
       this.addedComponent.category = this.category;
-      this.category = null;
-      this.ingredient = null;
-      this.flavor = null;
     }
     if (this.ingredient) {
       this.addedComponent.ingredient = this.ingredient;
-      this.category = null;
-      this.ingredient = null;
-      this.flavor = null;
     }
     if (this.flavor) {
       this.addedComponent.flavor = this.flavor;
-      this.category = null;
-      this.ingredient = null;
-      this.flavor = null;
     }
+    this.category = null;
+    this.ingredient = null;
+    this.flavor = null;
     if (!this.addedComponent.quantity) {
       this.addedComponent.quantity = 1;
     }

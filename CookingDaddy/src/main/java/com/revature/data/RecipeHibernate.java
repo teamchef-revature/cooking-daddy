@@ -82,10 +82,14 @@ public class RecipeHibernate implements RecipeDAO {
 
 	@Override
 	public Recipe updateRecipe(Recipe recipe) {
+		System.out.println("updateRecipe: " + recipe);
 		Session session = hu.getSession();
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
+			recipe.getComponent().forEach((comp)->{
+				comp.setRecipe(recipe);
+			});
 			session.update(recipe);
 			transaction.commit();
 		} catch (HibernateException he) {

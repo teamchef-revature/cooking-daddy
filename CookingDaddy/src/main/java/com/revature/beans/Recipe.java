@@ -19,10 +19,9 @@ import javax.persistence.Table;
 public class Recipe {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="recipe")
-	@SequenceGenerator(name="recipe", sequenceName="recipe_seq")
+	@SequenceGenerator(name="recipe", sequenceName="recipe_seq", allocationSize=1)
 	private Integer id;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="recipe_id")
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="recipe", cascade=CascadeType.ALL)
 	private Set<RecipeComponent> component;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="flavor_id")

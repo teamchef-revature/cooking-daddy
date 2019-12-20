@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Category;
@@ -155,15 +156,17 @@ public class AdminController {
 	// ** Recipe **
 	@GetMapping(value="/recipe")
 	public ResponseEntity<Set<Recipe>> getRecipe() {
+		for(Recipe recipe : recipeService.getRecipes()) {
+			System.out.println(recipe);
+		}
 		return ResponseEntity.ok(recipeService.getRecipes());
 	}
 	@GetMapping(value="/recipe/{id}")
 	public ResponseEntity<Recipe> getRecipe(@PathVariable Integer id) {
 		return ResponseEntity.ok(recipeService.getRecipe(id));
 	}
-	@PostMapping(value="/recipe")
+	@RequestMapping(value="/recipe", method = RequestMethod.POST)
 	public ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
-		System.out.println("------>Add Recipe<-------------------------------------------------");
 		recipeService.addRecipe(recipe);
 		return ResponseEntity.status(201).body(recipe);
 	}
