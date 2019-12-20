@@ -15,6 +15,7 @@ export class BasketComponent implements OnInit {
   choice: number;
   clicked: number;
   activePerson: Person;
+  @Input() pi: PersonIngredient[];
   constructor(private basketHolder: MarketServiceService, private active: PersonService) {
     if (!this.holder) {
       this.choice = 1;

@@ -1,8 +1,22 @@
 <span style="text-align:center;overflow:auto" *ngIf="ingredient">
   <table class="fridge fridgetable">
     <tr class="fridge fridgerow">
-      <td colspan="3" class="fridge">
+      <td colspan="2" class="fridge">
         <h3>{{ingredient.name}}</h3>
+      </td>
+      <td class="fridge">
+        <button class="btn availinfo" (click)="toggleAvail()">?</button>
+        <span *ngIf="seasonsopen">
+          <span *ngIf="ingredient.seasons.length > 0">Available during:</span>
+          <span *ngIf="ingredient.seasons.length === 0">Always available</span>
+          <p *ngFor="let s of ingredient.seasons">
+            <span [ngSwitch]="inSOrR(s)">
+              <span *ngSwitchCase = "1" style="color: darkblue;">{{s.name}}</span>
+              <span *ngSwitchCase = "2" style="color: darkgreen;">{{s.name}}</span>
+              <span *ngSwitchCase = "3">{{s.name}}</span>
+            </span>
+          </p>
+        </span>
       </td>
     </tr>
     <tr class="fridge fridgerow">

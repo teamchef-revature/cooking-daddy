@@ -1,21 +1,22 @@
+<div>
 <div class="row">
     <div class="col-sm-3">
         <label for="ingredient">Ingredient</label>
         <input type="text" name="ingredient" [(ngModel)]="ingredient.name" />
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <label for="category">Category</label>
         <select ngModel (ngModelChange)="addCategory($event)" name="category">
             <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
         </select>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
         <label for="quality">Quality</label>
         <select ngModel (ngModelChange)="addQuality($event)" name="quality">
             <option *ngFor="let quality of qualities" [ngValue]="quality">{{quality.name}}</option>
         </select>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <label for="flavor">Flavor</label>
         <select ngModel (ngModelChange)="addFlavor($event)" name="flavor">
             <option *ngFor="let flavor of flavors" [ngValue]="flavor">{{flavor.name}}</option>
@@ -32,7 +33,7 @@
             <option *ngFor="let s of allseasons" [ngValue]="s">{{s.name}}</option>
         </select>
     </div>
-    <div class="col-sm-7">
+    <div class="col-sm-5">
         <li *ngFor="let s of ingredient.seasons">
             {{s.name}}
             <button type="button" (click)="removeSeason(s)">x</button>
@@ -40,7 +41,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-12"><br /></div>
+    <div class="col-sm-10"><br /></div>
 </div>
 <div class="row">
     <div class="col-sm-2">
@@ -49,5 +50,6 @@
     <div class="col-sm-2">
         <button class="btn btn-warning" (click)="cancel()">Cancel</button>
     </div>
-    <div class="col-sm-8"></div>
+    <div class="col-sm-6"></div>
+</div>
 </div>
