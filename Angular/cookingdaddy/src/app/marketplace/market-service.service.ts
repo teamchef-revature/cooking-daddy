@@ -26,7 +26,6 @@ export class MarketServiceService {
     this.storeBasketHolder.ingredients = [];
     this.storePerson = new Person();
     this.storePerson.ingredients = [];
-    this.setNpcIngredients();
   }
   getBasket(): Person {
     return this.basketHolder;

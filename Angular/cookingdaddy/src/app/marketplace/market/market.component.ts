@@ -13,11 +13,13 @@ export class MarketComponent implements OnInit {
   public name = 'trade';
   hack = 'none';
   ketchup: PersonIngredient[];
+  refresh: {on: number};
 
   constructor(private marketService: MarketServiceService, private active: PersonService, private randItemService: RandomitemService) { }
 
   ngOnInit() {
     this.ketchup = this.active.getPerson().ingredients.filter(el => el.inventory > 0);
+    this.refresh = {on: 1};
   }
 
   trade() {
@@ -39,5 +41,9 @@ export class MarketComponent implements OnInit {
     }
     this.marketService.storeBasketHolder.ingredients = [];
     this.marketService.basketHolder.ingredients = [];
+    this.refresh.on = 0;
+    setTimeout(() => {
+      this.refresh.on = 1;
+    }, 100);
   }
 }
