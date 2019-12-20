@@ -12,4 +12,5 @@ public interface EquipmentService {
 	public Equipment updateEquipment(Equipment e);
 	public Integer addPersonEquipment(PersonEquipment pe);
 	public PersonEquipment updatePersonEquipment(PersonEquipment pe);
+	public Set<PersonEquipment> getStarterEquipment(Integer personID);
 }

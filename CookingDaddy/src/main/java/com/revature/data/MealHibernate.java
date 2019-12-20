@@ -54,7 +54,7 @@ public class MealHibernate implements MealDAO {
 	public Recipe getRecipe(Integer id) {
 		Recipe meal = null;
 		Session session = hibernateUtil.getSession();
-		String queryHQL = "from Recipe where recipe.id=:id";
+		String queryHQL = "from Recipe where id=:id";
 		Query<Recipe> query = session.createQuery(queryHQL, Recipe.class);
 		query.setParameter("id", id);
 		meal = query.uniqueResult();

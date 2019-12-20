@@ -94,11 +94,21 @@ public class MealServiceHibernate implements MealService {
 						}
 					} // if the current component has flavor + category
 					else if (c.getFlavor() != null && c.getCategory() != null) {
+						// if exact category match
 						if(c.getFlavor().equals(i.getFlavor()) && 
 								c.getCategory().equals(i.getCategory()) ) { 
 							ingredientBowl.add(i);
 							ingredients.remove(i);
 							break ing;
+						} // if the ingredient has a parent category
+						else if(i.getCategory().getParent() != null) {
+							// if parent category match
+							if(c.getCategory().equals(i.getCategory().getParent()) &&
+									c.getFlavor().equals(i.getFlavor())) {
+								ingredientBowl.add(i);
+								ingredients.remove(i);
+								break ing;
+							}
 						}
 					} // if the current component just has flavor
 					else if (c.getFlavor() != null) {
@@ -109,10 +119,19 @@ public class MealServiceHibernate implements MealService {
 						}
 					} // if the current component just has category
 					else if (c.getCategory() != null) {
+						// if exact category match
 						if(c.getCategory().equals(i.getCategory())) {
 							ingredientBowl.add(i);
 							ingredients.remove(i);
 							break ing;
+						} // if the ingredient has a parent category
+						else if(i.getCategory().getParent() != null) {
+							// if parent category match
+							if(c.getCategory().equals(i.getCategory().getParent())) {
+								ingredientBowl.add(i);
+								ingredients.remove(i);
+								break ing;
+							}
 						}
 					} // if the current component is ANY
 					else {
@@ -361,7 +380,12 @@ public class MealServiceHibernate implements MealService {
 		
 		p = pserv.getPersonById(p.getId());
 		// increment meals served
-		p.setMealsServed(p.getMealsServed() + 1);
+		if(p.getMealsServed() != null) {
+			p.setMealsServed(p.getMealsServed() + 1);
+		}
+		else {
+			p.setMealsServed(1);
+		}
 					
 		// if they haven't gotten a chef rating yet
 		if(p.getChefRating() == null || p.getChefRating() == 0) {
@@ -370,11 +394,13 @@ public class MealServiceHibernate implements MealService {
 		} // if they already have a score
 		else {
 			// their score is averaged with their current rating
-			p.setChefRating((score + p.getChefRating()) / p.getMealsServed());
+			p.setChefRating((score + p.getChefRating()) / 2);
 		}
 		
 		// decrement meal inventory
 		m.setInventory(m.getInventory() - 1);
+		
+		m.setRecipe(mealDAO.getRecipe(m.getRecipe().getId()));
 		
 		mealDAO.updateMeal(m);
 		

@@ -13,7 +13,9 @@ import { map } from 'rxjs/operators';
 })
 export class CookService {
   private cookURL = this.url.getUrl() + '/cook';
+  private serveURL = this.url.getUrl() + '/serve';
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  private currentMeal: Meal;
 
   constructor(private personService: PersonService, private url: UrlService, private http: HttpClient) {}
 
@@ -22,16 +24,26 @@ export class CookService {
     const body = JSON.stringify(ingredients);
     const myUrl = this.cookURL + '/' + equipment.id + '/' + person.id;
     return this.http.put(myUrl, body, { headers: this.headers, withCredentials: true }).pipe(
-      map( resp => resp as Meal )
+      map( resp => {
+        const meal: Meal = resp as Meal;
+        if (meal) {
+          this.currentMeal = meal;
+        }
+        return meal;
+      } )
     );
   }
 
   public serveMeal(meal: Meal) {
     const person = this.personService.getPerson();
     const body = JSON.stringify(meal);
-    const myUrl = this.cookURL + '/' + person.id;
+    const myUrl = this.serveURL + '/' + person.id;
     return this.http.put(myUrl, body, { headers: this.headers, withCredentials: true }).pipe(
       map( resp => resp as number )
     );
+  }
+
+  public getMeal(): Meal {
+    return this.currentMeal;
   }
 }

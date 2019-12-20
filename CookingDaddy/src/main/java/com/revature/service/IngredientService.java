@@ -36,6 +36,9 @@ public interface IngredientService {
 	public Integer addSeason(Season season);
 	public Season updateSeason(Season season);
 
+	public Integer addPersonIngredient(PersonIngredient ping);
 	public PersonIngredient updatePersonIngredient(PersonIngredient ping);
 	public void deletePersonIngredient(PersonIngredient ping);
+	
+	public Set<PersonIngredient> getStarterIngredients(Integer personID);
 }
