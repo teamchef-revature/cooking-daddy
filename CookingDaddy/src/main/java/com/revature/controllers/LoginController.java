@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import java.util.HashSet;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.beans.Person;
 import com.revature.beans.PersonEquipment;
 import com.revature.beans.PersonIngredient;
+import com.revature.service.EquipmentService;
+import com.revature.service.IngredientService;
 import com.revature.service.PersonService;
 
 @RestController
@@ -22,6 +26,12 @@ import com.revature.service.PersonService;
 public class LoginController {
 	@Autowired
 	private PersonService pserv;
+	
+	@Autowired
+	private EquipmentService eserv;
+	
+	@Autowired
+	private IngredientService iserv;
 	
 	@GetMapping(value="/login")
 	public ResponseEntity<Person> goLogin(HttpSession session) {
@@ -71,8 +81,16 @@ public class LoginController {
 	public ResponseEntity<Person> register(@RequestBody Person person) {
 		System.out.println(person);
 		person.setRole(pserv.getRoleById(1));
+		person.setMealsServed(0);
+		person.setChefRating(0);
+		Integer id = pserv.addPerson(person);
+		
+		person.setEquipments(eserv.getStarterEquipment(id));
+		
+		person.setIngredients(iserv.getStarterIngredients(id));
+		
 		System.out.println(person);
-		pserv.addPerson(person);
+		pserv.updatePerson(person);
 		return ResponseEntity.ok(person);
 	}
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Meal } from '../meal';
 import { CookService } from '../cook.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-restaurant',
@@ -10,14 +11,18 @@ import { CookService } from '../cook.service';
 export class RestaurantComponent implements OnInit {
   private currentMeal: Meal;
 
-  constructor(private cookService: CookService) { }
+  constructor(private cookService: CookService, private router: Router) { }
 
   ngOnInit() {
+    this.currentMeal = this.cookService.getMeal();
+    if (!this.currentMeal) {
+      this.router.navigate(['/cook']);
+    }
   }
 
-  serveMeal(meal: Meal) {
+  serveMeal() {
     let score;
-    this.cookService.serveMeal(meal).subscribe(
+    this.cookService.serveMeal(this.currentMeal).subscribe(
       resp => {
         score = resp;
         window.alert('The customer gave your meal a score of ' + score + '!');
