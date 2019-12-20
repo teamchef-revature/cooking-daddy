@@ -50,6 +50,8 @@ import { RecipeAddControllerComponent } from './admin/recipe-add-controller/reci
 import { RecipeEditControllerComponent } from './admin/recipe-edit-controller/recipe-edit-controller.component';
 import { RecipeItemControllerComponent } from './admin/recipe-item-controller/recipe-item-controller.component';
 import { RecipeComponentAddedListControllerComponent } from './admin/recipe-component-added-list-controller/recipe-component-added-list-controller.component';
+import { RestaurantComponent } from './cook/restaurant/restaurant.component';
+import { MealComponent } from './fridge/meal/meal.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +96,9 @@ import { RecipeComponentAddedListControllerComponent } from './admin/recipe-comp
     RecipeAddControllerComponent,
     RecipeEditControllerComponent,
     RecipeItemControllerComponent,
-    RecipeComponentAddedListControllerComponent
+    RecipeComponentAddedListControllerComponent,
+    RestaurantComponent,
+    MealComponent
   ],
   imports: [
     BrowserModule,
