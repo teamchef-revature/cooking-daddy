@@ -1,0 +1,18 @@
+<div class="container">
+    <table>
+        <tr>
+            <th>&nbsp;</th> <!-- place -->
+            <th>Username</th>
+            <th>Chef Rating</th>
+            <th>Meals Cooked</th>
+        </tr>
+        <ng-container *ngFor="let i = 1; i < 51; i++">
+            <tr>
+                <td>{{ i }}</td>
+                <td>{{ people[i].username }}</td>
+                <td>{{ people[i].chefRating }}</td>
+                <td>{{ people[i].mealsServed }}</td>
+            </tr>
+        </ng-container>
+    </table>
+</div>

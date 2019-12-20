@@ -1,5 +1,9 @@
 package com.revature.data;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -7,6 +11,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.revature.beans.Equipment;
 import com.revature.beans.Person;
 import com.revature.beans.Role;
 import com.revature.utils.HibernateUtil;
@@ -94,5 +99,15 @@ public class PersonHibernate implements PersonDAO {
 		r = q.uniqueResult();
 		s.close();
 		return r;
+	}
+
+	@Override
+	public Set<Person> getPeople() {
+		Session s = hu.getSession();
+		String query = "from Person";
+		Query<Person> q = s.createQuery(query, Person.class);
+		List<Person> people = q.list();
+		s.close();
+		return new HashSet<Person>(people);
 	}
 }
