@@ -23,7 +23,6 @@ export class RecipeControllerComponent implements OnInit {
     this.adminService.getRecipes().subscribe(
       (r) => {
         this.recipes = r;
-        console.log(this.recipes);
         this.recipes.sort((r1, r2) => r1.id - r2.id);
       });
   }

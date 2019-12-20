@@ -62,6 +62,7 @@ public class RecipeHibernate implements RecipeDAO {
 
 	@Override
 	public Integer addRecipe(Recipe recipe) {
+		System.out.println("------>Add Recipe<-------------------------------------------------");
 		Integer index = null;
 		Session session = hu.getSession();
 		Transaction transaction = null;

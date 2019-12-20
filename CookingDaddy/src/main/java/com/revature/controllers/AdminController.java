@@ -30,8 +30,6 @@ public class AdminController {
 	@Autowired
 	private IngredientService ingredientService;
 	@Autowired
-	private MealService mealService;
-	@Autowired
 	private RecipeService recipeService;
 	
 	// ** Ingredient **
@@ -164,7 +162,8 @@ public class AdminController {
 		return ResponseEntity.ok(recipeService.getRecipe(id));
 	}
 	@PostMapping(value="/recipe")
-	public ResponseEntity<Recipe> addMeal(@RequestBody Recipe recipe) {
+	public ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
+		System.out.println("------>Add Recipe<-------------------------------------------------");
 		recipeService.addRecipe(recipe);
 		return ResponseEntity.status(201).body(recipe);
 	}
