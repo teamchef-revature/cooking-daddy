@@ -25,8 +25,9 @@ export class StorefridgeComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    if (this.storePerson.getStorePerson().ingredients.length === 0) {
     this.storePerson.setNpcIngredients();
+    }
 
     this.holder = this.storePerson.getStorePerson();
 
