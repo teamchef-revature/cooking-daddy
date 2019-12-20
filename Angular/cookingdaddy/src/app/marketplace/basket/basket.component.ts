@@ -15,6 +15,7 @@ export class BasketComponent implements OnInit {
   choice: number;
   clicked: number;
   activePerson: Person;
+  @Input() refresh: {on: number};
   @Input() pi: PersonIngredient[];
   constructor(private basketHolder: MarketServiceService, private active: PersonService) {
     if (!this.holder) {
@@ -38,12 +39,15 @@ export class BasketComponent implements OnInit {
       const ingredients: PersonIngredient[] = this.holder.ingredients.filter(element => element !== ping);
       this.holder.ingredients = ingredients;
       this.basketHolder.restoreItem(ping, this.activePerson);
-
     } else {
       ping.inventory--;
       console.log(this.activePerson);
       this.basketHolder.restoreItem(ping, this.activePerson);
     }
+    this.refresh.on = 0;
+    setTimeout(() => {
+      this.refresh.on = 1;
+    }, 100);
   }
   updateBasket() {
     this.choice = (this.choice === 1) ? 2 : 1;
