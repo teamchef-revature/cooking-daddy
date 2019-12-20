@@ -7,13 +7,13 @@
             <label for="ingredient">Ingredient</label>
             <input type="text" name="ingredient" [(ngModel)]="ingredient.name" />
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <label for="category">Category</label>
             <select ngModel (ngModelChange)="addCategory($event)" name="category">
                 <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}</option>
             </select>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <label for="quality">Quality</label>
             <select ngModel (ngModelChange)="addQuality($event)" name="quality">
                 <option *ngFor="let quality of qualities" [ngValue]="quality">{{quality.name}}</option>
