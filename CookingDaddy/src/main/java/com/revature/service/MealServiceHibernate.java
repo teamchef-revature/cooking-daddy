@@ -69,7 +69,6 @@ public class MealServiceHibernate implements MealService {
 	@Override
 	public Meal cookMeal(List<Ingredient> ingredients, Equipment equipment, Person p) {
 		Meal cookedMeal = null;
-		System.out.println("cooking meal in meal service.....");
 		//keeps track of ingredients used in the meal
 		List<Ingredient> ingredientBowl = new ArrayList<>();
 		
@@ -78,8 +77,6 @@ public class MealServiceHibernate implements MealService {
 		Set<Recipe> recipes = this.getRecipes();
 		rec: for(Recipe r : recipes) {
 			List<RecipeComponent> sortedComponents = sortComponents(r.getComponent());
-			System.out.println("Sorted components for recipe " + r.getName() + ": " 
-			+ sortedComponents);
 			for(RecipeComponent c : sortedComponents) {
 				ing: for(Ingredient i : ingredients ) {
 					// if the current component of the recipe is a specific ingredient
@@ -144,7 +141,6 @@ public class MealServiceHibernate implements MealService {
 					}
 				}
 			}
-			System.out.println("Ingredients in bowl: " + ingredientBowl);
 			// did we satisfy this recipe? if we have the same amount
 			// of ingredients in the bowl as in the recipe components,
 			// we have all of the necessary ingredients to cook this meal.
@@ -248,7 +244,6 @@ public class MealServiceHibernate implements MealService {
 			pserv.updatePerson(p);
 		}
 		
-		System.out.println(cookedMeal.toString());
 		return cookedMeal;
 	}
 	

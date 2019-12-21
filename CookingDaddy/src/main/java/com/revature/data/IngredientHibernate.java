@@ -50,7 +50,6 @@ public class IngredientHibernate implements IngredientDAO{
 		try {
 			tx = s.beginTransaction();
 			r = (Integer) s.save(ingredient);
-			System.out.println(r);
 			tx.commit();
 		} catch(Exception e) {
 			if(tx != null)
@@ -95,7 +94,6 @@ public class IngredientHibernate implements IngredientDAO{
 		Query<Category> query = session.createQuery(q, Category.class);
 		List<Category> categories = query.list();
 		session.close();
-		System.out.println(categories);
 		return new HashSet<Category>(categories);
 	}
 

@@ -21,7 +21,7 @@ import com.revature.utils.HibernateUtil;
 public class RecipeHibernate implements RecipeDAO {
 	@Autowired
 	private HibernateUtil hu;
-	
+
 	@Override
 	public Set<Recipe> getRecipes() {
 		Session session = hu.getSession();
@@ -29,7 +29,7 @@ public class RecipeHibernate implements RecipeDAO {
 		Query<Recipe> query = session.createQuery(queryHQL, Recipe.class);
 		List<Recipe> recipes = query.list();
 		Set<Recipe> adjustedRecipes = new HashSet<Recipe>();
-		
+
 		for (int iter = 0; iter < recipes.size(); iter++) {
 			Recipe recipe = (Recipe) Array.get(recipes.toArray(), iter);
 			adjustedRecipes.add(SetIfAny(recipe));
@@ -45,16 +45,14 @@ public class RecipeHibernate implements RecipeDAO {
 		recipe = SetIfAny(recipe);
 		return recipe;
 	}
-	
+
 	private Recipe SetIfAny(Recipe recipe) {
 		RecipeComponent[] recipeComponent = new RecipeComponent[recipe.getComponent().size()];
 		recipeComponent = recipe.getComponent().toArray(recipeComponent);
-		
+
 		for (int iter = 0; iter < recipe.getComponent().size(); iter++) {
-			recipeComponent[iter].isAny(
-					recipeComponent[iter].getCategory() == null &&
-					recipeComponent[iter].getFlavor() == null &&
-					recipeComponent[iter].getIngredient() == null);
+			recipeComponent[iter].isAny(recipeComponent[iter].getCategory() == null
+					&& recipeComponent[iter].getFlavor() == null && recipeComponent[iter].getIngredient() == null);
 		}
 		recipe.setComponent(new HashSet<>(Arrays.asList(recipeComponent)));
 		return recipe;
@@ -62,7 +60,6 @@ public class RecipeHibernate implements RecipeDAO {
 
 	@Override
 	public Integer addRecipe(Recipe recipe) {
-		System.out.println("------>Add Recipe<-------------------------------------------------");
 		Integer index = null;
 		Session session = hu.getSession();
 		Transaction transaction = null;
@@ -71,7 +68,7 @@ public class RecipeHibernate implements RecipeDAO {
 			index = (Integer) session.save(recipe);
 			transaction.commit();
 		} catch (HibernateException he) {
-			if(transaction != null)
+			if (transaction != null)
 				transaction.rollback();
 			he.printStackTrace();
 		} finally {
@@ -82,23 +79,45 @@ public class RecipeHibernate implements RecipeDAO {
 
 	@Override
 	public Recipe updateRecipe(Recipe recipe) {
-		System.out.println("updateRecipe: " + recipe);
 		Session session = hu.getSession();
 		Transaction transaction = null;
 		try {
+			System.out.println("update session open");
 			transaction = session.beginTransaction();
-			recipe.getComponent().forEach((comp)->{
+			recipe.getComponent().forEach((comp) -> {
 				comp.setRecipe(recipe);
 			});
 			session.update(recipe);
 			transaction.commit();
 		} catch (HibernateException he) {
-			if(transaction != null)
+			if (transaction != null)
 				transaction.rollback();
 			he.printStackTrace();
 		} finally {
+			System.out.println("update sesson close");
 			session.close();
 		}
 		return recipe;
+	}
+
+	@Override
+	public void deleteRecipeComponent(Integer id) {
+		Session session = hu.getSession();
+		String querySQL = "delete from new_component where recipe_id=" + id;
+		Transaction transaction = null;
+		try {
+			System.out.println("delete session open");
+			transaction = session.beginTransaction();
+			javax.persistence.Query query = session.createSQLQuery(querySQL);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+			e.printStackTrace();
+		} finally {
+			System.out.println("delette session close");
+			session.close();
+		}
 	}
 }

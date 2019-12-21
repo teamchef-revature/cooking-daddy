@@ -34,9 +34,6 @@ public class CookController {
 	public ResponseEntity<Meal> cookMeal(@RequestBody Ingredient[] ings, 
 			@PathVariable("equipID") Integer equipID, 
 			@PathVariable("personID") Integer personID) {
-		System.out.println("cooking meal with ingredients " + ings + 
-				",\n equipment with id " + equipID + 
-				", for person with ID " + personID);
 		List<Ingredient> ingsList = new ArrayList<Ingredient>();
 		for(Ingredient i : ings)
 		{

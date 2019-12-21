@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -155,9 +156,6 @@ public class AdminController {
 	// ** Recipe **
 	@GetMapping(value="/recipe")
 	public ResponseEntity<Set<Recipe>> getRecipe() {
-		for(Recipe recipe : recipeService.getRecipes()) {
-			System.out.println(recipe);
-		}
 		return ResponseEntity.ok(recipeService.getRecipes());
 	}
 	@GetMapping(value="/recipe/{id}")
@@ -174,5 +172,17 @@ public class AdminController {
 		if(recipeService.getRecipe(id) == null)
 			return ResponseEntity.status(405).body(null);
 		return ResponseEntity.ok(recipeService.updateRecipe(recipe));
+	}
+	@DeleteMapping(value="/recipe/{id}")
+	public ResponseEntity<Void> deleteRecipeComponent(@PathVariable Integer id) {
+		if(recipeService.getRecipe(id) == null) {
+			return ResponseEntity.notFound().build();
+		}
+		try {
+			recipeService.deleteRecipeComponent(id);
+			return ResponseEntity.noContent().build();
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
+		}
 	}
 }
