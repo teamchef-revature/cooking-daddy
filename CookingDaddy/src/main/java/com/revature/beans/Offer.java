@@ -30,6 +30,8 @@ public class Offer {
 	private Integer postId;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "offerid")
 	private Set<OfferIngredient> ingredients;
+	@Column(name="offer_maker")
+	private Integer offerMakerId;
 	@Override
 	public String toString() {
 		return "Offer [id=" + id + ", status=" + status + ", description=" + description + ", postId=" + postId
