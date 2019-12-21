@@ -10,10 +10,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.beans.Ingredient;
+import com.revature.beans.Offer;
 import com.revature.beans.Post;
 import com.revature.beans.Status;
+import com.revature.service.OfferService;
 import com.revature.service.PostService;
 
 @RestController
@@ -21,6 +27,8 @@ import com.revature.service.PostService;
 public class TradingController {
 	@Autowired
 	private PostService ps;
+	@Autowired
+	private OfferService os;
 	
 	//Status
 	@GetMapping(value = "/market/status")
@@ -62,4 +70,25 @@ public class TradingController {
 			return ResponseEntity.status(405).body(null);
 		return ResponseEntity.ok(ps.updatePost(post));
 	}
+	
+	@GetMapping(value = "/market/offer")
+	public ResponseEntity<Set<Offer>> getOffers() {
+		return ResponseEntity.ok(os.getOffers());
+	}
+	@GetMapping(value = "/market/offer/{id}")
+	public ResponseEntity<Offer> getOffer(@PathVariable("id") Integer id) {
+		return ResponseEntity.ok(os.getOffer(id));
+	}
+	@PostMapping(value="/market/offer")
+	public ResponseEntity<Offer> addOffer(@RequestBody Offer fo) {
+		os.addOffer(fo);
+		return ResponseEntity.status(201).body(fo);
+	}
+	@PutMapping(value="/market/offer/{id}")
+	public ResponseEntity<Offer> updateOffer(@PathVariable Integer id, @RequestBody Offer offer) {
+		if(os.getOffer(id) == null)
+			return ResponseEntity.status(405).body(null);
+		return ResponseEntity.ok(os.updateOffer(offer));
+	}
+
 }
