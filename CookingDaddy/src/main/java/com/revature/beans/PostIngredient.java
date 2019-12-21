@@ -15,9 +15,6 @@ public class PostIngredient {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="ingredient_id", insertable=false, updatable=false)
 	private Ingredient ingredient;
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="person_id", insertable=false, updatable=false)
-	private Person person;
 	@JoinColumn(name="post_id")
 	private Integer postid;
 	private Integer quantity;
@@ -39,12 +36,6 @@ public class PostIngredient {
 	public Ingredient getIngredient() {
 		return ingredient;
 	}
-	public Person getPerson() {
-		return person;
-	}
-	public void setPerson(Person person) {
-		this.person = person;
-	}
 	public void setIngredient(Ingredient ingredient) {
 		this.ingredient = ingredient;
 	}
@@ -60,7 +51,6 @@ public class PostIngredient {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((ingredient == null) ? 0 : ingredient.hashCode());
-		result = prime * result + ((person == null) ? 0 : person.hashCode());
 		result = prime * result + ((postid == null) ? 0 : postid.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		return result;
@@ -84,11 +74,6 @@ public class PostIngredient {
 				return false;
 		} else if (!ingredient.equals(other.ingredient))
 			return false;
-		if (person == null) {
-			if (other.person != null)
-				return false;
-		} else if (!person.equals(other.person))
-			return false;
 		if (postid == null) {
 			if (other.postid != null)
 				return false;
@@ -103,7 +88,7 @@ public class PostIngredient {
 	}
 	@Override
 	public String toString() {
-		return "PostIngredient [id=" + id + ", ingredient=" + ingredient + ", person=" + person + ", postId=" + postid
+		return "PostIngredient [id=" + id + ", ingredient=" + ingredient + ", postId=" + postid
 				+ ", quantity=" + quantity + "]";
 	}
 	

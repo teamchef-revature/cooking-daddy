@@ -3,12 +3,14 @@ package com.revature.service;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.revature.beans.Post;
 import com.revature.beans.PostIngredient;
 import com.revature.beans.Status;
 import com.revature.data.PostDAO;
 
+@Service
 public class PostServiceHibernate implements PostService {
 	@Autowired
 	PostDAO pd;
