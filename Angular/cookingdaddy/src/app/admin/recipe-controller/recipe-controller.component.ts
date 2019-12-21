@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../../cook/recipe';
+import { Flavor } from '../../shared/ingredient/flavor';
 import { AdminService } from '../../shared/person/admin.service';
 
 @Component({
@@ -16,20 +17,23 @@ export class RecipeControllerComponent implements OnInit {
   ngOnInit() {
     this.recipe = new Recipe();
     this.recipe.component = new Array();
-    this.recipe.flavor = null;
+    this.recipe.flavor = new Flavor();
     this.recipe.name = null;
     this.recipe.id = null;
 
     this.adminService.getRecipes().subscribe(
       (r) => {
         this.recipes = r;
-        console.log(this.recipes);
-        this.recipes.sort((r1, r2) => r1.id - r2.id);
+        this.recipes.sort((r1, r2) => (r1.name > r2.name) ? 1 : -1);
       });
   }
 
   submitted() {
     this.recipes.push(this.recipe);
     this.recipe = new Recipe();
+    this.recipe.component = new Array();
+    this.recipe.flavor = new Flavor();
+    this.recipe.name = null;
+    this.recipe.id = null;
   }
 }

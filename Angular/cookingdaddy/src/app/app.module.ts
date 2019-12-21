@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './core/register/register.component';
 import { UrlService } from './shared/url.service';
 import { PersonService } from './shared/person/person.service';
+import { AdminService } from './shared/person/admin.service';
 import { IngredientControllerComponent } from './admin/ingredient-controller/ingredient-controller.component';
 import { CategoryControllerComponent } from './admin/category-controller/category-controller.component';
 import { FlavorControllerComponent } from './admin/flavor-controller/flavor-controller.component';
@@ -49,7 +50,6 @@ import { RecipeControllerComponent } from './admin/recipe-controller/recipe-cont
 import { RecipeAddControllerComponent } from './admin/recipe-add-controller/recipe-add-controller.component';
 import { RecipeEditControllerComponent } from './admin/recipe-edit-controller/recipe-edit-controller.component';
 import { RecipeItemControllerComponent } from './admin/recipe-item-controller/recipe-item-controller.component';
-import { RecipeComponentAddedListControllerComponent } from './admin/recipe-component-added-list-controller/recipe-component-added-list-controller.component';
 import { ShowcaseComponent } from './marketplace/showcase/showcase/showcase.component';
 import { ClassifiedsComponent } from './marketplace/showcase/classifieds/classifieds.component';
 import { RestaurantComponent } from './cook/restaurant/restaurant.component';
@@ -98,7 +98,6 @@ import { MealComponent } from './fridge/meal/meal.component';
     RecipeAddControllerComponent,
     RecipeEditControllerComponent,
     RecipeItemControllerComponent,
-    RecipeComponentAddedListControllerComponent,
     ShowcaseComponent,
     ClassifiedsComponent,
     RestaurantComponent,
@@ -113,6 +112,7 @@ import { MealComponent } from './fridge/meal/meal.component';
   providers: [
     UrlService,
     PersonService,
+    AdminService,
     MarketServiceService,
     DatePipe
   ],

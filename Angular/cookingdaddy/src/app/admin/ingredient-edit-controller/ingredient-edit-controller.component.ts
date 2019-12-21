@@ -5,8 +5,8 @@ import { Quality } from '../../shared/ingredient/quality';
 import { Flavor } from '../../shared/ingredient/flavor';
 import { AdminService } from '../../shared/person/admin.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Season } from 'src/app/shared/ingredient/season';
-import { SeasonService } from 'src/app/shared/ingredient/season.service';
+import { Season } from '../../shared/ingredient/season';
+import { SeasonService } from '../../shared/ingredient/season.service';
 
 @Component({
   selector: 'app-ingredient-edit-controller',

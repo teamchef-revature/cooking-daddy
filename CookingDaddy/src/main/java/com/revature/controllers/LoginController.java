@@ -68,21 +68,18 @@ public class LoginController {
 		if (person.getId() != id) {
 			return ResponseEntity.notFound().build();
 		}
-		System.out.println(person.toString());
 		for (PersonIngredient pi: person.getIngredients()) {
 			pi.setPerson_id(id);
 		}
 		for (PersonEquipment pe: person.getEquipments()) {
 			pe.setPersonId(id);
 		}
-		System.out.println();
 		pserv.updatePerson(person);
 		return ResponseEntity.ok(pserv.getPersonById(id));
 	}
 	
 	@PostMapping(value="/register")
 	public ResponseEntity<Person> register(@RequestBody Person person) {
-		System.out.println(person);
 		person.setRole(pserv.getRoleById(1));
 		person.setMealsServed(0);
 		person.setChefRating(0);
@@ -92,7 +89,6 @@ public class LoginController {
 		
 		person.setIngredients(iserv.getStarterIngredients(id));
 		
-		System.out.println(person);
 		pserv.updatePerson(person);
 		return ResponseEntity.ok(person);
 	}

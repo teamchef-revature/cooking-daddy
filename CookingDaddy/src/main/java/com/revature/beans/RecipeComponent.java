@@ -12,6 +12,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="new_component")
 public class RecipeComponent {
@@ -28,11 +30,13 @@ public class RecipeComponent {
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="ingredient_id")
 	private Ingredient ingredient;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="recipe_id")
+	@JsonIgnore
+	private Recipe recipe;
 	private Integer quantity;
 	@Transient
 	private Boolean any;
-	
-	
 	public Integer getId() {
 		return id;
 	}
@@ -57,17 +61,17 @@ public class RecipeComponent {
 	public void setIngredient(Ingredient ingredient) {
 		this.ingredient = ingredient;
 	}
-	public Boolean isAny() {
-		return any;
-	}
-	public void isAny(Boolean any) {
-		this.any = any;
-	}
 	public Integer getQuantity() {
 		return quantity;
 	}
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+	public Boolean isAny() {
+		return any;
+	}
+	public void isAny(Boolean any) {
+		this.any = any;
 	}
 	@Override
 	public int hashCode() {
@@ -125,6 +129,14 @@ public class RecipeComponent {
 	@Override
 	public String toString() {
 		return "RecipeComponent [id=" + id + ", flavor=" + flavor + ", category=" + category + ", ingredient="
-				+ ingredient + ", any=" + any + ", quantity=" + quantity + "]";
+				+ ingredient + ", quantity=" + quantity + ", any=" + any + "]";
 	}
+	public Recipe getRecipe() {
+		return recipe;
+	}
+	public void setRecipe(Recipe recipe) {
+		this.recipe = recipe;
+	}
+	
+
 }
