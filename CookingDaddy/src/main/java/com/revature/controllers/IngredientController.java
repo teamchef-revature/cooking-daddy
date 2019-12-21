@@ -54,7 +54,6 @@ public class IngredientController {
 	
 	@RequestMapping(value = "/personIngredient/{piid}", method = RequestMethod.PUT)
 	public ResponseEntity<PersonIngredient> updatePersonIngredient(@PathVariable("piid") Integer pid, @RequestBody PersonIngredient pi) {
-		System.out.println(pi);
 		if (pi.getId().equals(pid)) {
 			PersonIngredient update= id.updatePersonIngredient(pi);
 			return ResponseEntity.ok(update);
