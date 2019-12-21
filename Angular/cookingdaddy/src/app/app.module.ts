@@ -50,6 +50,8 @@ import { RecipeAddControllerComponent } from './admin/recipe-add-controller/reci
 import { RecipeEditControllerComponent } from './admin/recipe-edit-controller/recipe-edit-controller.component';
 import { RecipeItemControllerComponent } from './admin/recipe-item-controller/recipe-item-controller.component';
 import { RecipeComponentAddedListControllerComponent } from './admin/recipe-component-added-list-controller/recipe-component-added-list-controller.component';
+import { ShowcaseComponent } from './marketplace/showcase/showcase/showcase.component';
+import { ClassifiedsComponent } from './marketplace/showcase/classifieds/classifieds.component';
 import { RestaurantComponent } from './cook/restaurant/restaurant.component';
 import { MealComponent } from './fridge/meal/meal.component';
 
@@ -97,6 +99,8 @@ import { MealComponent } from './fridge/meal/meal.component';
     RecipeEditControllerComponent,
     RecipeItemControllerComponent,
     RecipeComponentAddedListControllerComponent,
+    ShowcaseComponent,
+    ClassifiedsComponent,
     RestaurantComponent,
     MealComponent
   ],
