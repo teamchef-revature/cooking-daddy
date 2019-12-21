@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name="post_ingredient")
 public class PostIngredient {
 	@EmbeddedId
-	private PostIngredientID id;
+	private PostIngredientId id;
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="ingredient_id", insertable=false, updatable=false)
 	private Ingredient ingredient;
@@ -27,10 +27,10 @@ public class PostIngredient {
 	public void setPostid(Integer postid) {
 		this.postid = postid;
 	}
-	public PostIngredientID getId() {
+	public PostIngredientId getId() {
 		return id;
 	}
-	public void setId(PostIngredientID id) {
+	public void setId(PostIngredientId id) {
 		this.id = id;
 	}
 	public Ingredient getIngredient() {

@@ -236,6 +236,7 @@ CREATE TABLE OFFER (
     CONSTRAINT FK_OFFER_STATUS FOREIGN KEY (STATUS_ID) REFERENCES STATUS(ID),
     DESCRIPTION VARCHAR2(128)
 );
+alter table offer add (offer_maker number(20) references person(id));
 CREATE SEQUENCE OFFER_SEQ;
 
 /*
@@ -252,6 +253,14 @@ CREATE TABLE OFFER_INGREDIENT (
     CONSTRAINT FK_OFFER_ING_PERSON_ING FOREIGN KEY (PERSON_INGREDIENT_ID) REFERENCES PERSON_INGREDIENT(ID),
     CONSTRAINT PK_OFFER_INGREDIENT PRIMARY KEY (OFFER_ID, PERSON_INGREDIENT_ID),
     QUANTITY NUMBER(10) NOT NULL
+);
+drop table offer_ingredient cascade constraints;
+
+create table offer_ingredient (
+    offer_id number(20) not null references offer(id),
+    ingredient_id number(20) not null references ingredient(id),
+    quantity number(20) not null,
+    CONSTRAINT PK_OFFER_INGREDIENT PRIMARY KEY (OFFER_ID, INGREDIENT_ID)
 );
 
 /*
@@ -305,7 +314,7 @@ CREATE TABLE POST_INGREDIENT (
 drop table post_ingredient cascade constraints;
 
 create table post_ingredient (
-    post_id number(20) not null references person(id),
+    post_id number(20) not null references post(id),
     ingredient_id number(20) not null references ingredient(id),
     quantity number(20) not null,
     CONSTRAINT PK_POST_INGREDIENT PRIMARY KEY (POST_ID, INGREDIENT_ID)

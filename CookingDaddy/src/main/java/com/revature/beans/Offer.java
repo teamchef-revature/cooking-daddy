@@ -28,20 +28,48 @@ public class Offer {
 	private String description;
 	@Column(name="post_id")
 	private Integer postId;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "offerid")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "offerId")
 	private Set<OfferIngredient> ingredients;
 	@Column(name="offer_maker")
 	private Integer offerMakerId;
+	public Offer() {
+		super();
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Status getStatus() {
+		return status;
+	}
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Integer getPostId() {
+		return postId;
+	}
+	public void setPostId(Integer postId) {
+		this.postId = postId;
+	}
+	public Set<OfferIngredient> getIngredients() {
+		return ingredients;
+	}
+	public void setIngredients(Set<OfferIngredient> ingredients) {
+		this.ingredients = ingredients;
+	}
 	public Integer getOfferMakerId() {
 		return offerMakerId;
 	}
 	public void setOfferMakerId(Integer offerMakerId) {
 		this.offerMakerId = offerMakerId;
-	}
-	@Override
-	public String toString() {
-		return "Offer [id=" + id + ", status=" + status + ", description=" + description + ", postId=" + postId
-				+ ", ingredients=" + ingredients + ", offerMakerId=" + offerMakerId + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -96,39 +124,10 @@ public class Offer {
 			return false;
 		return true;
 	}
-	public Offer() {
-		super();
-		// TODO Auto-generated constructor stub
+	@Override
+	public String toString() {
+		return "Offer [id=" + id + ", status=" + status + ", description=" + description + ", postId=" + postId
+				+ ", ingredients=" + ingredients + ", offerMakerId=" + offerMakerId + "]";
 	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public Status getStatus() {
-		return status;
-	}
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public Integer getPostId() {
-		return postId;
-	}
-	public void setPostId(Integer postId) {
-		this.postId = postId;
-	}
-	public Set<OfferIngredient> getIngredients() {
-		return ingredients;
-	}
-	public void setIngredients(Set<OfferIngredient> ingredients) {
-		this.ingredients = ingredients;
-	}
-
+	
 }
