@@ -33,6 +33,9 @@ export class FridgeComponent implements OnInit {
   chooseEqu() {
     this.choice = 2;
   }
+  chooseMeal() {
+    this.choice = 3;
+  }
   randIng() {
     this.randIngred = this.randSer.getRandIng();
     return this.randIngred;

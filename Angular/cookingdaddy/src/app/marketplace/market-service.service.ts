@@ -59,8 +59,6 @@ export class MarketServiceService {
     activePerson.ingredients[prev].inventory++;
   }
 
-  
-
   public addPost(post: Post) {
     const body = JSON.stringify(post);
     return this.http.post(this.appUrl + '/post', body, { headers: this.headers, withCredentials: true }).pipe(
