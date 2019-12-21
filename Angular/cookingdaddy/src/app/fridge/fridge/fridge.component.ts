@@ -5,6 +5,8 @@ import { Person } from 'src/app/shared/person/person';
 import { PersonEquipment } from 'src/app/shared/equipment/person-equipment';
 import { RandomitemService } from 'src/app/shared/randomitem.service';
 import { Ingredient } from 'src/app/shared/ingredient/ingredient';
+import { CookService } from 'src/app/cook/cook.service';
+import { Meal } from 'src/app/cook/meal';
 
 @Component({
   selector: 'app-fridge',
@@ -18,7 +20,8 @@ export class FridgeComponent implements OnInit {
   private searchText: string;
   private person: Person;
   private randIngred: Ingredient;
-  constructor(private personService: PersonService, private randSer: RandomitemService) { }
+  private personMeals: Meal[];
+  constructor(private personService: PersonService, private randSer: RandomitemService, private cookService: CookService) { }
 
   ngOnInit() {
     this.searchText = '';
@@ -26,6 +29,7 @@ export class FridgeComponent implements OnInit {
     this.personIngredients = this.personService.getPerson().ingredients.filter(el => el.inventory > 0);
     this.personEquipments = this.personService.getPerson().equipments.filter(el => el.inventory > 0);
     this.person = this.personService.getPerson();
+    this.personMeals = this.person.meals.filter(el => el.inventory > 0);
   }
   chooseIng() {
     this.choice = 1;
