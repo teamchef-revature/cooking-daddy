@@ -1,23 +1,25 @@
 package com.revature.beans;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+
 @Embeddable
-public class OfferIngredientID {
+public class PostIngredientId implements Serializable {
 	private static final long serialVersionUID = -7972597880685365227L;
-	@Column(name="offer_id")
-	private Integer offerId;
+	@Column(name="post_id")
+	private Integer postId;
 	@Column(name="ingredient_id")
 	private Integer ingredientId;
-	public OfferIngredientID() {
+	public PostIngredientId() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public Integer getOfferId() {
-		return offerId;
+	public Integer getPostId() {
+		return postId;
 	}
-	public void setOfferId(Integer offerId) {
-		this.offerId = offerId;
+	public void setPostId(Integer postId) {
+		this.postId = postId;
 	}
 	public Integer getIngredientId() {
 		return ingredientId;
@@ -30,7 +32,7 @@ public class OfferIngredientID {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((ingredientId == null) ? 0 : ingredientId.hashCode());
-		result = prime * result + ((offerId == null) ? 0 : offerId.hashCode());
+		result = prime * result + ((postId == null) ? 0 : postId.hashCode());
 		return result;
 	}
 	@Override
@@ -41,23 +43,22 @@ public class OfferIngredientID {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OfferIngredientID other = (OfferIngredientID) obj;
+		PostIngredientId other = (PostIngredientId) obj;
 		if (ingredientId == null) {
 			if (other.ingredientId != null)
 				return false;
 		} else if (!ingredientId.equals(other.ingredientId))
 			return false;
-		if (offerId == null) {
-			if (other.offerId != null)
+		if (postId == null) {
+			if (other.postId != null)
 				return false;
-		} else if (!offerId.equals(other.offerId))
+		} else if (!postId.equals(other.postId))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "OfferIngredientID [offerId=" + offerId + ", ingredientId=" + ingredientId + "]";
+		return "PostIngredientID [postId=" + postId + ", ingredientId=" + ingredientId + "]";
 	}
-
-
+	
 }

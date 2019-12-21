@@ -3,6 +3,7 @@ import { Post } from '../post';
 import { PersonService } from 'src/app/shared/person/person.service';
 import { Person } from 'src/app/shared/person/person';
 import { TradingService } from '../trading.service';
+import { Offer } from '../offer';
 
 @Component({
   selector: 'app-classifieds',
@@ -41,7 +42,7 @@ export class ClassifiedsComponent implements OnInit {
       return false;
     }
     for (i = 0; i < po.offers.length; i++) {
-      if (po.offers[i].status.id === 1 ) {
+      if (po.offers[i].status.id === 2 ) {
         return true;
       }
     }

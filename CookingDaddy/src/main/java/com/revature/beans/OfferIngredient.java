@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name="offer_ingredient")
 public class OfferIngredient {
 	@EmbeddedId
-	private OfferIngredientID id;
+	private OfferIngredientId id;
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="ingredient_id", insertable=false, updatable=false)
 	private Ingredient ingredient;
@@ -22,10 +22,10 @@ public class OfferIngredient {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public OfferIngredientID getId() {
+	public OfferIngredientId getId() {
 		return id;
 	}
-	public void setId(OfferIngredientID id) {
+	public void setId(OfferIngredientId id) {
 		this.id = id;
 	}
 	public Ingredient getIngredient() {

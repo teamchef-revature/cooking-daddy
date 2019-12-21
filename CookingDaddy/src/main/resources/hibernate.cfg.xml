@@ -33,5 +33,7 @@
 		<mapping class="com.revature.beans.Post"/>
 		<mapping class="com.revature.beans.PostIngredient"/>
 		<mapping class="com.revature.beans.Status"/>
+		<mapping class="com.revature.beans.Offer"/>
+		<mapping class="com.revature.beans.OfferIngredient"/>
 	</session-factory>
 </hibernate-configuration>
