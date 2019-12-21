@@ -60,6 +60,11 @@
             </select>
         </div>
         <div class="row">
+            <label>Any Component</label>
+            <button *ngIf="!addedComponent.any" class="btn btn-caution" (click)="addAny()">Add Any</button>
+            <label *ngIf="addedComponent.any">Currently Any Component</label>
+        </div>
+        <div class="row">
             <label for="add-quantity">Quantity</label>
             <div class="col-sm-4">
                 <input type="number" name="add-quantity" [(ngModel)]="addedComponent.quantity" />

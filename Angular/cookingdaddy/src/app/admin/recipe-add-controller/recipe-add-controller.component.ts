@@ -59,18 +59,28 @@ export class RecipeAddControllerComponent implements OnInit {
     this.category = null;
     this.flavor = null;
     this.ingredient = ingredient;
+    this.addedComponent.any = false;
   }
 
   addCategory(category: Category) {
     this.category = category;
     this.flavor = null;
     this.ingredient = null;
+    this.addedComponent.any = false;
   }
 
   addFlavor(flavor: Flavor) {
     this.category = null;
     this.flavor = flavor;
     this.ingredient = null;
+    this.addedComponent.any = false;
+  }
+
+  addAny() {
+    this.flavor = null;
+    this.category = null;
+    this.ingredient = null;
+    this.addedComponent.any = true;
   }
 
   addRecipeFlavor(flavor: Flavor) {
@@ -78,6 +88,8 @@ export class RecipeAddControllerComponent implements OnInit {
   }
 
   addRecipe() {
+    this.recipe.component = new Array();
+    this.recipe.component = this.addedComponentList;
     this.adminService.addRecipe(this.recipe).subscribe(
       recipe => {
         this.recipe = recipe;
@@ -95,38 +107,49 @@ export class RecipeAddControllerComponent implements OnInit {
 
   addComponent() {
     if (this.category) {
+      console.log(this.category);
       this.addedComponent.category = this.category;
     }
     if (this.ingredient) {
+      console.log(this.ingredient);
       this.addedComponent.ingredient = this.ingredient;
     }
     if (this.flavor) {
+      console.log(this.flavor);
       this.addedComponent.flavor = this.flavor;
     }
     this.category = null;
     this.ingredient = null;
     this.flavor = null;
     if (!this.addedComponent.quantity) {
+      console.log(this.addedComponent);
       this.addedComponent.quantity = 1;
     }
     let push = true;
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.addedComponentList.length; i++) {
-      if (this.addedComponentList[i].category) {
+      console.log('loop: ' + i);
+      if (this.addedComponentList[i].category && this.addedComponent.category) {
+        this.addedComponentList[i].id = null;
+        console.log(this.addedComponentList[i].category);
         if (this.addedComponentList[i].category.name === this.addedComponent.category.name) {
           this.addedComponentList[i].quantity += this.addedComponent.quantity;
           push = false;
         }
-      } else if (this.addedComponentList[i].flavor) {
+      } else if (this.addedComponentList[i].flavor && this.addedComponent.flavor) {
+        console.log(this.addedComponentList[i].flavor);
         if (this.addedComponentList[i].flavor.name === this.addedComponent.flavor.name) {
           this.addedComponentList[i].quantity += this.addedComponent.quantity;
           push = false;
         }
-      } else if (this.addedComponentList[i].ingredient) {
+      } else if (this.addedComponentList[i].ingredient && this.addedComponent.ingredient) {
+        console.log(this.addedComponentList[i].ingredient);
         if (this.addedComponentList[i].ingredient.name === this.addedComponent.ingredient.name) {
           this.addedComponentList[i].quantity += this.addedComponent.quantity;
           push = false;
         }
+      } else if (this.addedComponentList[i].any) {
+        this.addedComponentList[i].quantity += this.addedComponent.quantity;
       }
     }
     if (push) {

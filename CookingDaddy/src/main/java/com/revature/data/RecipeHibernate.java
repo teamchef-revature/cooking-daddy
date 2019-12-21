@@ -65,6 +65,9 @@ public class RecipeHibernate implements RecipeDAO {
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
+			recipe.getComponent().forEach((comp) -> {
+				comp.setRecipe(recipe);
+			});
 			index = (Integer) session.save(recipe);
 			transaction.commit();
 		} catch (HibernateException he) {
@@ -82,7 +85,6 @@ public class RecipeHibernate implements RecipeDAO {
 		Session session = hu.getSession();
 		Transaction transaction = null;
 		try {
-			System.out.println("update session open");
 			transaction = session.beginTransaction();
 			recipe.getComponent().forEach((comp) -> {
 				comp.setRecipe(recipe);
@@ -94,7 +96,6 @@ public class RecipeHibernate implements RecipeDAO {
 				transaction.rollback();
 			he.printStackTrace();
 		} finally {
-			System.out.println("update sesson close");
 			session.close();
 		}
 		return recipe;
@@ -106,7 +107,6 @@ public class RecipeHibernate implements RecipeDAO {
 		String querySQL = "delete from new_component where recipe_id=" + id;
 		Transaction transaction = null;
 		try {
-			System.out.println("delete session open");
 			transaction = session.beginTransaction();
 			javax.persistence.Query query = session.createSQLQuery(querySQL);
 			query.executeUpdate();
@@ -116,7 +116,6 @@ public class RecipeHibernate implements RecipeDAO {
 				transaction.rollback();
 			e.printStackTrace();
 		} finally {
-			System.out.println("delette session close");
 			session.close();
 		}
 	}
