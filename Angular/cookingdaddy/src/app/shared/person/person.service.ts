@@ -12,6 +12,7 @@ export class PersonService {
   private liURL = this.url.getUrl() + '/login';
   private loURL = this.url.getUrl() + '/logout';
   private reURL = this.url.getUrl() + '/register';
+  private perURL = this.url.getUrl() + '/person';
   private headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
   private person: Person;
 
@@ -45,6 +46,7 @@ export class PersonService {
     }
   }
 
+  // tslint:disable-next-line: ban-types
   logout(): Observable<Object> {
     const justabody = `Adios`;
     return this.http.post(this.loURL, justabody, {withCredentials: true}).pipe(
@@ -76,5 +78,13 @@ export class PersonService {
   }
   isAdmin(): boolean {
     return (this.isPerson() && this.person.role.id === 2);
+  }
+  getPersonById(id): Observable<Person> {
+    let p = new Person();
+    return this.http.get(this.perURL + '/' + id, {withCredentials: true}).pipe(
+      map(resp => {
+        p = resp as Person;
+        return p;
+      }));
   }
 }

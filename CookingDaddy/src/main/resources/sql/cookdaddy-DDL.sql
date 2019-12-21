@@ -218,6 +218,7 @@ CREATE TABLE POST (
     CONSTRAINT FK_POST_STATUS FOREIGN KEY (STATUS_ID) REFERENCES STATUS(ID),
     DESCRIPTION VARCHAR2(128)
 );
+alter table post add (person_id number(20) references person(id));
 CREATE SEQUENCE POST_SEQ;
 
 /*
@@ -299,6 +300,15 @@ CREATE TABLE POST_INGREDIENT (
     CONSTRAINT FK_POST_ING_PERSON_ING FOREIGN KEY (PERSON_INGREDIENT_ID) REFERENCES PERSON_INGREDIENT(ID),
     CONSTRAINT PK_POST_INGREDIENT PRIMARY KEY (POST_ID, PERSON_INGREDIENT_ID),
     QUANTITY NUMBER(10) NOT NULL
+);
+
+drop table post_ingredient cascade constraints;
+
+create table post_ingredient (
+    post_id number(20) not null references person(id),
+    ingredient_id number(20) not null references ingredient(id),
+    quantity number(20) not null,
+    CONSTRAINT PK_POST_INGREDIENT PRIMARY KEY (POST_ID, INGREDIENT_ID)
 );
 
 /*

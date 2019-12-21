@@ -42,6 +42,9 @@ public class Person {
 	private Integer chefRating;
 	@Column(name="meals_served")
 	private Integer mealsServed;
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="person_id")
+	private Set<Post> posts;
 	
 	public Integer getMealsServed() {
 		return mealsServed;
@@ -63,6 +66,12 @@ public class Person {
 	}
 	public void setMeals(Set<Meal> meals) {
 		this.meals = meals;
+	}
+	public Set<Post> getPosts() {
+		return posts;
+	}
+	public void setPosts(Set<Post> posts) {
+		this.posts = posts;
 	}
 	public void setId(Integer id) {
 		this.id = id;

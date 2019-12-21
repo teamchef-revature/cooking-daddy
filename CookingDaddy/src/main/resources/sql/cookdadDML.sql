@@ -73,4 +73,16 @@ insert into recipe_component (id, recipe_id, component_id, quantity)
     values (2, 1, 2, 1);
 insert into recipe_component (id, recipe_id, component_id, quantity)
     values (3, 2, 3, 1);
+insert into status (id, name)
+    values (1, 'open');
+insert into status (id, name)
+    values (2, 'bites');
+insert into status (id, name)
+    values (3, 'accepted');
+insert into status (id, name)
+    values (4, 'canceled');
+insert into status (id, name)
+    values (5, 'rejected');
+update status set next_status_id=2 where id =1;
+update status set next_status_id=3 where id =2;
 commit;
