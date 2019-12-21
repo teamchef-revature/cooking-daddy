@@ -32,10 +32,16 @@ public class Offer {
 	private Set<OfferIngredient> ingredients;
 	@Column(name="offer_maker")
 	private Integer offerMakerId;
+	public Integer getOfferMakerId() {
+		return offerMakerId;
+	}
+	public void setOfferMakerId(Integer offerMakerId) {
+		this.offerMakerId = offerMakerId;
+	}
 	@Override
 	public String toString() {
 		return "Offer [id=" + id + ", status=" + status + ", description=" + description + ", postId=" + postId
-				+ ", ingredients=" + ingredients + "]";
+				+ ", ingredients=" + ingredients + ", offerMakerId=" + offerMakerId + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -44,6 +50,7 @@ public class Offer {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((ingredients == null) ? 0 : ingredients.hashCode());
+		result = prime * result + ((offerMakerId == null) ? 0 : offerMakerId.hashCode());
 		result = prime * result + ((postId == null) ? 0 : postId.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
@@ -71,6 +78,11 @@ public class Offer {
 			if (other.ingredients != null)
 				return false;
 		} else if (!ingredients.equals(other.ingredients))
+			return false;
+		if (offerMakerId == null) {
+			if (other.offerMakerId != null)
+				return false;
+		} else if (!offerMakerId.equals(other.offerMakerId))
 			return false;
 		if (postId == null) {
 			if (other.postId != null)
