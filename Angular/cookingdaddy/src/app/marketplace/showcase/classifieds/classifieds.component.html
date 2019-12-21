@@ -1,0 +1,42 @@
+<div>
+</div>
+<ng-template #rowdata>
+    <tr>
+        <td class="fridge">
+
+        </td>
+        <td class="fridge">
+            Owner:
+        </td>
+        <td class="fridge">
+            Value:
+        </td>
+        <td class="fridge">
+            Ingredients:
+        </td>
+    </tr>
+    <tr class="showcase" *ngFor="let po of collection" (click)="show(po)">
+        <td class = "fridge">
+            <ng-container *ngIf="hasBites(po)">BITES</ng-container>
+        </td>
+        <td class = "fridge">
+            {{owner(po)}}
+        </td>
+        <td class="fridge">
+            {{tvalue(po)}}
+        </td>
+        <td class="fridge" *ngFor="let i of [0,1,2]">
+            <ng-container *ngIf="collection.length>i">
+                {{collection[i].quantity}} {{collection[i].ingredient.name}}
+            </ng-container>
+        </td>
+    </tr>
+</ng-template>
+<ng-template #postdata>
+    <tr>
+        <td class="fridge">
+            
+        </td>
+    </tr>
+
+</ng-template>
