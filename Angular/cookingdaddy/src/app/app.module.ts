@@ -54,6 +54,7 @@ import { ShowcaseComponent } from './marketplace/showcase/showcase/showcase.comp
 import { ClassifiedsComponent } from './marketplace/showcase/classifieds/classifieds.component';
 import { RestaurantComponent } from './cook/restaurant/restaurant.component';
 import { MealComponent } from './fridge/meal/meal.component';
+import { MealPipe } from './meal.pipe';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { MealComponent } from './fridge/meal/meal.component';
     ShowcaseComponent,
     ClassifiedsComponent,
     RestaurantComponent,
-    MealComponent
+    MealComponent,
+    MealPipe
   ],
   imports: [
     BrowserModule,
