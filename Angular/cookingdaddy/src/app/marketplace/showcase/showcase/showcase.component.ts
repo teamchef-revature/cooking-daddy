@@ -68,4 +68,6 @@ export class ShowcaseComponent implements OnInit {
   }
   reject() {
   }
+  makeOffer() {
+  }
 }
