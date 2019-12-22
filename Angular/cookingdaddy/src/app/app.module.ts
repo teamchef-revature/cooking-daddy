@@ -54,6 +54,7 @@ import { ShowcaseComponent } from './marketplace/showcase/showcase/showcase.comp
 import { ClassifiedsComponent } from './marketplace/showcase/classifieds/classifieds.component';
 import { RestaurantComponent } from './cook/restaurant/restaurant.component';
 import { MealComponent } from './fridge/meal/meal.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { MealPipe } from './meal.pipe';
 import { OfferComponent } from './marketplace/showcase/offer/offer.component';
 
@@ -104,6 +105,7 @@ import { OfferComponent } from './marketplace/showcase/offer/offer.component';
     ClassifiedsComponent,
     RestaurantComponent,
     MealComponent,
+    LeaderboardComponent,
     MealPipe,
     OfferComponent
   ],
