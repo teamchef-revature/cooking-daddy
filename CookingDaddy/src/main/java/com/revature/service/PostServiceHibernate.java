@@ -17,7 +17,12 @@ public class PostServiceHibernate implements PostService {
 
 	@Override
 	public Integer addPost(Post p) {
-		return pd.addPost(p);
+		Integer pid = pd.addPost(p);
+		for(PostIngredient pi: p.getIngredients()) {
+			pi.setPostid(pid);
+			pd.addPostIngredient(pi);
+		}
+		return pid;
 	}
 
 	@Override
@@ -32,6 +37,19 @@ public class PostServiceHibernate implements PostService {
 
 	@Override
 	public Post updatePost(Post p) {
+		Post ori = pd.getPost(p.getId());
+		Set<PostIngredient> dels= ori.getIngredients();
+		Set<PostIngredient> adds= p.getIngredients();
+		dels.removeAll(adds);
+		adds.removeAll(ori.getIngredients());
+		System.out.println(dels.toString() + ' ' + adds.toString());
+		for(PostIngredient pi: dels) {
+			pd.deletePostIngredient(pi);
+		}
+		for(PostIngredient pi: adds) {
+			pi.setPostid(p.getId());
+			pd.addPostIngredient(pi);
+		}
 		return pd.updatePost(p);
 	}
 
@@ -78,6 +96,11 @@ public class PostServiceHibernate implements PostService {
 	@Override
 	public Status updateStatus(Status s) {
 		return pd.updateStatus(s);
+	}
+
+	@Override
+	public void deletePostIngredient(PostIngredient pi) {
+		pd.deletePostIngredient(pi);
 	}
 
 }

@@ -1,31 +1,35 @@
 package com.revature.beans;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="offer_ingredient")
 public class OfferIngredient {
-	@EmbeddedId
-	private OfferIngredientId id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="any takers")
+	@SequenceGenerator(name="any takers", sequenceName="offer_ingredient_seq", allocationSize=1)
+	private Integer id;
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="ingredient_id", insertable=false, updatable=false)
+	@JoinColumn(name="ingredient_id")
 	private Ingredient ingredient;
 	@JoinColumn(name="offer_id")
 	private Integer offerId;
 	private Integer quantity;
 	public OfferIngredient() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public OfferIngredientId getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(OfferIngredientId id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Ingredient getIngredient() {

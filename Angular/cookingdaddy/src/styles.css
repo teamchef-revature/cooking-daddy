@@ -124,4 +124,10 @@ td {
     margin:0px 10px;
 }
 
+.leaderboard {
+    padding: 5px;
+    border-radius: 0px;
+    text-align: center;
+}
+
 /* ****************************** IDS ********************************* */

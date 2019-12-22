@@ -1,11 +1,11 @@
 import { Status } from './status';
-import { Ingredient } from 'src/app/shared/ingredient/ingredient';
+import { OfferIngredient } from './offer-ingredient';
 
 export class Offer {
     id: number;
     status: Status;
     description: string;
     postId: number;
-    ingredients: Ingredient[];
+    ingredients: OfferIngredient[];
     offerMakerId: string;
 }

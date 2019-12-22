@@ -74,6 +74,8 @@ CREATE TABLE PERSON (
     FIRST VARCHAR2(32),
     LAST VARCHAR2(21)
 );
+alter table person add (CHEF_RATING number);
+alter table person add (MEALS_SERVED number);
 CREATE SEQUENCE PERSON_SEQ;
 
 /*
@@ -257,11 +259,13 @@ CREATE TABLE OFFER_INGREDIENT (
 drop table offer_ingredient cascade constraints;
 
 create table offer_ingredient (
+    id number(20) primary key,
     offer_id number(20) not null references offer(id),
     ingredient_id number(20) not null references ingredient(id),
-    quantity number(20) not null,
-    CONSTRAINT PK_OFFER_INGREDIENT PRIMARY KEY (OFFER_ID, INGREDIENT_ID)
+    quantity number(20) not null
 );
+
+CREATE SEQUENCE OFFER_INGREDIENT_SEQ;
 
 /*
     OFFER_MEAL table
@@ -314,11 +318,12 @@ CREATE TABLE POST_INGREDIENT (
 drop table post_ingredient cascade constraints;
 
 create table post_ingredient (
+    id number(20) primary key,
     post_id number(20) not null references post(id),
     ingredient_id number(20) not null references ingredient(id),
-    quantity number(20) not null,
-    CONSTRAINT PK_POST_INGREDIENT PRIMARY KEY (POST_ID, INGREDIENT_ID)
+    quantity number(20) not null
 );
+CREATE SEQUENCE POST_INGREDIENT_SEQ;
 
 /*
     POST_MEAL table

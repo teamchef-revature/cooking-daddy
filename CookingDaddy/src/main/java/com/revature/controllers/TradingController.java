@@ -61,6 +61,7 @@ public class TradingController {
 	}
 	@PostMapping(value="/market/showcase")
 	public ResponseEntity<Post> addPost(@RequestBody Post po) {
+		System.out.println(po);
 		ps.addPost(po);
 		return ResponseEntity.status(201).body(po);
 	}
