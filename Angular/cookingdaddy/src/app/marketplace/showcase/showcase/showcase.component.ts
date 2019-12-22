@@ -3,9 +3,10 @@ import { Post } from '../post';
 import { PersonService } from 'src/app/shared/person/person.service';
 import { TradingService } from '../trading.service';
 import { PostIngredient } from '../post-ingredient';
-import { Person } from 'src/app/shared/person/person';
-import { Status } from '../status';
 import { Offer } from '../offer';
+import { MarketServiceService } from '../../market-service.service';
+import { PersonIngredient } from 'src/app/shared/personIngredient/person-ingredient';
+import { RandomitemService } from 'src/app/shared/randomitem.service';
 
 @Component({
   selector: 'app-showcase',
@@ -14,19 +15,29 @@ import { Offer } from '../offer';
 })
 export class ShowcaseComponent implements OnInit {
   @Input() activePost: Post;
+  @Input() activeOffer: Offer;
   @Output() done = new EventEmitter<boolean>();
   private refresh: number;
   private value: {val: number};
   private username: {name: string};
+  private postIng: PostIngredient[];
+  private returnIng: PostIngredient[];
 
   constructor(
     private perSer: PersonService,
     private traSer: TradingService,
-    private tr2Ser: TradingService) { }
+    private marSer: MarketServiceService,
+    private randSer: RandomitemService) { }
 
   ngOnInit() {
     this.value = {val: this.tvalue()};
     this.username = this.nameOb(this.activePost.personId);
+    if (this.activePost.ingredients) {
+      this.postIng = this.activePost.ingredients;
+    } else {
+      this.postIng = [];
+    }
+    this.returnIng = [];
   }
 
   nameOb(personId) {
@@ -43,7 +54,21 @@ export class ShowcaseComponent implements OnInit {
 
   onIngClick(i: PostIngredient) {
     if (this.isMaker()) {
+      this.traSer.addPostIngToSet(i.ingredient, this.returnIng, 1, 0);
+      this.traSer.addPostIngToSet(i.ingredient, this.postIng, -1, i.postid);
+      this.refresh = 0;
+      setTimeout(() => {
+        this.refresh = 1;
+      }, 60);
     }
+  }
+  onRetClick(i: PostIngredient) {
+    this.traSer.addPostIngToSet(i.ingredient, this.returnIng, -1, 0);
+    this.traSer.addPostIngToSet(i.ingredient, this.postIng, 1, i.postid);
+    this.refresh = 0;
+    setTimeout(() => {
+      this.refresh = 1;
+    }, 60);
   }
   tvalue(): number {
     let num = 0;
@@ -60,9 +85,23 @@ export class ShowcaseComponent implements OnInit {
     return num;
   }
   save() {
+    if (this.postIng.length === 0 && this.marSer.getBasket().ingredients.length === 0) {
+      window.alert('You must have at least one item up for trade.');
+      return;
+    }
+    this.traSer.putPerIngInPost(this.marSer.getBasket().ingredients, this.activePost);
+    this.marSer.getBasket().ingredients = [];
+    this.returnIng.forEach( pi => {
+      this.randSer.addIngToPer(pi.ingredient, this.perSer.getPerson(), pi.quantity, true);
+    });
+    this.activePost.ingredients = this.postIng;
+    this.traSer.putPostInDB(this.activePost);
+    this.traSer.unsavedpost = new Post();
+    this.traSer.unsavedpost.ingredients = [];
     this.done.emit(true);
   }
   cancel() {
+    this.done.emit(true);
   }
   accept() {
   }

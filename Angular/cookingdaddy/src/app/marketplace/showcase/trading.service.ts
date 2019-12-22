@@ -34,21 +34,19 @@ export class TradingService {
   }
 
   public putPostInDB(po: Post) {
-    po.ingredients.forEach(el => {
-      el.id.postId = el.postid;
-      el.id.ingredientId = el.ingredient.id;
-    });
     if (po.id) {
-      this.updatePost(po);
+      console.log('update');
+      this.updatePost(po).subscribe();
     } else {
-      this.addPost(po);
+      console.log('add');
+      this.addPost(po).subscribe(resp => po = resp);
     }
   }
 
   public putPerIngInPost(perings: PersonIngredient[], post: Post): Post {
     let i: number;
     for (i = 0; i < perings.length; i++) {
-      this.addIngToPost(perings[i].ingredient, post, perings[i].inventory);
+      this.addPostIngToSet(perings[i].ingredient, post.ingredients, perings[i].inventory, post.id);
     }
     return post;
   }
@@ -58,7 +56,7 @@ export class TradingService {
   }
 
   retPostIngToPer(poing: PostIngredient, post: Post) {
-    const dbinst = (poing.id.postId) ? true : false;
+    const dbinst = (poing.id) ? true : false;
     if (dbinst) {
       this.getPost(poing.postid).subscribe(
         resp => {
@@ -78,16 +76,16 @@ export class TradingService {
     }
   }
 
-  public addIngToPost(ing: Ingredient, post: Post, change: number): boolean {
-    const prev = post.ingredients.findIndex(poing => poing.ingredient.id === ing.id);
+  public addPostIngToSet(ing: Ingredient, box: PostIngredient[], change: number, postid: number): boolean {
+    const prev = box.findIndex(poing => poing.ingredient.id === ing.id);
     if (prev + 1 > 0) {
-      const poing = post.ingredients[prev];
+      const poing = box[prev];
       const aftTot = poing.quantity + change;
       if (aftTot === 0) {
-        post.ingredients.splice(prev, 1);
+        box.splice(prev, 1);
       } else {
         if (aftTot > 0) {
-          post.ingredients[prev].quantity = aftTot;
+          box[prev].quantity = aftTot;
         } else {
           return false;
         }
@@ -96,9 +94,9 @@ export class TradingService {
       if (change > 0) {
         const newpoi = new PostIngredient();
         newpoi.ingredient = ing;
-        newpoi.postid = post.id;
+        newpoi.postid = postid;
         newpoi.quantity = change;
-        post.ingredients.push(newpoi);
+        box.push(newpoi);
       } else {
         return false;
       }

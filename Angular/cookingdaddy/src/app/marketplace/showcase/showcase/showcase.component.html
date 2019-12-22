@@ -18,7 +18,7 @@
     <p>{{activePost.description}}</p>
 </ng-container>
 <ng-container *ngIf="refresh">
-    <table class="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of activePost.ingredients">
+    <table class="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of postIng">
         <ng-container *ngIf="i.quantity">
             <tr class="fridge">
                 <td clas="fridge">
@@ -34,8 +34,22 @@
     </table>
 </ng-container>
 <ng-container *ngIf="isMaker()">
+    Send Back to Inventory:
     <table>
-        
+        <table class="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of returnIng">
+            <ng-container *ngIf="i.quantity">
+                <tr class="fridge">
+                    <td clas="fridge">
+                        <app-ingredient [ingredient]="i.ingredient" (click)="onRetClick(i)"></app-ingredient>
+                    </td>
+                </tr>
+                <tr class="fridge">
+                    <td class="fridge">
+                        <div class="fridge">Quantity: {{i.quantity}}</div>
+                    </td>
+                </tr>
+            </ng-container>
+        </table>
     </table>
     <table>
         <tr>
@@ -89,5 +103,10 @@
     </table>
 </ng-container>
 <ng-container *ngIf="!isMaker()">
-    <button class="btn" (click)="makeOffer()">Make Offer</button>
+    <ng-container *ngIf="!activeOffer">
+        <button class="btn" (click)="makeOffer()">Make Offer</button>
+    </ng-container>
+    <ng-container *ngIf="activeOffer">
+        <app-offer [activeOffer]="activeOffer"></app-offer>
+    </ng-container>
 </ng-container>

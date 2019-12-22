@@ -1,36 +1,36 @@
 package com.revature.beans;
 
-import javax.persistence.EmbeddedId;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="post_ingredient")
 public class PostIngredient {
-	@EmbeddedId
-	private PostIngredientId id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="fruitcake in the mail")
+	@SequenceGenerator(name="fruitcake in the mail", sequenceName="post_ingredient_seq", allocationSize=1)
+	private Integer id;
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="ingredient_id", insertable=false, updatable=false)
 	private Ingredient ingredient;
-	@JoinColumn(name="post_id")
+	@Column(name="post_id")
 	private Integer postid;
 	private Integer quantity;
 	public PostIngredient() {
 		super();
 	}
-	public Integer getPostid() {
-		return postid;
-	}
-	public void setPostid(Integer postid) {
-		this.postid = postid;
-	}
-	public PostIngredientId getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(PostIngredientId id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Ingredient getIngredient() {
@@ -38,6 +38,12 @@ public class PostIngredient {
 	}
 	public void setIngredient(Ingredient ingredient) {
 		this.ingredient = ingredient;
+	}
+	public Integer getPostid() {
+		return postid;
+	}
+	public void setPostid(Integer postid) {
+		this.postid = postid;
 	}
 	public Integer getQuantity() {
 		return quantity;
@@ -88,8 +94,8 @@ public class PostIngredient {
 	}
 	@Override
 	public String toString() {
-		return "PostIngredient [id=" + id + ", ingredient=" + ingredient + ", postId=" + postid
-				+ ", quantity=" + quantity + "]";
+		return "PostIngredient [id=" + id + ", ingredient=" + ingredient + ", postid=" + postid + ", quantity="
+				+ quantity + "]";
 	}
 	
 }
