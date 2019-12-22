@@ -1,6 +1,7 @@
 <div class="container">
     <button class="btn mybtn" (click)="chooseIng()">Ingredients</button>
     <button class="btn mybtn" (click)="chooseEqu()">Equipment</button>
+    <button class="btn mybtn" (click)="chooseMeal()">Meals</button>
     <div>
         <app-ingredient [ingredient]="randIng()"></app-ingredient>
     </div>
@@ -32,6 +33,11 @@
     <div *ngIf="choice === 2">
         <div *ngFor="let e of personEquipments | equipment:searchText">
             <app-equipment [equipment]="e.equipment"></app-equipment>
+        </div>
+    </div>
+    <div *ngIf="choice === 3">
+        <div>
+            <app-meal *ngFor = "let m of personMeals | meal:searchText" [currentMeal] = "m"></app-meal>
         </div>
     </div>
 </div>

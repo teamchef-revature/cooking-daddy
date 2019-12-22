@@ -1,6 +1,7 @@
 import { PersonIngredient } from '../personIngredient/person-ingredient';
 import { Role } from '../person/role';
 import { PersonEquipment } from '../equipment/person-equipment';
+import { Meal } from 'src/app/cook/meal';
 
 export class Person {
     id: string;
@@ -13,4 +14,5 @@ export class Person {
     equipments: PersonEquipment[];
     chefRating: number;
     mealsServed: number;
+    meals: Meal[];
 }

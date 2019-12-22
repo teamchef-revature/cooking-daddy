@@ -38,4 +38,9 @@ public class RecipeServiceHibernate implements RecipeService {
 		return recipe.getComponent();
 	}
 
+	@Override
+	public void deleteRecipeComponent(Integer id) {
+		recipeDAO.deleteRecipeComponent(id);
+	}
+
 }

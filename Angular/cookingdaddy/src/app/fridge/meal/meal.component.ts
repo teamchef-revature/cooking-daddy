@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Meal } from '../../cook/meal';
 import { CookService } from '../../cook/cook.service';
 
@@ -8,10 +8,10 @@ import { CookService } from '../../cook/cook.service';
   styleUrls: ['./meal.component.css']
 })
 export class MealComponent implements OnInit {
-  private currentMeal: Meal;
+  @Input() private currentMeal: Meal;
   constructor(private cookService: CookService) { }
 
   ngOnInit() {
-    this.currentMeal = this.cookService.getMeal();
+    //this.currentMeal = this.cookService.getMeal();
   }
 }

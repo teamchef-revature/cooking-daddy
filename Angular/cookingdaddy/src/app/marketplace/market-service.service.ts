@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Person } from '../shared/person/person';
 import { PersonIngredient } from '../shared/personIngredient/person-ingredient';
-import { Post } from './post';
+import { Post } from './showcase/post';
 import { UrlService } from '../shared/url.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -58,8 +58,6 @@ export class MarketServiceService {
     const prev: number = activePerson.ingredients.findIndex(perig => perig.ingredient === pi.ingredient);
     activePerson.ingredients[prev].inventory++;
   }
-
-  
 
   public addPost(post: Post) {
     const body = JSON.stringify(post);

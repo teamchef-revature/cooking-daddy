@@ -42,27 +42,17 @@ public class Person {
 	private Integer chefRating;
 	@Column(name="meals_served")
 	private Integer mealsServed;
-	
-	public Integer getMealsServed() {
-		return mealsServed;
-	}
-	public void setMealsServed(Integer mealsServed) {
-		this.mealsServed = mealsServed;
-	}
-	public Integer getChefRating() {
-		return chefRating;
-	}
-	public void setChefRating(Integer chefRating) {
-		this.chefRating = chefRating;
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="person_id")
+	private Set<Post> posts;
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="offer_maker")
+	private Set<Offer> offers;
+	public Person() {
+		super();
 	}
 	public Integer getId() {
 		return id;
-	}
-	public Set<Meal> getMeals() {
-		return meals;
-	}
-	public void setMeals(Set<Meal> meals) {
-		this.meals = meals;
 	}
 	public void setId(Integer id) {
 		this.id = id;
@@ -109,6 +99,36 @@ public class Person {
 	public void setEquipments(Set<PersonEquipment> equipments) {
 		this.equipments = equipments;
 	}
+	public Set<Meal> getMeals() {
+		return meals;
+	}
+	public void setMeals(Set<Meal> meals) {
+		this.meals = meals;
+	}
+	public Integer getChefRating() {
+		return chefRating;
+	}
+	public void setChefRating(Integer chefRating) {
+		this.chefRating = chefRating;
+	}
+	public Integer getMealsServed() {
+		return mealsServed;
+	}
+	public void setMealsServed(Integer mealsServed) {
+		this.mealsServed = mealsServed;
+	}
+	public Set<Post> getPosts() {
+		return posts;
+	}
+	public void setPosts(Set<Post> posts) {
+		this.posts = posts;
+	}
+	public Set<Offer> getOffers() {
+		return offers;
+	}
+	public void setOffers(Set<Offer> offers) {
+		this.offers = offers;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -121,7 +141,9 @@ public class Person {
 		result = prime * result + ((last == null) ? 0 : last.hashCode());
 		result = prime * result + ((meals == null) ? 0 : meals.hashCode());
 		result = prime * result + ((mealsServed == null) ? 0 : mealsServed.hashCode());
+		result = prime * result + ((offers == null) ? 0 : offers.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((posts == null) ? 0 : posts.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -175,10 +197,20 @@ public class Person {
 				return false;
 		} else if (!mealsServed.equals(other.mealsServed))
 			return false;
+		if (offers == null) {
+			if (other.offers != null)
+				return false;
+		} else if (!offers.equals(other.offers))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
+			return false;
+		if (posts == null) {
+			if (other.posts != null)
+				return false;
+		} else if (!posts.equals(other.posts))
 			return false;
 		if (role == null) {
 			if (other.role != null)
@@ -196,7 +228,8 @@ public class Person {
 	public String toString() {
 		return "Person [id=" + id + ", username=" + username + ", password=" + password + ", first=" + first + ", last="
 				+ last + ", role=" + role + ", ingredients=" + ingredients + ", equipments=" + equipments + ", meals="
-				+ meals + ", chefRating=" + chefRating + ", mealsServed=" + mealsServed + "]";
+				+ meals + ", chefRating=" + chefRating + ", mealsServed=" + mealsServed + ", posts=" + posts
+				+ ", offers=" + offers + "]";
 	}
 	
-}
+	}

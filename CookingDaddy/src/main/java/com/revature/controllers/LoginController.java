@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -36,8 +37,9 @@ public class LoginController {
 	@GetMapping(value="/login")
 	public ResponseEntity<Person> goLogin(HttpSession session) {
 		Person active = (Person) session.getAttribute("person");
-		if(active == null)
+		if(active == null) {
 			return ResponseEntity.notFound().build();
+		}
 		else {
 			Person pPrime = pserv.getPersonById(active.getId());
 			session.setAttribute("person", pPrime);
@@ -48,8 +50,9 @@ public class LoginController {
 	@PostMapping(value="/login")
 	public ResponseEntity<Person> login(String user, String pass, HttpSession session) {
 		Person p = pserv.getPersonByUserPass(user, pass);
-		if(p == null)
+		if(p == null) {
 			return ResponseEntity.status(401).build();
+			}
 		session.setAttribute("person", p);
 		return ResponseEntity.ok(p);
 	}
@@ -65,21 +68,18 @@ public class LoginController {
 		if (person.getId() != id) {
 			return ResponseEntity.notFound().build();
 		}
-		System.out.println(person.toString());
 		for (PersonIngredient pi: person.getIngredients()) {
 			pi.setPerson_id(id);
 		}
 		for (PersonEquipment pe: person.getEquipments()) {
 			pe.setPersonId(id);
 		}
-		System.out.println();
 		pserv.updatePerson(person);
 		return ResponseEntity.ok(pserv.getPersonById(id));
 	}
 	
 	@PostMapping(value="/register")
 	public ResponseEntity<Person> register(@RequestBody Person person) {
-		System.out.println(person);
 		person.setRole(pserv.getRoleById(1));
 		person.setMealsServed(0);
 		person.setChefRating(0);
@@ -89,8 +89,16 @@ public class LoginController {
 		
 		person.setIngredients(iserv.getStarterIngredients(id));
 		
-		System.out.println(person);
 		pserv.updatePerson(person);
 		return ResponseEntity.ok(person);
+	}
+	
+	@GetMapping(value="/person/{id}")
+	public ResponseEntity<Person> getPersonById(@PathVariable("id") Integer id) {
+		Person p = pserv.getPersonById(id);
+		if (p==null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(p);
 	}
 }

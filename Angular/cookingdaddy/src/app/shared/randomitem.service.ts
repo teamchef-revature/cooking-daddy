@@ -141,7 +141,7 @@ updatePerson(per: Person) {
   );
 }
   public updatePersonIngredient(pin: PersonIngredient): Observable < PersonIngredient > {
-  if(pin.id) {
+  if (pin.id) {
   const body = JSON.stringify(pin);
   return this.http.put(this.urlpi + '/' + pin.id, body, { headers: this.headers, withCredentials: true }).pipe(
     map(resp => resp as PersonIngredient)
@@ -157,7 +157,7 @@ updatePerson(per: Person) {
   );
 }
   public updatePersonEquipment(peq: PersonEquipment): Observable < PersonEquipment > {
-  if(peq.id) {
+  if (peq.id) {
   const body = JSON.stringify(peq);
   return this.http.put(this.urlpe + '/' + peq.id, body, { headers: this.headers, withCredentials: true }).pipe(
     map(resp => resp as PersonEquipment)

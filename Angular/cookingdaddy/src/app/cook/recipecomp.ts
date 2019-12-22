@@ -8,5 +8,6 @@ export class RecipeComp {
     category: Category;
     flavor: Flavor;
     quantity: number;
+    recipeId: number;
     any: boolean;
 }
