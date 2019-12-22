@@ -85,4 +85,5 @@ insert into status (id, name)
     values (5, 'rejected');
 update status set next_status_id=2 where id =1;
 update status set next_status_id=3 where id =2;
+update status set name = 'cancelled' where name = 'canceled';
 commit;

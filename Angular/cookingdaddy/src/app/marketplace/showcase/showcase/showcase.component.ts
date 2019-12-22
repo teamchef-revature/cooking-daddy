@@ -50,7 +50,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     });
   }
 
-  nameOb(personId) {
+  private nameOb(personId) {
     const envelope = { name: '' };
     this.perSer.getPersonById(personId).subscribe(resp => {
       envelope.name = resp.username;
@@ -58,16 +58,19 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     return envelope;
   }
 
-  isMaker(): boolean {
+  private isMaker(): boolean {
     return (this.activePost.personId === this.perSer.getPerson().id) && this.isEditable();
   }
 
-  isEditable(): boolean {
+  private isEditable(): boolean {
     return (this.activePost.status.name === 'open' || this.activePost.status.name === 'bites');
   }
+  private isOpen(): boolean {
+    return (this.activePost.status.name === 'open');
+  }
 
-  onIngClick(i: PostIngredient) {
-    if (this.isMaker()) {
+  private onIngClick(i: PostIngredient) {
+    if (this.isMaker() && this.isOpen()) {
       this.traSer.addPostIngToSet(i.ingredient, this.returnIng, 1, 0);
       this.traSer.addPostIngToSet(i.ingredient, this.postIng, -1, i.postid);
       this.value.val = this.tvalue();
@@ -77,7 +80,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
       }, 60);
     }
   }
-  onRetClick(i: PostIngredient) {
+  private onRetClick(i: PostIngredient) {
     this.traSer.addPostIngToSet(i.ingredient, this.returnIng, -1, 0);
     this.traSer.addPostIngToSet(i.ingredient, this.postIng, 1, i.postid);
     this.value.val = this.tvalue();
@@ -86,21 +89,14 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
       this.refresh = 1;
     }, 60);
   }
-  tvalue(): number {
+  private tvalue(): number {
     let num = 0;
     this.postIng.forEach(poi => {
       num += Math.pow(poi.ingredient.quality.id, 3) * poi.quantity;
     });
     return num;
   }
-  ovalue(o: Offer): number {
-    let num = 0;
-    o.ingredients.forEach(oi => {
-      num += Math.pow(oi.ingredient.quality.id, 3) * oi.quantity;
-    });
-    return num;
-  }
-  save() {
+  private save() {
     if (this.postIng.length === 0 && this.marSer.getBasket().ingredients.length === 0) {
       window.alert('You must have at least one item up for trade.');
       return;
@@ -119,10 +115,10 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.traSer.unsavedpost.ingredients = [];
     this.done.emit(true);
   }
-  cancel() {
+  private cancel() {
     this.done.emit(true);
   }
-  delete() {
+  private delete() {
     this.postIng.forEach(el => {
       this.traSer.addPostIngToSet(el.ingredient, this.postIng, -el.quantity, el.postid);
       this.randSer.addIngToPer(el.ingredient, this.perSer.getPerson(), el.quantity, true);
@@ -134,7 +130,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.activePost.status = this.allStatuses.filter(el => el.name === 'cancelled')[0];
     if (this.activePost.offers != null) {
       this.activePost.offers.forEach(el => {
-        if (el.status.name === 'open') {
+        if (el.status.name === 'open' || el.status.name === 'bites') {
           this.perSer.getPersonById(el.offerMakerId).subscribe(per => {
             el.ingredients.forEach(ing => {
               this.randSer.addIngToPer(ing.ingredient, per, ing.quantity, true);
@@ -148,10 +144,39 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.traSer.putPostInDB(this.activePost);
     this.done.emit(true);
   }
-  accept() {
+  private showOffer(o: Offer) {
+    this.activeOffer = o;
+    this.refresh = 0;
+    setTimeout(() => {
+      this.refresh = 1;
+    }, 60);
   }
-  reject() {
+  private nullAo() {
+    this.activeOffer = null;
+    this.refresh = 0;
+    setTimeout(() => {
+      this.refresh = 1;
+    }, 60);
   }
-  makeOffer() {
+  private accept(o: Offer) {
+    if (o.status.name === 'open') {
+      o.status = this.allStatuses.filter(el => el.name === 'bites')[0];
+      this.traSer.putOffInDB(o);
+    }
+  }
+  private reject(o: Offer) {
+    this.perSer.getPersonById(o.offerMakerId).subscribe(per => {
+      o.ingredients.forEach(ing => {
+        this.randSer.addIngToPer(ing.ingredient, per, ing.quantity, true);
+      });
+      o.status = this.allStatuses.filter(el => el.name === 'rejected')[0];
+    });
+  }
+  private makeOffer() {
+    this.activeOffer = this.traSer.unsavedoffer;
+    this.refresh = 0;
+    setTimeout(() => {
+      this.refresh = 1;
+    }, 60);
   }
 }
