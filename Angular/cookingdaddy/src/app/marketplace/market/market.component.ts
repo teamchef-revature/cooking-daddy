@@ -14,12 +14,20 @@ export class MarketComponent implements OnInit {
   hack = 'none';
   ketchup: PersonIngredient[];
   refresh: {on: number};
+  mode: number;
 
   constructor(private marketService: MarketServiceService, private active: PersonService, private randItemService: RandomitemService) { }
 
   ngOnInit() {
     this.ketchup = this.active.getPerson().ingredients.filter(el => el.inventory > 0);
     this.refresh = {on: 1};
+    this.mode = 1;
+  }
+  store() {
+    this.mode = 1;
+  }
+  market() {
+    this.mode = 2;
   }
 
   trade() {
