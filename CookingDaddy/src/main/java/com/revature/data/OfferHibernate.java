@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 
 import com.revature.beans.Offer;
 import com.revature.beans.OfferIngredient;
-import com.revature.beans.Post;
-import com.revature.beans.PostIngredient;
 import com.revature.beans.Status;
 import com.revature.utils.HibernateUtil;
 @Component
@@ -141,6 +139,23 @@ public class OfferHibernate implements OfferDAO{
 			s.close();
 		}
 		return oi;
+	}
+
+	@Override
+	public void deleteOfferIngredient(OfferIngredient oi) {
+			Session s = hu.getSession();
+			Transaction tx = null;
+			try {
+				tx = s.beginTransaction();
+				s.delete(oi);
+				tx.commit();
+			} catch(Exception e) {
+				if(tx != null)
+					tx.rollback();
+				e.printStackTrace();
+			} finally {
+				s.close();
+	    }
 	}
 
 }
