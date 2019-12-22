@@ -1,5 +1,6 @@
 package com.revature.data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -109,5 +110,16 @@ public class PersonHibernate implements PersonDAO {
 		List<Person> people = q.list();
 		s.close();
 		return new HashSet<Person>(people);
+	}
+
+	@Override
+	public List<Person> getLeaderboard() {
+		Session s = hu.getSession();
+		String query = "from Person p ORDER BY p.chefRating desc, p.mealsServed desc";
+		Query<Person> q = s.createQuery(query, Person.class);
+		q.setMaxResults(10);
+		List<Person> people = q.list();
+		s.close();
+		return new ArrayList<Person>(people);
 	}
 }

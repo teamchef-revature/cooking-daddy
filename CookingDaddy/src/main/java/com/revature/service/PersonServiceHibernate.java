@@ -1,6 +1,6 @@
 package com.revature.service;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,9 +45,8 @@ public class PersonServiceHibernate implements PersonService {
 	}
 
 	@Override
-	public Set<Person> getLeaderboard() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Person> getLeaderboard() {
+		return pdao.getLeaderboard();
 	}
 
 }

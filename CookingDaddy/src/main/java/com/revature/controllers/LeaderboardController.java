@@ -1,7 +1,7 @@
 package com.revature.controllers;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +19,10 @@ public class LeaderboardController {
 	private PersonService pserv;
 	
 	@GetMapping(value="/leaderboard")
-	public ResponseEntity<Set<Person>> getLeaderboard() {
-		Set<Person> leaderboard = new HashSet<Person>();
+	public ResponseEntity<List<Person>> getLeaderboard() {
+		List<Person> leaderboard = new ArrayList<Person>();
 		
-		
+		leaderboard = pserv.getLeaderboard();
 		
 		return ResponseEntity.ok(leaderboard);
 	}

@@ -1,5 +1,6 @@
 package com.revature.data;
 
+import java.util.List;
 import java.util.Set;
 
 import com.revature.beans.Person;
@@ -10,6 +11,7 @@ public interface PersonDAO {
 	public Person getPersonById(Integer id);
 	public Person getPersonByUserPass(String user, String pass);
 	public Set<Person> getPeople();
+	public List<Person> getLeaderboard();
 	public void updatePerson(Person p);
 	public void deletePerson(Person p);
 	public Role getRoleById(Integer id);

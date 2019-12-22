@@ -74,6 +74,8 @@ CREATE TABLE PERSON (
     FIRST VARCHAR2(32),
     LAST VARCHAR2(21)
 );
+alter table person add (CHEF_RATING number);
+alter table person add (MEALS_SERVED number);
 CREATE SEQUENCE PERSON_SEQ;
 
 /*

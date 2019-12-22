@@ -1,17 +1,17 @@
 <div class="container">
-    <table>
+    <table style="margin:auto" class="leaderboard">
         <tr>
             <th>&nbsp;</th> <!-- place -->
             <th>Username</th>
             <th>Chef Rating</th>
             <th>Meals Cooked</th>
         </tr>
-        <ng-container *ngFor="let i = 1; i < 51; i++">
-            <tr>
-                <td>{{ i }}</td>
-                <td>{{ people[i].username }}</td>
-                <td>{{ people[i].chefRating }}</td>
-                <td>{{ people[i].mealsServed }}</td>
+        <ng-container *ngFor="let p of people; let i = index">
+            <tr class="leaderboard">
+                <td class="leaderboard">{{ i + 1 }}</td>
+                <td class="leaderboard">{{ p.username }}</td>
+                <td class="leaderboard">{{ p.chefRating }}</td>
+                <td class="leaderboard">{{ p.mealsServed }}</td>
             </tr>
         </ng-container>
     </table>
