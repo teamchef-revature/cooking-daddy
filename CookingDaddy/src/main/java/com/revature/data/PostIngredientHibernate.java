@@ -197,4 +197,21 @@ public class PostIngredientHibernate implements PostDAO {
 		return s;		
 	}
 
+	@Override
+	public void deletePostIngredient(PostIngredient pi) {
+			Session s = hu.getSession();
+			Transaction tx = null;
+			try {
+				tx = s.beginTransaction();
+				s.delete(pi);
+				tx.commit();
+			} catch(Exception e) {
+				if(tx != null)
+					tx.rollback();
+				e.printStackTrace();
+			} finally {
+				s.close();
+	    }
+	}
+
 }

@@ -19,7 +19,7 @@ public class PostIngredient {
 	@SequenceGenerator(name="fruitcake in the mail", sequenceName="post_ingredient_seq", allocationSize=1)
 	private Integer id;
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="ingredient_id", insertable=false, updatable=false)
+	@JoinColumn(name="ingredient_id")
 	private Ingredient ingredient;
 	@Column(name="post_id")
 	private Integer postid;

@@ -18,6 +18,7 @@ public interface PostService {
 	public Set<PostIngredient> getPostIngredients();
 	public PostIngredient getPostIngredient(Integer piid);
 	public PostIngredient updatePostIngredient(PostIngredient pi);
+	public void deletePostIngredient(PostIngredient pi);
 	
 	public Integer addStatus(Status s);
 	public Set<Status> getStatuses();

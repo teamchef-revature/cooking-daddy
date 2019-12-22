@@ -17,5 +17,6 @@ public interface OfferDAO {
 	public Set<OfferIngredient> getOfferIngredients();
 	public OfferIngredient getOfferIngredient(Integer oiid);
 	public OfferIngredient updateOfferIngredient(OfferIngredient oi);
+	public void deleteOfferIngredient(OfferIngredient oi);
 
 }

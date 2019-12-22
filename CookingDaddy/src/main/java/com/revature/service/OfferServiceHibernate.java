@@ -9,7 +9,6 @@ import com.revature.beans.Offer;
 import com.revature.beans.OfferIngredient;
 import com.revature.beans.Status;
 import com.revature.data.OfferDAO;
-import com.revature.data.PostDAO;
 
 @Service
 public class OfferServiceHibernate implements OfferService {
@@ -18,7 +17,12 @@ public class OfferServiceHibernate implements OfferService {
 	OfferDAO od;
 	@Override
 	public Integer addOffer(Offer o) {
-		return od.addOffer(o);
+		Integer oid = od.addOffer(o);
+		for(OfferIngredient oi: o.getIngredients()) {
+			oi.setOfferId(oid);
+			od.addOfferIngredient(oi);
+		}
+		return oid;
 	}
 
 	@Override
@@ -33,9 +37,20 @@ public class OfferServiceHibernate implements OfferService {
 
 	@Override
 	public Offer updateOffer(Offer o) {
+		Offer ori = od.getOffer(o.getId());
+		Set<OfferIngredient> dels= ori.getIngredients();
+		Set<OfferIngredient> adds= o.getIngredients();
+		dels.removeAll(adds);
+		adds.removeAll(ori.getIngredients());
+		for(OfferIngredient oi: dels) {
+			od.deleteOfferIngredient(oi);
+		}
+		for(OfferIngredient oi: adds) {
+			oi.setOfferId(o.getId());
+			od.addOfferIngredient(oi);
+		}
 		return od.updateOffer(o);
 	}
-
 	@Override
 	public Set<Offer> getOffersByStatus(Status s) {
 		return od.getOffersByStatus(s);
@@ -59,6 +74,12 @@ public class OfferServiceHibernate implements OfferService {
 	@Override
 	public OfferIngredient updateOfferIngredient(OfferIngredient oi) {
 		return od.updateOfferIngredient(oi);
+	}
+
+	@Override
+	public void deleteOfferIngredient(OfferIngredient oi) {
+		od.deleteOfferIngredient(oi);
+		
 	}
 
 }

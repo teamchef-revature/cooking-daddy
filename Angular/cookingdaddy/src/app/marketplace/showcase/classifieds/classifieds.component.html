@@ -12,8 +12,7 @@
             </td>
         </tr>
     </table>
-    <ng-container [ngSwitch]="choice">
-        <ng-container *ngSwitchCase="1">
+        <ng-container *ngIf="choice === 1">
             <table>
                 <tr>
                     <td class="fridge">
@@ -50,7 +49,7 @@
                 </tr>
             </table>
         </ng-container>
-        <ng-container *ngSwitchCase="2">
+        <ng-container *ngIf="choice === 2">
             <table>
                 <tr>
                     <td class="fridge">
@@ -90,8 +89,7 @@
                 </tr>
             </table>
         </ng-container>
-        <ng-container *ngSwitchCase="3">
+        <ng-container *ngIf="choice === 3">
             <app-showcase [activePost]="activePost" (done)="chooseMain()"></app-showcase>
         </ng-container>
-    </ng-container>
 </div>

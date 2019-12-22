@@ -5,6 +5,7 @@ import { Person } from 'src/app/shared/person/person';
 import { TradingService } from '../trading.service';
 import { Offer } from '../offer';
 import { Status } from '../status';
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-classifieds',
@@ -22,10 +23,13 @@ export class ClassifiedsComponent implements OnInit {
   public uo: Offer;
   private allStats: Status[];
 
-  constructor(private perSer: PersonService, private traSer: TradingService) {
-    this.traSer.getPosts().subscribe(resp => this.allPosts = resp);
+  constructor(
+    private perSer: PersonService,
+    private traSer: TradingService,
+    private posSer: PostService) {
     this.up = this.traSer.unsavedpost;
     this.uo = this.traSer.unsavedoffer;
+    this.allPosts = this.traSer.allPosts;
     if (!this.up.id) {
       this.traSer.getStatuses().subscribe(el => {
         this.allStats = el;
@@ -36,7 +40,7 @@ export class ClassifiedsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.traSer.getPosts().subscribe(resp => this.allPosts = resp);
+    console.log(this.allPosts);
     this.choice = 1;
   }
   public owner(po: Post): string {
@@ -60,7 +64,7 @@ export class ClassifiedsComponent implements OnInit {
   }
   public postFor(o: Offer) {
     const num = Number.parseInt(o.offerMakerId, 10);
-    return this.traSer.getPost(num).subscribe(resp => resp as Post);
+    return this.posSer.getPost(num).subscribe(resp => resp as Post);
   }
   public show(po: Post) {
     this.activePost = po;
@@ -72,7 +76,11 @@ export class ClassifiedsComponent implements OnInit {
     this.choice = 4;
   }
   public chooseMain() {
-    this.collection = this.allPosts.filter(el => (el.status.name === 'open') || (el.status.name === 'bites'));
+    this.allPosts.forEach(el => {
+      console.log(el);
+    });
+
+    this.collection = this.allPosts;//.filter(el => (el.status.name === 'open') || (el.status.name === 'bites'));
     this.choice = 1;
     this.refresh();
   }
