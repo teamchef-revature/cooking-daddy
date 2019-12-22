@@ -1,3 +1,83 @@
-<ng-container >
+<table>
+    <tr>
+        <td class="fridge">
+            Status: {{activePost.status.name}}
+        </td>
+        <td class="fridge">
+            Owner: {{username.name}}
+        </td>
+        <td class="fridge">
+            Value: {{value.val}}
+        </td>
+    </tr>
+</table>
+<ng-container *ngIf="isMaker()">
+    <textarea [(ngModel)]="activePost.description"></textarea>
+</ng-container>
+<ng-container *ngIf="!isMaker()">
+    <p>{{activePost.description}}</p>
+</ng-container>
+<ng-container *ngIf="refresh">
+    <table class="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of activePost.ingredients">
+        <ng-container *ngIf="i.quantity">
+            <tr class="fridge">
+                <td clas="fridge">
+                    <app-ingredient [ingredient]="i.ingredient" (click)="onIngClick(i)"></app-ingredient>
+                </td>
+            </tr>
+            <tr class="fridge">
+                <td class="fridge">
+                    <div class="fridge">Quantity: {{i.quantity}}</div>
+                </td>
+            </tr>
+        </ng-container>
+    </table>
+</ng-container>
+<ng-container *ngIf="isMaker()">
+    <table>
+        <tr>
+            <td class="fridge">
+                <button class="btn" (click)="save()">Save</button>
+            </td>
+            <td class="fridge">
+                <button class="btn" (click)="cancel()">Cancel</button>
+            </td>
+        </tr>
+    </table>
+</ng-container>
+Current Offers:
+<table>
+    <tr>
+        <td class = "fridge">
+            Owner:
+        </td>
+        <td class = "fridge">
+            Value:
+        </td>
+        <td class = "fridge">
+            Ingredients:
+        </td>
+    </tr>
+    <tr *ngFor="o in activePost.offers">
+        <td class = "fridge">
+            {{nameOb.name}}
+        </td>
+        <td class = "fridge">
+            {{ovalue(o)}}
+        </td>
+        <td class="fridge" *ngFor="let i of [0,1,2]">
+            <ng-container *ngIf="o.ingredients.length>i">
+                {{o.ingredients[i].quantity}} {{o.ingredients[i].ingredient.name}}
+            </ng-container>
+        </td>
+        <td class ="fridge" *ngIf="isMaker()">
+            <button class="btn" (click)="accept()">Accept</button>
+        </td>
+        <td class ="fridge" *ngIf="isMaker()">
+            <button class="btn" (click)="reject()">Reject</button>
+        </td>
+    </tr>
+</table>
+<ng-container *ngIf="!isMaker()">
 
 </ng-container>

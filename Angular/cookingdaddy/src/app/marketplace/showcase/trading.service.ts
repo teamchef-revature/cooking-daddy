@@ -10,6 +10,7 @@ import { PostIngredient } from './post-ingredient';
 import { PersonIngredient } from 'src/app/shared/personIngredient/person-ingredient';
 import { RandomitemService } from 'src/app/shared/randomitem.service';
 import { PersonService } from 'src/app/shared/person/person.service';
+import { Offer } from './offer';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +18,19 @@ import { PersonService } from 'src/app/shared/person/person.service';
 export class TradingService {
   private appUrl = this.urlSer.getUrl() + '/market';
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  public allPosts: Post[];
+  public unsavedpost: Post;
+  public unsavedoffer: Offer;
 
   constructor(
     private urlSer: UrlService,
     private http: HttpClient,
     private randSer: RandomitemService,
     private perSer: PersonService, ) {
-    this.getPosts().subscribe(resp => this.allPosts = resp);
+    this.unsavedoffer = new Offer();
+    this.unsavedoffer.offerMakerId = perSer.getPerson().id;
+    this.unsavedpost = new Post();
+    this.unsavedpost.personId = perSer.getPerson().id;
+    this.unsavedpost.ingredients = [];
   }
 
   public putPostInDB(po: Post) {
@@ -125,6 +131,28 @@ export class TradingService {
     return this.http.post(this.appUrl + '/showcase', body, {
       headers: this.headers, withCredentials: true
     }).pipe(map(resp => resp as Post));
+  }
+  public getOffers(): Observable<Offer[]> {
+    return this.http.get(this.appUrl + '/offer', { withCredentials: true }).pipe(map(resp => resp as Offer[]));
+  }
+  public getOffer(id: number): Observable<Offer> {
+    const url: string = this.appUrl + '/offer/' + id;
+    return this.http.get(url, { withCredentials: true }).pipe(
+      map(resp => resp as Offer));
+  }
+  public updateOffer(o: Offer) {
+    const body = JSON.stringify(o);
+    if (o.id) {
+      return this.http.put(this.appUrl + '/offer/' + o.id, body, {
+        headers: this.headers, withCredentials: true
+      }).pipe(map(resp => resp as Offer));
+    }
+  }
+  public addOffer(o: Offer) {
+    const body = JSON.stringify(o);
+    return this.http.post(this.appUrl + '/offer', body, {
+      headers: this.headers, withCredentials: true
+    }).pipe(map(resp => resp as Offer));
   }
   public getStatuses(): Observable<Status[]> {
     return this.http.get(this.appUrl + '/status', { withCredentials: true }).pipe(map(resp => resp as Status[]));

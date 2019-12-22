@@ -1,42 +1,97 @@
 <div>
+    <table>
+        <tr>
+            <td class="fridge">
+                <button class="btn" (click)="chooseMain()">Available Showcases</button>
+            </td>
+            <td class="fridge">
+                <button class="btn" (click)="myPosts()">My Showcases</button>
+            </td>
+            <td class="fridge">
+                <button class="btn" (click)="myOffers()">My Offers</button>
+            </td>
+        </tr>
+    </table>
+    <ng-container [ngSwitch]="choice">
+        <ng-container *ngSwitchCase="1">
+            <table>
+                <tr>
+                    <td class="fridge">
+                        Status:
+                    </td>
+                    <td class="fridge">
+                        Owner:
+                    </td>
+                    <td class="fridge">
+                        Value:
+                    </td>
+                    <td class="fridge">
+                        Ingredients:
+                    </td>
+                    <td class="fridge">
+                        <button class="btn" type="button" (click)="show(up)">Make Showcase</button>
+                    </td>
+                </tr>
+                <tr class="showcase" *ngFor="let po of collection" (click)="show(po)">
+                    <td class="fridge">
+                        {{po.status.name}}
+                    </td>
+                    <td class="fridge">
+                        {{owner(po)}}
+                    </td>
+                    <td class="fridge">
+                        {{tvalue(po)}}
+                    </td>
+                    <td class="fridge" *ngFor="let i of [0,1,2]">
+                        <ng-container *ngIf="collection.length>i">
+                            {{collection[i].quantity}} {{collection[i].ingredient.name}}
+                        </ng-container>
+                    </td>
+                </tr>
+            </table>
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+            <table>
+                <tr>
+                    <td class="fridge">
+                        Status:
+                    </td>
+                    <td class="fridge">
+                        Post Owner:
+                    </td>
+                    <td class="fridge">
+                        Post Value:
+                    </td>
+                    <td class="fridge">
+                        Offer Value:
+                    </td>
+                    <td class="fridge">
+                        Ingredients:
+                    </td>
+                </tr>
+                <tr class="showcase" *ngFor="let o of ocollection" (click)="showOffer(o)">
+                    <td class="fridge">
+                        {{o.status.name}}
+                    </td>
+                    <td class="fridge">
+                        {{owner(postFor(o))}}
+                    </td>
+                    <td class="fridge">
+                        {{tvalue(postFor(o))}}
+                    </td>
+                    <td class="fridge">
+                        {{ovalue(o)}}
+                    </td>
+                    <td class="fridge" *ngFor="let i of [0,1,2]">
+                        <ng-container *ngIf="collection.length>i">
+                            {{collection[i].quantity}} {{collection[i].ingredient.name}}
+                        </ng-container>
+                    </td>
+                </tr>
+            </table>
+        </ng-container>
+        <ng-container *ngSwitchCase="3">
+            <app-showcase [activePost]="activePost" (done)="chooseMain()"></app-showcase>
+        </ng-container>
+    </ng-container>
 </div>
-<ng-template #rowdata>
-    <tr>
-        <td class="fridge">
-
-        </td>
-        <td class="fridge">
-            Owner:
-        </td>
-        <td class="fridge">
-            Value:
-        </td>
-        <td class="fridge">
-            Ingredients:
-        </td>
-    </tr>
-    <tr class="showcase" *ngFor="let po of collection" (click)="show(po)">
-        <td class = "fridge">
-            <ng-container *ngIf="hasBites(po)">BITES</ng-container>
-        </td>
-        <td class = "fridge">
-            {{owner(po)}}
-        </td>
-        <td class="fridge">
-            {{tvalue(po)}}
-        </td>
-        <td class="fridge" *ngFor="let i of [0,1,2]">
-            <ng-container *ngIf="collection.length>i">
-                {{collection[i].quantity}} {{collection[i].ingredient.name}}
-            </ng-container>
-        </td>
-    </tr>
-</ng-template>
-<ng-template #postdata>
-    <tr>
-        <td class="fridge">
-            
-        </td>
-    </tr>
-
-</ng-template>
