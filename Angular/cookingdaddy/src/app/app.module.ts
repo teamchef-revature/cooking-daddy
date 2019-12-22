@@ -57,6 +57,7 @@ import { MealComponent } from './fridge/meal/meal.component';
 import { MealPipe } from './meal.pipe';
 import { OfferComponent } from './marketplace/showcase/offer/offer.component';
 import { PostrowComponent } from './marketplace/showcase/postrow/postrow.component';
+import { OfferrowComponent } from './marketplace/showcase/offerrow/offerrow.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { PostrowComponent } from './marketplace/showcase/postrow/postrow.compone
     MealComponent,
     MealPipe,
     OfferComponent,
-    PostrowComponent
+    PostrowComponent,
+    OfferrowComponent
   ],
   imports: [
     BrowserModule,

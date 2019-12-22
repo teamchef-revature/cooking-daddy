@@ -17,7 +17,7 @@ export class ShowcaseComponent implements OnInit {
   @Input() activePost: Post;
   @Input() activeOffer: Offer;
   @Output() done = new EventEmitter<boolean>();
-  private refresh: number;
+  public refresh: number;
   private value: {val: number};
   private username: {name: string};
   private postIng: PostIngredient[];
@@ -30,14 +30,16 @@ export class ShowcaseComponent implements OnInit {
     private randSer: RandomitemService) { }
 
   ngOnInit() {
-    this.value = {val: this.tvalue()};
     this.username = this.nameOb(this.activePost.personId);
     if (this.activePost.ingredients) {
       this.postIng = this.activePost.ingredients;
+      this.value = {val: this.tvalue()};
     } else {
       this.postIng = [];
+      this.value = {val: this.tvalue()};
     }
     this.returnIng = [];
+    this.refresh = 1;
   }
 
   nameOb(personId) {
@@ -49,13 +51,18 @@ export class ShowcaseComponent implements OnInit {
   }
 
   isMaker(): boolean {
-    return (this.activePost.personId === this.perSer.getPerson().id);
+    return (this.activePost.personId === this.perSer.getPerson().id) && this.isEditable();
+  }
+
+  isEditable(): boolean {
+    return (this.activePost.status.name === 'open' || this.activePost.status.name === 'bites');
   }
 
   onIngClick(i: PostIngredient) {
     if (this.isMaker()) {
       this.traSer.addPostIngToSet(i.ingredient, this.returnIng, 1, 0);
       this.traSer.addPostIngToSet(i.ingredient, this.postIng, -1, i.postid);
+      this.tvalue();
       this.refresh = 0;
       setTimeout(() => {
         this.refresh = 1;
@@ -65,6 +72,7 @@ export class ShowcaseComponent implements OnInit {
   onRetClick(i: PostIngredient) {
     this.traSer.addPostIngToSet(i.ingredient, this.returnIng, -1, 0);
     this.traSer.addPostIngToSet(i.ingredient, this.postIng, 1, i.postid);
+    this.tvalue();
     this.refresh = 0;
     setTimeout(() => {
       this.refresh = 1;
@@ -72,7 +80,7 @@ export class ShowcaseComponent implements OnInit {
   }
   tvalue(): number {
     let num = 0;
-    this.activePost.ingredients.forEach(poi => {
+    this.postIng.forEach(poi => {
       num += Math.pow(poi.ingredient.quality.id, 3) * poi.quantity;
     });
     return num;

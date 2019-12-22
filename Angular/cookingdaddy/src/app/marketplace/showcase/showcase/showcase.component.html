@@ -1,6 +1,9 @@
 <table>
     <tr>
         <td class="fridge">
+<table>
+    <tr>
+        <td class="fridge">
             Status: {{activePost.status.name}}
         </td>
         <td class="fridge">
@@ -11,15 +14,23 @@
         </td>
     </tr>
 </table>
+</td>
+</tr>
+<tr>
+    <td class="fridge">
 <ng-container *ngIf="isMaker()">
     <textarea [(ngModel)]="activePost.description"></textarea>
 </ng-container>
 <ng-container *ngIf="!isMaker()">
     <p>{{activePost.description}}</p>
 </ng-container>
+</td>
+</tr>
+<tr>
+    <td class = "fridge">
 <ng-container *ngIf="refresh">
     <table class="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of postIng">
-        hi
+        <h3>For Trade:</h3>
         <ng-container *ngIf="i.quantity">
             <tr class="fridge">
                 <td clas="fridge">
@@ -34,9 +45,14 @@
         </ng-container>
     </table>
 </ng-container>
-<ng-container *ngIf="isMaker()">
+</td>
+</tr>
+<tr>
+<td class="fridge">
+<ng-container 
+<*ngIf="isMaker()">
     <br>
-    <p>Send Back to Inventory:</p>
+    <h3>Send Back to Inventory:</h3>
     <table>
         <table class="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of returnIng">
             <ng-container *ngIf="i.quantity">
@@ -64,6 +80,10 @@
         </tr>
     </table>
 </ng-container>
+</td>
+</tr>
+<tr>
+    <td class="fridge">
 <ng-container *ngIf="refresh">
     Current Offers:
     <table>
@@ -78,7 +98,8 @@
                 Ingredients:
             </td>
         </tr>
-        <tr *ngFor="let o of activePost.offers">
+        <ng-container *ngFor="let o of activePost.offers">
+            <tr>
             <td class="fridge">
                 {{nameOb.name}}
             </td>
@@ -96,15 +117,19 @@
             <td class="fridge" *ngIf="isMaker()">
                 <button class="btn" (click)="reject()">Reject</button>
             </td>
-        </tr>
         <tr>
             <td class="fridge" colspan="7">
                 {{o.description}}
             </td>
         </tr>
+    </ng-container>
     </table>
 </ng-container>
-<ng-container *ngIf="!isMaker()">
+</td>
+</tr>
+<tr>
+    <td class="fridge">
+<ng-container *ngIf="isEditable()&&!isMaker()">
     <ng-container *ngIf="!activeOffer">
         <button class="btn" (click)="makeOffer()">Make Offer</button>
     </ng-container>
@@ -112,3 +137,5 @@
         <app-offer [activeOffer]="activeOffer"></app-offer>
     </ng-container>
 </ng-container>
+</td></tr>
+</table>

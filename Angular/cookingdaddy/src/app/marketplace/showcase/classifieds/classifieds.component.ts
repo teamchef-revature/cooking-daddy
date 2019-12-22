@@ -29,7 +29,7 @@ export class ClassifiedsComponent implements OnInit {
     private posSer: PostService) {
     this.up = this.traSer.unsavedpost;
     this.uo = this.traSer.unsavedoffer;
-    this.allPosts = this.traSer.allPosts;
+    this.posSer.getPosts().subscribe(el => this.allPosts = el);
     if (!this.up.id) {
       this.traSer.getStatuses().subscribe(el => {
         this.allStats = el;
@@ -40,11 +40,11 @@ export class ClassifiedsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.allPosts);
     this.chooseMain();
   }
   public owner(po: Post): string {
     let own = new Person();
+    own.username = 'loading';
     this.perSer.getPersonById(po.personId).subscribe(resp => own = resp);
     return own.username;
   }

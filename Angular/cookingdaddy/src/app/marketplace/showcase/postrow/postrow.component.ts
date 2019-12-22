@@ -15,7 +15,7 @@ export class PostrowComponent implements OnInit {
   constructor(private perSer: PersonService) { }
 
   ngOnInit() {
-    this.owner = {name: ''};
+    this.owner = {name: 'loading'};
     this.perSer.getPersonById(this.post.personId).subscribe(resp => this.owner = {name: resp.username});
   }
   tvalue(): number {
