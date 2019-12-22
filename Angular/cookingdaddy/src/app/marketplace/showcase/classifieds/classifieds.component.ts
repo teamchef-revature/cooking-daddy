@@ -41,7 +41,7 @@ export class ClassifiedsComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.allPosts);
-    this.choice = 1;
+    this.chooseMain();
   }
   public owner(po: Post): string {
     let own = new Person();
@@ -76,17 +76,17 @@ export class ClassifiedsComponent implements OnInit {
     this.choice = 4;
   }
   public chooseMain() {
-    this.allPosts.forEach(el => {
-      console.log(el);
-    });
-
-    this.collection = this.allPosts;//.filter(el => (el.status.name === 'open') || (el.status.name === 'bites'));
-    this.choice = 1;
-    this.refresh();
+    if (!this.allPosts) {
+      setTimeout(() => this.chooseMain(), 50);
+    } else {
+      this.collection = this.allPosts.filter(el => (el.status.name === 'open') || (el.status.name === 'bites'));
+      this.choice = 1;
+      this.refresh();
+    }
   }
   public myPosts() {
     this.collection = this.allPosts.filter(el => (el.personId === this.perSer.getPerson().id));
-    this.collection.sort((a , b) => a.status.id - b.status.id);
+    this.collection.sort((a, b) => a.status.id - b.status.id);
     this.choice = 1;
     this.refresh();
   }

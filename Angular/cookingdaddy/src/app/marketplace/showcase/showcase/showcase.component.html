@@ -19,6 +19,7 @@
 </ng-container>
 <ng-container *ngIf="refresh">
     <table class="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of postIng">
+        hi
         <ng-container *ngIf="i.quantity">
             <tr class="fridge">
                 <td clas="fridge">
@@ -34,7 +35,8 @@
     </table>
 </ng-container>
 <ng-container *ngIf="isMaker()">
-    Send Back to Inventory:
+    <br>
+    <p>Send Back to Inventory:</p>
     <table>
         <table class="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of returnIng">
             <ng-container *ngIf="i.quantity">
