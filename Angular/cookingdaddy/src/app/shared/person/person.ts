@@ -12,5 +12,7 @@ export class Person {
     ingredients: PersonIngredient[];
     role: Role;
     equipments: PersonEquipment[];
+    chefRating: number;
+    mealsServed: number;
     meals: Meal[];
 }

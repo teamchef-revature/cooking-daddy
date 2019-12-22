@@ -213,4 +213,12 @@ insert into equipment (id, quality_id, name, min_temp, max_temp, min_time, max_t
     
 insert into role (id, label) values (1, 'player');
 insert into role (id, label) values (2, 'admin');
+
+delete from meal_ingredient where meal_id = 25;
+delete from meal_ingredient where meal_id = 22;
+delete from meal_ingredient where meal_id = 26;
+delete from meal_ingredient where meal_id = 24;
+delete from meal_ingredient where meal_id = 23;
+delete from meal where recipe_id = 22;
+delete from recipe where id = 22;
 commit;
