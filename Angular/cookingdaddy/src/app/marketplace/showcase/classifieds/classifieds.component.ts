@@ -4,6 +4,7 @@ import { PersonService } from 'src/app/shared/person/person.service';
 import { Person } from 'src/app/shared/person/person';
 import { TradingService } from '../trading.service';
 import { Offer } from '../offer';
+import { Status } from '../status';
 
 @Component({
   selector: 'app-classifieds',
@@ -13,11 +14,25 @@ import { Offer } from '../offer';
 export class ClassifiedsComponent implements OnInit {
   public allPosts: Post[];
   public collection: Post[];
+  public ocollection: Offer[];
   public choice: number;
   public activePost: Post;
+  public activeOffer: Offer;
+  public up: Post;
+  public uo: Offer;
+  private allStats: Status[];
 
   constructor(private perSer: PersonService, private traSer: TradingService) {
-    this.allPosts = traSer.allPosts;
+    this.traSer.getPosts().subscribe(resp => this.allPosts = resp);
+    this.up = this.traSer.unsavedpost;
+    this.uo = this.traSer.unsavedoffer;
+    if (!this.up.id) {
+      this.traSer.getStatuses().subscribe(el => {
+        this.allStats = el;
+        const i = el.findIndex(em => em.name === 'open');
+        this.up.status = el[i];
+      });
+    }
   }
 
   ngOnInit() {
@@ -36,16 +51,46 @@ export class ClassifiedsComponent implements OnInit {
     });
     return num;
   }
-  public hasBites(po: Post): boolean {
-    let i: number;
-    if (!po.offers) {
-      return false;
-    }
-    for (i = 0; i < po.offers.length; i++) {
-      if (po.offers[i].status.id === 2 ) {
-        return true;
-      }
-    }
-    return false;
+  public ovalue(o: Offer): number {
+    let num = 0;
+    o.ingredients.forEach(oi => {
+      num += Math.pow(oi.ingredient.quality.id, 3) * oi.quantity;
+    });
+    return num;
+  }
+  public postFor(o: Offer) {
+    const num = Number.parseInt(o.offerMakerId, 10);
+    return this.traSer.getPost(num).subscribe(resp => resp as Post);
+  }
+  public show(po: Post) {
+    this.activePost = po;
+    this.choice = 3;
+    this.refresh();
+  }
+  public showOffer(o: Offer) {
+    this.activeOffer = o;
+    this.choice = 4;
+  }
+  public chooseMain() {
+    this.collection = this.allPosts.filter(el => (el.status.name === 'open') || (el.status.name === 'bites'));
+    this.choice = 1;
+    this.refresh();
+  }
+  public myPosts() {
+    this.collection = this.allPosts.filter(el => (el.personId === this.perSer.getPerson().id));
+    this.collection.sort((a , b) => a.status.id - b.status.id);
+    this.choice = 1;
+    this.refresh();
+  }
+  public myOffers() {
+    this.choice = 2;
+    this.refresh();
+  }
+  refresh() {
+    const i = this.choice;
+    this.choice = 0;
+    setTimeout(() => {
+      this.choice = i;
+    }, 60);
   }
 }

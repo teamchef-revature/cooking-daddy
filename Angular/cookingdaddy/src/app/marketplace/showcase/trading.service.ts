@@ -10,6 +10,7 @@ import { PostIngredient } from './post-ingredient';
 import { PersonIngredient } from 'src/app/shared/personIngredient/person-ingredient';
 import { RandomitemService } from 'src/app/shared/randomitem.service';
 import { PersonService } from 'src/app/shared/person/person.service';
+import { Offer } from './offer';
 
 @Injectable({
   providedIn: 'root'
@@ -17,32 +18,35 @@ import { PersonService } from 'src/app/shared/person/person.service';
 export class TradingService {
   private appUrl = this.urlSer.getUrl() + '/market';
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  public allPosts: Post[];
+  public unsavedpost: Post;
+  public unsavedoffer: Offer;
 
   constructor(
     private urlSer: UrlService,
     private http: HttpClient,
     private randSer: RandomitemService,
     private perSer: PersonService, ) {
-    this.getPosts().subscribe(resp => this.allPosts = resp);
+    this.unsavedoffer = new Offer();
+    this.unsavedoffer.offerMakerId = perSer.getPerson().id;
+    this.unsavedpost = new Post();
+    this.unsavedpost.personId = perSer.getPerson().id;
+    this.unsavedpost.ingredients = [];
   }
 
   public putPostInDB(po: Post) {
-    po.ingredients.forEach(el => {
-      el.id.postId = el.postid;
-      el.id.ingredientId = el.ingredient.id;
-    });
     if (po.id) {
-      this.updatePost(po);
+      console.log('update');
+      this.updatePost(po).subscribe();
     } else {
-      this.addPost(po);
+      console.log('add');
+      this.addPost(po).subscribe(resp => po = resp);
     }
   }
 
   public putPerIngInPost(perings: PersonIngredient[], post: Post): Post {
     let i: number;
     for (i = 0; i < perings.length; i++) {
-      this.addIngToPost(perings[i].ingredient, post, perings[i].inventory);
+      this.addPostIngToSet(perings[i].ingredient, post.ingredients, perings[i].inventory, post.id);
     }
     return post;
   }
@@ -52,7 +56,7 @@ export class TradingService {
   }
 
   retPostIngToPer(poing: PostIngredient, post: Post) {
-    const dbinst = (poing.id.postId) ? true : false;
+    const dbinst = (poing.id) ? true : false;
     if (dbinst) {
       this.getPost(poing.postid).subscribe(
         resp => {
@@ -72,16 +76,16 @@ export class TradingService {
     }
   }
 
-  public addIngToPost(ing: Ingredient, post: Post, change: number): boolean {
-    const prev = post.ingredients.findIndex(poing => poing.ingredient.id === ing.id);
+  public addPostIngToSet(ing: Ingredient, box: PostIngredient[], change: number, postid: number): boolean {
+    const prev = box.findIndex(poing => poing.ingredient.id === ing.id);
     if (prev + 1 > 0) {
-      const poing = post.ingredients[prev];
+      const poing = box[prev];
       const aftTot = poing.quantity + change;
       if (aftTot === 0) {
-        post.ingredients.splice(prev, 1);
+        box.splice(prev, 1);
       } else {
         if (aftTot > 0) {
-          post.ingredients[prev].quantity = aftTot;
+          box[prev].quantity = aftTot;
         } else {
           return false;
         }
@@ -90,9 +94,9 @@ export class TradingService {
       if (change > 0) {
         const newpoi = new PostIngredient();
         newpoi.ingredient = ing;
-        newpoi.postid = post.id;
+        newpoi.postid = postid;
         newpoi.quantity = change;
-        post.ingredients.push(newpoi);
+        box.push(newpoi);
       } else {
         return false;
       }
@@ -125,6 +129,28 @@ export class TradingService {
     return this.http.post(this.appUrl + '/showcase', body, {
       headers: this.headers, withCredentials: true
     }).pipe(map(resp => resp as Post));
+  }
+  public getOffers(): Observable<Offer[]> {
+    return this.http.get(this.appUrl + '/offer', { withCredentials: true }).pipe(map(resp => resp as Offer[]));
+  }
+  public getOffer(id: number): Observable<Offer> {
+    const url: string = this.appUrl + '/offer/' + id;
+    return this.http.get(url, { withCredentials: true }).pipe(
+      map(resp => resp as Offer));
+  }
+  public updateOffer(o: Offer) {
+    const body = JSON.stringify(o);
+    if (o.id) {
+      return this.http.put(this.appUrl + '/offer/' + o.id, body, {
+        headers: this.headers, withCredentials: true
+      }).pipe(map(resp => resp as Offer));
+    }
+  }
+  public addOffer(o: Offer) {
+    const body = JSON.stringify(o);
+    return this.http.post(this.appUrl + '/offer', body, {
+      headers: this.headers, withCredentials: true
+    }).pipe(map(resp => resp as Offer));
   }
   public getStatuses(): Observable<Status[]> {
     return this.http.get(this.appUrl + '/status', { withCredentials: true }).pipe(map(resp => resp as Status[]));
