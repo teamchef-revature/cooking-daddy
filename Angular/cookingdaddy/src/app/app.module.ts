@@ -105,12 +105,9 @@ import { OfferComponent } from './marketplace/showcase/offer/offer.component';
     ClassifiedsComponent,
     RestaurantComponent,
     MealComponent,
-<<<<<<< HEAD
-    LeaderboardComponent
-=======
+    LeaderboardComponent,
     MealPipe,
     OfferComponent
->>>>>>> 4098e2d60dcb224759d2e13ba6745eee491e2a87
   ],
   imports: [
     BrowserModule,
