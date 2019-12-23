@@ -1,5 +1,6 @@
 package com.revature.beans;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ public class OfferIngredient {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="ingredient_id")
 	private Ingredient ingredient;
-	@JoinColumn(name="offer_id")
+	@Column(name="offer_id")
 	private Integer offerId;
 	private Integer quantity;
 	public OfferIngredient() {

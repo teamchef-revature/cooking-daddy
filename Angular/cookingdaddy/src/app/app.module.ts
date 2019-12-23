@@ -57,6 +57,9 @@ import { MealComponent } from './fridge/meal/meal.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { MealPipe } from './meal.pipe';
 import { OfferComponent } from './marketplace/showcase/offer/offer.component';
+import { PostrowComponent } from './marketplace/showcase/postrow/postrow.component';
+import { OfferrowComponent } from './marketplace/showcase/offerrow/offerrow.component';
+import { ProfileComponent } from './core/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +110,10 @@ import { OfferComponent } from './marketplace/showcase/offer/offer.component';
     MealComponent,
     LeaderboardComponent,
     MealPipe,
-    OfferComponent
+    OfferComponent,
+    PostrowComponent,
+    OfferrowComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

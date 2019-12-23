@@ -6,6 +6,7 @@ import { TradingService } from '../trading.service';
 import { Offer } from '../offer';
 import { Status } from '../status';
 import { PostService } from '../post.service';
+import { OfferService } from '../offer.service';
 
 @Component({
   selector: 'app-classifieds',
@@ -14,6 +15,7 @@ import { PostService } from '../post.service';
 })
 export class ClassifiedsComponent implements OnInit {
   public allPosts: Post[];
+  public allOffers: Offer[];
   public collection: Post[];
   public ocollection: Offer[];
   public choice: number;
@@ -26,11 +28,20 @@ export class ClassifiedsComponent implements OnInit {
   constructor(
     private perSer: PersonService,
     private traSer: TradingService,
-    private posSer: PostService) {
+    private posSer: PostService,
+    private offSer: OfferService) {
     this.up = this.traSer.unsavedpost;
     this.uo = this.traSer.unsavedoffer;
-    this.allPosts = this.traSer.allPosts;
+    this.posSer.getPosts().subscribe(el => this.allPosts = el);
+    this.offSer.getOffers().subscribe(el => this.allOffers = el);
     if (!this.up.id) {
+      this.traSer.getStatuses().subscribe(el => {
+        this.allStats = el;
+        const i = el.findIndex(em => em.name === 'open');
+        this.up.status = el[i];
+      });
+    }
+    if (!this.uo.id) {
       this.traSer.getStatuses().subscribe(el => {
         this.allStats = el;
         const i = el.findIndex(em => em.name === 'open');
@@ -40,31 +51,7 @@ export class ClassifiedsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.allPosts);
-    this.choice = 1;
-  }
-  public owner(po: Post): string {
-    let own = new Person();
-    this.perSer.getPersonById(po.personId).subscribe(resp => own = resp);
-    return own.username;
-  }
-  public tvalue(po: Post): number {
-    let num = 0;
-    po.ingredients.forEach(poi => {
-      num += Math.pow(poi.ingredient.quality.id, 3) * poi.quantity;
-    });
-    return num;
-  }
-  public ovalue(o: Offer): number {
-    let num = 0;
-    o.ingredients.forEach(oi => {
-      num += Math.pow(oi.ingredient.quality.id, 3) * oi.quantity;
-    });
-    return num;
-  }
-  public postFor(o: Offer) {
-    const num = Number.parseInt(o.offerMakerId, 10);
-    return this.posSer.getPost(num).subscribe(resp => resp as Post);
+    this.chooseMain();
   }
   public show(po: Post) {
     this.activePost = po;
@@ -72,27 +59,41 @@ export class ClassifiedsComponent implements OnInit {
     this.refresh();
   }
   public showOffer(o: Offer) {
-    this.activeOffer = o;
-    this.choice = 4;
+    this.posSer.getPost(o.postId).subscribe(resp => {
+      this.activeOffer = o;
+      this.activePost = resp;
+      this.choice = 3;
+    });
   }
   public chooseMain() {
-    this.allPosts.forEach(el => {
-      console.log(el);
-    });
-
-    this.collection = this.allPosts;//.filter(el => (el.status.name === 'open') || (el.status.name === 'bites'));
-    this.choice = 1;
-    this.refresh();
+    if (!this.allPosts) {
+      setTimeout(() => this.chooseMain(), 50);
+    } else {
+      this.collection = this.allPosts.filter(el => (el.status.name === 'open') || (el.status.name === 'bites'));
+      this.choice = 1;
+      this.refresh();
+    }
   }
   public myPosts() {
-    this.collection = this.allPosts.filter(el => (el.personId === this.perSer.getPerson().id));
-    this.collection.sort((a , b) => a.status.id - b.status.id);
-    this.choice = 1;
-    this.refresh();
+    if (!this.allPosts) {
+      setTimeout(() => this.chooseMain(), 50);
+    } else {
+      this.collection = this.allPosts.filter(el => (el.personId === this.perSer.getPerson().id));
+      this.collection.sort((a, b) => a.status.id - b.status.id);
+      this.choice = 1;
+      this.refresh();
+    }
   }
   public myOffers() {
-    this.choice = 2;
-    this.refresh();
+    if (!this.allPosts) {
+      setTimeout(() => this.chooseMain(), 50);
+    } else {
+      console.log(this.perSer.getPerson().offers);
+      this.ocollection = this.perSer.getPerson().offers;
+      this.ocollection.sort((a, b) => a.status.id - b.status.id);
+      this.choice = 2;
+      this.refresh();
+    }
   }
   refresh() {
     const i = this.choice;

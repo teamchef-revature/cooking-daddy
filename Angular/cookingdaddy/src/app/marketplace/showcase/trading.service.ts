@@ -12,6 +12,8 @@ import { RandomitemService } from 'src/app/shared/randomitem.service';
 import { PersonService } from 'src/app/shared/person/person.service';
 import { Offer } from './offer';
 import { PostService } from './post.service';
+import { OfferIngredient } from './offer-ingredient';
+import { OfferService } from './offer.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +30,11 @@ export class TradingService {
     private http: HttpClient,
     private randSer: RandomitemService,
     private perSer: PersonService,
-    private posSer: PostService) {
+    private posSer: PostService,
+    private offSer: OfferService) {
     this.unsavedoffer = new Offer();
     this.unsavedoffer.offerMakerId = perSer.getPerson().id;
+    this.unsavedoffer.ingredients = [];
     this.unsavedpost = new Post();
     this.unsavedpost.personId = perSer.getPerson().id;
     this.unsavedpost.ingredients = [];
@@ -80,6 +84,19 @@ export class TradingService {
     }
   }
 
+  public newAddIngToOffer(ing: Ingredient, o: Offer, num: number) {
+    const check = o.ingredients.filter(el => el.ingredient.id === ing.id);
+    if (check.length > 0) {
+      check[0].quantity += num;
+    } else {
+      const oi = new OfferIngredient();
+      oi.ingredient = ing;
+      oi.offerId = o.id;
+      oi.quantity = num;
+      o.ingredients.push(oi);
+    }
+  }
+
   public addPostIngToSet(ing: Ingredient, box: PostIngredient[], change: number, postid: number): boolean {
     const prev = box.findIndex(poing => poing.ingredient.id === ing.id);
     if (prev + 1 > 0) {
@@ -108,30 +125,75 @@ export class TradingService {
     return true;
   }
 
-  public movePostStatus(po: Post) {
-    po.status = po.status.nextStatus;
-  }
-  public getOffers(): Observable<Offer[]> {
-    return this.http.get(this.appUrl + '/offer', { withCredentials: true }).pipe(map(resp => resp as Offer[]));
-  }
-  public getOffer(id: number): Observable<Offer> {
-    const url: string = this.appUrl + '/offer/' + id;
-    return this.http.get(url, { withCredentials: true }).pipe(
-      map(resp => resp as Offer));
-  }
-  public updateOffer(o: Offer) {
-    const body = JSON.stringify(o);
+  public putOffInDB(o: Offer) {
     if (o.id) {
-      return this.http.put(this.appUrl + '/offer/' + o.id, body, {
-        headers: this.headers, withCredentials: true
-      }).pipe(map(resp => resp as Offer));
+      console.log('update oing');
+      this.offSer.updateOffer(o).subscribe();
+    } else {
+      console.log('add oing');
+      this.offSer.addOffer(o).subscribe(resp => o = resp);
     }
   }
-  public addOffer(o: Offer) {
-    const body = JSON.stringify(o);
-    return this.http.post(this.appUrl + '/offer', body, {
-      headers: this.headers, withCredentials: true
-    }).pipe(map(resp => resp as Offer));
+
+  public putPerIngInOffer(perings: PersonIngredient[], offer: Offer): Offer {
+    let i: number;
+    for (i = 0; i < perings.length; i++) {
+      this.addOfferIngToSet(perings[i].ingredient, offer.ingredients, perings[i].inventory, offer.id);
+    }
+    return offer;
+  }
+
+  retOfferIngToPer(oing: OfferIngredient, offer: Offer) {
+    const dbinst = (oing.id) ? true : false;
+    if (dbinst) {
+      this.offSer.getOffer(oing.offerId).subscribe(
+        resp => {
+          this.perSer.getPersonById(resp.offerMakerId).subscribe(
+            per => this.randSer.addIngToPer(oing.ingredient, per, oing.quantity, dbinst));
+          const prev = resp.ingredients.findIndex(oi => oi.ingredient.id === oing.ingredient.id);
+          resp.ingredients.splice(prev, 1);
+          this.putOffInDB(resp);
+        });
+    } else {
+      const prev = offer.ingredients.findIndex(oi => oi.ingredient.id === oing.ingredient.id);
+      if (prev + 1) {
+        this.perSer.getPersonById(offer.offerMakerId).subscribe(
+          per => this.randSer.addIngToPer(oing.ingredient, per, oing.quantity, dbinst));
+        offer.ingredients.splice(prev, 1);
+      }
+    }
+  }
+
+  public addOfferIngToSet(ing: Ingredient, box: OfferIngredient[], change: number, offerid: number): boolean {
+    const prev = box.findIndex(poing => poing.ingredient.id === ing.id);
+    if (prev + 1 > 0) {
+      const poing = box[prev];
+      const aftTot = poing.quantity + change;
+      if (aftTot === 0) {
+        box.splice(prev, 1);
+      } else {
+        if (aftTot > 0) {
+          box[prev].quantity = aftTot;
+        } else {
+          return false;
+        }
+      }
+    } else {
+      if (change > 0) {
+        const newoi = new OfferIngredient();
+        newoi.ingredient = ing;
+        newoi.offerId = offerid;
+        newoi.quantity = change;
+        box.push(newoi);
+      } else {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public movePostStatus(po: Post) {
+    po.status = po.status.nextStatus;
   }
   public getStatuses(): Observable<Status[]> {
     return this.http.get(this.appUrl + '/status', { withCredentials: true }).pipe(map(resp => resp as Status[]));
