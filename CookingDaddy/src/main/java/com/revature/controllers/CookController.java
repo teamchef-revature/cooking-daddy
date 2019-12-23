@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import com.revature.beans.*;
 import com.revature.service.EquipmentService;
 import com.revature.service.MealService;
 import com.revature.service.PersonService;
+import com.revature.service.RecipeService;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
@@ -26,6 +28,9 @@ public class CookController {
 	
 	@Autowired
 	PersonService pserv;
+	
+	@Autowired
+	RecipeService rserv;
 	
 	// yeah honestly this whole cooking thing pretty much wrecks any hope of
 	// this project actually being restful buuuuut oh well man. will fix later
@@ -50,5 +55,11 @@ public class CookController {
 		score = mserv.serveMeal(meal, pserv.getPersonById(personID));
 		
 		return ResponseEntity.ok(score);
+	}
+	
+	@GetMapping(value="/cookbook")
+	public ResponseEntity<List<Recipe>> getCookbook() {
+		List<Recipe> cookbook = rserv.getRecipeList();
+		return ResponseEntity.ok(cookbook);
 	}
 }

@@ -21,6 +21,7 @@ import { RecipeEditControllerComponent } from './admin/recipe-edit-controller/re
 import { RestaurantComponent } from './cook/restaurant/restaurant.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { ProfileComponent } from './core/profile/profile.component';
+import { CookbookComponent } from './cookbook/cookbook/cookbook.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent
+  },
+  {
+    path: 'cookbook',
+    component: CookbookComponent
   },
   {
     path: 'ingredients/:bob',

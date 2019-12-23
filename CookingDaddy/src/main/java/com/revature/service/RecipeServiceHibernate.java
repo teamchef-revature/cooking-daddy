@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,11 @@ public class RecipeServiceHibernate implements RecipeService {
 	@Override
 	public Set<Recipe> getRecipes() {
 		return recipeDAO.getRecipes();
+	}
+	
+	@Override
+	public List<Recipe> getRecipeList() {
+		return recipeDAO.getRecipeList();
 	}
 
 	@Override

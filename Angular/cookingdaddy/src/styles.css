@@ -82,6 +82,11 @@ td {
     border-radius: 15px;
 }
 
+th {
+    text-align:center;
+    padding:10px;
+}
+
 /* **************************** CLASSES ******************************* */
 
 .my-nav-pill {
@@ -128,6 +133,11 @@ td {
     padding: 5px;
     border-radius: 0px;
     text-align: center;
+    vertical-align: middle;
+}
+
+.cookbook {
+    padding:0px 10px;
 }
 
 /* ****************************** IDS ********************************* */

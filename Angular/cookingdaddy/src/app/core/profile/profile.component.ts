@@ -15,4 +15,14 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.currentPerson = this.personService.getPerson();
   }
+
+  isPerson(): boolean {
+    if (this.personService.isPerson()) {
+      this.currentPerson = this.personService.getPerson();
+      return true;
+    } else {
+      this.currentPerson = null;
+      return false;
+    }
+  }
 }
