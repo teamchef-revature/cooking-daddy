@@ -32,9 +32,9 @@
                 </td>
             </tr>
         </table>
-            <ng-container *ngFor="let po of collection">
-                <app-postrow [post]="po" (click)="show(po)"></app-postrow>
-            </ng-container>
+        <ng-container *ngFor="let po of collection">
+            <app-postrow [post]="po" (click)="show(po)"></app-postrow>
+        </ng-container>
     </ng-container>
     <ng-container *ngIf="choice === 2">
         <table>
@@ -43,10 +43,7 @@
                     Status:
                 </td>
                 <td class="fridge">
-                    Post Owner:
-                </td>
-                <td class="fridge">
-                    Post Value:
+                    Offer Owner:
                 </td>
                 <td class="fridge">
                     Offer Value:
@@ -55,28 +52,12 @@
                     Ingredients:
                 </td>
             </tr>
-            <tr class="showcase" *ngFor="let o of ocollection" (click)="showOffer(o)">
-                <td class="fridge">
-                    {{o.status.name}}
-                </td>
-                <td class="fridge">
-                    {{owner(postFor(o))}}
-                </td>
-                <td class="fridge">
-
-                </td>
-                <td class="fridge">
-                    {{ovalue(o)}}
-                </td>
-                <td class="fridge" *ngFor="let i of [0,1,2]">
-                    <ng-container *ngIf="collection.length>i">
-                        {{collection[i].quantity}} {{collection[i].ingredient.name}}
-                    </ng-container>
-                </td>
-            </tr>
         </table>
+        <ng-container *ngFor="let o of ocollection">
+            <app-offerrow [offer]="o" (click)="showOffer(o)"></app-offerrow>
+        </ng-container>
     </ng-container>
     <ng-container *ngIf="choice === 3">
-        <app-showcase [activePost]="activePost" (done)="chooseMain()"></app-showcase>
+        <app-showcase [activePost]="activePost" [activeOffer]="activeOffer" (done)="chooseMain()"></app-showcase>
     </ng-container>
 </div>

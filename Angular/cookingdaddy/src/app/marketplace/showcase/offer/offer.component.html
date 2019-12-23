@@ -1,1 +1,88 @@
-<p>offer works!</p>
+<table>
+    <tr>
+        <td class="fridge">
+            <table>
+                <tr>
+                    <td class="fridge">
+                        Status: {{activeOffer.status.name}}
+                    </td>
+                    <td class="fridge">
+                        Owner: {{username.name}}
+                    </td>
+                    <td class="fridge">
+                        Value: {{value.val}}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="fridge">
+            <ng-container *ngIf="isMaker()">
+                <textarea [(ngModel)]="activeOffer.description"></textarea>
+            </ng-container>
+            <ng-container *ngIf="!isMaker()">
+                <p>{{activeOffer.description}}</p>
+            </ng-container>
+        </td>
+    </tr>
+    <tr>
+        <td class="fridge">
+            <ng-container *ngIf="refresh">
+                <h3>For Trade:</h3>
+                <table class="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of offerIng"
+                    (click)="onIngClick(i)">
+                    <ng-container *ngIf="i.quantity">
+                        <tr class="fridge">
+                            <td>
+                                <h4>{{i.ingredient.name}}</h4>
+                                <br>
+                                <h5>Quantity: {{i.quantity}}</h5>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </table>
+            </ng-container>
+        </td>
+    </tr>
+    <tr>
+        <td class="fridge">
+            <ng-container *ngIf="isOpen()">
+                <br>
+                <h3>Send Back to Inventory:</h3>
+                <table *ngIf="refresh">
+                    <table class="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of returnIng"
+                        (click)="onRetClick(i)">
+                        <ng-container *ngIf="i.quantity">
+                            <tr class="fridge">
+                                <td>
+                                    <h4>{{i.ingredient.name}}</h4>
+                                    <br>
+                                    <h5>Quantity: {{i.quantity}}</h5>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </table>
+                </table>
+            </ng-container>
+            <ng-container *ngIf="isEditable()">
+                <table>
+                    <tr>
+                        <td class="fridge">
+                            <button class="btn" (click)="save()">Save</button>
+                        </td>
+                        <td class="fridge">
+                            <button class="btn" (click)="cancel()">Go Back</button>
+                        </td>
+                        <td class="fridge" *ngIf="activeOffer.status.name ==='bites'">
+                            <button class="btn" (click)="accept()">Accept</button>
+                        </td>
+                        <td class="fridge">
+                            <button class="btn danger" (click)="delete()">Delete Offer</button>
+                        </td>
+                    </tr>
+                </table>
+            </ng-container>
+        </td>
+    </tr>
+</table>
