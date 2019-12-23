@@ -62,7 +62,7 @@ export class ClassifiedsComponent implements OnInit {
     this.posSer.getPost(o.postId).subscribe(resp => {
       this.activeOffer = o;
       this.activePost = resp;
-      this.choice = 4;
+      this.choice = 3;
     });
   }
   public chooseMain() {
@@ -88,7 +88,8 @@ export class ClassifiedsComponent implements OnInit {
     if (!this.allPosts) {
       setTimeout(() => this.chooseMain(), 50);
     } else {
-      this.ocollection = this.allOffers.filter(el => el.offerMakerId === this.perSer.getPerson().id);
+      console.log(this.perSer.getPerson().offers);
+      this.ocollection = this.perSer.getPerson().offers;
       this.ocollection.sort((a, b) => a.status.id - b.status.id);
       this.choice = 2;
       this.refresh();

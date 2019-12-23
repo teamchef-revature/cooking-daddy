@@ -106,8 +106,10 @@
                         </tr>
                         <ng-container *ngFor="let o of activePost.offers">
                             <app-offerrow [offer]="o" (click)="showOffer(o)"></app-offerrow>
+                        <ng-container *ngIf="isMaker()">
                             <button class="btn" (click)="accept(o)">Accept</button>
                             <button class="btn" (click)="reject(o)">Reject</button>
+                        </ng-container>
                         </ng-container>
                     </table>
                 </ng-container>

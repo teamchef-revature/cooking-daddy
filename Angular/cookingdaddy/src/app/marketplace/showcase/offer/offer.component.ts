@@ -99,7 +99,6 @@ export class OfferComponent implements OnInit, OnDestroy {
       window.alert('You must have at least one item up for trade.');
       return;
     }
-    console.log('hi');
     this.traSer.putPerIngInOffer(this.marSer.getBasket().ingredients, this.activeOffer);
     this.marSer.getBasket().ingredients.forEach(peri => {
       this.traSer.newAddIngToOffer(peri.ingredient, this.activeOffer, peri.inventory);
@@ -156,6 +155,9 @@ export class OfferComponent implements OnInit, OnDestroy {
             this.randSer.addIngToPer(i.ingredient, per, i.quantity, true);
           });
         });
+        this.traSer.putOffInDB(o);
       });
+    this.traSer.putPostInDB(this.activePost);
+    this.traSer.putOffInDB(this.activeOffer);
   }
 }
