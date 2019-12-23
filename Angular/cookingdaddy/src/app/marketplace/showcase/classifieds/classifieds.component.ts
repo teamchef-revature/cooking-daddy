@@ -6,6 +6,7 @@ import { TradingService } from '../trading.service';
 import { Offer } from '../offer';
 import { Status } from '../status';
 import { PostService } from '../post.service';
+import { OfferService } from '../offer.service';
 
 @Component({
   selector: 'app-classifieds',
@@ -14,6 +15,7 @@ import { PostService } from '../post.service';
 })
 export class ClassifiedsComponent implements OnInit {
   public allPosts: Post[];
+  public allOffers: Offer[];
   public collection: Post[];
   public ocollection: Offer[];
   public choice: number;
@@ -26,11 +28,20 @@ export class ClassifiedsComponent implements OnInit {
   constructor(
     private perSer: PersonService,
     private traSer: TradingService,
-    private posSer: PostService) {
+    private posSer: PostService,
+    private offSer: OfferService) {
     this.up = this.traSer.unsavedpost;
     this.uo = this.traSer.unsavedoffer;
     this.posSer.getPosts().subscribe(el => this.allPosts = el);
+    this.offSer.getOffers().subscribe(el => this.allOffers = el);
     if (!this.up.id) {
+      this.traSer.getStatuses().subscribe(el => {
+        this.allStats = el;
+        const i = el.findIndex(em => em.name === 'open');
+        this.up.status = el[i];
+      });
+    }
+    if (!this.uo.id) {
       this.traSer.getStatuses().subscribe(el => {
         this.allStats = el;
         const i = el.findIndex(em => em.name === 'open');
@@ -42,38 +53,17 @@ export class ClassifiedsComponent implements OnInit {
   ngOnInit() {
     this.chooseMain();
   }
-  public owner(po: Post): string {
-    let own = new Person();
-    own.username = 'loading';
-    this.perSer.getPersonById(po.personId).subscribe(resp => own = resp);
-    return own.username;
-  }
-  public tvalue(po: Post): number {
-    let num = 0;
-    po.ingredients.forEach(poi => {
-      num += Math.pow(poi.ingredient.quality.id, 3) * poi.quantity;
-    });
-    return num;
-  }
-  public ovalue(o: Offer): number {
-    let num = 0;
-    o.ingredients.forEach(oi => {
-      num += Math.pow(oi.ingredient.quality.id, 3) * oi.quantity;
-    });
-    return num;
-  }
-  public postFor(o: Offer) {
-    const num = Number.parseInt(o.offerMakerId, 10);
-    return this.posSer.getPost(num).subscribe(resp => resp as Post);
-  }
   public show(po: Post) {
     this.activePost = po;
     this.choice = 3;
     this.refresh();
   }
   public showOffer(o: Offer) {
-    this.activeOffer = o;
-    this.choice = 4;
+    this.posSer.getPost(o.postId).subscribe( resp => {
+      this.activeOffer = o;
+      this.activePost = resp;
+      this.choice = 4;
+    });
   }
   public chooseMain() {
     if (!this.allPosts) {
@@ -91,6 +81,8 @@ export class ClassifiedsComponent implements OnInit {
     this.refresh();
   }
   public myOffers() {
+    this.ocollection = this.allOffers.filter(el => el.offerMakerId === this.perSer.getPerson().id);
+    this.ocollection.sort((a, b) => a.status.id - b.status.id);
     this.choice = 2;
     this.refresh();
   }
