@@ -20,6 +20,7 @@ import { RecipeControllerComponent } from './admin/recipe-controller/recipe-cont
 import { RecipeEditControllerComponent } from './admin/recipe-edit-controller/recipe-edit-controller.component';
 import { RestaurantComponent } from './cook/restaurant/restaurant.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { ProfileComponent } from './core/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
   {
     path: 'leaderboard',
     component: LeaderboardComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   },
   {
     path: 'ingredients/:bob',
