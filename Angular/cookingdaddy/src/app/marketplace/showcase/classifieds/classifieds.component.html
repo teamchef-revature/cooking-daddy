@@ -1,17 +1,7 @@
 <div>
-    <table>
-        <tr>
-            <td class="fridge">
-                <button class="btn" (click)="chooseMain()">Available Showcases</button>
-            </td>
-            <td class="fridge">
-                <button class="btn" (click)="myPosts()">My Showcases</button>
-            </td>
-            <td class="fridge">
-                <button class="btn" (click)="myOffers()">My Offers</button>
-            </td>
-        </tr>
-    </table>
+    <button type="button" (click)="chooseMain()">Available Showcases</button>
+    <button type="button" (click)="myPosts()">My Showcases</button>
+    <button type="button" (click)="myOffers()">My Offers</button>
     <ng-container *ngIf="choice === 1">
         <table>
             <tr>

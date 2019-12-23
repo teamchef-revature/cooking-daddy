@@ -1,0 +1,29 @@
+<div class="container">
+    <span style="text-align:center"><h2>Cookbook</h2></span>
+    <table style="margin:auto" class="leaderboard">
+        <tr>
+            <th>Name</th>
+            <th>Flavor</th>
+            <th>Components</th>
+        </tr>
+        <ng-container *ngFor="let r of recipes">
+            <tr class="leaderboard">
+                <td class="leaderboard cookbook">
+                    {{ r.name }}
+                  </td>
+                  <td class="leaderboard cookbook">
+                    {{ r.flavor.name }}
+                  </td>
+                  <td class="leaderboard cookbook">
+                    <ul *ngFor="let c of r.component">
+                      <li style="padding-right:10px" *ngIf="c.ingredient">- {{c.ingredient.name}}</li>
+                      <li style="padding-right:10px" *ngIf="c.category && c.flavor">- {{ c.ingredient.flavor.name }} {{ c.ingredient.category.name }}</li>
+                      <li style="padding-right:10px" *ngIf="c.category && !c.flavor">- {{c.category.name}}</li>
+                      <li style="padding-right:10px" *ngIf="c.flavor && !c.category">- {{c.flavor.name}}</li>
+                      <li style="padding-right:10px" *ngIf="!c.ingredient && !c.category && !c.flavor">- Any</li>
+                    </ul>
+                  </td>
+            </tr>
+        </ng-container>
+    </table>
+</div>

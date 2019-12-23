@@ -1,6 +1,7 @@
 package com.revature.data;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -29,6 +30,21 @@ public class RecipeHibernate implements RecipeDAO {
 		Query<Recipe> query = session.createQuery(queryHQL, Recipe.class);
 		List<Recipe> recipes = query.list();
 		Set<Recipe> adjustedRecipes = new HashSet<Recipe>();
+
+		for (int iter = 0; iter < recipes.size(); iter++) {
+			Recipe recipe = (Recipe) Array.get(recipes.toArray(), iter);
+			adjustedRecipes.add(SetIfAny(recipe));
+		}
+		return adjustedRecipes;
+	}
+	
+	@Override
+	public List<Recipe> getRecipeList() {
+		Session session = hu.getSession();
+		String queryHQL = "from Recipe";
+		Query<Recipe> query = session.createQuery(queryHQL, Recipe.class);
+		List<Recipe> recipes = query.list();
+		List<Recipe> adjustedRecipes = new ArrayList<Recipe>();
 
 		for (int iter = 0; iter < recipes.size(); iter++) {
 			Recipe recipe = (Recipe) Array.get(recipes.toArray(), iter);

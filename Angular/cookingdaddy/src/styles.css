@@ -75,11 +75,16 @@ table {
 }
 
 td {
-    padding: 25px;
+    padding: 10px;
     margin: 0px 25px;
     border: solid 1px;
     border-color: #885544;
     border-radius: 15px;
+}
+
+th {
+    text-align:center;
+    padding:10px;
 }
 
 /* **************************** CLASSES ******************************* */
@@ -100,7 +105,7 @@ td {
 
 .fridge {
     border: 0px;
-    padding: 10px;
+    padding: 5px;
     text-align:center;
 }
 
@@ -128,6 +133,11 @@ td {
     padding: 5px;
     border-radius: 0px;
     text-align: center;
+    vertical-align: middle;
+}
+
+.cookbook {
+    padding:0px 10px;
 }
 
 /* ****************************** IDS ********************************* */
