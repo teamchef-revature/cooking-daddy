@@ -1,26 +1,21 @@
-<table>
-  <tr>
-    <td class="fridge">
-      <button class="btn" (click)="store()">Store</button>
-      <button class="btn" (click)="market()">Market</button>
-    </td>
-  </tr>
-  <tr>
-    <ng-container *ngIf="mode === 2">
-      <td>
-        <app-classifieds></app-classifieds>
-      </td>
-    </ng-container>
-    <td>
-      <app-basket [pi]="ketchup" [refresh]="refresh"></app-basket>
-    </td>
-  </tr>
-  <ng-container *ngIf="mode === 1">
-    <tr>
-      <td>
-        <app-storebasket></app-storebasket>
-        <button class="btn" (click)="trade()">Trade</button>
-      </td>
-    </tr>
+<div class="container">
+  <div>
+    <button type="button" class="my-nav-pill" (click)="store()">Store</button>
+    <button type="button" class="my-nav-pill" (click)="market()">Market</button>
+  </div>
+  <br><br>
+  <ng-container *ngIf="mode === 2">
+    <app-classifieds></app-classifieds>
+    <app-basket [pi]="ketchup" [refresh]="refresh"></app-basket>
   </ng-container>
-</table>
+  <br><br>
+  <div>
+  <ng-container *ngIf="mode === 1">
+    <app-storebasket></app-storebasket>
+    <br>
+    <app-basket [pi]="ketchup" [refresh]="refresh"></app-basket>
+    <br>
+    <button class="btn" (click)="trade()">Trade</button>
+  </ng-container>
+  </div>
+</div>
