@@ -177,7 +177,7 @@ public class IngredientServiceHibernate implements IngredientService {
 	}
 	
 	//initial try to write front end random function in Java if you want to have it somewhat match the front end
-	private Ingredient randIng() {
+	public Ingredient randIng() {
 		List<Ingredient> ingredients = new ArrayList<Ingredient>(getIngredients());
 		List<Quality> qualities = new ArrayList<Quality>(getQualities());
 		Random rdm = new Random();

@@ -12,9 +12,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.revature.beans.Equipment;
 import com.revature.beans.Person;
-import com.revature.beans.Post;
 import com.revature.beans.Role;
 import com.revature.utils.HibernateUtil;
 
