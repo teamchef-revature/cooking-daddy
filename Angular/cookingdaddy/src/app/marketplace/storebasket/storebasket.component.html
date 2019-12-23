@@ -1,30 +1,31 @@
 <app-storefridge (add)="updateBasket()"></app-storefridge>
-<div class="container">
-        <table>
-            <tr>
+<!--<div>
+    <button type="button" (click)="chooseIng()">Ingredients</button>
+    <button type="button" (click)="chooseEqu()">Equipment</button>
+</div>
+Search: <input type="text" [(ngModel)]="searchText">-->
+<hr>
+<div style="float:clear"></div>
+<div style="display:table-row">
+    <h3>Store Basket</h3>
+    <div *ngIf="choice === 1">
+        <table class="fridgetable" style="text-align:center;overflow:auto"
+            *ngFor="let i of storeHolder.ingredients | ingredient:searchText">
+            <tr class="fridge">
                 <td>
-                    <button class="btn" (click)="chooseIng()">Ingredients</button>
+                    <app-ingredient [ingredient]="i.ingredient" (click)="onIngClick(i)"></app-ingredient>
                 </td>
+            </tr>
+            <tr class="fridge">
                 <td>
-                    <button class="btn" (click)="chooseEqu()">Equipment</button>
+                    <div class="fridge">Available Inventory: {{i.inventory}}</div>
                 </td>
             </tr>
         </table>
-        Search: <input type="text" [(ngModel)]="searchText">
-        
-        <div *ngIf="choice === 1">
-        <table class ="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of storeHolder.ingredients | ingredient:searchText">
-            <tr class= "fridge"><td>
-            <app-ingredient [ingredient] = "i.ingredient" (click) = "onIngClick(i)"></app-ingredient>
-            </td></tr>
-            <tr class = "fridge"><td>
-            <div class="fridge">Available Inventory: {{i.inventory}}</div>
-            </td></tr>
-        </table>
+    </div>
+    <div *ngIf="choice === 2">
+        <div *ngFor="let e of storeHolder.equipments | equipment:searchText">
+            <app-equipment [equipment]="e.equipment"></app-equipment>
         </div>
-        <div *ngIf="choice === 2">
-            <div *ngFor="let e of storeHolder.equipments | equipment:searchText">
-                <app-equipment [equipment] = "e.equipment"></app-equipment>
-            </div>
-            </div>
-        </div>
+    </div>
+</div>
