@@ -30,6 +30,8 @@ public class Post {
 	private Integer personId;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "postid")
 	private Set<PostIngredient> ingredients;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "postId")
+	private Set<Offer> offers;
 	public Post() {
 		super();
 	}
@@ -63,6 +65,12 @@ public class Post {
 	public void setIngredients(Set<PostIngredient> ingredients) {
 		this.ingredients = ingredients;
 	}
+	public Set<Offer> getOffers() {
+		return offers;
+	}
+	public void setOffers(Set<Offer> offers) {
+		this.offers = offers;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,6 +78,8 @@ public class Post {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((ingredients == null) ? 0 : ingredients.hashCode());
+		result = prime * result + ((offers == null) ? 0 : offers.hashCode());
+		result = prime * result + ((personId == null) ? 0 : personId.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
@@ -97,6 +107,16 @@ public class Post {
 				return false;
 		} else if (!ingredients.equals(other.ingredients))
 			return false;
+		if (offers == null) {
+			if (other.offers != null)
+				return false;
+		} else if (!offers.equals(other.offers))
+			return false;
+		if (personId == null) {
+			if (other.personId != null)
+				return false;
+		} else if (!personId.equals(other.personId))
+			return false;
 		if (status == null) {
 			if (other.status != null)
 				return false;
@@ -106,8 +126,8 @@ public class Post {
 	}
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", status=" + status + ", description=" + description + ", ingredients=" + ingredients
-				+ "]";
+		return "Post [id=" + id + ", status=" + status + ", description=" + description + ", personId=" + personId
+				+ ", ingredients=" + ingredients + ", offers=" + offers + "]";
 	}
-
+	
 }

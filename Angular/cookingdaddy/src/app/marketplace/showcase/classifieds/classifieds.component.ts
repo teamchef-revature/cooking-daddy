@@ -59,10 +59,10 @@ export class ClassifiedsComponent implements OnInit {
     this.refresh();
   }
   public showOffer(o: Offer) {
-    this.posSer.getPost(o.postId).subscribe( resp => {
+    this.posSer.getPost(o.postId).subscribe(resp => {
       this.activeOffer = o;
       this.activePost = resp;
-      this.choice = 4;
+      this.choice = 3;
     });
   }
   public chooseMain() {
@@ -75,16 +75,25 @@ export class ClassifiedsComponent implements OnInit {
     }
   }
   public myPosts() {
-    this.collection = this.allPosts.filter(el => (el.personId === this.perSer.getPerson().id));
-    this.collection.sort((a, b) => a.status.id - b.status.id);
-    this.choice = 1;
-    this.refresh();
+    if (!this.allPosts) {
+      setTimeout(() => this.chooseMain(), 50);
+    } else {
+      this.collection = this.allPosts.filter(el => (el.personId === this.perSer.getPerson().id));
+      this.collection.sort((a, b) => a.status.id - b.status.id);
+      this.choice = 1;
+      this.refresh();
+    }
   }
   public myOffers() {
-    this.ocollection = this.allOffers.filter(el => el.offerMakerId === this.perSer.getPerson().id);
-    this.ocollection.sort((a, b) => a.status.id - b.status.id);
-    this.choice = 2;
-    this.refresh();
+    if (!this.allPosts) {
+      setTimeout(() => this.chooseMain(), 50);
+    } else {
+      console.log(this.perSer.getPerson().offers);
+      this.ocollection = this.perSer.getPerson().offers;
+      this.ocollection.sort((a, b) => a.status.id - b.status.id);
+      this.choice = 2;
+      this.refresh();
+    }
   }
   refresh() {
     const i = this.choice;
