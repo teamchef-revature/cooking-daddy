@@ -10,18 +10,13 @@ import { Router } from '@angular/router';
 })
 export class MealComponent implements OnInit {
   @Input() private currentMeal: Meal;
-  constructor(private cookService: CookService, private router: Router/*, private route: ActivatedRoute*/) { }
+  @Input() private parentName: string;
+  constructor(private cookService: CookService, private router: Router) { }
 
   ngOnInit() {
-    // this.currentMeal = this.cookService.getMeal();
-    /*const id = +this.route.snapshot;
-    if (id) {
-      this.bookService.getBook(id).subscribe(
-        book => {
-          this.book = book;
-        }
-      );
-    }*/
+    if (!this.currentMeal) {
+      this.currentMeal = this.cookService.getMeal();
+    }
   }
 
   serveMeal() {
@@ -36,6 +31,11 @@ export class MealComponent implements OnInit {
         window.alert('The whole restaurant just disappeared! You\'re in the void!');
       }
     );
-    this.router.navigate(['/fridge']);
+    if (this.parentName === 'fridge') {
+      this.router.navigate(['/fridge']);
+    }
+    else if (this.parentName === 'restaurant') {
+      this.router.navigate(['/restaurant']);
+    }
   }
 }
