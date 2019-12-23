@@ -99,15 +99,17 @@ export class OfferComponent implements OnInit, OnDestroy {
       window.alert('You must have at least one item up for trade.');
       return;
     }
+    console.log('hi');
     this.traSer.putPerIngInOffer(this.marSer.getBasket().ingredients, this.activeOffer);
     this.marSer.getBasket().ingredients.forEach(peri => {
-      this.randSer.addIngToPer(peri.ingredient, this.perSer.getPerson(), 0, true);
+      this.traSer.newAddIngToOffer(peri.ingredient, this.activeOffer, peri.inventory);
     });
     this.marSer.getBasket().ingredients = [];
     this.returnIng.forEach(pi => {
       this.randSer.addIngToPer(pi.ingredient, this.perSer.getPerson(), pi.quantity, true);
     });
-    this.activeOffer.ingredients = this.offerIng;
+    //this.activeOffer.ingredients = this.offerIng;
+    console.log(this.activeOffer);
     this.traSer.putOffInDB(this.activeOffer);
     this.traSer.unsavedoffer = new Offer();
     this.traSer.unsavedoffer.ingredients = [];

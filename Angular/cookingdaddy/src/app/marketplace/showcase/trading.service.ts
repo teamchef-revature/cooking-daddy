@@ -34,6 +34,7 @@ export class TradingService {
     private offSer: OfferService) {
     this.unsavedoffer = new Offer();
     this.unsavedoffer.offerMakerId = perSer.getPerson().id;
+    this.unsavedoffer.ingredients = [];
     this.unsavedpost = new Post();
     this.unsavedpost.personId = perSer.getPerson().id;
     this.unsavedpost.ingredients = [];
@@ -83,6 +84,19 @@ export class TradingService {
     }
   }
 
+  public newAddIngToOffer(ing: Ingredient, o: Offer, num: number) {
+    const check = o.ingredients.filter(el => el.ingredient.id === ing.id);
+    if (check.length > 0) {
+      check[0].quantity += num;
+    } else {
+      const oi = new OfferIngredient();
+      oi.ingredient = ing;
+      oi.offerId = o.id;
+      oi.quantity = num;
+      o.ingredients.push(oi);
+    }
+  }
+
   public addPostIngToSet(ing: Ingredient, box: PostIngredient[], change: number, postid: number): boolean {
     const prev = box.findIndex(poing => poing.ingredient.id === ing.id);
     if (prev + 1 > 0) {
@@ -113,10 +127,10 @@ export class TradingService {
 
   public putOffInDB(o: Offer) {
     if (o.id) {
-      console.log('update');
+      console.log('update oing');
       this.offSer.updateOffer(o).subscribe();
     } else {
-      console.log('add');
+      console.log('add oing');
       this.offSer.addOffer(o).subscribe(resp => o = resp);
     }
   }
