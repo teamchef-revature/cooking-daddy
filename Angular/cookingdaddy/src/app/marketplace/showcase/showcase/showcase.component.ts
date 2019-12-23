@@ -113,6 +113,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
     this.traSer.putPostInDB(this.activePost);
     this.traSer.unsavedpost = new Post();
     this.traSer.unsavedpost.ingredients = [];
+    this.traSer.unsavedpost.status = this.allStatuses.filter(el => el.name === 'open')[0];
     this.done.emit(true);
   }
   private cancel() {
@@ -174,6 +175,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   }
   private makeOffer() {
     this.activeOffer = this.traSer.unsavedoffer;
+    this.activeOffer.status = this.allStatuses.filter(el => el.name === 'open')[0];
     this.refresh = 0;
     setTimeout(() => {
       this.refresh = 1;

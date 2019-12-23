@@ -111,6 +111,7 @@ export class OfferComponent implements OnInit, OnDestroy {
     this.traSer.putOffInDB(this.activeOffer);
     this.traSer.unsavedoffer = new Offer();
     this.traSer.unsavedoffer.ingredients = [];
+    this.traSer.unsavedoffer.status = this.allStatuses.filter(el => el.name === 'open')[0];
     this.activePost.status = this.allStatuses.filter(el => el.name === 'bites')[0];
     this.traSer.putPostInDB(this.activePost);
     this.over.emit(true);
