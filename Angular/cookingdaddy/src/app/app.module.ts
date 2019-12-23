@@ -38,7 +38,7 @@ import { QualityAddControllerComponent } from './admin/quality-add-controller/qu
 import { QualityEditControllerComponent } from './admin/quality-edit-controller/quality-edit-controller.component';
 import { IngredientEditControllerComponent } from './admin/ingredient-edit-controller/ingredient-edit-controller.component';
 import { IngredientAddControllerComponent } from './admin/ingredient-add-controller/ingredient-add-controller.component';
-import { CookbookComponent } from './cook/cookbook/cookbook/cookbook.component';
+import { CookbookComponent } from './cookbook/cookbook/cookbook.component';
 import { StorefridgeComponent } from './marketplace/storefridge/storefridge.component';
 import { StorebasketComponent } from './marketplace/storebasket/storebasket.component';
 import { SeasonControllerComponent } from './admin/season-controller/season-controller.component';
@@ -60,6 +60,7 @@ import { OfferComponent } from './marketplace/showcase/offer/offer.component';
 import { PostrowComponent } from './marketplace/showcase/postrow/postrow.component';
 import { OfferrowComponent } from './marketplace/showcase/offerrow/offerrow.component';
 import { ProfileComponent } from './core/profile/profile.component';
+import { CookbookService } from './cookbook/cookbook.service';
 
 @NgModule({
   declarations: [
@@ -126,6 +127,7 @@ import { ProfileComponent } from './core/profile/profile.component';
     PersonService,
     AdminService,
     MarketServiceService,
+    CookbookService,
     DatePipe
   ],
   bootstrap: [AppComponent]
