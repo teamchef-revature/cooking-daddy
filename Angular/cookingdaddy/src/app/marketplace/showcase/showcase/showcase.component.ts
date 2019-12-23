@@ -175,6 +175,7 @@ export class ShowcaseComponent implements OnInit, OnDestroy {
   }
   private makeOffer() {
     this.activeOffer = this.traSer.unsavedoffer;
+    this.activeOffer.postId = this.activePost.id;
     this.activeOffer.status = this.allStatuses.filter(el => el.name === 'open')[0];
     this.refresh = 0;
     setTimeout(() => {

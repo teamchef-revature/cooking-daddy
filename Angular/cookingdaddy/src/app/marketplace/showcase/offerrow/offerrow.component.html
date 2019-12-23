@@ -10,7 +10,7 @@
             {{value.val}}
         </td>
         <td class="fridge" *ngFor="let i of [0,1,2]">
-            <ng-container *ngIf="activeOffer.ingredients.length>i">
+            <ng-container *ngIf="offer.ingredients.length>i">
                 {{offer.ingredients[i].quantity}} {{offer.ingredients[i].ingredient.name}}
             </ng-container>
         </td>
