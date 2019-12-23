@@ -1,0 +1,8 @@
+<h4>{{ currentMeal.recipe.name }}</h4>
+<p>Quality: {{ currentMeal.quality.name }}</p>
+<p>Inventory: {{ currentMeal.inventory }}</p>
+<p>Most recently used ingredients: </p>
+<ul *ngFor="let i of currentMeal.ingredients">
+    <li>{{ i.name }}</li>
+</ul>
+<button type="button" (click)="serveMeal()">Serve</button>

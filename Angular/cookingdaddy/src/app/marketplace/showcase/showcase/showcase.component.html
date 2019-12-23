@@ -1,0 +1,125 @@
+<table>
+    <tr>
+        <td class="fridge">
+            <table>
+                <tr>
+                    <td class="fridge">
+                        Status: {{activePost.status.name}}
+                    </td>
+                    <td class="fridge">
+                        Owner: {{username.name}}
+                    </td>
+                    <td class="fridge">
+                        Value: {{value.val}}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td class="fridge">
+            <ng-container *ngIf="isMaker()">
+                <textarea [(ngModel)]="activePost.description"></textarea>
+            </ng-container>
+            <ng-container *ngIf="!isMaker()">
+                <p>{{activePost.description}}</p>
+            </ng-container>
+        </td>
+    </tr>
+    <tr>
+        <td class="fridge">
+            <ng-container *ngIf="refresh">
+                <h3>For Trade:</h3>
+                <table class="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of postIng"
+                    (click)="onIngClick(i)">
+                    <ng-container *ngIf="i.quantity">
+                        <tr class="fridge">
+                            <td>
+                                <h4>{{i.ingredient.name}}</h4>
+                                <br>
+                                <h5>Quantity: {{i.quantity}}</h5>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </table>
+            </ng-container>
+        </td>
+    </tr>
+    <tr>
+        <td class="fridge">
+            <ng-container *ngIf="isOpen()">
+                <br>
+                <h3>Send Back to Inventory:</h3>
+                <table *ngIf="refresh">
+                    <table class="fridgetable" style="text-align:center;overflow:auto" *ngFor="let i of returnIng"
+                        (click)="onRetClick(i)">
+                        <ng-container *ngIf="i.quantity">
+                            <tr class="fridge">
+                                <td>
+                                    <h4>{{i.ingredient.name}}</h4>
+                                    <br>
+                                    <h5>Quantity: {{i.quantity}}</h5>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </table>
+                </table>
+            </ng-container>
+            <ng-container *ngIf="isEditable()">
+                <table>
+                    <tr>
+                        <td class="fridge">
+                            <button class="btn" (click)="save()">Save</button>
+                        </td>
+                        <td class="fridge">
+                            <button class="btn" (click)="cancel()">Go Back</button>
+                        </td>
+                        <td class="fridge">
+                            <button class="btn danger" (click)="delete()">Delete Showcase</button>
+                        </td>
+                    </tr>
+                </table>
+            </ng-container>
+        </td>
+    </tr>
+    <tr>
+        <td class="fridge">
+            <ng-container *ngIf="refresh">
+                <ng-container *ngIf="isEditable()">
+                    Current Offers:
+                    <table>
+                        <tr>
+                            <td class="fridge">
+                                Status:
+                            </td>
+                            <td class="fridge">
+                                Owner:
+                            </td>
+                            <td class="fridge">
+                                Value:
+                            </td>
+                            <td class="fridge">
+                                Ingredients:
+                            </td>
+                        </tr>
+                        <ng-container *ngFor="let o of activePost.offers">
+                            <app-offerrow [offer]="o" (click)="showOffer(o)"></app-offerrow>
+                            <button class="btn" (click)="accept(o)">Accept</button>
+                            <button class="btn" (click)="reject(o)">Reject</button>
+                        </ng-container>
+                    </table>
+                </ng-container>
+            </ng-container>
+        </td>
+    </tr>
+    <tr>
+        <td class="fridge">
+            <ng-container *ngIf="isEditable()&&!isMaker()">
+                <ng-container *ngIf="activeOffer && refresh">
+                    <app-offer [activeOffer]="activeOffer" [activePost]="activePost" (over)="nullAo()"></app-offer>
+                </ng-container>
+                <button class="btn" (click)="makeOffer()">Make Offer</button>
+            </ng-container>
+        </td>
+    </tr>
+</table>

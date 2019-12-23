@@ -1,0 +1,19 @@
+<div *ngIf="season">
+    <div class="row">
+        <div class="col-sm-1">
+            <button class="btn btn-caution" (click)="editSeason()">Edit</button>
+        </div>
+        <div class="col-sm-4">
+            {{season.name}}
+            <span *ngIf="inSeason(season)" style="color: darkblue;">ACTIVE </span>
+            <span *ngIf="season.recurring" style="color: darkgreen;">RECURRING</span>
+        </div>
+        <div class="col-sm-3">
+            {{pipeDate(season.timeStart)}}
+        </div>
+        <div class="col-sm-3">
+            {{pipeDate(season.timeEnd)}}
+        </div>
+        <div class="col-sm-7"></div>
+    </div>
+</div>

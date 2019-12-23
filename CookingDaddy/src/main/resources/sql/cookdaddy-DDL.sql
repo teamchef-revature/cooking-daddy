@@ -74,6 +74,8 @@ CREATE TABLE PERSON (
     FIRST VARCHAR2(32),
     LAST VARCHAR2(21)
 );
+alter table person add (CHEF_RATING number);
+alter table person add (MEALS_SERVED number);
 CREATE SEQUENCE PERSON_SEQ;
 
 /*
@@ -218,6 +220,7 @@ CREATE TABLE POST (
     CONSTRAINT FK_POST_STATUS FOREIGN KEY (STATUS_ID) REFERENCES STATUS(ID),
     DESCRIPTION VARCHAR2(128)
 );
+alter table post add (person_id number(20) references person(id));
 CREATE SEQUENCE POST_SEQ;
 
 /*
@@ -235,6 +238,7 @@ CREATE TABLE OFFER (
     CONSTRAINT FK_OFFER_STATUS FOREIGN KEY (STATUS_ID) REFERENCES STATUS(ID),
     DESCRIPTION VARCHAR2(128)
 );
+alter table offer add (offer_maker number(20) references person(id));
 CREATE SEQUENCE OFFER_SEQ;
 
 /*
@@ -252,6 +256,16 @@ CREATE TABLE OFFER_INGREDIENT (
     CONSTRAINT PK_OFFER_INGREDIENT PRIMARY KEY (OFFER_ID, PERSON_INGREDIENT_ID),
     QUANTITY NUMBER(10) NOT NULL
 );
+drop table offer_ingredient cascade constraints;
+
+create table offer_ingredient (
+    id number(20) primary key,
+    offer_id number(20) not null references offer(id),
+    ingredient_id number(20) not null references ingredient(id),
+    quantity number(20) not null
+);
+
+CREATE SEQUENCE OFFER_INGREDIENT_SEQ;
 
 /*
     OFFER_MEAL table
@@ -301,6 +315,16 @@ CREATE TABLE POST_INGREDIENT (
     QUANTITY NUMBER(10) NOT NULL
 );
 
+drop table post_ingredient cascade constraints;
+
+create table post_ingredient (
+    id number(20) primary key,
+    post_id number(20) not null references post(id),
+    ingredient_id number(20) not null references ingredient(id),
+    quantity number(20) not null
+);
+CREATE SEQUENCE POST_INGREDIENT_SEQ;
+
 /*
     POST_MEAL table
     POST_ID (NUMBER) - Not Null Foreign Key to POST table
@@ -336,11 +360,18 @@ CREATE TABLE POST_EQUIPMENT (
     SEASON table
     ID (NUMBER) - Primary Key
     NAME (VARCHAR2) - Not Null
+    START_TIME (NUMBER)
+    END_TIME (NUMBER)
+    RECURRING (NUMBER)
 */
 CREATE TABLE SEASON (
     ID NUMBER(20) PRIMARY KEY,
-    NAME VARCHAR2(256) NOT NULL
+    NAME VARCHAR2(256) NOT NULL,
+    START_TIME NUMBER,
+    END_TIME NUMBER,
+    RECURRING NUMBER
 );
+alter table season add (start_time number, end_time number, recurring number);
 CREATE SEQUENCE SEASON_SEQ;
 
 /*
@@ -373,7 +404,7 @@ CREATE TABLE COMPONENT (
     FLAVOR_ID NUMBER(20),
     CONSTRAINT FK_COMPONENT_FLAVOR FOREIGN KEY (FLAVOR_ID) REFERENCES FLAVOR(ID)
 );
-CREATE SEQUENCE COMPONET_SEQ;
+CREATE SEQUENCE COMPONENT_SEQ;
 
 /*
     RECIPE table
@@ -391,17 +422,20 @@ CREATE SEQUENCE RECIPE_SEQ;
 
 /*
     RECIPE_COMPONENT
+    ID (NUMBER) - Primary Key
     RECIPE_ID (NUMBER) - Foreign Key to RECIPE table
     COMPONENT_ID (NUMBER) - Foreign key to COMPONENT table
+    QUANTITY (NUMBER) - Not Null : At least 0
 */
 CREATE TABLE RECIPE_COMPONENT (
+    ID NUMBER(20) PRIMARY KEY,
     RECIPE_ID NUMBER(20) NOT NULL,
     CONSTRAINT FK_RECIPE_COMPONENT_RECIPE FOREIGN KEY (RECIPE_ID) REFERENCES RECIPE(ID),
     COMPONENT_ID NUMBER(20) NOT NULL,
     CONSTRAINT FK_RECIPE_COMPONENT_COMPONENT FOREIGN KEY (COMPONENT_ID) REFERENCES COMPONENT(ID),
-    CONSTRAINT PK_RECIPE_COMPONENT PRIMARY KEY (RECIPE_ID, COMPONENT_ID)
+    QUANTITY NUMBER(20) NOT NULL
 );
-
+CREATE SEQUENCE RECIPE_COMPONENT_SEQ;
 /*
     MEAL table
     ID (NUMBER) - Primary Key,

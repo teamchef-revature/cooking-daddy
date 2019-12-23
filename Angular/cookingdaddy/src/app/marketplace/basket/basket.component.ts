@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, DoCheck } from '@angular/core';
+import { Component, OnInit, Input, DoCheck, OnChanges } from '@angular/core';
 import { MarketServiceService } from '../market-service.service';
 import { Person } from 'src/app/shared/person/person';
 import { PersonIngredient } from 'src/app/shared/personIngredient/person-ingredient';
@@ -13,16 +13,20 @@ import { PersonService } from 'src/app/shared/person/person.service';
 export class BasketComponent implements OnInit {
   @Input() holder: Person;
   choice: number;
+  clicked: number;
   activePerson: Person;
-  constructor(private basketHolder: MarketServiceService, active: PersonService) {
+  @Input() refresh: {on: number};
+  @Input() pi: PersonIngredient[];
+  constructor(private basketHolder: MarketServiceService, private active: PersonService) {
     if (!this.holder) {
-      this.holder = basketHolder.getBasket();
       this.choice = 1;
-      this.activePerson = active.getPerson();
+      this.clicked = 1;
     }
   }
   ngOnInit() {
     this.choice = 1;
+    this.holder = this.basketHolder.getBasket();
+    this.activePerson = this.active.getPerson();
   }
   chooseIng() {
     this.choice = 1;
@@ -35,13 +39,23 @@ export class BasketComponent implements OnInit {
       const ingredients: PersonIngredient[] = this.holder.ingredients.filter(element => element !== ping);
       this.holder.ingredients = ingredients;
       this.basketHolder.restoreItem(ping, this.activePerson);
-
     } else {
       ping.inventory--;
       console.log(this.activePerson);
       this.basketHolder.restoreItem(ping, this.activePerson);
     }
+    this.refresh.on = 0;
+    setTimeout(() => {
+      this.refresh.on = 1;
+    }, 100);
   }
+  updateBasket() {
+    this.choice = (this.choice === 1) ? 2 : 1;
+    setTimeout(() => {
+      this.choice = (this.choice === 1) ? 2 : 1;
+    }, 100);
+  }
+  submit() {
+// implement submit to add a post to the database
 }
-
-
+}

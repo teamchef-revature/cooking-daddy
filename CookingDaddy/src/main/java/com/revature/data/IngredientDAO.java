@@ -7,6 +7,7 @@ import com.revature.beans.Flavor;
 import com.revature.beans.Ingredient;
 import com.revature.beans.PersonIngredient;
 import com.revature.beans.Quality;
+import com.revature.beans.Season;
 
 public interface IngredientDAO {
 	
@@ -30,6 +31,12 @@ public interface IngredientDAO {
 	public Integer addQuality(Quality quality);
 	public Quality updateQuality(Quality quality);
 	
+	public Season getSeason(Integer id);
+	public Set<Season> getSeasons();
+	public Integer addSeason(Season season);
+	public Season updateSeason(Season season);
+	
 	public Integer addPersonIngredient(PersonIngredient pi);
 	public PersonIngredient updatePersonIngredient(PersonIngredient pi);
+	public void deletePersonIngredient(PersonIngredient pi);
 }

@@ -7,6 +7,7 @@ import { Flavor } from '../ingredient/flavor';
 import { Category } from '../ingredient/category';
 import { Quality } from '../ingredient/quality';
 import { Ingredient } from '../ingredient/ingredient';
+import { Recipe } from '../../cook/recipe';
 
 @Injectable({
   providedIn: 'root'
@@ -48,14 +49,14 @@ export class AdminService {
   public getFlavor(id: number): Observable<Flavor> {
     const url: string = this.appUrl + '/flavor/' + id;
     return this.http.get(url, { withCredentials: true }).pipe(
-      map( resp => resp as Flavor));
+      map(resp => resp as Flavor));
   }
   public updateFlavor(flavor: Flavor) {
     const body = JSON.stringify(flavor);
     if (flavor.id) {
       return this.http.put(this.appUrl + '/flavor/' + flavor.id, body, {
         headers: this.headers, withCredentials: true
-      }).pipe(map (resp => resp as Flavor));
+      }).pipe(map(resp => resp as Flavor));
     }
   }
   public addFlavor(flavor: Flavor) {
@@ -80,14 +81,14 @@ export class AdminService {
     if (quality.id) {
       return this.http.put(this.appUrl + '/quality/' + quality.id, body, {
         headers: this.headers, withCredentials: true
-      }).pipe(map (resp => resp as Quality));
+      }).pipe(map(resp => resp as Quality));
     }
   }
   public addQuality(quality: Quality) {
     const body = JSON.stringify(quality);
     return this.http.post(this.appUrl + '/quality', body, {
       headers: this.headers, withCredentials: true
-    }).pipe( map( resp => resp as Quality ));
+    }).pipe(map(resp => resp as Quality));
   }
 
   public getIngredients(): Observable<Ingredient[]> {
@@ -98,20 +99,52 @@ export class AdminService {
   public getIngredient(id: number): Observable<Ingredient> {
     const url: string = this.appUrl + '/ingredient/' + id;
     return this.http.get(url, { withCredentials: true }).pipe(
-      map( resp => resp as Ingredient));
+      map(resp => resp as Ingredient));
   }
   public updateIngredient(ingredient: Ingredient) {
     const body = JSON.stringify(ingredient);
     if (ingredient.id) {
-      return this.http.put( this.appUrl + '/ingredient/' + ingredient.id, body, {
+      return this.http.put(this.appUrl + '/ingredient/' + ingredient.id, body, {
         headers: this.headers, withCredentials: true
-      }).pipe(map (resp => resp as Ingredient));
+      }).pipe(map(resp => resp as Ingredient));
     }
   }
   public addIngredient(ingredient: Ingredient) {
     const body = JSON.stringify(ingredient);
     return this.http.post(this.appUrl + '/ingredient', body, {
       headers: this.headers, withCredentials: true
-    }).pipe( map( resp => resp as Ingredient ));
+    }).pipe(map(resp => resp as Ingredient));
+  }
+
+  public getRecipes(): Observable<Recipe[]> {
+    return this.http.get(this.appUrl + '/recipe', {
+      withCredentials: true
+    }).pipe(map(resp => resp as Recipe[]));
+  }
+  public getRecipe(id: number): Observable<Recipe> {
+    const url: string = this.appUrl + '/recipe/' + id;
+    return this.http.get(url, { withCredentials: true }).pipe(
+      map(resp => resp as Recipe));
+  }
+  public updateRecipe(recipe: Recipe) {
+    const body = JSON.stringify(recipe);
+    if (recipe.id) {
+      return this.http.put(this.appUrl + '/recipe/' + recipe.id, body, {
+        headers: this.headers, withCredentials: true
+      }).pipe(map(resp => resp as Recipe));
+    }
+  }
+  public addRecipe(recipe: Recipe) {
+    const body = JSON.stringify(recipe);
+    return this.http.post(this.appUrl + '/recipe', body, {
+      headers: this.headers, withCredentials: true
+    }).pipe(map(resp => resp as Recipe));
+  }
+  public removeRecipeComponent(recipe: Recipe) {
+    if (recipe.id != null) {
+      return this.http.delete(this.appUrl + '/recipe/' + recipe.id, {
+        headers: this.headers, withCredentials: true
+      });
+    }
   }
 }

@@ -1,0 +1,78 @@
+<div *ngIf="recipe">
+    <div class="row">
+        <div class="col-sm-1">
+            <button class="btn btn-warning" (click)="addRecipe()">Add</button>
+        </div>
+        <div class="col-sm-6">
+            <label for="recipe">Recipe Name (required)</label>
+            <input type="text" name="recipe" [(ngModel)]="recipe.name" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">
+            <label for="flavor">Recipe Flavor (required)</label>
+            <select [(ngModel)]="recipe.flavor" (ngModelChange)="addRecipeFlavor($event)" name="flavor">
+                <option *ngFor="let recipeFlavor of recipeFlavorList" [ngValue]="recipeFlavor">{{recipeFlavor.name}}</option>
+            </select>
+        </div>
+        <div class="col-sm-5">
+            <h4>Current Components</h4>
+            <div *ngFor="let recipeComponents of addedComponentList">
+                <div *ngIf="recipeComponents.flavor">
+                    <button class="btn btn-danger btn-sm" (click)="remove(recipeComponents)">x</button>
+                    <em>Flavor:</em> {{recipeComponents.flavor.name}} x{{recipeComponents.quantity}}
+                </div>
+                <div *ngIf="recipeComponents.category">
+                    <button class="btn btn-danger btn-sm" (click)="remove(recipeComponents)">x</button>
+                    <em>Category:</em> {{recipeComponents.category.name}} x{{recipeComponents.quantity}}
+                </div>
+                <div *ngIf="recipeComponents.ingredient">
+                    <button class="btn btn-danger btn-sm" (click)="remove(recipeComponents)">x</button>
+                    <em>Ingredient:</em> {{recipeComponents.ingredient.name}} x{{recipeComponents.quantity}}
+                </div>
+                <div *ngIf="recipeComponents.any">
+                    <button class="btn btn-danger btn-sm" (click)="remove(recipeComponents)">x</button>
+                    <em>Any Ingredient</em> x{{recipeComponents.quantity}}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="row">
+                <h4>Select Component</h4>
+            </div>
+            <div class="row">
+                <label for="add-ingredient">Ingredient</label>
+                <select [(ngModel)]="ingredient" (ngModelChange)="addIngredient($event)" name="add-ingredient">
+                    <option *ngFor="let ingredient of ingredientList" [ngValue]="ingredient">{{ingredient.name}}</option>
+                </select>
+            </div>
+            <div class="row">
+                <label for="add-category">Category</label>
+                <select [(ngModel)]="category" (ngModelChange)="addCategory($event)" name="add-category">
+                    <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
+                </select>
+            </div>
+            <div class="row">
+                <label for="add-flavor">Flavor</label>
+                <select [(ngModel)]="flavor" (ngModelChange)="addFlavor($event)" name="add-flavor">
+                    <option *ngFor="let flavor of flavorList" [ngValue]="flavor">{{flavor.name}}</option>
+                </select>
+            </div>
+            <div class="row">
+                <label>Any Component</label>
+                <button *ngIf="!addedComponent.any" class="btn btn-caution" (click)="addAny()">Add Any</button>
+                <label *ngIf="addedComponent.any">Currently Any Component</label>
+            </div>
+            <div class="row">
+                <label for="add-quantity">Quantity</label>
+                <div class="col-sm-4">
+                    <input type="number" name="add-quantity" [(ngModel)]="addedComponent.quantity" />
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn btn-primary" (click)="addComponent()">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

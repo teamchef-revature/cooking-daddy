@@ -1,0 +1,23 @@
+<table>
+    <tr>
+        <td class="fridge">
+            {{offer.status.name}}
+        </td>
+        <td class="fridge">
+            {{owner.name}}
+        </td>
+        <td class="fridge">
+            {{value.val}}
+        </td>
+        <td class="fridge" *ngFor="let i of [0,1,2]">
+            <ng-container *ngIf="activeOffer.ingredients.length>i">
+                {{offer.ingredients[i].quantity}} {{offer.ingredients[i].ingredient.name}}
+            </ng-container>
+        </td>
+    </tr>
+    <tr>
+        <td class="fridge" colspan="7">
+            {{offer.description}}
+        </td>
+    </tr>
+</table>

@@ -1,6 +1,5 @@
 package com.revature.beans;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,22 +11,21 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table
-public class Component {
+@Table(name="offer_ingredient")
+public class OfferIngredient {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="prometheus")
-	@SequenceGenerator(name="prometheus", sequenceName="meal_seq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="any takers")
+	@SequenceGenerator(name="any takers", sequenceName="offer_ingredient_seq", allocationSize=1)
 	private Integer id;
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="ingredient_id")
 	private Ingredient ingredient;
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="category_id")
-	private Category category;
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="flavor_id")
-	private Flavor flavor;
-
+	@JoinColumn(name="offer_id")
+	private Integer offerId;
+	private Integer quantity;
+	public OfferIngredient() {
+		super();
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -40,26 +38,26 @@ public class Component {
 	public void setIngredient(Ingredient ingredient) {
 		this.ingredient = ingredient;
 	}
-	public Category getCategory() {
-		return category;
+	public Integer getOfferId() {
+		return offerId;
 	}
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setOfferId(Integer offerId) {
+		this.offerId = offerId;
 	}
-	public Flavor getFlavor() {
-		return flavor;
+	public Integer getQuantity() {
+		return quantity;
 	}
-	public void setFlavor(Flavor flavor) {
-		this.flavor = flavor;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((flavor == null) ? 0 : flavor.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((ingredient == null) ? 0 : ingredient.hashCode());
+		result = prime * result + ((offerId == null) ? 0 : offerId.hashCode());
+		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		return result;
 	}
 	@Override
@@ -70,17 +68,7 @@ public class Component {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Component other = (Component) obj;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
-			return false;
-		if (flavor == null) {
-			if (other.flavor != null)
-				return false;
-		} else if (!flavor.equals(other.flavor))
-			return false;
+		OfferIngredient other = (OfferIngredient) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -91,12 +79,22 @@ public class Component {
 				return false;
 		} else if (!ingredient.equals(other.ingredient))
 			return false;
+		if (offerId == null) {
+			if (other.offerId != null)
+				return false;
+		} else if (!offerId.equals(other.offerId))
+			return false;
+		if (quantity == null) {
+			if (other.quantity != null)
+				return false;
+		} else if (!quantity.equals(other.quantity))
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Component [id=" + id + ", ingredient=" + ingredient + ", category=" + category + ", flavor=" + flavor
-				+ "]";
+		return "OfferIngredient [id=" + id + ", ingredient=" + ingredient + ", offerId=" + offerId + ", quantity="
+				+ quantity + "]";
 	}
-
+	
 }

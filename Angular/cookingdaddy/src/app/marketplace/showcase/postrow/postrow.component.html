@@ -1,0 +1,18 @@
+<table>
+    <tr>
+        <td class="fridge">
+            {{post.status.name}}
+        </td>
+        <td class="fridge">
+            {{owner.name}}
+        </td>
+        <td class="fridge">
+            {{tvalue()}}
+        </td>
+        <td class="fridge" *ngFor="let i of [0,1,2]">
+            <ng-container *ngIf="post.ingredients.length>i">
+                {{post.ingredients[i].quantity}} {{post.ingredients[i].ingredient.name}}
+            </ng-container>
+        </td>
+    </tr>
+</table>

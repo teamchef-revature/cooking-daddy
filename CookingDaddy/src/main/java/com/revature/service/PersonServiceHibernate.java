@@ -1,15 +1,18 @@
 package com.revature.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.Person;
 import com.revature.beans.Role;
 import com.revature.data.PersonDAO;
-import com.revature.data.PersonHibernate;
 
 @Service
 public class PersonServiceHibernate implements PersonService {
-	private PersonDAO pdao = new PersonHibernate();
+	@Autowired
+	private PersonDAO pdao;
 	
 	@Override
 	public Integer addPerson(Person p) {
@@ -39,6 +42,11 @@ public class PersonServiceHibernate implements PersonService {
 	@Override
 	public Role getRoleById(Integer id) {
 		return pdao.getRoleById(id);
+	}
+
+	@Override
+	public List<Person> getLeaderboard() {
+		return pdao.getLeaderboard();
 	}
 
 }

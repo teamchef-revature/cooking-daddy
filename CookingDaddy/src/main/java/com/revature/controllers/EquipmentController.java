@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,8 +45,7 @@ public class EquipmentController {
 		return ResponseEntity.created(URI.create("/equipment/"+eid)).build();
 	}
 	
-	@PostMapping
-	@RequestMapping(value="/personEquipment")
+	@RequestMapping(value="/personEquipment", method = RequestMethod.POST)
 	public ResponseEntity<Integer> addPersonEquipment(@RequestBody PersonEquipment pe) {
 		Integer peid = es.addPersonEquipment(pe);
 		if (peid == null) {
@@ -57,10 +54,9 @@ public class EquipmentController {
 		return ResponseEntity.created(URI.create("/personEquipment/"+peid)).build();
 	}
 	
-	@PutMapping
-	@RequestMapping(value = "/personEquipment/{id}")
-	public ResponseEntity<PersonEquipment> updatePersonEquipment(@PathVariable Integer id, @RequestBody PersonEquipment pe) {
-		if (pe.getId().equals(id)) {
+	@RequestMapping(value = "/personEquipment/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<PersonEquipment> updatePersonEquipment(@PathVariable("id") Integer peid, @RequestBody PersonEquipment pe) {
+		if (pe.getId().equals(peid)) {
 			PersonEquipment update= es.updatePersonEquipment(pe);
 			return ResponseEntity.ok(update);
 		} else {

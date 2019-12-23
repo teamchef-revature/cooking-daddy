@@ -1,5 +1,7 @@
 package com.revature.beans;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,7 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-// import javax.persistence.JoinTable;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -31,27 +34,23 @@ public class Ingredient {
 	@JoinColumn(name="flavor_id")
 	private Flavor flavor;
 	private String name;
-	// commented this out because i'm not sure why it's here,
-	// left it in case we do need it again. looks like it was probably
-	// leftover from when we included inventory in the ingredient bean.
-	// (before separating personingredient to its own bean)
-	/*@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="person_ingredient", 
-		joinColumns=@JoinColumn(name="id"),
-		inverseJoinColumns=@JoinColumn(name="ingredient_id"))
-	*/
+	@ManyToMany(fetch=FetchType.EAGER, cascade= CascadeType.ALL)
+	@JoinTable(name="Ingredient_Season", 
+		joinColumns=@JoinColumn(name="ingredient_id"),
+		inverseJoinColumns=@JoinColumn(name="season_id"))
+	private Set<Season> seasons;
+	public void addSeason(Season season) {
+		this.seasons.add(season);
+	}
+	public void removeSeason(Season season) {
+		this.seasons.remove(season);
+	}
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-//	public Integer getInventory() {
-//		return inventory;
-//	}
-//	public void setInventory(Integer inventory) {
-//		this.inventory = inventory;
-//	}
 	public Category getCategory() {
 		return category;
 	}
@@ -76,18 +75,24 @@ public class Ingredient {
 	public void setName(String name) {
 		this.name = name;
 	}
-@Override
-public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + ((category == null) ? 0 : category.hashCode());
-	result = prime * result + ((flavor == null) ? 0 : flavor.hashCode());
-	result = prime * result + ((id == null) ? 0 : id.hashCode());
-//	result = prime * result + ((inventory == null) ? 0 : inventory.hashCode());
-	result = prime * result + ((name == null) ? 0 : name.hashCode());
-	result = prime * result + ((quality == null) ? 0 : quality.hashCode());
-	return result;
-}
+	public Set<Season> getSeasons() {
+		return seasons;
+	}
+	public void setSeasons(Set<Season> seasons) {
+		this.seasons = seasons;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
+		result = prime * result + ((flavor == null) ? 0 : flavor.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((quality == null) ? 0 : quality.hashCode());
+		result = prime * result + ((seasons == null) ? 0 : seasons.hashCode());
+		return result;
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -112,11 +117,6 @@ public int hashCode() {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-//		if (inventory == null) {
-//			if (other.inventory != null)
-//				return false;
-//		} else if (!inventory.equals(other.inventory))
-//			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -127,11 +127,17 @@ public int hashCode() {
 				return false;
 		} else if (!quality.equals(other.quality))
 			return false;
+		if (seasons == null) {
+			if (other.seasons != null)
+				return false;
+		} else if (!seasons.equals(other.seasons))
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
 		return "Ingredient [id=" + id + ", category=" + category + ", quality=" + quality + ", flavor=" + flavor
-				+ ", name=" + name + "]";
+				+ ", name=" + name + ", seasons=" + seasons + "]";
 	}
+	
 }

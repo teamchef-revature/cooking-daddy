@@ -1,0 +1,10 @@
+<div class="container">
+    <div style="margin: auto;">
+        <ng-container *ngIf="currentUser">
+            <h4>{{ currentUser.first }} {{ currentUser.last }}</h4>
+            <h4>{{ currentUser.username }}</h4>
+            <p>Chef Rating: {{ currentUser.chefRating }}</p>
+            <p>Meals Served: {{ currentUser.mealsServed }}</p>
+        </ng-container>
+    </div>
+</div>

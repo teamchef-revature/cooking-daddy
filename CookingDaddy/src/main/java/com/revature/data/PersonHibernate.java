@@ -1,5 +1,10 @@
 package com.revature.data;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -14,7 +19,7 @@ import com.revature.utils.HibernateUtil;
 @Component
 public class PersonHibernate implements PersonDAO {
 	@Autowired
-	private HibernateUtil hu = new HibernateUtil();
+	private HibernateUtil hu;
 	
 	@Override
 	public Integer addPerson(Person p) {
@@ -43,6 +48,9 @@ public class PersonHibernate implements PersonDAO {
 		Query<Person> q = s.createQuery(query, Person.class);
 		q.setParameter("id", id);
 		p = q.uniqueResult();
+		//for (Post po: p.getPosts()) {
+		//	po.getPerson();
+		//}
 		s.close();
 		return p;
 	}
@@ -66,7 +74,8 @@ public class PersonHibernate implements PersonDAO {
 		Transaction tx = null;
 		try {
 			tx = s.beginTransaction();
-			s.update(p);
+			s.merge(p);
+			// s.update(p);
 			tx.commit();
 		} catch(Exception e) {
 			if(tx != null)
@@ -93,5 +102,26 @@ public class PersonHibernate implements PersonDAO {
 		r = q.uniqueResult();
 		s.close();
 		return r;
+	}
+
+	@Override
+	public Set<Person> getPeople() {
+		Session s = hu.getSession();
+		String query = "from Person";
+		Query<Person> q = s.createQuery(query, Person.class);
+		List<Person> people = q.list();
+		s.close();
+		return new HashSet<Person>(people);
+	}
+
+	@Override
+	public List<Person> getLeaderboard() {
+		Session s = hu.getSession();
+		String query = "from Person p ORDER BY p.chefRating desc, p.mealsServed desc";
+		Query<Person> q = s.createQuery(query, Person.class);
+		q.setMaxResults(10);
+		List<Person> people = q.list();
+		s.close();
+		return new ArrayList<Person>(people);
 	}
 }

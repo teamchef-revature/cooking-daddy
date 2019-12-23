@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './core/register/register.component';
 import { UrlService } from './shared/url.service';
 import { PersonService } from './shared/person/person.service';
+import { AdminService } from './shared/person/admin.service';
 import { IngredientControllerComponent } from './admin/ingredient-controller/ingredient-controller.component';
 import { CategoryControllerComponent } from './admin/category-controller/category-controller.component';
 import { FlavorControllerComponent } from './admin/flavor-controller/flavor-controller.component';
@@ -38,6 +39,27 @@ import { QualityEditControllerComponent } from './admin/quality-edit-controller/
 import { IngredientEditControllerComponent } from './admin/ingredient-edit-controller/ingredient-edit-controller.component';
 import { IngredientAddControllerComponent } from './admin/ingredient-add-controller/ingredient-add-controller.component';
 import { CookbookComponent } from './cook/cookbook/cookbook/cookbook.component';
+import { StorefridgeComponent } from './marketplace/storefridge/storefridge.component';
+import { StorebasketComponent } from './marketplace/storebasket/storebasket.component';
+import { SeasonControllerComponent } from './admin/season-controller/season-controller.component';
+import { SeasonEditControllerComponent } from './admin/season-edit-controller/season-edit-controller.component';
+import { SeasonAddControllerComponent } from './admin/season-add-controller/season-add-controller.component';
+import { SeasonItemControllerComponent } from './admin/season-item-controller/season-item-controller.component';
+import { DatePipe } from '@angular/common';
+import { RecipeControllerComponent } from './admin/recipe-controller/recipe-controller.component';
+import { RecipeAddControllerComponent } from './admin/recipe-add-controller/recipe-add-controller.component';
+import { RecipeEditControllerComponent } from './admin/recipe-edit-controller/recipe-edit-controller.component';
+import { RecipeItemControllerComponent } from './admin/recipe-item-controller/recipe-item-controller.component';
+import { ShowcaseComponent } from './marketplace/showcase/showcase/showcase.component';
+import { ClassifiedsComponent } from './marketplace/showcase/classifieds/classifieds.component';
+import { RestaurantComponent } from './cook/restaurant/restaurant.component';
+import { MealComponent } from './fridge/meal/meal.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { MealPipe } from './meal.pipe';
+import { OfferComponent } from './marketplace/showcase/offer/offer.component';
+import { PostrowComponent } from './marketplace/showcase/postrow/postrow.component';
+import { OfferrowComponent } from './marketplace/showcase/offerrow/offerrow.component';
+import { ProfileComponent } from './core/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +93,27 @@ import { CookbookComponent } from './cook/cookbook/cookbook/cookbook.component';
     QualityEditControllerComponent,
     IngredientEditControllerComponent,
     IngredientAddControllerComponent,
-    CookbookComponent
+    CookbookComponent,
+    StorefridgeComponent,
+    StorebasketComponent,
+    SeasonControllerComponent,
+    SeasonEditControllerComponent,
+    SeasonAddControllerComponent,
+    SeasonItemControllerComponent,
+    RecipeControllerComponent,
+    RecipeAddControllerComponent,
+    RecipeEditControllerComponent,
+    RecipeItemControllerComponent,
+    ShowcaseComponent,
+    ClassifiedsComponent,
+    RestaurantComponent,
+    MealComponent,
+    LeaderboardComponent,
+    MealPipe,
+    OfferComponent,
+    PostrowComponent,
+    OfferrowComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +124,9 @@ import { CookbookComponent } from './cook/cookbook/cookbook/cookbook.component';
   providers: [
     UrlService,
     PersonService,
-    MarketServiceService
+    AdminService,
+    MarketServiceService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

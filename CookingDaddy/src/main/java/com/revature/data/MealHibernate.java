@@ -13,12 +13,13 @@ import org.springframework.stereotype.Component;
 
 import com.revature.beans.Recipe;
 import com.revature.beans.Meal;
+import com.revature.beans.Person;
 import com.revature.utils.HibernateUtil;
 
 @Component
 public class MealHibernate implements MealDAO {
 	@Autowired
-	private HibernateUtil hibernateUtil = new HibernateUtil();
+	private HibernateUtil hibernateUtil;
 
 	@Override
 	public Integer addRecipe(Recipe meal) {
@@ -42,7 +43,7 @@ public class MealHibernate implements MealDAO {
 	@Override
 	public Set<Recipe> getRecipes() {
 		Session session = hibernateUtil.getSession();
-		String queryHQL = "from Meal";
+		String queryHQL = "from Recipe";
 		Query<Recipe> query = session.createQuery(queryHQL, Recipe.class);
 		List<Recipe> meals = query.list();
 		session.close();
@@ -53,7 +54,7 @@ public class MealHibernate implements MealDAO {
 	public Recipe getRecipe(Integer id) {
 		Recipe meal = null;
 		Session session = hibernateUtil.getSession();
-		String queryHQL = "from Meal where meal.id=:id";
+		String queryHQL = "from Recipe where id=:id";
 		Query<Recipe> query = session.createQuery(queryHQL, Recipe.class);
 		query.setParameter("id", id);
 		meal = query.uniqueResult();
@@ -79,16 +80,19 @@ public class MealHibernate implements MealDAO {
 		return meal;
 	}
 
-	/*@Override
-	public Integer addPersonMeal(PersonMeal personMeal) {
 	@Override
-	public Integer addMeal(Meal personMeal) {
+	public Set<Meal> getMealsByPerson(Person p) {
+		return p.getMeals();
+	}
+	
+	@Override
+	public Integer addMeal(Meal m) {
 		Integer index = null;
 		Session session = hibernateUtil.getSession();
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			index = (Integer) session.save(personMeal);
+			index = (Integer) session.save(m);
 			transaction.commit();
 		} catch(HibernateException he) {
 			if(transaction != null)
@@ -98,17 +102,27 @@ public class MealHibernate implements MealDAO {
 			session.close();
 		}
 		return index;
-	}*/
+	}
 
-	/*@Override
-	public PersonMeal updatePersonMeal(PersonMeal personMeal) {
 	@Override
-	public Meal updateMeal(Meal personMeal) {
+	public Recipe getRecipeByName(String name) {
+		Recipe recipe = null;
+		Session session = hibernateUtil.getSession();
+		String queryHQL = "from Recipe where recipe.name=:name";
+		Query<Recipe> query = session.createQuery(queryHQL, Recipe.class);
+		query.setParameter("name", name);
+		recipe = query.uniqueResult();
+		session.close();
+		return recipe;
+	}
+
+	@Override
+	public Meal updateMeal(Meal m) {
 		Session session = hibernateUtil.getSession();
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			session.update(personMeal);
+			session.update(m);
 			transaction.commit();
 		} catch(HibernateException he) {
 			if(transaction != null)
@@ -117,6 +131,6 @@ public class MealHibernate implements MealDAO {
 		} finally {
 			session.close();
 		}
-		return personMeal;
-	}*/
+		return m;
+	}
 }
