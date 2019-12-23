@@ -35,7 +35,7 @@ export class MealComponent implements OnInit {
       this.router.navigate(['/fridge']);
     }
     else if (this.parentName === 'restaurant') {
-      this.router.navigate(['/restaurant']);
+      this.router.navigate(['/cook']);
     }
   }
 }
