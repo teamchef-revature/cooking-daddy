@@ -37,7 +37,7 @@
     </div>
     <div *ngIf="choice === 3">
         <div>
-            <app-meal *ngFor = "let m of personMeals | meal:searchText" [currentMeal] = "m"></app-meal>
+            <app-meal parentName="'fridge'" *ngFor = "let m of personMeals | meal:searchText" [currentMeal] = "m"></app-meal>
         </div>
     </div>
 </div>
